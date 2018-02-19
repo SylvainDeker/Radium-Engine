@@ -92,13 +92,13 @@ namespace MeshFeatureTrackingPlugin
     namespace { // anonymous namespace for line mesh indices retrieval from triangles -- according to the render mode
         // returns the triangles where the vertices can be found, along with the corresponding vertex indices within them.
         void getPos_L2T( int l, int &v0, int &v1, int &t0, int &t1 )
-        {
+    {
             v0 = 0;
             v1 = 1;
             t0 = l/3*2;
             t1 = t0;
             if ( l % 3 == 1 )
-            {
+        {
                 v0 = 2;
                 v1 = 0;
                 ++t1;
@@ -222,17 +222,17 @@ namespace MeshFeatureTrackingPlugin
         // check picking mode / render config OK
         if ( m_data.m_mode == PickingMode::RO || m_data.m_mode > PickingMode::TRIANGLE)
         {
-            return;
-        }
+                return;
+            }
         if ( !getRoMgr()->exists(m_pickedRoIdx) )
-        {
+            {
             m_data.m_mode = PickingMode::RO;
-            return;
-        }
+                return;
+            }
         auto ro = getRoMgr()->getRenderObject( m_pickedRoIdx );
         auto rm = ro->getMesh()->getRenderMode();
         if ( rm == MeshRenderMode::RM_POINTS && m_data.m_mode != PickingMode::VERTEX )
-        {
+            {
             m_data.m_mode = PickingMode::RO;
             return;
         }
@@ -240,19 +240,19 @@ namespace MeshFeatureTrackingPlugin
               rm == MeshRenderMode::RM_LINE_STRIP || rm == MeshRenderMode::RM_LINES_ADJACENCY ||
               rm == MeshRenderMode::RM_LINE_STRIP_ADJACENCY) &&
              m_data.m_mode == PickingMode::TRIANGLE )
-        {
+                {
             m_data.m_mode = PickingMode::RO;
-            return;
-        }
+                    return;
+                }
         // fill data accordingly
         if ( rm == MeshRenderMode::RM_POINTS )
-        {
+                {
             m_data.m_data[0] = data.m_elementIdx[0];
-            return;
-        }
+                    return;
+                }
         // if lines, retrieve triangle-based indices
         if ( rm == MeshRenderMode::RM_LINES )
-        {
+                {
             int v0, v1, t0, t1;
             getPos_L2T( data.m_elementIdx[0], v0, v1, t0, t1 );
             const auto &t = ro->getMesh()->getGeometry().m_triangles;
@@ -266,8 +266,8 @@ namespace MeshFeatureTrackingPlugin
                 m_data.m_data[0] = t[t0](v0);
                 m_data.m_data[1] = t[t1](v1);
             }
-            return;
-        }
+                    return;
+                }
         if ( rm == MeshRenderMode::RM_LINE_LOOP || rm == MeshRenderMode::RM_LINE_STRIP )
         {
             int v0, v1, t0, t1;
@@ -282,11 +282,11 @@ namespace MeshFeatureTrackingPlugin
             {
                 m_data.m_data[0] = t[t0](v0);
                 m_data.m_data[1] = t[t1](v1);
-            }
+    }
             return;
         }
         if ( rm == MeshRenderMode::RM_LINES_ADJACENCY )
-        {
+    {
             int v0, v1, t0, t1;
             getPos_L2T_adjacency( data.m_elementIdx[0], v0, v1, t0, t1 );
             const auto &t = ro->getMesh()->getGeometry().m_triangles;
@@ -294,9 +294,9 @@ namespace MeshFeatureTrackingPlugin
             {
                 m_data.m_data[0] = data.m_vertexIdx[0] == 0 ? t[t0](v0) : t[t1](v1) ;
                 m_data.m_data[1] = data.m_vertexIdx[0] == 0 ? t[t1](v1) : t[t0](v0) ;
-            }
+    }
             else
-            {
+    {
                 m_data.m_data[0] = t[t0](v0);
                 m_data.m_data[1] = t[t1](v1);
             }
@@ -311,16 +311,16 @@ namespace MeshFeatureTrackingPlugin
             {
                 m_data.m_data[0] = data.m_vertexIdx[0] == 0 ? t[t0](v0) : t[t1](v1) ;
                 m_data.m_data[1] = data.m_vertexIdx[0] == 0 ? t[t1](v1) : t[t0](v0) ;
-            }
-            else
-            {
+        }
+        else
+        {
                 m_data.m_data[0] = t[t0](v0);
                 m_data.m_data[1] = t[t1](v1);
-            }
-            return;
         }
+            return;
+    }
         if ( rm == MeshRenderMode::RM_TRIANGLES && m_data.m_mode == PickingMode::VERTEX )
-        {
+    {
             const auto &T = ro->getMesh()->getGeometry().m_triangles[ data.m_elementIdx[0] ];
             m_data.m_data[0] = T( data.m_vertexIdx[0] );
             m_data.m_data[1] = T( (data.m_vertexIdx[0]+1)%3 );
@@ -402,10 +402,10 @@ namespace MeshFeatureTrackingPlugin
             m_data.m_data[3] = data.m_elementIdx[0];
             return;
         }
-    }
+        }
 
     void MeshFeatureTrackingComponent::setVertexIdx( int idx )
-    {
+        {
         if ( !getRoMgr()->exists(m_pickedRoIdx) )
         {
             return;
@@ -529,27 +529,27 @@ namespace MeshFeatureTrackingPlugin
             m_data.m_data[1] = ( idx == 0 ? t[0](1) : 0 );
             return;
         }
-    }
+        }
 
     void MeshFeatureTrackingComponent::setTriangleIdx( int idx )
-    {
-        if ( !getRoMgr()->exists(m_pickedRoIdx) )
         {
+        if ( !getRoMgr()->exists(m_pickedRoIdx) )
+            {
             return;
-        }
+            }
         // also need to change all for feature Scale, Position and Vector
         const auto &ro = getRoMgr()->getRenderObject( m_pickedRoIdx );
         const auto rm = ro->getMesh()->getRenderMode();
         const auto &t = ro->getMesh()->getGeometry().m_triangles;
         if (rm == MeshRenderMode::RM_TRIANGLES)
-        {
+            {
             const auto &T = t[idx];
             m_data.m_data[0] = T(0);
             m_data.m_data[1] = T(1);
             m_data.m_data[2] = T(2);
             m_data.m_data[3] = idx;
             return;
-        }
+            }
         if (rm == MeshRenderMode::RM_TRIANGLE_STRIP)
         {
             int v0, v1, v2, t0, t1, t2;
@@ -575,7 +575,7 @@ namespace MeshFeatureTrackingPlugin
     }
 
     void MeshFeatureTrackingComponent::update()
-    {
+        {
         // check supported picking mode
         if ( m_data.m_mode != PickingMode::RO && getRoMgr()->exists( m_pickedRoIdx ) )
         {
@@ -617,8 +617,8 @@ namespace MeshFeatureTrackingPlugin
             // return 1 fourth of the edge length of the first edge we can find with the vertex
             const Ra::Core::Vector3& v0 = v[ m_data.m_data[0] ];
             const Ra::Core::Vector3& v1 = v[ m_data.m_data[1] ];
-            return (v1-v0).norm() / 4.0;
-        }
+                    return (v1-v0).norm() / 4.0;
+                }
         case PickingMode::EDGE:
         {
             // return 1 fourth of the edge length
