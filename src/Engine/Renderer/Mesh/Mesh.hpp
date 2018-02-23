@@ -130,7 +130,7 @@ namespace Ra
             inline void setDirty( const Vec3Data& type );
             inline void setDirty( const Vec4Data& type );
 
-            /// This function is called at the start of the rendering. It will update the
+          /// This function is called at the start of the rendering. It will update the
             /// necessary openGL buffers.
             void updateGL();
 
@@ -151,7 +151,11 @@ namespace Ra
             uint m_vao;          /// Index of our openGL VAO
             MeshRenderMode m_renderMode; /// Render mode (GL_TRIANGLES or GL_LINES, etc.)
 
-            Core::TriangleMesh m_mesh; /// Base geometry : vertices, triangles and normals
+            Core::TriangleMesh m_mesh; /// Base geometry : vertices, triangles
+                                       /// and normals
+
+            std::array<Core::TriangleMesh::Vec3AttribHandle, MAX_VEC3> m_v3DataHandle;
+            std::array<Core::TriangleMesh::Vec4AttribHandle, MAX_VEC4> m_v4DataHandle;
 
             std::array<Core::Vector3Array, MAX_VEC3 > m_v3Data; /// Additionnal vertex vector 3 data
             std::array<Core::Vector4Array, MAX_VEC4 > m_v4Data; /// Additionnal vertex vector 4 data

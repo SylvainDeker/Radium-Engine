@@ -62,7 +62,7 @@ namespace MeshFeatureTrackingPlugin
         {
             return Ra::Engine::RadiumEngine::getInstance()
                     ->getRenderObjectManager()->getRenderObject( m_pickedRoIdx )
-                    ->getMesh()->getGeometry().m_vertices.size();
+                ->getMesh()->getGeometry().vertices().size();
         }
         return 0;
     }
@@ -609,7 +609,7 @@ namespace MeshFeatureTrackingPlugin
         {
             return ro->getAabb().sizes().norm() / 500;
         }
-        const auto& v = ro->getMesh()->getGeometry().m_vertices;
+        const auto& v = ro->getMesh()->getGeometry().vertices();
         switch (m_data.m_mode)
         {
         case PickingMode::VERTEX:
@@ -656,7 +656,7 @@ namespace MeshFeatureTrackingPlugin
         // manage picking mode
         auto ro = Ra::Engine::RadiumEngine::getInstance()
                 ->getRenderObjectManager()->getRenderObject( m_pickedRoIdx );
-        const auto& v = ro->getMesh()->getGeometry().m_vertices;
+        const auto& v = ro->getMesh()->getGeometry().vertices();
         Ra::Core::Vector3 P(0,0,0);
         switch (m_data.m_mode)
         {
@@ -694,7 +694,7 @@ namespace MeshFeatureTrackingPlugin
         // manage picking mode
         auto ro = Ra::Engine::RadiumEngine::getInstance()
                 ->getRenderObjectManager()->getRenderObject( m_pickedRoIdx );
-        const auto& n = ro->getMesh()->getGeometry().m_normals;
+        const auto& n = ro->getMesh()->getGeometry().normals();
         if (m_data.m_mode == PickingMode::VERTEX)
         {
             if ( !n.empty() )
@@ -703,7 +703,7 @@ namespace MeshFeatureTrackingPlugin
             }
             return Ra::Core::Vector3();
         }
-        const auto& v = ro->getMesh()->getGeometry().m_vertices;
+        const auto& v = ro->getMesh()->getGeometry().vertices();
         Ra::Core::Vector3 V(0,0,0);
         switch (m_data.m_mode)
         {
