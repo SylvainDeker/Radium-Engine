@@ -1,0 +1,19 @@
+﻿---
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: Align
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: 'false'
+AllowShortLoopsOnASingleLine: 'false'
+AlwaysBreakTemplateDeclarations: 'true'
+BreakBeforeBraces: Allman
+DisableFormat: 'false'
+IndentCaseLabels: 'false'
+IndentWidth: '4'
+Language: Cpp
+NamespaceIndentation: None
+SpaceBeforeAssignmentOperators: 'true'
+Standard: Cpp11
+UseTab: Never
+...
