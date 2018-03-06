@@ -9,16 +9,16 @@ namespace Core {
 namespace Animation {
 
 /**
-* Definition of the Pose of a generic handle for model animation or deformation.
-*/
+ * Definition of the Pose of a generic handle for model animation or deformation.
+ */
 
 /*
-* The Pose is represented just as a vector of Transforms.
-*/
-typedef AlignedStdVector< Transform > Pose;
+ * The Pose is represented just as a vector of Transforms.
+ */
+typedef AlignedStdVector<Transform> Pose;
 
 // Typedef for code redability purposes only.
-typedef Pose     RestPose;
+typedef Pose RestPose;
 typedef RestPose RefPose;
 
 typedef Pose LocalPose;

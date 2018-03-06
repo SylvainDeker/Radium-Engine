@@ -1,10 +1,10 @@
 #ifndef HANDLE_WEIGHT_H
 #define HANDLE_WEIGHT_H
 
-#include <utility>
 #include <Core/Containers/AlignedStdVector.hpp>
 #include <Core/Containers/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
+#include <utility>
 
 namespace Ra {
 namespace Core {
@@ -15,13 +15,13 @@ typedef std::map<int, float> SkinningWeights;
 typedef std::vector<SkinningWeights> Weights;
 
 // Defining the pair handle/weight for a vertex
-typedef std::pair< uint, Scalar > SingleWeight;
+typedef std::pair<uint, Scalar> SingleWeight;
 
 // Defining the vector of the skinning weights for a vertex
-typedef AlignedStdVector< SingleWeight > VertexWeight;
+typedef AlignedStdVector<SingleWeight> VertexWeight;
 
 // Defining the vector of the skinning weights for the entire mesh
-typedef AlignedStdVector< VertexWeight > MeshWeight;
+typedef AlignedStdVector<VertexWeight> MeshWeight;
 
 // Defining the weight matrix as the nxm matrix, where n are the vertices and m the handles
 // It is like an adjacency matrix between vertices and handle transforms.
@@ -30,11 +30,8 @@ typedef AlignedStdVector< VertexWeight > MeshWeight;
 //      M( i, j ) = 0   , otherwise
 typedef Sparse WeightMatrix;
 
-
-
 } // namespace Animation
 } // Namespace Core
 } // Namespace Ra
 
 #endif // HANDLE_WEIGHT_H
-
