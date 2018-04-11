@@ -47,10 +47,9 @@ before_install:
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       if [ ! -d "~/Qt/5.10.1/gcc_64" ]; then
         # wget http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run ;
-        wget https://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run ;
-        chmod a+x ./qt-opensource-linux-x64-5.10.1.run ;
+        TRAVIS_URL="https://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run"
         export QT_QPA_PLATFORM=minimal ;
-        travis_wait 60 ./qt-opensource-linux-x64-5.10.1.run --script .ci/qt-installer-noninteractive.qs --no-force-installations --verbose ;
+        travis_retry wget ${TRAVIS_URL} &&  chmod a+x ./qt-opensource-linux-x64-5.10.1.run && ./qt-opensource-linux-x64-5.10.1.run --script .ci/qt-installer-noninteractive.qs --no-force-installations --verbose ;
       fi;
     fi;
 
