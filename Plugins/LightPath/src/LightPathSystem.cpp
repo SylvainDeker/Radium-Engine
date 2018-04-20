@@ -14,21 +14,25 @@
 
 
 namespace LightPathPlugin {
-    LightPathSystem::LightPathSystem() : Ra::Engine::System() {
-        LOG(logINFO) << "Light Path Plugin System created.";
-    }
+  LightPathSystem::LightPathSystem() : Ra::Engine::System() {
+    LOG(logINFO) << "Light Path Plugin System created.";
+  }
   
-    LightPathSystem::~LightPathSystem() {
-        LOG(logINFO) << "Light Path Plugin System destroyed.";
-    }
+  LightPathSystem::~LightPathSystem() {
+    LOG(logINFO) << "Light Path Plugin System destroyed.";
+  }
 
-    void LightPathSystem::handleAssetLoading( Ra::Engine::Entity* entity,
-                                          const Ra::Asset::FileData* fileData ) {
-      // TODO
-    }
+  void LightPathSystem::handleAssetLoading( Ra::Engine::Entity* entity,
+                                            const Ra::Asset::FileData* fileData ) {
+    
+  }
+  
+  void LightPathSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
+                                       const Ra::Engine::FrameInfo& frameInfo ) {
+    // TODO, but not sure since this plugin only show light path
+  }
 
-    void LightPathSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
-                                     const Ra::Engine::FrameInfo& frameInfo ) {
-      // TODO, but not sure since this plugin only show light path
-    }
-}
+  
+} // namespace LightPathPLugin
+
+

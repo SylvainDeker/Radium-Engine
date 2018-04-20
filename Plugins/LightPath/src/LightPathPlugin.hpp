@@ -6,22 +6,31 @@
 #include <QtPlugin>
 
 #include <PluginBase/RadiumPluginInterface.hpp>
-
 #include <LightPathPluginMacros.hpp>
 
 namespace Ra {
-namespace Engine {
-class RadiumEngine;
-}
+  namespace Engine {
+    class RadiumEngine;
+  }
 } // namespace Ra
 
 namespace LightPathPlugin {
-class LightPathPluginC : public QObject, Ra::Plugins::RadiumPluginInterface {
+  
+  class LightPathSystem;
+  class LightPathUI;
+  
+  struct Param {
+    QString entityName;
+    QString dataId;
+  };
+  
+  class LightPathPluginC : public QObject, Ra::Plugins::RadiumPluginInterface {
     Q_OBJECT
     Q_PLUGIN_METADATA( IID "RadiumEngine.PluginInterface" )
     Q_INTERFACES( Ra::Plugins::RadiumPluginInterface )
 
-  public:
+    public:
+    LightPathPluginC();
     virtual ~LightPathPluginC();
 
     void registerPlugin( const Ra::PluginContext& context ) override;
@@ -34,7 +43,10 @@ class LightPathPluginC : public QObject, Ra::Plugins::RadiumPluginInterface {
 
     bool doAddAction( int& nb ) override;
     QAction* getAction( int id ) override;
-};
+  private:
+    LightPathSystem* l_system;
+    LightPathUI* l_widget;
+  };
 
 } // namespace LightPathPlugin
 

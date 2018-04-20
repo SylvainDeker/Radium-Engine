@@ -28,7 +28,7 @@ if (MSVC OR MSVC_IDE)
         foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
             string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
             set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-            set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+            set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
             set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
         endforeach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     endif()
@@ -38,15 +38,18 @@ find_package( Qt5Core    REQUIRED )
 find_package( Qt5Widgets REQUIRED )
 
 file( GLOB_RECURSE sources src/*.cpp )
-file( GLOB_RECURSE headers src/*.hpp )
+file( GLOB_RECURSE headers src/*.hpp src/*.h )
 file( GLOB_RECURSE inlines src/*.inl )
+
+file(GLOB_RECURSE app_uis  src/*.ui)
+qt5_wrap_ui(app_uis_moc ${app_uis})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 add_definitions( ${Qt5Core_DEFINITIONS} )
 add_definitions( ${Qt5Widges_DEFINITIONS} )
-add_definitions( ${Qt5OpenGL_DEFINITIONS} )
 
 include_directories(
     src/
@@ -54,14 +57,13 @@ include_directories(
     ${RADIUM_INCLUDE_DIRS}
     )
 
-add_library( LightPath SHARED ${sources} ${headers} ${inlines} )
+add_library( LightPath SHARED ${sources} ${headers} ${inlines} ${app_uis})
 message(INFO " LightPath : dependencies are ${RADIUM_LIBRARIES}")
-add_dependencies( LightPath ${RADIUM_LIBRARIES})
+add_dependencies( MeshPaint ${RADIUM_LIBRARIES})
 
 target_compile_definitions( LightPath PRIVATE "-DLightPath_EXPORTS" )
 
 set(Qt5_LIBRARIES ${Qt5Core_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${Qt5OpenGL_LIBRARIES})
-
 target_link_libraries( LightPath
                        ${Qt5_LIBRARIES}
                        ${RADIUM_LIBRARIES}
