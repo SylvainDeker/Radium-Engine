@@ -5,20 +5,24 @@
 
 namespace LightPathPlugin {
 
-  LightPathPluginC::LightPathPluginC(): l_system (nullptr),
-                                        l_widget (nullptr) {}
+  LightPathPluginC::LightPathPluginC(): l_system ( nullptr ),
+                                        l_widget ( nullptr ) {}
   
   LightPathPluginC::~LightPathPluginC() {}
 
   void LightPathPluginC::registerPlugin( const Ra::PluginContext& context ) {
-    delete (l_system);
+    delete ( l_system );
     l_system = new LightPathSystem;
     context.m_engine->registerSystem( "LightPathSystem", l_system );
   }
 
   bool LightPathPluginC::doAddWidget( QString& name ) {
-    delete (l_widget);
+    delete ( l_widget );
     l_widget = new LightPathUI();
+
+    connect(l_widget, &LightPathUI::amazingSignal,
+            this, &LightPathPluginC::amazing);
+    
     name = "Light Path";
     return true;
   }
@@ -42,6 +46,10 @@ namespace LightPathPlugin {
 
   QAction* LightPathPluginC::getAction( int id ) {
     return nullptr;
+  }
+
+  void LightPathPluginC::amazing() {
+    LOG( logINFO ) << "Wooow this Light Plugin is amazing don't you think?";
   }
 
 } // namespace LightPathPlugin

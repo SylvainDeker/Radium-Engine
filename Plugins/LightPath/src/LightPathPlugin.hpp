@@ -1,10 +1,6 @@
 #ifndef LIGHTPATHPLUGIN_HPP_
 #define LIGHTPATHPLUGIN_HPP_
 
-#include <QAction>
-#include <QObject>
-#include <QtPlugin>
-
 #include <PluginBase/RadiumPluginInterface.hpp>
 #include <LightPathPluginMacros.hpp>
 
@@ -18,11 +14,6 @@ namespace LightPathPlugin {
   
   class LightPathSystem;
   class LightPathUI;
-  
-  struct Param {
-    QString entityName;
-    QString dataId;
-  };
   
   class LightPathPluginC : public QObject, Ra::Plugins::RadiumPluginInterface {
     Q_OBJECT
@@ -43,6 +34,9 @@ namespace LightPathPlugin {
 
     bool doAddAction( int& nb ) override;
     QAction* getAction( int id ) override;
+
+    void amazing();
+    
   private:
     LightPathSystem* l_system;
     LightPathUI* l_widget;

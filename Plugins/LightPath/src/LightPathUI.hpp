@@ -14,10 +14,18 @@ namespace LightPathPlugin {
     Q_OBJECT
 
   public:
-    explicit LightPathUI(QWidget *parent = 0);
+    explicit LightPathUI( QWidget *parent = 0 );
     ~LightPathUI();
+
+  signals:
+    void amazingSignal();
+                      
+  private slots:
+    void on__amazingButton_clicked();
+    
   private:
     Ui::LightPathUI *ui;
+    
   };
 
 } // namespace LightPathPlugin

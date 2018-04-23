@@ -20,17 +20,16 @@ namespace Ra {
 
 namespace LightPathPlugin {
   class LP_PLUGIN_API LightPathSystem : public Ra::Engine::System {
-    //    Q_OBJECT
   public:
     LightPathSystem();
     virtual ~LightPathSystem();
-
+    
     void handleAssetLoading( Ra::Engine::Entity* entity,
                              const Ra::Asset::FileData* fileData ) override;
     
     void generateTasks( Ra::Core::TaskQueue* taskQueue,
                         const Ra::Engine::FrameInfo& frameInfo ) override;
-
+    
   };
 } // namespace LightPathPlugin
 
