@@ -59,7 +59,7 @@ include_directories(
 
 add_library( LightPath SHARED ${sources} ${headers} ${inlines} ${app_uis})
 message(INFO " LightPath : dependencies are ${RADIUM_LIBRARIES}")
-add_dependencies( MeshPaint ${RADIUM_LIBRARIES})
+add_dependencies( LightPath ${RADIUM_LIBRARIES})
 
 target_compile_definitions( LightPath PRIVATE "-DLightPath_EXPORTS" )
 

@@ -14,6 +14,7 @@ namespace LightPathPlugin {
     delete ( l_system );
     l_system = new LightPathSystem;
     context.m_engine->registerSystem( "LightPathSystem", l_system );
+    l_engine = context.m_engine;
   }
 
   bool LightPathPluginC::doAddWidget( QString& name ) {
@@ -50,6 +51,11 @@ namespace LightPathPlugin {
 
   void LightPathPluginC::amazing() {
     LOG( logINFO ) << "Wooow this Light Plugin is amazing don't you think?";
+    bool res = l_engine->loadFile("/export/home/carmin/gpatat/suzanne.obj");
+    if (res)
+      LOG( logINFO ) << "Such an Amazing Suzanne !";
+    else
+      LOG( logINFO ) << "Maybe you don't have an amazing Suzanne in your root folder";
   }
 
 } // namespace LightPathPlugin

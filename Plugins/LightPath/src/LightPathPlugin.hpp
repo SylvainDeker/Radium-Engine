@@ -40,6 +40,7 @@ namespace LightPathPlugin {
   private:
     LightPathSystem* l_system;
     LightPathUI* l_widget;
+    Ra::Engine::RadiumEngine* l_engine;
   };
 
 } // namespace LightPathPlugin

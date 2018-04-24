@@ -4,11 +4,11 @@
 
 namespace LightPathPlugin {
   LightPathSystem::LightPathSystem() : Ra::Engine::System() {
-    LOG( logINFO ) << "Light Path Plugin System created.";
+    // LOG( logINFO ) << "Light Path Plugin System created.";
   }
   
   LightPathSystem::~LightPathSystem() {
-    LOG( logINFO ) << "Light Path Plugin System destroyed.";
+    // LOG( logINFO ) << "Light Path Plugin System destroyed.";
   }
 
   void LightPathSystem::handleAssetLoading( Ra::Engine::Entity* entity,
