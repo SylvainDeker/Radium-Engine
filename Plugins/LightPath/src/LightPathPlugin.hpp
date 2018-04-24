@@ -3,6 +3,7 @@
 
 #include <PluginBase/RadiumPluginInterface.hpp>
 #include <LightPathPluginMacros.hpp>
+#include <spfreader.h>
 
 namespace Ra {
   namespace Engine {
@@ -41,6 +42,7 @@ namespace LightPathPlugin {
     LightPathSystem* l_system;
     LightPathUI* l_widget;
     Ra::Engine::RadiumEngine* l_engine;
+    pbrt::sample_path_file::SampleAndPathFileReader* entr; // Test for the include
   };
 
 } // namespace LightPathPlugin

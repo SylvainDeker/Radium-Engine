@@ -37,6 +37,10 @@ endif(MSVC OR MSVC_IDE)
 find_package( Qt5Core    REQUIRED )
 find_package( Qt5Widgets REQUIRED )
 
+
+find_package(spfreader REQUIRED)
+
+
 file( GLOB_RECURSE sources src/*.cpp )
 file( GLOB_RECURSE headers src/*.hpp src/*.h )
 file( GLOB_RECURSE inlines src/*.inl )
@@ -67,7 +71,7 @@ set(Qt5_LIBRARIES ${Qt5Core_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${Qt5OpenGL_LIBRA
 target_link_libraries( LightPath
                        ${Qt5_LIBRARIES}
                        ${RADIUM_LIBRARIES}
-                       ${GLBINDING_LIBRARIES}           # Radium dep
-                     )
-
+                       ${GLBINDING_LIBRARIES}
+                       spfreader
+                       )
 

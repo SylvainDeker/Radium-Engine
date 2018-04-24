@@ -13,28 +13,28 @@
     <property name="windowTitle">
       <string>Form</string>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-      
+    <!-- The Box -->
+    <layout class="QGridLayout" name="gridLayout">      
       <item row="0" column="0">
         <widget class="QGroupBox" name="_parameters">
           <property name="title">
             <string>Light Path Options</string>
-          </property>        
+          </property>
+          <!-- Inside the Box -->
+          <layout class="QFormLayout" name="formLayout">
+            <item row="1" column="0">
+              <widget class="QPushButton" name="_amazingButton">
+                <property name="text">
+                  <string>Amazing !</string>
+                </property>
+              </widget>
+            </item>
+          </layout>  
         </widget>
       </item>
-      
-      <item row="1" column="0">
-        <widget class="QPushButton" name="_amazingButton">
-          <property name="text">
-            <string>Amazing !</string>
-          </property>
-        </widget>    
-      </item>
-
+      <!-- End of the Box -->
+    </layout>
     
-      
-      
-    </layout>    
   </widget>
   <resources/>
   <connections/>
