@@ -51,11 +51,11 @@ namespace LightPathPlugin {
 
   void LightPathPluginC::amazing() {
     LOG( logINFO ) << "Wooow this Light Plugin is amazing don't you think?";
-    bool res = l_engine->loadFile("/export/home/carmin/gpatat/suzanne.obj");
+    bool res = l_engine->loadFile("../../../../suzanne.obj");
     if (res)
       LOG( logINFO ) << "Such an Amazing Suzanne !";
     else
-      LOG( logINFO ) << "Maybe you don't have an amazing Suzanne in your root folder";
+      LOG( logINFO ) << "Maybe you don't have an amazing Suzanne in your dev directory";
   }
 
 } // namespace LightPathPlugin
