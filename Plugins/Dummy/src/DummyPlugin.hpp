@@ -1,48 +1,44 @@
-#ifndef DUMMYPLUGIN_DUMMYPLUGIN_HPP
-#define DUMMYPLUGIN_DUMMYPLUGIN_HPP
+#ifndef DUMMYPLUGIN_HPP_
+#define DUMMYPLUGIN_HPP_
 
-#include <DummyPluginMacros.hpp>
-
-#include <QObject>
-#include <QtPlugin>
+#include <QLabel>
 
 #include <PluginBase/RadiumPluginInterface.hpp>
 
-class QLabel;
-
-namespace Ra {
-namespace Engine {
-class RadiumEngine;
-}
-} // namespace Ra
-
 namespace DummyPlugin {
-class DummySystem;
+// Due to an ambigous name while compiling with Clang, must differentiate plugin class from plugin
+// namespace
+class DummyPluginC : public QObject, Ra::Plugins::RadiumPluginInterface {
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "RadiumEngine.PluginInterface")
+	Q_INTERFACES(Ra::Plugins::RadiumPluginInterface)
 
-class DummyPlugin : public QObject, Ra::Plugins::RadiumPluginInterface {
-    Q_OBJECT
-    Q_PLUGIN_METADATA( IID "foo.bar.RadiumEngine.PluginInterface" )
-    Q_INTERFACES( Ra::Plugins::RadiumPluginInterface )
+public:
+	virtual ~DummyPluginC();
 
-  public:
-    virtual ~DummyPlugin();
+	void registerPlugin(const Ra::PluginContext& context) override;
 
-    virtual void registerPlugin( const Ra::PluginContext& context ) override;
+	virtual bool doAddWidget(QString& name) override;
+	virtual QWidget* getWidget() override;
 
-    virtual bool doAddWidget( QString& name ) override;
-    virtual QWidget* getWidget() override;
+	virtual bool doAddMenu() override;
+	virtual QMenu* getMenu() override;
 
-    virtual bool doAddMenu() override;
-    virtual QMenu* getMenu() override;
+	virtual bool doAddAction(int& nb) override;
+	virtual QAction* getAction(int id) override;
 
-  private slots:
-    void sayHello();
+	void incrementFrameCounter();
 
-  private:
-    DummySystem* m_system;
-    QLabel* m_label;
+public slots:
+	void updateNbTriangle();
+
+private:
+	int m_frameCounter;
+	QLabel* m_label;
+	QLabel* m_infoNbTriangle;
+
 };
+}
 
-} // namespace DummyPlugin
+#endif //DUMMYPLUGIN_HPP_
 
-#endif // FANCYMESHPLUGIN_HPP_

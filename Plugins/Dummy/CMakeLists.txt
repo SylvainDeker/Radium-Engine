@@ -3,6 +3,9 @@ project(DummyPlugin)
 cmake_minimum_required(VERSION 2.8.11)
 if (APPLE)
     cmake_policy(SET CMP0042 NEW)
+    # RPATH settings on macOS do not affect install_name.
+    # Run "cmake --help-policy CMP0068" for policy details.
+    cmake_policy(SET CMP0068 NEW)
 endif(APPLE)
 
 message( "${PROJECT_NAME} output path : ${RADIUM_PLUGIN_OUTPUT_PATH}" )
@@ -21,11 +24,11 @@ if (MSVC OR MSVC_IDE)
     # Copy libs / targets in the correct directories
     if ("${CMAKE_GENERATOR}" STREQUAL "NMake Makefiles")
         set(PDB_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-    else()
+    else() 
         foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
             string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
             set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-            set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+            set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
             set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
         endforeach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
     endif()
@@ -48,13 +51,12 @@ add_definitions( ${Qt5OpenGL_DEFINITIONS} )
 include_directories(
     src/
     ${CMAKE_CURRENT_BINARY_DIR} # MOC
-    ${RADIUM_INCLUDE_DIR}
-    ${EIGEN3_INCLUDE_DIR}
-    ${ASSIMP_INCLUDE_DIR}
+    ${RADIUM_INCLUDE_DIRS}
     )
 
 add_library( Dummy SHARED ${sources} ${headers} ${inlines} )
-add_dependencies( Dummy radiumCore radiumEngine radiumGuiBase)
+message(INFO " Dummy : dependencies are ${RADIUM_LIBRARIES}")
+add_dependencies( Dummy ${RADIUM_LIBRARIES})
 
 target_compile_definitions( Dummy PRIVATE "-DDummy_EXPORTS" )
 
