@@ -7,6 +7,7 @@
 #include <Engine/Renderer/RenderTechnique/RenderTechnique.hpp>
 #include <Engine/Renderer/Renderer.hpp>
 #include <Engine/System/System.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 #include <memory>
 
@@ -87,10 +88,10 @@ class RA_ENGINE_API LightManager : public System {
     //
 
     /// Method generating the correct tasks for a LightManager.
-    void generateTasks( Core::TaskQueue* taskQueue, const Engine::FrameInfo& frameInfo ) override;
+    void generateTasks( Core::Utils::TaskQueue* taskQueue, const Engine::FrameInfo& frameInfo ) override;
 
     /// Handle Lights loading.
-    void handleAssetLoading( Entity* entity, const Asset::FileData* data ) override;
+    void handleAssetLoading( Entity* entity, const Core::Asset::FileData* data ) override;
 
   protected:
     /// store the current renderData
