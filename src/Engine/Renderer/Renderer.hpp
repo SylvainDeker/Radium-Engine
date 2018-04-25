@@ -10,7 +10,7 @@
 #include <vector>
 
 #include <Core/Event/EventEnums.hpp>
-#include <Core/File/FileData.hpp>
+#include <Core/Asset/FileData.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/Time/Timer.hpp>
 

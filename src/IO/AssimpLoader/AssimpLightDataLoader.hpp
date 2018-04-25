@@ -1,7 +1,7 @@
 #ifndef RADIUMENGINE_ASSIMP_LIGHT_DATA_LOADER_HPP
 #define RADIUMENGINE_ASSIMP_LIGHT_DATA_LOADER_HPP
 
-#include <Core/File/DataLoader.hpp>
+#include <Core/Asset/DataLoader.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <IO/RaIO.hpp>
 

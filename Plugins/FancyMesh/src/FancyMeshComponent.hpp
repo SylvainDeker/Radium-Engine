@@ -6,7 +6,7 @@
 #include <Core/Mesh/MeshTypes.hpp>
 #include <Core/Mesh/TriangleMesh.hpp>
 
-#include <Core/File/GeometryData.hpp>
+#include <Core/Asset/GeometryData.hpp>
 
 #include <Engine/Component/Component.hpp>
 

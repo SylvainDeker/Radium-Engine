@@ -5,8 +5,8 @@
 
 #include <Engine/System/System.hpp>
 
-#include <Core/File/FileData.hpp>
-#include <Core/File/HandleData.hpp>
+#include <Core/Asset/FileData.hpp>
+#include <Core/Asset/HandleData.hpp>
 #include <Core/Tasks/Task.hpp>
 #include <Core/Tasks/TaskQueue.hpp>
 

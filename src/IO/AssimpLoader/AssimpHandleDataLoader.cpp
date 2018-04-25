@@ -5,7 +5,7 @@
 #include <set>
 
 #include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/File/HandleData.hpp>
+#include <Core/Asset/HandleData.hpp>
 #include <Core/Log/Log.hpp>
 
 #include <IO/AssimpLoader/AssimpWrapper.hpp>

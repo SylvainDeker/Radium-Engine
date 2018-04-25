@@ -4,10 +4,10 @@
 #include <assimp/scene.h>
 #include <set>
 
-#include <Core/File/AnimationData.hpp>
-#include <Core/File/KeyFrame/KeyRotation.hpp>
-#include <Core/File/KeyFrame/KeyScaling.hpp>
-#include <Core/File/KeyFrame/KeyTranslation.hpp>
+#include <Core/Asset/AnimationData.hpp>
+#include <Core/Asset/KeyFrame/KeyRotation.hpp>
+#include <Core/Asset/KeyFrame/KeyScaling.hpp>
+#include <Core/Asset/KeyFrame/KeyTranslation.hpp>
 #include <Core/Log/Log.hpp>
 
 #include <IO/AssimpLoader/AssimpWrapper.hpp>

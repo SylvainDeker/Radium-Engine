@@ -1,7 +1,7 @@
 #include <MeshPaintSystem.hpp>
 
-#include <Core/File/FileData.hpp>
-#include <Core/File/GeometryData.hpp>
+#include <Core/Asset/FileData.hpp>
+#include <Core/Asset/GeometryData.hpp>
 #include <Core/String/StringUtils.hpp>
 #include <Core/Tasks/Task.hpp>
 #include <Core/Tasks/TaskQueue.hpp>

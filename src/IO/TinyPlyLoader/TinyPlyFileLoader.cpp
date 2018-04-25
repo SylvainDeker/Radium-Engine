@@ -1,6 +1,6 @@
 #include <IO/TinyPlyLoader/TinyPlyFileLoader.hpp>
 
-#include <Core/File/FileData.hpp>
+#include <Core/Asset/FileData.hpp>
 
 #include <tinyply/tinyply.h>
 

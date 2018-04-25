@@ -1,6 +1,6 @@
 #include <Engine/Renderer/Material/MaterialConverters.hpp>
 
-#include <Core/File/MaterialData.hpp>
+#include <Core/Asset/MaterialData.hpp>
 
 #include <Engine/Renderer/Material/BlinnPhongMaterial.hpp>
 
