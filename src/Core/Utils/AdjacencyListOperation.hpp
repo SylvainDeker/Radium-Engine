@@ -4,7 +4,7 @@
 #include <Core/Container/VectorArray.hpp>
 #include <Core/Geometry/MeshTypes.hpp>
 
-#include <Core/Utils/Graph/AdjacencyList.hpp>
+#include <Core/Utils/AdjacencyList.hpp>
 
 namespace Ra {
 namespace Core {

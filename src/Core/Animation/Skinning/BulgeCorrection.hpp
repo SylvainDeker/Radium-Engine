@@ -4,7 +4,7 @@
 #include <Core/Animation/Pose/Pose.hpp>
 #include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Utils/Graph/AdjacencyList.hpp>
+#include <Core/Utils/AdjacencyList.hpp>
 
 namespace Ra {
 namespace Core {

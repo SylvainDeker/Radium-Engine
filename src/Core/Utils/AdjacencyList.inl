@@ -1,4 +1,4 @@
-#include <Core/Utils/Graph/AdjacencyList.hpp>
+#include <Core/Utils/AdjacencyList.hpp>
 
 #include <set>
 

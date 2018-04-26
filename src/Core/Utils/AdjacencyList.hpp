@@ -71,6 +71,6 @@ class /*RA_CORE_API*/ AdjacencyList {
 } // namespace Core
 } // namespace Ra
 
-#include <Core/Utils/Graph/AdjacencyList.inl>
+#include <Core/Utils/AdjacencyList.inl>
 
 #endif // ADJACENCY_LIST_H

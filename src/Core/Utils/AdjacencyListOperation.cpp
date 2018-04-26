@@ -1,6 +1,6 @@
-#include <Core/Utils/Graph/AdjacencyListOperation.hpp>
+#include <Core/Utils/AdjacencyListOperation.hpp>
 
-#include <Core/Utils/Graph/AdjacencyList.hpp>
+#include <Core/Utils/AdjacencyList.hpp>
 #include <fstream>
 #include <iostream>
 #include <utility>

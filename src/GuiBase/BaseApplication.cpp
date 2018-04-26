@@ -8,8 +8,8 @@
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/Geometry/MeshUtils.hpp>
 #include <Core/Utils/StringUtils.hpp>
-#include <Core/Tasks/Task.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/Task.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 #include <Core/Utils/Version.hpp>
 
 #include <Engine/Entity/Entity.hpp>

@@ -2,7 +2,7 @@
 #define SKELETON_HANDLE_H
 
 #include <Core/Animation/Handle/PointCloud.hpp>
-#include <Core/Utils/Graph/AdjacencyList.hpp>
+#include <Core/Utils/AdjacencyList.hpp>
 
 namespace Ra {
 namespace Core {
