@@ -5,7 +5,7 @@
 
 #include "Eigen/Core"
 
-#include "Core/Mesh/TriangleMesh.hpp"
+#include "Core/Geometry/TriangleMesh.hpp"
 
 #include "Core/Geometry/Triangle/TriangleOperation.hpp"
 

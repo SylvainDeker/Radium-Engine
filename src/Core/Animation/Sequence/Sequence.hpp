@@ -3,7 +3,7 @@
 
 #include <Core/Animation/Pose/Pose.hpp>
 #include <Core/CoreMacros.hpp>
-#include <Core/Index/CircularIndex.hpp>
+#include <Core/Container/CircularIndex.hpp>
 #include <vector>
 
 namespace Ra {

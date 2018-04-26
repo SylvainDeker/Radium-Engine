@@ -1,8 +1,8 @@
 #include <Engine/Renderer/RenderObject/Primitives/DrawPrimitives.hpp>
 
 #include <Core/Math/ColorPresets.hpp>
-#include <Core/Mesh/MeshPrimitives.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
+#include <Core/Geometry/MeshPrimitives.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
 
 #include <Engine/Renderer/Mesh/Mesh.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>

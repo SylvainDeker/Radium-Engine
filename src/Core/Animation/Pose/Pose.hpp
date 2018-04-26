@@ -1,7 +1,7 @@
 #ifndef POSE_H
 #define POSE_H
 
-#include <Core/Containers/AlignedStdVector.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 namespace Ra {

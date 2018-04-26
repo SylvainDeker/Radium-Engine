@@ -1,7 +1,7 @@
 #ifndef RADIUMENGINE_POLYLINE_HPP_
 #define RADIUMENGINE_POLYLINE_HPP_
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Geometry/Distance/DistanceQueries.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/RaCore.hpp>

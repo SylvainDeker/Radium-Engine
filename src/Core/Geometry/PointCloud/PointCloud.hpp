@@ -5,7 +5,7 @@
 
 #include <Eigen/Eigenvalues>
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/Math/Math.hpp>
 #include <Core/Math/Obb.hpp>

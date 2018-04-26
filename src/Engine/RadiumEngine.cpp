@@ -9,11 +9,11 @@
 #include <string>
 #include <thread>
 
-#include <Core/Event/EventEnums.hpp>
-#include <Core/Event/KeyEvent.hpp>
-#include <Core/Event/MouseEvent.hpp>
-#include <Core/Log/Log.hpp>
-#include <Core/String/StringUtils.hpp>
+#include <GuiBase/Event/EventEnums.hpp>
+#include <GuiBase/Event/KeyEvent.hpp>
+#include <GuiBase/Event/MouseEvent.hpp>
+#include <Core/Utils/Log.hpp>
+#include <Core/Utils/StringUtils.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/FrameInfo.hpp>

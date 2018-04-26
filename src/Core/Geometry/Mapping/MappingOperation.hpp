@@ -2,7 +2,7 @@
 #define RADIUMENGINE_MAPPING_OPERATION
 
 #include <Core/Geometry/Mapping/Mapping.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 namespace Ra {
 namespace Core {

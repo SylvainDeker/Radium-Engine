@@ -1,4 +1,4 @@
-#include <Core/Mesh/MeshUtils.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
 #include <Core/TreeStructures/BVH.hpp>
 
 #include <iostream>

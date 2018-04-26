@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Core/Containers/VectorArray.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Container/VectorArray.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 #include <array>
 #include <queue>
 #include <vector>

@@ -9,10 +9,10 @@
 #include <mutex>
 #include <vector>
 
-#include <Core/Event/EventEnums.hpp>
 #include <Core/Asset/FileData.hpp>
+#include <GuiBase/Event/EventEnums.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Time/Timer.hpp>
+#include <Core/Utils/Timer.hpp>
 
 namespace Ra {
 namespace Core {

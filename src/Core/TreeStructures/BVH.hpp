@@ -5,7 +5,7 @@
 #include <Core/RaCore.hpp>
 
 #include <Core/Math/Frustum.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 #include <memory>
 #include <vector>

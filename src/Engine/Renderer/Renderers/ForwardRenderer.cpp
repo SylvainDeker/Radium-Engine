@@ -1,6 +1,6 @@
 #include <Engine/Renderer/Renderers/ForwardRenderer.hpp>
 
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/ColorPresets.hpp>
 
 #include <Engine/Managers/LightManager/DefaultLightManager.hpp>

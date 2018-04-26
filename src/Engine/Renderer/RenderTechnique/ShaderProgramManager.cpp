@@ -1,8 +1,8 @@
 #include <Engine/Renderer/RenderTechnique/ShaderProgram.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderProgramManager.hpp>
 
-#include <Core/Containers/MakeShared.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Container/MakeShared.hpp>
+#include <Core/Utils/Log.hpp>
 
 #include <globjects/NamedString.h>
 #include <globjects/Program.h>

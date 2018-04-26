@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Utils/Singleton.hpp>
 
 #include <Engine/Renderer/Mesh/Mesh.hpp>

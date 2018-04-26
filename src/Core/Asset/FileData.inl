@@ -3,7 +3,7 @@
 #include <Core/Asset/GeometryData.hpp>
 #include <Core/Asset/HandleData.hpp>
 #include <Core/Asset/LightData.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 
 namespace Ra {
 namespace Asset {

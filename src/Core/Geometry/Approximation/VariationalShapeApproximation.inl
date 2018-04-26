@@ -1,7 +1,7 @@
 #include <Core/Geometry/Approximation/VariationalShapeApproximation.hpp>
 
 #include <Core/Geometry/Triangle/TriangleOperation.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Eigen/Eigenvalues>
 #include <random>
 #include <set>

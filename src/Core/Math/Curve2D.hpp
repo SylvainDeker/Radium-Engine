@@ -1,7 +1,7 @@
 #ifndef RADIUMENGINE_CURVE2D_HPP_
 #define RADIUMENGINE_CURVE2D_HPP_
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/Spline.hpp>
 #include <Core/RaCore.hpp>
 #include <vector>

@@ -3,8 +3,8 @@
 
 #include <FancyMeshPluginMacros.hpp>
 
-#include <Core/Mesh/MeshTypes.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 #include <Core/Asset/GeometryData.hpp>
 

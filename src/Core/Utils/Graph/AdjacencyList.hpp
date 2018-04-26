@@ -1,7 +1,7 @@
 #ifndef ADJACENCY_LIST_H
 #define ADJACENCY_LIST_H
 
-#include <Core/Containers/AlignedStdVector.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
 
 namespace Ra {
 namespace Core {

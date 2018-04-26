@@ -4,13 +4,13 @@
 #include <Engine/Component/Component.hpp>
 #include <SkinningPlugin.hpp>
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Geometry/Adjacency/Adjacency.hpp>
 #include <Core/Math/ColorPresets.hpp>
 
 #include <Core/Animation/Handle/HandleWeight.hpp>
 #include <Core/Animation/Skinning/SkinningData.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 #include <Engine/Renderer/Material/BlinnPhongMaterial.hpp>
 #include <Engine/Renderer/Mesh/Mesh.hpp>

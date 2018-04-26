@@ -2,7 +2,7 @@
 #define RADIUMENGINE_ENTITY_PROPERTY_WIDGET_HPP_
 #include <QWidget>
 
-#include <Core/Containers/AlignedAllocator.hpp>
+#include <Core/Container/AlignedAllocator.hpp>
 #include <Gui/VectorEditor.hpp>
 #include <GuiBase/TransformEditor/TransformEditor.hpp>
 

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include <Core/Containers/AlignedStdVector.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/RaCore.hpp>
 

@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include <Core/Containers/VectorArray.hpp>
-#include <Core/Index/Index.hpp>
+#include <Core/Container/VectorArray.hpp>
+#include <Core/Container/Index.hpp>
 #include <Core/RaCore.hpp>
 
 #include <Core/Asset/AssetData.hpp>

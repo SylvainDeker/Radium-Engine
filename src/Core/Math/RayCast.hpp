@@ -2,7 +2,7 @@
 #define RADIUMENGINE_RAY_CAST_HPP_
 
 #include <Core/Math/Ray.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/RaCore.hpp>
 #include <vector>
 

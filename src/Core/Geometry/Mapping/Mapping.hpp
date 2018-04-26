@@ -1,8 +1,8 @@
 #ifndef RADIUMENGINE_MAPPING_DEFINITION
 #define RADIUMENGINE_MAPPING_DEFINITION
 
-#include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/Index/Index.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Container/Index.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 namespace Ra {

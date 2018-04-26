@@ -1,7 +1,7 @@
 #ifndef RADIUM_STRINGTESTS_HPP_
 #define RADIUM_STRINGTESTS_HPP_
 
-#include <Core/String/StringUtils.hpp>
+#include <Core/Utils/StringUtils.hpp>
 #include <Tests/CoreTests/Tests.hpp>
 
 namespace RaTests {

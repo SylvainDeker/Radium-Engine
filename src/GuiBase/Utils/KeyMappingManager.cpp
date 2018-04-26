@@ -1,6 +1,6 @@
 #include "KeyMappingManager.hpp"
 
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 
 namespace Ra {
 namespace Gui {

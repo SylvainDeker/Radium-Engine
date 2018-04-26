@@ -2,7 +2,7 @@
 #define RADIUMENGINE_BULGE_CORRECTION_DEFINITION_HPP
 
 #include <Core/Animation/Pose/Pose.hpp>
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/Utils/Graph/AdjacencyList.hpp>
 

@@ -1,6 +1,6 @@
 #include <Core/Geometry/Curvature/Curvature.hpp>
 
-#include <Core/Index/CircularIndex.hpp>
+#include <Core/Container/CircularIndex.hpp>
 
 namespace Ra {
 namespace Core {

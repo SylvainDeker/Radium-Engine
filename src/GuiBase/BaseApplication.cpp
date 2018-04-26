@@ -3,11 +3,11 @@
 #include <GuiBase/MainWindowInterface.hpp>
 
 #include <Core/CoreMacros.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
-#include <Core/String/StringUtils.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
+#include <Core/Utils/StringUtils.hpp>
 #include <Core/Tasks/Task.hpp>
 #include <Core/Tasks/TaskQueue.hpp>
 #include <Core/Utils/Version.hpp>

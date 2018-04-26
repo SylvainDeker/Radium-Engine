@@ -9,8 +9,8 @@
 #include <set>
 #include <vector>
 
-#include <Core/Index/Index.hpp>
-#include <Core/Index/IndexMap.hpp>
+#include <Core/Container/Index.hpp>
+#include <Core/Container/IndexMap.hpp>
 
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectTypes.hpp>

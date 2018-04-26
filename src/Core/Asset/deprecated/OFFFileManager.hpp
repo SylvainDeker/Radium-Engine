@@ -2,7 +2,7 @@
 #define RADIUMENGINE_OFF_FILE_MANAGER_HPP
 
 #include <Core/Asset/deprecated/FileManager.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 namespace Ra {
 namespace Core {

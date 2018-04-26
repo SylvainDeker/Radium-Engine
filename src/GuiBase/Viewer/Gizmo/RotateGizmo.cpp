@@ -1,9 +1,9 @@
 #include <GuiBase/Viewer/Gizmo/RotateGizmo.hpp>
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Math/RayCast.hpp>
-#include <Core/Mesh/MeshPrimitives.hpp>
+#include <Core/Geometry/MeshPrimitives.hpp>
 
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>

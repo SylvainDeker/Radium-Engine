@@ -1,7 +1,7 @@
 #include <Engine/Component/Component.hpp>
 
-#include <Core/Log/Log.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
+#include <Core/Utils/Log.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Managers/SignalManager/SignalManager.hpp>
 #include <Engine/RadiumEngine.hpp>

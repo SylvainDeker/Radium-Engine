@@ -2,7 +2,7 @@
 #define ANIMPLUGIN_SKELETON_BONE_DRAWABLE_HPP_
 
 #include <Core/Animation/Handle/Skeleton.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Renderer/Mesh/Mesh.hpp>

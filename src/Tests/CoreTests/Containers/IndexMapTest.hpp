@@ -1,7 +1,7 @@
 #ifndef RADIUM_INDEXMAP_TEST_HPP_
 #define RADIUM_INDEXMAP_TEST_HPP_
 
-#include <Core/Index/IndexMap.hpp>
+#include <Core/Container/IndexMap.hpp>
 #include <Tests/CoreTests/Tests.hpp>
 
 namespace RaTests {
