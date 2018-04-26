@@ -7,9 +7,9 @@
 #include <Core/Animation/Handle/SkeletonUtils.hpp>
 #include <Core/Animation/Pose/Pose.hpp>
 #include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/File/HandleToSkeleton.hpp>
-#include <Core/File/KeyFrame/KeyPose.hpp>
-#include <Core/File/KeyFrame/KeyTransform.hpp>
+#include <Core/Asset/HandleToSkeleton.hpp>
+#include <Core/Asset/KeyFrame/KeyPose.hpp>
+#include <Core/Asset/KeyFrame/KeyTransform.hpp>
 #include <Core/Mesh/TriangleMesh.hpp>
 #include <Core/Utils/Graph/AdjacencyListOperation.hpp>
 

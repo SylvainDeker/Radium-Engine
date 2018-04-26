@@ -4,8 +4,8 @@
 #include <numeric> // std::iota
 
 #include <Core/Containers/MakeShared.hpp>
-#include <Core/File/FileData.hpp>
-#include <Core/File/GeometryData.hpp>
+#include <Core/Asset/FileData.hpp>
+#include <Core/Asset/GeometryData.hpp>
 #include <Core/Geometry/Normal/Normal.hpp>
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Mesh/MeshUtils.hpp>

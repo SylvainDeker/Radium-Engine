@@ -6,7 +6,7 @@
 #include <Core/Animation/Handle/HandleWeight.hpp>
 #include <Core/Animation/Pose/Pose.hpp>
 #include <Core/Animation/Skinning/SkinningData.hpp>
-#include <Core/File/HandleData.hpp>
+#include <Core/Asset/HandleData.hpp>
 #include <Core/Math/DualQuaternion.hpp>
 #include <Core/Mesh/TriangleMesh.hpp>
 

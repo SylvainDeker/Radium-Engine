@@ -3,7 +3,7 @@
 
 #include <assimp/Importer.hpp>
 
-#include <Core/File/FileLoaderInterface.hpp>
+#include <Core/Asset/FileLoaderInterface.hpp>
 #include <IO/RaIO.hpp>
 
 namespace Ra {

@@ -3,7 +3,7 @@
 #include <assimp/mesh.h>
 #include <assimp/scene.h>
 
-#include <Core/File/GeometryData.hpp>
+#include <Core/Asset/GeometryData.hpp>
 #include <Core/Log/Log.hpp>
 
 #include <IO/AssimpLoader/AssimpWrapper.hpp>
