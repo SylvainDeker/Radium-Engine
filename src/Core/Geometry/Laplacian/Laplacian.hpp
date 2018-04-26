@@ -1,9 +1,9 @@
 #ifndef LAPLACIAN_DEFINITION
 #define LAPLACIAN_DEFINITION
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 #include <Core/Geometry/Adjacency/Adjacency.hpp>
 

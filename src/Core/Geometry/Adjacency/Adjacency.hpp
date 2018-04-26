@@ -1,10 +1,10 @@
 #ifndef ADJACENCY_DEFINITION
 #define ADJACENCY_DEFINITION
 
-#include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 #include <Core/Utils/Graph/AdjacencyList.hpp>
 

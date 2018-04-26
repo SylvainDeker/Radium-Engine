@@ -1,10 +1,10 @@
 #ifndef RADIUM_CONVERT_TESTS_HPP_
 #define RADIUM_CONVERT_TESTS_HPP_
 
-#include <Core/Mesh/MeshPrimitives.hpp>
-#include <Core/Mesh/TopologicalTriMesh/TopologicalMesh.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
-#include <Core/Mesh/Wrapper/TopologicalMeshConvert.hpp>
+#include <Core/Geometry/MeshPrimitives.hpp>
+#include <Core/Geometry/TopologicalTriMesh/TopologicalMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
+#include <Core/Geometry/Wrapper/TopologicalMeshConvert.hpp>
 #include <Tests/CoreTests/Tests.hpp>
 
 using Ra::Core::MeshConverter;

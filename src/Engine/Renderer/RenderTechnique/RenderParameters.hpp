@@ -6,8 +6,8 @@
 #include <set>
 #include <vector>
 
-#include <Core/Containers/AlignedAllocator.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Container/AlignedAllocator.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 namespace Ra {

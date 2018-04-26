@@ -6,7 +6,7 @@
 
 #include <QApplication>
 
-#include <Core/Time/Timer.hpp>
+#include <Core/Utils/Timer.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 #include <GuiBase/Viewer/Viewer.hpp>
 

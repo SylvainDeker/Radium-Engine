@@ -3,8 +3,8 @@
 
 #include <Core/Animation/Handle/HandleWeight.hpp>
 #include <Core/Animation/Pose/Pose.hpp>
-#include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/DualQuaternion.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 

@@ -1,9 +1,9 @@
 #ifndef AREA_DEFINITION
 #define AREA_DEFINITION
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 namespace Ra {
 namespace Core {

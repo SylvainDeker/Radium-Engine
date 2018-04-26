@@ -3,7 +3,7 @@
 #include <assimp/scene.h>
 
 #include <Core/Asset/LightData.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 
 #include <IO/AssimpLoader/AssimpWrapper.hpp>
 

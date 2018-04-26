@@ -6,9 +6,9 @@
 #include <iomanip>
 #include <iostream>
 
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Tasks/TaskQueue.hpp>
-#include <Core/Time/Timer.hpp>
+#include <Core/Utils/Timer.hpp>
 #include <Engine/Renderer/Renderer.hpp>
 
 namespace Ra {

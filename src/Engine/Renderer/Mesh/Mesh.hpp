@@ -5,8 +5,8 @@
 
 #include <array>
 
-#include <Core/Containers/VectorArray.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Container/VectorArray.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 namespace Ra {
 namespace Engine {

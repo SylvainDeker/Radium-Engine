@@ -1,6 +1,6 @@
 #include <GuiBase/Utils/PickingManager.hpp>
 
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 namespace Ra {
 namespace Gui {

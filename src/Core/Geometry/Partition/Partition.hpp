@@ -4,11 +4,11 @@
 #include <set>
 
 #include <Core/Animation/Handle/HandleWeight.hpp>
-#include <Core/Containers/AlignedStdVector.hpp>
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 namespace Ra {
 namespace Core {

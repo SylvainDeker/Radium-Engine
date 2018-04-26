@@ -8,7 +8,7 @@
 #include <QObject>
 
 #include <Core/CoreMacros.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 namespace Ra {

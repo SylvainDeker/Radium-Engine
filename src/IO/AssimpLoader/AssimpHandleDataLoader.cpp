@@ -4,9 +4,9 @@
 #include <assimp/scene.h>
 #include <set>
 
-#include <Core/Containers/AlignedStdVector.hpp>
 #include <Core/Asset/HandleData.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Utils/Log.hpp>
 
 #include <IO/AssimpLoader/AssimpWrapper.hpp>
 

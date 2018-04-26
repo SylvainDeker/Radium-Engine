@@ -1,6 +1,6 @@
 #include <Core/Geometry/Area/Area.hpp>
 
-#include <Core/Index/CircularIndex.hpp>
+#include <Core/Container/CircularIndex.hpp>
 
 #include <Core/Geometry/Triangle/TriangleOperation.hpp>
 

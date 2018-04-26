@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include <Core/Index/IndexMap.hpp>
+#include <Core/Container/IndexMap.hpp>
 #include <Core/Utils/Singleton.hpp>
 
 namespace Ra {

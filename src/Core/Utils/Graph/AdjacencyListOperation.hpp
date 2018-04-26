@@ -1,8 +1,8 @@
 #ifndef ADJACENCY_LIST_OPERATION_H
 #define ADJACENCY_LIST_OPERATION_H
 
-#include <Core/Containers/VectorArray.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Container/VectorArray.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 #include <Core/Utils/Graph/AdjacencyList.hpp>
 

@@ -1,7 +1,7 @@
 #ifndef CURVATURE_DEFINITION
 #define CURVATURE_DEFINITION
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Geometry/Area/Area.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 

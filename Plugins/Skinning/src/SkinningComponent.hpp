@@ -8,7 +8,7 @@
 #include <Core/Animation/Skinning/SkinningData.hpp>
 #include <Core/Asset/HandleData.hpp>
 #include <Core/Math/DualQuaternion.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 #include <Engine/Component/Component.hpp>
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>

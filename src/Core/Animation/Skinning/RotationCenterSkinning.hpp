@@ -5,13 +5,13 @@
 
 #include <array>
 
-#include <Core/Index/IndexMap.hpp>
-#include <Core/Log/Log.hpp>
-#include <Core/Mesh/DCEL/Dcel.hpp>
-#include <Core/Mesh/DCEL/FullEdge.hpp>
-#include <Core/Mesh/DCEL/Operations/EdgeSplit.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
-#include <Core/Mesh/Wrapper/Convert.hpp>
+#include <Core/Container/IndexMap.hpp>
+#include <Core/Utils/Log.hpp>
+#include <Core/Geometry/DCEL/Dcel.hpp>
+#include <Core/Geometry/DCEL/FullEdge.hpp>
+#include <Core/Geometry/DCEL/Operations/EdgeSplit.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
+#include <Core/Geometry/Wrapper/Convert.hpp>
 
 #include <Core/Animation/Handle/HandleWeight.hpp>
 #include <Core/Animation/Pose/Pose.hpp>

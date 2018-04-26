@@ -4,9 +4,9 @@
 #include <QMessageBox>
 #include <iostream>
 
-#include <Core/Event/KeyEvent.hpp>
-#include <Core/Event/MouseEvent.hpp>
-#include <Core/Log/Log.hpp>
+#include <GuiBase/Event/KeyEvent.hpp>
+#include <GuiBase/Event/MouseEvent.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/Math.hpp>
 #include <Engine/Renderer/Camera/Camera.hpp>
 #include <Engine/Renderer/Light/Light.hpp>

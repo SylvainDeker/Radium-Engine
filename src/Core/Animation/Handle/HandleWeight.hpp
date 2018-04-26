@@ -1,7 +1,7 @@
 #ifndef HANDLE_WEIGHT_H
 #define HANDLE_WEIGHT_H
 
-#include <Core/Containers/AlignedStdVector.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 #include <map>
 

@@ -1,9 +1,9 @@
 #include <Core/Geometry/Normal/Normal.hpp>
 
 #include <Core/Geometry/Triangle/TriangleOperation.hpp>
-#include <Core/Index/CircularIndex.hpp>
+#include <Core/Container/CircularIndex.hpp>
 
-#include <Core/Time/Timer.hpp>
+#include <Core/Utils/Timer.hpp>
 
 namespace Ra {
 namespace Core {

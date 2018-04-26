@@ -1,7 +1,7 @@
 #include <MeshFeatureTrackingComponent.hpp>
 
-#include <Core/Mesh/MeshPrimitives.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/MeshPrimitives.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>

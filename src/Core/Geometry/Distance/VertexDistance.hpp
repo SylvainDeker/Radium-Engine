@@ -1,7 +1,7 @@
 #ifndef DISTANCE_OPERATION
 #define DISTANCE_OPERATION
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 namespace Ra {

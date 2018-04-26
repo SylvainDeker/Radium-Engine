@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include <Core/Math/ColorPresets.hpp>
-#include <Core/Mesh/MeshUtils.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
+#include <Core/Geometry/MeshUtils.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/Tasks/TaskQueue.hpp>
 
 #include <Engine/Entity/Entity.hpp>

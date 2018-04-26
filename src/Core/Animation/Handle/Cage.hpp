@@ -2,8 +2,8 @@
 #define CAGE_HANDLE_H
 
 #include <Core/Animation/Handle/PointCloud.hpp>
-#include <Core/Containers/VectorArray.hpp>
-#include <Core/Mesh/MeshTypes.hpp> // Triangle
+#include <Core/Container/VectorArray.hpp>
+#include <Core/Geometry/MeshTypes.hpp> // Triangle
 #include <Core/RaCore.hpp>
 
 namespace Ra {

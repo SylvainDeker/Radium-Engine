@@ -6,11 +6,11 @@
 #include <Core/Animation/Handle/HandleWeightOperation.hpp>
 #include <Core/Animation/Handle/SkeletonUtils.hpp>
 #include <Core/Animation/Pose/Pose.hpp>
-#include <Core/Containers/AlignedStdVector.hpp>
+#include <Core/Container/AlignedStdVector.hpp>
+#include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/Asset/HandleToSkeleton.hpp>
 #include <Core/Asset/KeyFrame/KeyPose.hpp>
 #include <Core/Asset/KeyFrame/KeyTransform.hpp>
-#include <Core/Mesh/TriangleMesh.hpp>
 #include <Core/Utils/Graph/AdjacencyListOperation.hpp>
 
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>

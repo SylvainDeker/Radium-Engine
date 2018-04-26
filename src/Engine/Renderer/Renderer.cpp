@@ -4,9 +4,9 @@
 
 #include <iostream>
 
-#include <Core/Log/Log.hpp>
+#include <Core/Utils/Log.hpp>
 
-#include <Core/Mesh/MeshPrimitives.hpp>
+#include <Core/Geometry/MeshPrimitives.hpp>
 
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/OpenGL/OpenGL.hpp>

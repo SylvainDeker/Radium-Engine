@@ -6,8 +6,8 @@
 #include <map>
 #include <memory>
 
-#include <Core/Event/KeyEvent.hpp>
-#include <Core/Event/MouseEvent.hpp>
+#include <GuiBase/Event/KeyEvent.hpp>
+#include <GuiBase/Event/MouseEvent.hpp>
 
 #include <Engine/Component/Component.hpp>
 

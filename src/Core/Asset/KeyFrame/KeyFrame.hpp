@@ -4,7 +4,7 @@
 #include <map>
 #include <set>
 
-#include <Core/Containers/AlignedAllocator.hpp>
+#include <Core/Container/AlignedAllocator.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
 #include <Core/Asset/KeyFrame/AnimationTime.hpp>

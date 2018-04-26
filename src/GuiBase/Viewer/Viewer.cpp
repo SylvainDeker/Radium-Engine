@@ -21,11 +21,11 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>
 
-#include <Core/Containers/MakeShared.hpp>
-#include <Core/Log/Log.hpp>
+#include <Core/Container/MakeShared.hpp>
+#include <Core/Utils/Log.hpp>
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Math/Math.hpp>
-#include <Core/String/StringUtils.hpp>
+#include <Core/Utils/StringUtils.hpp>
 
 #include <Engine/Component/Component.hpp>
 #include <Engine/Renderer/Camera/Camera.hpp>

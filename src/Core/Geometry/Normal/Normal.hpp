@@ -1,10 +1,10 @@
 #ifndef NORMAL_DEFINITION
 #define NORMAL_DEFINITION
 
-#include <Core/Containers/VectorArray.hpp>
+#include <Core/Container/VectorArray.hpp>
 #include <Core/Geometry/Adjacency/Adjacency.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
-#include <Core/Mesh/MeshTypes.hpp>
+#include <Core/Geometry/MeshTypes.hpp>
 
 namespace Ra {
 namespace Core {
