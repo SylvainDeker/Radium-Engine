@@ -4,8 +4,8 @@
 #include <string>
 
 #include <Core/Asset/FileData.hpp>
-#include <Core/Tasks/Task.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/Task.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 #include <Engine/FrameInfo.hpp>
 #include <Engine/RadiumEngine.hpp>

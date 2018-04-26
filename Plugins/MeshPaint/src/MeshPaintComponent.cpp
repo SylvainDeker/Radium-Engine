@@ -5,7 +5,7 @@
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Geometry/MeshUtils.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Renderer/Material/Material.hpp>

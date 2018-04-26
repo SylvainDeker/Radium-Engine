@@ -2,8 +2,8 @@
 #include <minimalradium.hpp>
 
 #include <Core/Geometry/MeshPrimitives.hpp>
-#include <Core/Tasks/Task.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/Task.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 #include <Core/Utils/Timer.hpp>
 
 #include <Engine/Renderer/Mesh/Mesh.hpp>
