@@ -11,7 +11,7 @@
 #include <Core/Asset/HandleToSkeleton.hpp>
 #include <Core/Asset/KeyFrame/KeyPose.hpp>
 #include <Core/Asset/KeyFrame/KeyTransform.hpp>
-#include <Core/Utils/Graph/AdjacencyListOperation.hpp>
+#include <Core/Utils/AdjacencyListOperation.hpp>
 
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>

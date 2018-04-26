@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include <Core/Utils/Log.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 #include <Core/Utils/Timer.hpp>
 #include <Engine/Renderer/Renderer.hpp>
 

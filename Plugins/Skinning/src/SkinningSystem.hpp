@@ -7,8 +7,8 @@
 
 #include <Core/Asset/FileData.hpp>
 #include <Core/Asset/HandleData.hpp>
-#include <Core/Tasks/Task.hpp>
-#include <Core/Tasks/TaskQueue.hpp>
+#include <Core/Utils/Task.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 #include <Engine/Entity/Entity.hpp>
 #include <SkinningComponent.hpp>
