@@ -1,5 +1,5 @@
 #include "PolyLine.hpp"
-#include <Core/Geometry/PointCloud/PointCloud.hpp>
+#include <Core/Geometry/PointCloud.hpp>
 
 namespace Ra {
 namespace Core {

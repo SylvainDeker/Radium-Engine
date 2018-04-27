@@ -1,6 +1,6 @@
 #include <Core/Asset/HandleToSkeleton.hpp>
 
-#include <Core/Animation/Handle/Skeleton.hpp>
+#include <Core/Animation/Skeleton.hpp>
 #include <Core/Asset/HandleData.hpp>
 
 namespace Ra {

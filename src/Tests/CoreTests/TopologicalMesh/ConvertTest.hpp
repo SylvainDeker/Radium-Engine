@@ -2,9 +2,9 @@
 #define RADIUM_CONVERT_TESTS_HPP_
 
 #include <Core/Geometry/MeshPrimitives.hpp>
-#include <Core/Geometry/TopologicalTriMesh/TopologicalMesh.hpp>
+#include <Core/Geometry/TopologicalMesh.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
-#include <Core/Geometry/Wrapper/TopologicalMeshConvert.hpp>
+#include <Core/Geometry/TopologicalMeshConvert.hpp>
 #include <Tests/CoreTests/Tests.hpp>
 
 using Ra::Core::MeshConverter;

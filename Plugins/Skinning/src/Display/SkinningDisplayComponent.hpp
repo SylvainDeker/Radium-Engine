@@ -5,11 +5,11 @@
 #include <SkinningPlugin.hpp>
 
 #include <Core/Container/VectorArray.hpp>
-#include <Core/Geometry/Adjacency/Adjacency.hpp>
+#include <Core/Geometry/Adjacency.hpp>
 #include <Core/Math/ColorPresets.hpp>
 
-#include <Core/Animation/Handle/HandleWeight.hpp>
-#include <Core/Animation/Skinning/SkinningData.hpp>
+#include <Core/Animation/HandleWeight.hpp>
+#include <Core/Animation/SkinningData.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
 
 #include <Engine/Renderer/Material/BlinnPhongMaterial.hpp>

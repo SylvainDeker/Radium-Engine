@@ -1,7 +1,7 @@
 #ifndef RADIUM_GEOMETRYTESTS_HPP_
 #define RADIUM_GEOMETRYTESTS_HPP_
 
-#include <Core/Geometry/Distance/DistanceQueries.hpp>
+#include <Core/Geometry/DistanceQueries.hpp>
 #include <Core/Math/PolyLine.hpp>
 
 using Ra::Core::Vector3;

@@ -6,7 +6,7 @@
 #include <Core/Asset/FileData.hpp>
 #include <Core/Asset/GeometryData.hpp>
 #include <Core/Container/MakeShared.hpp>
-#include <Core/Geometry/Normal/Normal.hpp>
+#include <Core/Geometry/Normal.hpp>
 #include <Core/Math/ColorPresets.hpp>
 #include <Core/Geometry/MeshUtils.hpp>
 #include <Core/Utils/StringUtils.hpp>

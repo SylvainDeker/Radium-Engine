@@ -1,6 +1,6 @@
 #include <Core/Asset/deprecated/OBJFileManager.hpp>
 #include <Core/Geometry/MeshPrimitives.hpp>
-#include <Core/Geometry/Wrapper/TopologicalMeshConvert.hpp>
+#include <Core/Geometry/TopologicalMeshConvert.hpp>
 #include <OpenMesh/Tools/Subdivider/Uniform/CatmullClarkT.hh>
 #include <OpenMesh/Tools/Subdivider/Uniform/LoopT.hh>
 #include <memory>

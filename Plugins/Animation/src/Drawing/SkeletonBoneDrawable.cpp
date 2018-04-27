@@ -6,7 +6,7 @@
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 
-#include <Core/Animation/Handle/SkeletonUtils.hpp>
+#include <Core/Animation/SkeletonUtils.hpp>
 
 namespace AnimationPlugin {
 
