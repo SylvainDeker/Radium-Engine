@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-
 <keymaps>
-	<keymap>
-		<information id="type" modifier="NoModifier" type="mouse" value="LeftButton"></information>
-		<information id="action" value="TRACKBALLCAMERA_MANIPULATION"></information>
-	</keymap>
-	<keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_A"></information>
-		<information id="action" value="TRACKBALLCAMERA_ROTATE_AROUND"></information>
-	</keymap>
-        <keymap>
-                <information id="type" modifier="ControlModifier" type="mouse" value="RightButton"></information>
-                <information id="action" value="GIZMOMANAGER_MANIPULATION"></information>
-        </keymap>
-	<keymap>
-                <information id="type" modifier="NoModifier" type="mouse" value="RightButton"></information>
-                <information id="action" value="VIEWER_BUTTON_PICKING_QUERY"></information>
-	</keymap>
-        <keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_V"></information>
-                <information id="action" value="FEATUREPICKING_VERTEX"></information>
-        </keymap>
-        <keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_E"></information>
-                <information id="action" value="FEATUREPICKING_EDGE"></information>
-        </keymap>
-        <keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_T"></information>
-                <information id="action" value="FEATUREPICKING_TRIANGLE"></information>
-        </keymap>
-        <keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_C"></information>
-                <information id="action" value="FEATUREPICKING_MULTI_CIRCLE"></information>
-        </keymap>
-	<keymap>
-		<information id="type" modifier="NoModifier" type="mouse" value="RightButton"></information>
-                <information id="action" value="VIEWER_BUTTON_CAST_RAY_QUERY"></information>
-	</keymap>
-	<keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_R"></information>
-		<information id="action" value="VIEWER_RAYCAST_QUERY"></information>
-	</keymap>
-	<keymap>
-		<information id="type" modifier="ControlModifier" type="key" value="Key_W"></information>
-		<information id="action" value="VIEWER_TOGGLE_WIREFRAME"></information>
-        </keymap>
-	<keymap>
-		<information id="type" modifier="NoModifier" type="mouse" value="LeftButton"></information>
-		<information id="action" value="COLORWIDGET_PRESSBUTTON"></information>
-        </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="mouse" value="MiddleButton"/>
+        <information id="action" value="TRACKBALLCAMERA_MANIPULATION"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="mouse" value="LeftBouton"/>
+        <information id="action" value="GIZMOMANAGER_MANIPULATION"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="mouse" value="RIGHTBUTTON"/>
+        <information id="action" value="VIEWER_BUTTON_PICKING_QUERY"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="mouse" value="LeftBouton"/>
+        <information id="action" value="VIEWER_BUTTON_CAST_RAY_QUERY"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="mouse" value="LeftBouton"/>
+        <information id="action" value="COLORWIDGET_PRESSBUTTON"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_A"/>
+        <information id="action" value="TRACKBALLCAMERA_ROTATE_AROUND"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_V"/>
+        <information id="action" value="FEATUREPICKING_VERTEX"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_E"/>
+        <information id="action" value="FEATUREPICKING_EDGE"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_T"/>
+        <information id="action" value="FEATUREPICKING_TRIANGLE"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_C"/>
+        <information id="action" value="FEATUREPICKING_MULTI_CIRCLE"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_R"/>
+        <information id="action" value="VIEWER_RAYCAST_QUERY"/>
+    </keymap>
+    <keymap>
+        <information modifier="NoModifier" id="type" type="key" value="Key_Z"/>
+        <information id="action" value="VIEWER_TOGGLE_WIREFRAME"/>
+    </keymap>
 </keymaps>

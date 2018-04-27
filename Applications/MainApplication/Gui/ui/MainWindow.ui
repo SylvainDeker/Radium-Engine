@@ -52,6 +52,8 @@
     <addaction name="actionReload_configuration"/>
     <addaction name="separator"/>
     <addaction name="actionLoad_configuration_file"/>
+    <addaction name="separator"/>
+    <addaction name="actionEdit_keymap"/>
    </widget>
    <addaction name="menuFILE"/>
    <addaction name="menuMisc"/>
@@ -707,6 +709,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionEdit_keymap">
+   <property name="text">
+    <string>Edit keymap</string>
    </property>
   </action>
  </widget>

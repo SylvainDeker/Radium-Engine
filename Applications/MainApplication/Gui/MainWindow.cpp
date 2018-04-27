@@ -19,6 +19,8 @@
 #include <GuiBase/Viewer/Gizmo/GizmoManager.hpp>
 #include <PluginBase/RadiumPluginInterface.hpp>
 
+#include <GuiBase/Utils/KeyEditor.hpp>
+
 #include <QComboBox>
 #include <QFileDialog>
 #include <QSettings>
@@ -93,7 +95,7 @@ namespace Gui
 
         connect(actionReload_configuration, &QAction::triggered, this, &MainWindow::reloadConfiguration);
         connect(actionLoad_configuration_file, &QAction::triggered, this, &MainWindow::loadConfiguration);
-
+		connect(actionEdit_keymap, &QAction::triggered, this, &MainWindow::KeyEdit);
         // Loading setup.
         connect(this, &MainWindow::fileLoading, mainApp, &Ra::GuiBase::BaseApplication::loadFile);
 
@@ -579,6 +581,11 @@ namespace Gui
         std::shared_ptr<Engine::Renderer> e (new Engine::ForwardRenderer());
         addRenderer("Forward Renderer", e);
     }
-
+	
+	void MainWindow::KeyEdit()
+	{
+        KeyEditor * ed = new KeyEditor();
+        ed->show();
+	}
 } // namespace Gui
 } // namespace Ra

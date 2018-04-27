@@ -94,7 +94,7 @@ namespace Ra
             // Keymapping configuration tool
             void reloadConfiguration();
             void loadConfiguration();
-
+			void KeyEdit();
             /// Slot for the "visible" button
             void toggleVisisbleRO();
 

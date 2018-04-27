@@ -2,11 +2,9 @@
 
 <keymaps>
 	<keymap>
-		<information id="type" modifier="NoModifier" type="mouse" value="MiddleButton"></information>
-		<information id="action" value="TRACKBALLCAMERA_MANIPULATION"></information>
-	</keymap>
-	<keymap>
-                <information id="type" modifier="NoModifier" type="key" value="Key_A"></information>
+		<information id="type" modifier="NoModifier" type="mouse" value="LeftButton"></information>
+    </keymap>
+    <keymap>
 		<information id="action" value="TRACKBALLCAMERA_ROTATE_AROUND"></information>
 	</keymap>
         <keymap>

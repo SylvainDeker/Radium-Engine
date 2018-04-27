@@ -212,6 +212,8 @@ add_definitions(${Qt5Xml_DEFINITIONS})
 file(GLOB_RECURSE guibase_sources GuiBase/*.cpp)
 file(GLOB_RECURSE guibase_headers GuiBase/*.h GuiBase/*.hpp)
 file(GLOB_RECURSE guibase_inlines GuiBase/*.inl)
+file(GLOB_RECURSE guibase_uis     GuiBase/Utils/ui/*.ui)
+qt5_wrap_ui(guibase_uis_moc ${guibase_uis})
 
 set (guibase_libs
     radiumEngine
@@ -227,7 +229,8 @@ add_library(
     ${guibase_target} SHARED
     ${guibase_sources}
     ${guibase_headers}
-    ${guibase_inlines})
+    ${guibase_inlines}
+    ${guibase_uis_moc})
 
 add_dependencies( ${guibase_target} ${engine_target} ${io_target} ${core_target} glbinding_lib globjects_lib)
 target_compile_definitions(${guibase_target} PRIVATE "-DRA_GUIBASE_EXPORTS")
