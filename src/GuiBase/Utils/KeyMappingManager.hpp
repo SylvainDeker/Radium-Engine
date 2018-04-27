@@ -60,10 +60,11 @@ class RA_GUIBASE_API KeyMappingManager {
     bool actionTriggered( QMouseEvent* event, KeyMappingAction action );
     /// Utility method to check if a QKeyEvent triggers a specific action
     bool actionTriggered( QKeyEvent* event, KeyMappingAction action );
-
-  private:
     KeyMappingManager();
     ~KeyMappingManager();
+
+  private:
+
 
     // Private for now, but may need to be public if we want to customize keymapping configuration
     // otherwise than by editing the XML configuration file.
@@ -96,3 +97,4 @@ class RA_GUIBASE_API KeyMappingManager {
 } // namespace Ra
 
 #endif // RADIUMENGINE_KEYMAPPINGMANAGER_HPP
+

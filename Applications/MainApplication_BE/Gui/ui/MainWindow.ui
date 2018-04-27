@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>30</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFILE">
@@ -52,6 +52,8 @@
     <addaction name="actionReload_configuration"/>
     <addaction name="separator"/>
     <addaction name="actionLoad_configuration_file"/>
+    <addaction name="separator"/>
+    <addaction name="actionEdit_keymap"/>
    </widget>
    <widget class="QMenu" name="menuLights">
     <property name="title">
@@ -749,16 +751,13 @@
     <string>&amp;New entity</string>
    </property>
   </action>
+  <action name="actionEdit_keymap">
+   <property name="text">
+    <string>Edit_keymap</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>Ra::Gui::TransformEditorWidget</class>
-   <extends>QWidget</extends>
-   <header>Gui/TransformEditorWidget.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../../../icons.qrc"/>
  </resources>

@@ -21,6 +21,7 @@
 #include <GuiBase/Viewer/CameraInterface.hpp>
 #include <GuiBase/Viewer/Gizmo/GizmoManager.hpp>
 #include <PluginBase/RadiumPluginInterface.hpp>
+#include <GuiBase/Utils/KeyEditor.hpp>
 
 #include <QComboBox>
 #include <QFileDialog>
@@ -99,6 +100,8 @@ void MainWindow::createConnections() {
              &MainWindow::reloadConfiguration );
     connect( actionLoad_configuration_file, &QAction::triggered, this,
              &MainWindow::loadConfiguration );
+    connect(actionEdit_keymap, &QAction::triggered, this, &MainWindow::KeyEdit);
+
 
     // Loading setup.
     connect( this, &MainWindow::fileLoading, mainApp, &Ra::GuiBase::BaseApplication::loadFile );
@@ -588,5 +591,10 @@ void MainWindow::onGLInitialized() {
     addRenderer( "Forward Renderer", e );
 }
 
+void MainWindow::KeyEdit()
+{
+    KeyEditor * ed = new KeyEditor();
+    ed->show();
+}
 } // namespace Gui
 } // namespace Ra

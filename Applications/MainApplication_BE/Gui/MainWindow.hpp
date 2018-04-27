@@ -85,6 +85,7 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     // Keymapping configuration tool
     void reloadConfiguration();
     void loadConfiguration();
+    void KeyEdit();
 
     /// Slot for the "visible" button
     void toggleVisisbleRO();

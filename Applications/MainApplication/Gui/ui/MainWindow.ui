@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1350</width>
-    <height>877</height>
+    <height>913</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFILE">
@@ -52,6 +52,7 @@
     <addaction name="actionReload_configuration"/>
     <addaction name="separator"/>
     <addaction name="actionLoad_configuration_file"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFILE"/>
    <addaction name="menuMisc"/>
@@ -707,6 +708,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionEdit_keymap">
+   <property name="text">
+    <string>Edit keymap</string>
    </property>
   </action>
  </widget>
