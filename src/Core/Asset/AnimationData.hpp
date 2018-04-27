@@ -5,8 +5,8 @@
 #include <vector>
 
 #include <Core/Asset/AssetData.hpp>
-#include <Core/Asset/KeyFrame/AnimationTime.hpp>
-#include <Core/Asset/KeyFrame/KeyTransform.hpp>
+#include <Core/Asset/AnimationTime.hpp>
+#include <Core/Asset/KeyTransform.hpp>
 #include <Core/RaCore.hpp>
 
 namespace Ra {

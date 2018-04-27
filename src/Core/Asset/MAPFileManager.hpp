@@ -1,7 +1,7 @@
 #ifndef RADIUMENGINE_MAP_FILE_MANAGER_HPP
 #define RADIUMENGINE_MAP_FILE_MANAGER_HPP
 
-#include <Core/Asset/deprecated/FileManager.hpp>
+#include <Core/Asset/FileManager.hpp>
 #include <Core/Geometry/Mapping.hpp>
 
 namespace Ra {

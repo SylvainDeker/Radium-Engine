@@ -1,8 +1,8 @@
 #ifndef RADIUMENGINE_KEY_TRANSLATION_HPP
 #define RADIUMENGINE_KEY_TRANSLATION_HPP
 
-#include <Core/Asset/KeyFrame/Interpolation.hpp>
-#include <Core/Asset/KeyFrame/KeyFrame.hpp>
+#include <Core/Asset/Interpolation.hpp>
+#include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
 namespace Asset {

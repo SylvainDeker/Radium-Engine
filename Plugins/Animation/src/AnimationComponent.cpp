@@ -9,8 +9,8 @@
 #include <Core/Container/AlignedStdVector.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/Asset/HandleToSkeleton.hpp>
-#include <Core/Asset/KeyFrame/KeyPose.hpp>
-#include <Core/Asset/KeyFrame/KeyTransform.hpp>
+#include <Core/Asset/KeyPose.hpp>
+#include <Core/Asset/KeyTransform.hpp>
 #include <Core/Utils/AdjacencyListOperation.hpp>
 
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>

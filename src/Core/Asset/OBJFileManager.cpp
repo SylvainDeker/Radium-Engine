@@ -1,4 +1,4 @@
-#include <Core/Asset/deprecated/OBJFileManager.hpp>
+#include <Core/Asset/OBJFileManager.hpp>
 
 namespace Ra {
 namespace Core {

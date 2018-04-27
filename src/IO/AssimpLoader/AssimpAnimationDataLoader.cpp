@@ -4,9 +4,9 @@
 #include <assimp/scene.h>
 #include <set>
 
-#include <Core/Asset/KeyFrame/KeyTranslation.hpp>
-#include <Core/Asset/KeyFrame/KeyScaling.hpp>
-#include <Core/Asset/KeyFrame/KeyRotation.hpp>
+#include <Core/Asset/KeyTranslation.hpp>
+#include <Core/Asset/KeyScaling.hpp>
+#include <Core/Asset/KeyRotation.hpp>
 #include <Core/Asset/AnimationData.hpp>
 #include <Core/Utils/Log.hpp>
 

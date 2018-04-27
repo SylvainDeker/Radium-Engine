@@ -7,7 +7,7 @@
 #include <Core/Container/AlignedAllocator.hpp>
 #include <Core/Math/LinearAlgebra.hpp>
 
-#include <Core/Asset/KeyFrame/AnimationTime.hpp>
+#include <Core/Asset/AnimationTime.hpp>
 
 namespace Ra {
 namespace Asset {

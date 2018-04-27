@@ -1,4 +1,4 @@
-#include <Core/Asset/deprecated/MAPFileManager.hpp>
+#include <Core/Asset/MAPFileManager.hpp>
 
 namespace Ra {
 namespace Core {

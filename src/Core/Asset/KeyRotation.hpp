@@ -1,8 +1,8 @@
 #ifndef RADIUMENGINE_KEY_ROTATION_HPP
 #define RADIUMENGINE_KEY_ROTATION_HPP
 
-#include <Core/Asset/KeyFrame/Interpolation.hpp>
-#include <Core/Asset/KeyFrame/KeyFrame.hpp>
+#include <Core/Asset/Interpolation.hpp>
+#include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
 namespace Asset {

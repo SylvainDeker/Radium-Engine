@@ -2,8 +2,8 @@
 #define RADIUMENGINE_KEY_POSE_HPP
 
 #include <Core/Animation/Pose.hpp>
-#include <Core/Asset/KeyFrame/Interpolation.hpp>
-#include <Core/Asset/KeyFrame/KeyFrame.hpp>
+#include <Core/Asset/Interpolation.hpp>
+#include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
 namespace Asset {
