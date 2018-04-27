@@ -1,7 +1,7 @@
 #ifndef RADIUMENGINE_KEY_POSE_HPP
 #define RADIUMENGINE_KEY_POSE_HPP
 
-#include <Core/Animation/Pose/Pose.hpp>
+#include <Core/Animation/Pose.hpp>
 #include <Core/Asset/KeyFrame/Interpolation.hpp>
 #include <Core/Asset/KeyFrame/KeyFrame.hpp>
 

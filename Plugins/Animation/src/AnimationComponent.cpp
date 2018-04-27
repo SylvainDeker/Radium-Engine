@@ -3,9 +3,9 @@
 #include <iostream>
 #include <queue>
 
-#include <Core/Animation/Handle/HandleWeightOperation.hpp>
-#include <Core/Animation/Handle/SkeletonUtils.hpp>
-#include <Core/Animation/Pose/Pose.hpp>
+#include <Core/Animation/HandleWeightOperation.hpp>
+#include <Core/Animation/SkeletonUtils.hpp>
+#include <Core/Animation/Pose.hpp>
 #include <Core/Container/AlignedStdVector.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/Asset/HandleToSkeleton.hpp>

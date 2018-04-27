@@ -1,7 +1,7 @@
 #ifndef RADIUM_DISTANCETESTS_HPP_
 #define RADIUM_DISTANCETESTS_HPP_
 
-#include <Core/Geometry/Distance/DistanceQueries.hpp>
+#include <Core/Geometry/DistanceQueries.hpp>
 
 using Ra::Core::Vector3;
 namespace RaTests {

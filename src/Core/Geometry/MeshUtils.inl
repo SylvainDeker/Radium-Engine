@@ -1,6 +1,6 @@
 #include "MeshUtils.hpp"
-#include <Core/Geometry/PointCloud/PointCloud.hpp>
-#include <Core/Geometry/Triangle/TriangleOperation.hpp>
+#include <Core/Geometry/PointCloud.hpp>
+#include <Core/Geometry/TriangleOperation.hpp>
 #include <Core/Utils/StdUtils.hpp>
 #include <unordered_set>
 
