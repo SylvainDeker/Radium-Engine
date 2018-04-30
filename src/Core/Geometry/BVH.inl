@@ -1,5 +1,5 @@
 #include <Core/Geometry/MeshUtils.hpp>
-#include <Core/TreeStructures/BVH.hpp>
+#include <Core/Geometry/BVH.hpp>
 
 #include <iostream>
 

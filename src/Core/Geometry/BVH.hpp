@@ -78,6 +78,6 @@ class BVH {
 } // namespace Core
 } // namespace Ra
 
-#include <Core/TreeStructures/BVH.inl>
+#include <Core/Geometry/BVH.inl>
 
 #endif // RADIUMENGINE_BVH_HPP
