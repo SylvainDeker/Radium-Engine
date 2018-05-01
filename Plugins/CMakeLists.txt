@@ -3,6 +3,7 @@ message(STATUS "Building plugins with radium libs : ${RADIUM_LIBRARIES} ")
 set( CMAKE_DEBUG_POSTFIX "")
 
 #add_subdirectory( Dummy )
+add_subdirectory( Edition )
 add_subdirectory( FancyMesh )
 add_subdirectory( Animation )
 add_subdirectory( Skinning )
