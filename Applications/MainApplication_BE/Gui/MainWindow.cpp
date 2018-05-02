@@ -2,7 +2,7 @@
 #include <MainApplication.hpp>
 
 #include <Core/Asset/FileLoaderInterface.hpp>
-#include <Core/Asset/deprecated/OBJFileManager.hpp>
+#include <Core/Asset/OBJFileManager.hpp>
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Managers/EntityManager/EntityManager.hpp>
 #include <Engine/Managers/SignalManager/SignalManager.hpp>
@@ -13,6 +13,7 @@
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 #include <Engine/Renderer/Renderers/ForwardRenderer.hpp>
 #include <Gui/MaterialEditor.hpp>
+#include <Gui/LightCreator.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 #include <GuiBase/Utils/KeyMappingManager.hpp>
 #include <GuiBase/Utils/qt_utils.hpp>
@@ -57,7 +58,8 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
     m_edition = new EditionWidget(nullptr, m_selectionManager);
-   this->layoutForEdition->addWidget(m_edition);
+    this->layoutForEdition->addWidget(m_edition);
+    m_lightcreator = new Gui::LightCreator();
 
 
     createConnections();
@@ -78,7 +80,7 @@ void MainWindow::createConnections() {
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,
              &MainWindow::openMaterialEditor );
-
+    connect( actionLightCreator, &QAction::triggered,m_lightcreator,&QWidget::show);
     // Toolbox setup
     connect( actionToggle_Local_Global, &QAction::toggled, m_viewer->getGizmoManager(),
              &GizmoManager::setLocal );
@@ -473,7 +475,7 @@ void MainWindow::onRendererReady() {
 }
 
 void MainWindow::onFrameComplete() {
-    //tab_edition->updateValues();
+    tab_edition->updateValues();
     m_viewer->getGizmoManager()->updateValues();
 }
 
@@ -493,27 +495,20 @@ void MainWindow::onItemRemoved( const Engine::ItemEntry& ent ) {
 }
 
 void MainWindow::exportCurrentMesh() {
-    //std::string filename;
-    //Ra::Core::Utils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
-
-
-
-
-
-
+    std::string filename;
+    Ra::Core::Utils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
     ItemEntry e = m_selectionManager->currentItem();
 
     // For now we only export a mesh if the selected entry is a render object.
     // There could be a virtual method to get a mesh representation for any object.
     if ( e.isRoNode() )
     {
-        Ra::Core::Asset::deprecated::OBJFileManager obj;
+        Ra::Core::Asset::OBJFileManager obj;
         auto ro = Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(
             e.m_roIndex );
         Ra::Core::Geometry::TriangleMesh mesh = ro->getMesh()->getGeometry();
 
         std::string filename = QFileDialog::getSaveFileName(this, "Save mesh", QString::fromStdString(ro->getName()), "Mesh (*.obj)").toStdString();
-
         bool result = obj.save( filename, mesh );
         if ( result )
         {
