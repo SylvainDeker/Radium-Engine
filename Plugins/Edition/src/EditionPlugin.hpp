@@ -27,7 +27,7 @@ public:
 	virtual QAction* getAction(int id) override;
 
 public slots:
-    void resetSelectedRO();
+    void resetSelectedEntity();
 
 private:
     Ra::Gui::PickingManager* m_pickingManager;

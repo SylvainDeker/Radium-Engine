@@ -40,7 +40,7 @@ namespace EditionPlugin {
 	{
         QWidget* widget = new QWidget;
         QPushButton* resetButton = new QPushButton("Reset", widget);
-        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedRO()));
+        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedEntity()));
 
         QVBoxLayout* layout = new QVBoxLayout(widget);
 
@@ -71,7 +71,7 @@ namespace EditionPlugin {
 		return nullptr;
 	}
 
-    void EditionPluginC::resetSelectedRO()
+    void EditionPluginC::resetSelectedEntity()
     {
         Ra::Engine::Renderer::PickingResult data = m_pickingManager->getCurrent();
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
@@ -94,18 +94,39 @@ namespace EditionPlugin {
         } else {
             std::cout << "cannot reset that" << std::endl;
         }*/
-
-        if (item.isEntityNode())
+        if(item.isValid())
         {
-            Ra::Core::Matrix4 transform;
-            transform << 1, 0, 0, 0,
+            Ra::Core::Matrix4 mat;
+            mat << 1, 0, 0, 0,
                          0, 1, 0, 0,
                          0, 0, 1, 0,
                          0, 0, 0, 1;
-            item.m_entity->setTransform(transform);
-            std::cout << "reset done" << std::endl;
-        } else {
-            std::cout << "cannot reset that" << std::endl;
+            Ra::Core::Transform transform(mat);
+
+            if (item.isEntityNode())
+            {
+                item.m_entity->setTransform(transform);
+                std::cout << "reset done" << std::endl;
+            } else {
+                std::cout << "not an entity" << std::endl;
+            }
+
+            if (item.isComponentNode())
+            {
+                item.m_component->setTransform(item.m_roIndex, transform);
+                std::cout << "reset done" << std::endl;
+            } else {
+                std::cout << "not a component" << std::endl;
+            }
+
+            if ( Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->exists( item.m_roIndex ) )
+            {
+                std::shared_ptr<Ra::Engine::RenderObject> ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(item.m_roIndex);
+                ro->setLocalTransform(transform);
+                std::cout << "reset done" << std::endl;
+            } else {
+                std::cout << "not a RO" << std::endl;
+            }
         }
     }
 
