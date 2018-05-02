@@ -9,7 +9,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Skinning {
+namespace Animation {
 
 /// Skinning data that gets set at startup including the "reference state"
 struct RefData {
@@ -64,7 +64,7 @@ struct FrameData {
     bool m_doReset;
 };
 
-} // namespace Skinning
+} // namespace Animation
 } // namespace Core
 } // namespace Ra
 

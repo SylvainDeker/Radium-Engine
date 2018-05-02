@@ -36,7 +36,7 @@ Scalar weightSimilarity( const Eigen::SparseVector<Scalar>& v1w,
     return result;
 }
 
-void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
+void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
     LOG( logDEBUG ) << "Precomputing CoRs";
 
     // First step : subdivide the original mesh until weights are sufficiently close enough.

@@ -17,8 +17,8 @@ using Ra::Core::Animation::WeightMatrix;
 
 using SpaceType = Ra::Core::Animation::Handle::SpaceType;
 
-using Ra::Core::Skinning::FrameData;
-using Ra::Core::Skinning::RefData;
+using Ra::Core::Animation::FrameData;
+using Ra::Core::Animation::RefData;
 
 using Ra::Engine::ComponentMessenger;
 namespace SkinningPlugin {
@@ -183,7 +183,7 @@ void SkinningComponent::setupIO( const std::string& id ) {
 
     ComponentMessenger::CallbackTypes<RefData>::Getter refData =
         std::bind( &SkinningComponent::getRefData, this );
-    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Skinning::RefData>(
+    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Animation::RefData>(
         getEntity(), this, id, refData );
 
     ComponentMessenger::CallbackTypes<FrameData>::Getter frameData =
