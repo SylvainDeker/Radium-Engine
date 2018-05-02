@@ -96,12 +96,7 @@ namespace EditionPlugin {
         }*/
         if(item.isValid())
         {
-            Ra::Core::Matrix4 mat;
-            mat << 1, 0, 0, 0,
-                         0, 1, 0, 0,
-                         0, 0, 1, 0,
-                         0, 0, 0, 1;
-            Ra::Core::Transform transform(mat);
+            Ra::Core::Transform transform = Ra::Core::Transform::Identity();
 
             if (item.isEntityNode())
             {
