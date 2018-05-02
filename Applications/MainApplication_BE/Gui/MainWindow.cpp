@@ -13,6 +13,7 @@
 #include <Engine/Renderer/RenderTechnique/ShaderConfigFactory.hpp>
 #include <Engine/Renderer/Renderers/ForwardRenderer.hpp>
 #include <Gui/MaterialEditor.hpp>
+#include <Gui/LightCreator.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 #include <GuiBase/Utils/KeyMappingManager.hpp>
 #include <GuiBase/Utils/qt_utils.hpp>
@@ -56,6 +57,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_materialEditor = new MaterialEditor();
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
+    m_lightcreator = new Gui::LightCreator();
 
     createConnections();
 
@@ -75,7 +77,7 @@ void MainWindow::createConnections() {
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,
              &MainWindow::openMaterialEditor );
-
+    connect( actionLightCreator, &QAction::triggered,m_lightcreator,&QWidget::show);
     // Toolbox setup
     connect( actionToggle_Local_Global, &QAction::toggled, m_viewer->getGizmoManager(),
              &GizmoManager::setLocal );

@@ -27,12 +27,12 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>25</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFILE">
     <property name="title">
-     <string>File</string>
+     <string>Fi&amp;le</string>
     </property>
     <addaction name="actionOpenMesh"/>
     <addaction name="separator"/>
@@ -40,21 +40,28 @@
    </widget>
    <widget class="QMenu" name="menuMisc">
     <property name="title">
-     <string>Materials</string>
+     <string>&amp;Materials</string>
     </property>
     <addaction name="actionReload_Shaders"/>
     <addaction name="actionOpen_Material_Editor"/>
    </widget>
    <widget class="QMenu" name="menuKeymapping">
     <property name="title">
-     <string>Keymapping</string>
+     <string>&amp;Keymapping</string>
     </property>
     <addaction name="actionReload_configuration"/>
     <addaction name="separator"/>
     <addaction name="actionLoad_configuration_file"/>
    </widget>
+   <widget class="QMenu" name="menuLights">
+    <property name="title">
+     <string>Lig&amp;hts</string>
+    </property>
+    <addaction name="actionLightCreator"/>
+   </widget>
    <addaction name="menuFILE"/>
    <addaction name="menuMisc"/>
+   <addaction name="menuLights"/>
    <addaction name="menuKeymapping"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
@@ -580,7 +587,7 @@
   </widget>
   <action name="actionOpenMesh">
    <property name="text">
-    <string>Open...</string>
+    <string>&amp;Open...</string>
    </property>
    <property name="toolTip">
     <string>Open...</string>
@@ -591,7 +598,7 @@
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -599,7 +606,7 @@
   </action>
   <action name="actionReload_Shaders">
    <property name="text">
-    <string>Reload Shaders</string>
+    <string>&amp;Reload Shaders</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
@@ -674,7 +681,7 @@
   </action>
   <action name="actionOpen_Material_Editor">
    <property name="text">
-    <string>Open Material Editor</string>
+    <string>&amp;Open Material Editor</string>
    </property>
    <property name="shortcut">
     <string>Alt+M</string>
@@ -695,7 +702,7 @@
   </action>
   <action name="actionReload_configuration">
    <property name="text">
-    <string>Reload configuration</string>
+    <string>&amp;Reload configuration</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+R</string>
@@ -703,10 +710,25 @@
   </action>
   <action name="actionLoad_configuration_file">
    <property name="text">
-    <string>Load configuration file...</string>
+    <string>&amp;Load configuration file...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="text">
+    <string>Light</string>
+   </property>
+  </action>
+  <action name="actionNew_one">
+   <property name="text">
+    <string>&amp;New one ..</string>
+   </property>
+  </action>
+  <action name="actionLightCreator">
+   <property name="text">
+    <string>New one</string>
    </property>
   </action>
  </widget>

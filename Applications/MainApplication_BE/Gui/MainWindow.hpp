@@ -6,6 +6,7 @@
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
+#include <Gui/LightCreator.hpp>
 
 #include "ui_MainWindow.h"
 #include <QMainWindow>
@@ -163,6 +164,9 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
 
     /// viewer widget
     Ra::Gui::Viewer* m_viewer;
+
+    /// Light Creator
+    Ra::Gui::LightCreator * m_lightcreator;
 };
 
 } // namespace Gui
