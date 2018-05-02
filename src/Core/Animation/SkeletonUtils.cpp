@@ -6,7 +6,6 @@
 namespace Ra {
 namespace Core {
 namespace Animation {
-namespace SkeletonUtils {
 /// Returns the start and end point of a bone in model space.
 void getBonePoints( const Skeleton& skeleton, int boneIdx, Ra::Core::Vector3& startOut,
                     Ra::Core::Vector3& endOut ) {
@@ -87,7 +86,6 @@ inline void to_string( const Skeleton& skeleton ) {
     std::cout << "End of Skeleton Hierarchy" << std::endl;
 }
 
-} // namespace SkeletonUtils
 } // namespace Animation
 } // namespace Core
 } // namespace Ra

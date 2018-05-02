@@ -55,7 +55,7 @@ void SkeletonBoneRenderObject::update() {
 void SkeletonBoneRenderObject::updateLocalTransform() {
     Ra::Core::Vector3 start;
     Ra::Core::Vector3 end;
-    Ra::Core::Animation::SkeletonUtils::getBonePoints( m_skel, m_id, start, end );
+    Ra::Core::Animation::getBonePoints( m_skel, m_id, start, end );
 
     Ra::Core::Transform scale = Ra::Core::Transform::Identity();
     scale.scale( ( end - start ).norm() );
