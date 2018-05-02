@@ -32,6 +32,20 @@ class RA_ENGINE_API PointLight final : public Light {
     inline void setAttenuation( Scalar constant, Scalar linear, Scalar quadratic );
     inline const Attenuation& getAttenuation() const;
 
+    /*!
+       \brief Redefinition from Component to manipulate lights with Gizmos
+       \param Core::Container::Index roIdx Useless here
+       \param const Core::Math::Transform& transform the transformation
+       \return void
+    */
+    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ) override;
+
+    /*!
+       \brief Redefinition from Component to update Gizmos position when you use them on light
+       \return void
+    */
+    Core::Math::Transform getTransform( Core::Container::Index roIdx ) const override ;
+
     std::string getShaderInclude() const;
 
   private:

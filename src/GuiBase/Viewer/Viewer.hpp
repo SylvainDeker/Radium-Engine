@@ -15,6 +15,7 @@
 
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/Renderer.hpp>
+#include <Engine/Renderer/Light/Light.hpp>
 
 // Forward declarations
 class QOpenGLContext;
@@ -156,6 +157,9 @@ class RA_GUIBASE_API Viewer : public QWindow {
     /// Toggle the debug drawing
     void enableDebugDraw( int enabled );
 
+    /// (Sylvain) Add light to the Viewer
+    void addLight(Ra::Engine::Light*l);
+
     /** Add a renderer and return its index. Need to be called when catching
      * \param e : unique_ptr to your own renderer
      * \return index of the newly added renderer
@@ -242,6 +246,11 @@ class RA_GUIBASE_API Viewer : public QWindow {
 
     /// GL initialization status
     std::atomic_bool m_glInitStatus;
+
+
+
+    // std::vector<Ra::Engine::Light*>  m_lights;
+    // TODO (Sylvain)
 };
 
 } // namespace Gui

@@ -7,6 +7,8 @@
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 #include <Gui/EditionWidget.hpp>
+#include <Gui/LightCreator.hpp>
+#include <Gui/LightEditor.hpp>
 
 #include "ui_MainWindow.h"
 #include <QMainWindow>
@@ -92,7 +94,13 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     void postLoadFile() override { fitCamera(); }
 
     /// Slot for the "edit" button.
+    void editObject();
+
+    /// Edit a render object
     void editRO();
+
+    /// Edit a light
+    void editLight();
 
     /// Cleanup resources.
     void cleanup() override;
@@ -126,7 +134,10 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     /// Slot for the "material editor"
     void openMaterialEditor();
 
-    /// Slot for the user changing the current shader
+    /// Slot for the "light editor"
+    void openLightEditor();
+
+    /// Slot for the user changing the current shaderMainWindow
     void changeRenderObjectShader( const QString& shaderName );
 
     /// Slot for the user changing the current renderer
@@ -135,7 +146,7 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     /// Slot for the picking results from the viewer.
     void handlePicking( const Ra::Engine::Renderer::PickingResult& pickingResult );
 
-    // Slot to init renderers once gl is ready
+    /// Slot to init renderers once gl is ready
     void onGLInitialized();
 
     /// Slot to accept a new renderer
@@ -161,11 +172,18 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
 
     /// Widget to allow material edition.
     MaterialEditor* m_materialEditor;
-    /// widget to allow reset button
-    EditionWidget* m_edition;
 
     /// viewer widget
     Ra::Gui::Viewer* m_viewer;
+
+    /// Light Creator
+    Ra::Gui::LightCreator* m_lightCreator;
+
+    /// Light Editor
+    Ra::Gui::LightEditor* m_lightEditor;
+
+    /// widget to allow reset button
+    EditionWidget* m_edition;
 };
 
 } // namespace Gui
