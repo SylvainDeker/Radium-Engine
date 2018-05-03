@@ -6,6 +6,7 @@
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
+#include <Gui/EditionPlugin.hpp>
 
 #include "ui_MainWindow.h"
 #include <QMainWindow>
@@ -159,7 +160,9 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     GuiBase::SelectionManager* m_selectionManager;
 
     /// Widget to allow material edition.
-    MaterialEditor* m_materialEditor;
+       MaterialEditor* m_materialEditor;
+    /// widget to allow reset button
+    EditionPlugin::EditionPluginC m_edition;
 
     /// viewer widget
     Ra::Gui::Viewer* m_viewer;
