@@ -31,7 +31,8 @@ namespace Gui{
         layout->addWidget(resetButton);
     }
 
-    void EditionWidget::resetSelectedObject()
+    //TODO remove debug output
+    bool EditionWidget::selectedSetTransform(Ra::Core::Transform& tf)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
 
@@ -39,12 +40,12 @@ namespace Gui{
 
         if(item.isValid())
         {
-            Ra::Core::Transform transform = Ra::Core::Transform::Identity();
             if (item.isEntityNode())
             {
-                item.m_entity->setTransform(transform);
+                item.m_entity->setTransform(tf);
                 item.m_entity->swapTransformBuffers();
                 std::cout << "entity reset done" << std::endl;
+                return true;
             } else {
                 std::cout << "not an entity" << std::endl;
             }
@@ -53,11 +54,30 @@ namespace Gui{
 
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
-                item.m_component->setTransform(item.m_roIndex, transform);
+                item.m_component->setTransform(item.m_roIndex, tf);
                 std::cout << "reset done" << std::endl;
+                return true;
             } else {
                 std::cout << "not a editable RO" << std::endl;
             }
+        }
+
+        return false;
+    }
+
+    void EditionWidget::resetSelectedObject()
+    {
+        //we don't care of failure here
+        Ra::Core::Transform id = Ra::Core::Transform::Identity();
+        selectedSetTransform(id);
+    }
+
+    void EditionWidget::selectedSetMatrix(Core::Matrix4 &m)
+    {
+        Ra::Core::Transform tf = Ra::Core::Transform(m);
+        if(selectedSetTransform(tf))
+        {
+            //TODO if failure ?
         }
     }
 
