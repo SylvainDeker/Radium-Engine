@@ -301,7 +301,7 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
 
         if ( ent.isRoNode() )
         {
-            m_editRenderObjectButton->setEnabled( false );
+            m_editRenderObjectButton->setEnabled( true );
 
             m_materialEditor->changeRenderObject( ent.m_roIndex );
             const std::string& shaderName = mainApp->m_engine->getRenderObjectManager()
@@ -317,11 +317,17 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
             } else
             { m_currentShaderBox->setCurrentText( shaderName.c_str() ); }
         }
-    } else
+        else if ( ent.isComponentNode() )
+        {
+            m_editRenderObjectButton->setEnabled( true );
+            // !TODO: Continuer en suivant le modele precedent
+        }
+    }
+    else
     {
         emit selectedItem( ItemEntry() );
         m_selectedItemName->setText( "" );
-        m_editRenderObjectButton->setEnabled( true );
+        m_editRenderObjectButton->setEnabled( false );
         m_materialEditor->hide();
     }
 }
@@ -431,6 +437,12 @@ void Gui::MainWindow::editRO() {
     {
         m_materialEditor->changeRenderObject( item.m_roIndex );
         m_materialEditor->show();
+    }
+    else if (item.isComponentNode())
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+//        m_lightEditor->changeLight(item.isCompIndex());
+//        m_lightEditor->show();
     }
 }
 
