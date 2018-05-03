@@ -7,8 +7,7 @@
 
 namespace Ra {
 namespace Gui {
-// Due to an ambigous name while compiling with Clang, must differentiate plugin class from plugin
-// namespace
+
 class EditionWidget : public QWidget{
     Q_OBJECT
 
@@ -16,7 +15,7 @@ public:
     EditionWidget(QWidget* parent, Ra::GuiBase::SelectionManager* selectionManager);
 
 public slots:
-    void resetSelectedEntity();
+    void resetSelectedObject();
 
 private:
     Ra::Gui::PickingManager* m_pickingManager;
