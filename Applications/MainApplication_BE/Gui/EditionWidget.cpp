@@ -5,20 +5,23 @@
 #include <QVBoxLayout>
 
 #include <Engine/RadiumEngine.hpp>
-#include <GuiBase/Utils/PickingManager.hpp>
 #include <Engine/Renderer/Renderer.hpp>
 #include <Engine/Component/Component.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
+
 #include <Core/Math/LinearAlgebra.hpp>
 
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
+#include <GuiBase/Utils/PickingManager.hpp>
 
+#include <Gui/MainWindow.hpp>
 
 namespace Ra{
 namespace Gui{
 
-    EditionWidget::EditionWidget(QWidget *parent) :
-        QWidget(parent)
+    EditionWidget::EditionWidget(QWidget *parent, Ra::GuiBase::SelectionManager* selectionManager) :
+        QWidget(parent),
+        m_selectionManager(selectionManager)
     {
         QPushButton* resetButton = new QPushButton("Reset", this);
         QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedEntity()));
@@ -30,10 +33,8 @@ namespace Gui{
 
     void EditionWidget::resetSelectedEntity()
     {
-        Ra::Engine::Renderer::PickingResult data = m_pickingManager->getCurrent();
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
 
-        std::cout << "selected picking :" << data.m_roIdx << std::endl;
         std::cout << "selected selection :" << item.m_roIndex << std::endl;
 
         /*if ( data.m_mode == Ra::Engine::Renderer::PickingMode::RO && Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->exists( data.m_roIdx ) )

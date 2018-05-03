@@ -13,7 +13,7 @@ class EditionWidget : public QWidget{
     Q_OBJECT
 
 public:
-    EditionWidget(QWidget* parent);
+    EditionWidget(QWidget* parent, Ra::GuiBase::SelectionManager* selectionManager);
 
 public slots:
     void resetSelectedEntity();
