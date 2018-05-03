@@ -45,7 +45,7 @@
         <number>40</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="name_lab">
          <property name="text">
           <string>Name : </string>
          </property>
@@ -55,14 +55,14 @@
         <widget class="QLineEdit" name="lineEdit"/>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="type_lab">
          <property name="text">
           <string>Type : </string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="typeComboBox">
          <property name="minimumSize">
           <size>
            <width>120</width>
@@ -92,24 +92,24 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="color_lab">
          <property name="text">
           <string>Color : </string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QGroupBox" name="horizontalGroupBox">
+        <widget class="QGroupBox" name="color_layout">
          <layout class="QHBoxLayout" name="layout_color">
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="button_color">
             <property name="text">
-             <string>PushButton</string>
+             <string>Choose</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame">
+           <widget class="QFrame" name="result_color">
             <property name="minimumSize">
              <size>
               <width>40</width>
@@ -128,33 +128,33 @@
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="intensity_lab">
          <property name="text">
           <string>Intensity :</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="angle_lab">
          <property name="text">
           <string>Angle : </string>
          </property>
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="falloff_lab">
          <property name="text">
           <string>Falloff :</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="intensity_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+          <widget class="QDoubleSpinBox" name="intensity_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider">
+          <widget class="QSlider" name="intensity_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -163,12 +163,12 @@
         </layout>
        </item>
        <item row="4" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <layout class="QHBoxLayout" name="angle_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+          <widget class="QDoubleSpinBox" name="angle_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_2">
+          <widget class="QSlider" name="angle_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -177,12 +177,12 @@
         </layout>
        </item>
        <item row="5" column="1">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QHBoxLayout" name="fallof_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+          <widget class="QDoubleSpinBox" name="falloff_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_3">
+          <widget class="QSlider" name="falloff_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -192,7 +192,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="button_create">
       <property name="geometry">
        <rect>
         <x>650</x>
