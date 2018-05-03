@@ -2,40 +2,37 @@
 #define RADIUMENGINE_LIGHTCREATOR_HPP
 
 #include <QWidget>
-#include <QFormLayout>
-#include <QLabel>
+
 #include <memory>
-#include <QLineEdit>
 
 #include <Core/Container/Index.hpp>
 //#include <Engine/Renderer/RenderObject/RenderObject.hpp>
 
-#include <Gui/LightCreator.hpp>
+#include <ui_LightCreator.h>
 
 class QCloseEvent;
 class QShowEvent;
 
 namespace Ra {
 namespace Engine {
-  class RadiumEngine;
-  class RenderObjectManager;
-  class RenderObject;
-  class Material;
-  class BlinnPhongMaterial;
+class RadiumEngine;
+class RenderObjectManager;
+class RenderObject;
+class Material;
+class BlinnPhongMaterial;
 } // namespace Engine
 } // namespace Ra
 
 namespace Ra {
 namespace Gui {
-class LightCreator : public QWidget {
-    Q_OBJECT
+class LightCreator : public QWidget, private Ui::LightCreator {
+
+  Q_OBJECT
 
   public:
     LightCreator( QWidget* parent = nullptr );
 
-
-
-  public slots:
+  private slots:
 
 
   protected:
@@ -43,10 +40,8 @@ class LightCreator : public QWidget {
 
   private:
 
+
   private:
-    QFormLayout * m_form;
-    QLabel * m_namelab;
-    QLineEdit * m_nameedit;
 
 };
 } // namespace Gui
