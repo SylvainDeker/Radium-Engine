@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>518</height>
+    <width>793</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,6 +20,9 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
@@ -28,16 +31,19 @@
      <widget class="QWidget" name="formLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>19</x>
-        <y>39</y>
-        <width>431</width>
-        <height>201</height>
+        <x>10</x>
+        <y>30</y>
+        <width>761</width>
+        <height>251</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>40</number>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
@@ -45,19 +51,158 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Type : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Direct Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Omni Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Point Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Spot Light</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Color : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QGroupBox" name="horizontalGroupBox">
+         <layout class="QHBoxLayout" name="layout_color">
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Intensity :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Angle : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Falloff :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>460</y>
+        <x>650</x>
+        <y>330</y>
         <width>111</width>
         <height>34</height>
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Create</string>
       </property>
      </widget>
     </widget>
