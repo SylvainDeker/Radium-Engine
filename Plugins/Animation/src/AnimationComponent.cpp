@@ -155,7 +155,7 @@ void AnimationComponent::setWeights( Ra::Core::Animation::WeightMatrix m ) {
     m_weights = m;
 }
 
-void AnimationComponent::handleSkeletonLoading( const Ra::Asset::HandleData* data,
+void AnimationComponent::handleSkeletonLoading( const Ra::Core::Asset::HandleData* data,
                                                 const std::vector<Ra::Core::Index>& duplicateTable,
                                                 uint nbMeshVertices ) {
     std::string name( m_name );
@@ -169,7 +169,7 @@ void AnimationComponent::handleSkeletonLoading( const Ra::Asset::HandleData* dat
     m_contentName = data->getName();
 
     std::map<uint, uint> indexTable;
-    Ra::Asset::createSkeleton( *data, m_skel, indexTable );
+    Ra::Core::Asset::createSkeleton( *data, m_skel, indexTable );
 
     createWeightMatrix( data, indexTable, duplicateTable, nbMeshVertices );
     m_refPose = m_skel.getPose( Ra::Core::Animation::Handle::SpaceType::MODEL );
@@ -179,13 +179,13 @@ void AnimationComponent::handleSkeletonLoading( const Ra::Asset::HandleData* dat
 }
 
 void AnimationComponent::handleAnimationLoading(
-    const std::vector<Ra::Asset::AnimationData*> data ) {
+    const std::vector<Ra::Core::Asset::AnimationData*> data ) {
     m_animations.clear();
     CORE_ASSERT( ( m_skel.size() != 0 ), "At least a skeleton should be loaded first." );
     if ( data.empty() )
         return;
     std::map<uint, uint> table;
-    std::set<Ra::Asset::Time> keyTime;
+    std::set<Ra::Core::Asset::Time> keyTime;
 
     for ( uint n = 0; n < data.size(); ++n )
     {
@@ -203,7 +203,7 @@ void AnimationComponent::handleAnimationLoading(
             }
         }
 
-        Ra::Asset::KeyPose keypose;
+        Ra::Core::Asset::KeyPose keypose;
         Ra::Core::Animation::Pose pose = m_skel.m_pose;
 
         m_animations.push_back( Ra::Core::Animation::Animation() );
@@ -225,7 +225,7 @@ void AnimationComponent::handleAnimationLoading(
     m_animationTime = 0.0;
 }
 
-void AnimationComponent::createWeightMatrix( const Ra::Asset::HandleData* data,
+void AnimationComponent::createWeightMatrix( const Ra::Core::Asset::HandleData* data,
                                              const std::map<uint, uint>& indexTable,
                                              const std::vector<Ra::Core::Index>& duplicateTable,
                                              uint nbMeshVertices ) {

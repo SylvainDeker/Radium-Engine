@@ -6,6 +6,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 class RA_CORE_API OBJFileManager : public FileManager<TriangleMesh> {
   public:
@@ -21,6 +22,7 @@ class RA_CORE_API OBJFileManager : public FileManager<TriangleMesh> {
     virtual bool exportData( std::ostream& file, const TriangleMesh& data ) override;
 };
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra
 

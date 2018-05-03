@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 inline void interpolate( const Core::Vector3& v0, const Core::Vector3& v1, const Scalar t,
                          Core::Vector3& result ) {
@@ -26,6 +27,7 @@ inline void interpolate( const Core::Transform& T0, const Core::Transform& T1, c
     result.translation() = tr;
 }
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra
 

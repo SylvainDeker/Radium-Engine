@@ -6,6 +6,7 @@
 #include <Core/Utils/Log.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// FILENAME
@@ -120,4 +121,5 @@ inline void FileData::displayInfo() const {
 }
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

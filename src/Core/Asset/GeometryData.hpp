@@ -13,6 +13,7 @@
 #include <Core/Asset/MaterialData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class MaterialData;
@@ -191,6 +192,7 @@ class RA_CORE_API GeometryData : public AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/GeometryData.inl>

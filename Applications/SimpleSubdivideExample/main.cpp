@@ -85,7 +85,7 @@ int main( int argc, char* argv[] ) {
     {
         Ra::Core::TriangleMesh mesh;
         Ra::Core::TopologicalMesh topologicalMesh;
-        Ra::Core::OBJFileManager obj;
+        Ra::Core::Asset::OBJFileManager obj;
         if ( a.inputFilename.empty() )
         {
             mesh = Ra::Core::MeshUtils::makeBox();

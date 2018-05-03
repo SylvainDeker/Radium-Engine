@@ -54,7 +54,7 @@ void FancyMeshComponent::addMeshRenderObject( const Ra::Core::TriangleMesh& mesh
     m_meshIndex = addRenderObject( renderObject );
 }
 
-void FancyMeshComponent::handleMeshLoading( const Ra::Asset::GeometryData* data ) {
+void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData* data ) {
     std::string name( m_name );
     name.append( "_" + data->getName() );
 
@@ -142,7 +142,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Asset::GeometryData* data 
     bool isTransparent{false};
     if ( data->hasMaterial() )
     {
-        const Ra::Asset::MaterialData& loadedMaterial = data->getMaterial();
+        const Ra::Core::Asset::MaterialData& loadedMaterial = data->getMaterial();
 
         // First extract the material from asset
         auto converter =

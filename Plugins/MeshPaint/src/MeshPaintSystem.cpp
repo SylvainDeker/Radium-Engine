@@ -20,7 +20,7 @@ MeshPaintSystem::MeshPaintSystem() : Ra::Engine::System() {}
 MeshPaintSystem::~MeshPaintSystem() {}
 
 void MeshPaintSystem::handleAssetLoading( Ra::Engine::Entity* entity,
-                                          const Ra::Asset::FileData* fileData ) {
+                                          const Ra::Core::Asset::FileData* fileData ) {
     auto geomData = fileData->getGeometryData();
 
     uint id = 0;

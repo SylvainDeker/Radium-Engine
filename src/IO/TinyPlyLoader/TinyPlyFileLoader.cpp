@@ -25,7 +25,7 @@ bool TinyPlyFileLoader::handleFileExtension( const std::string& extension ) cons
     return extension.compare( plyExt ) == 0;
 }
 
-Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename ) {
+Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename ) {
 
     // Read the file and create a std::istringstream suitable
     // for the lib -- tinyply does not perform any file i/o.
@@ -45,7 +45,7 @@ Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename ) {
     }
 
     // we are now sure to have a point-cloud
-    Asset::FileData* fileData = new Asset::FileData( filename );
+    Core::Asset::FileData* fileData = new Core::Asset::FileData( filename );
 
     if ( !fileData->isInitialized() )
     {
@@ -79,8 +79,8 @@ Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename ) {
     fileData->m_geometryData.clear();
     fileData->m_geometryData.reserve( 1 );
 
-    Asset::GeometryData* geometry = new Asset::GeometryData();
-    geometry->setType( Asset::GeometryData::POINT_CLOUD );
+    Core::Asset::GeometryData* geometry = new Core::Asset::GeometryData();
+    geometry->setType( Core::Asset::GeometryData::POINT_CLOUD );
 
     std::vector<float> normals;
     std::vector<uint8_t> colors;
@@ -116,7 +116,7 @@ Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename ) {
 
     fileData->m_loadingTime = ( std::clock() - startTime ) / Scalar( CLOCKS_PER_SEC );
 
-    fileData->m_geometryData.push_back( std::unique_ptr<Asset::GeometryData>( geometry ) );
+    fileData->m_geometryData.push_back( std::unique_ptr<Core::Asset::GeometryData>( geometry ) );
 
     if ( fileData->isVerbose() )
     {

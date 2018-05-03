@@ -12,6 +12,7 @@
 #include <Core/Asset/AssetData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 struct RA_CORE_API HandleComponentData {
@@ -102,6 +103,7 @@ class RA_CORE_API HandleData : public AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/HandleData.inl>

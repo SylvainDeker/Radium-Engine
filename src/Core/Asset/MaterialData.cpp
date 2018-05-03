@@ -1,6 +1,7 @@
 #include <Core/Asset/MaterialData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// CONSTRUCTOR
@@ -42,4 +43,5 @@ BlinnPhongMaterialData::BlinnPhongMaterialData( const std::string& name ) :
 BlinnPhongMaterialData::~BlinnPhongMaterialData() {}
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

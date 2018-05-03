@@ -21,7 +21,7 @@ FancyMeshSystem::FancyMeshSystem() : Ra::Engine::System() {}
 FancyMeshSystem::~FancyMeshSystem() {}
 
 void FancyMeshSystem::handleAssetLoading( Ra::Engine::Entity* entity,
-                                          const Ra::Asset::FileData* fileData ) {
+                                          const Ra::Core::Asset::FileData* fileData ) {
     auto geomData = fileData->getGeometryData();
 
     uint id = 0;

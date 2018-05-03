@@ -33,8 +33,8 @@ bool AssimpFileLoader::handleFileExtension( const std::string& extension ) const
     return m_importer.IsExtensionSupported( extension );
 }
 
-Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename ) {
-    Asset::FileData* fileData = new Asset::FileData( filename );
+Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename ) {
+    Core::Asset::FileData* fileData = new Core::Asset::FileData( filename );
 
     if ( !fileData->isInitialized() )
     {

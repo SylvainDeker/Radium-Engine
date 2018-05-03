@@ -101,7 +101,7 @@ void AnimationSystem::toggleSlowMotion( const bool status ) {
 }
 
 void AnimationSystem::handleAssetLoading( Ra::Engine::Entity* entity,
-                                          const Ra::Asset::FileData* fileData ) {
+                                          const Ra::Core::Asset::FileData* fileData ) {
     auto geomData = fileData->getGeometryData();
     auto skelData = fileData->getHandleData();
     auto animData = fileData->getAnimationData();

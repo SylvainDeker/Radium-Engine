@@ -9,6 +9,7 @@
 #endif
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// CONSTRUCTOR
@@ -63,4 +64,5 @@ Engine::Light* LightData::getLight() const {
 #endif
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

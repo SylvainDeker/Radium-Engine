@@ -172,7 +172,7 @@ bool RadiumEngine::loadFile( const std::string& filename ) {
     {
         if ( l->handleFileExtension( extension ) )
         {
-            Asset::FileData* data = l->loadFile( filename );
+            Core::Asset::FileData* data = l->loadFile( filename );
             if ( data != nullptr )
             {
                 m_loadedFile.reset( data );
@@ -229,18 +229,18 @@ SignalManager* RadiumEngine::getSignalManager() const {
     return m_signalManager.get();
 }
 
-void RadiumEngine::registerFileLoader( std::shared_ptr<Asset::FileLoaderInterface> fileLoader ) {
+void RadiumEngine::registerFileLoader( std::shared_ptr<Core::Asset::FileLoaderInterface> fileLoader ) {
     m_fileLoaders.push_back( fileLoader );
 }
 
-const std::vector<std::shared_ptr<Asset::FileLoaderInterface>>&
+const std::vector<std::shared_ptr<Core::Asset::FileLoaderInterface>>&
 RadiumEngine::getFileLoaders() const {
     return m_fileLoaders;
 }
 
 RA_SINGLETON_IMPLEMENTATION( RadiumEngine );
 
-const Asset::FileData& RadiumEngine::getFileData() const {
+const Core::Asset::FileData& RadiumEngine::getFileData() const {
     return *( m_loadedFile.get() );
 }
 

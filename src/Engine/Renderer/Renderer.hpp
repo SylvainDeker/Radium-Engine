@@ -188,7 +188,7 @@ class RA_ENGINE_API Renderer {
 
     virtual void reloadShaders();
 
-    virtual void handleFileLoading( const Asset::FileData& filedata );
+    virtual void handleFileLoading( const Core::Asset::FileData& filedata );
 
     /**
      * @brief Change the texture that is displayed on screen.

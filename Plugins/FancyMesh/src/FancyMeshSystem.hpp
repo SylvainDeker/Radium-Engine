@@ -30,7 +30,7 @@ class FM_PLUGIN_API FancyMeshSystem : public Ra::Engine::System {
     virtual ~FancyMeshSystem();
 
     void handleAssetLoading( Ra::Engine::Entity* entity,
-                             const Ra::Asset::FileData* fileData ) override;
+                             const Ra::Core::Asset::FileData* fileData ) override;
 
     void generateTasks( Ra::Core::TaskQueue* taskQueue,
                         const Ra::Engine::FrameInfo& frameInfo ) override;

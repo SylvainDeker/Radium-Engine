@@ -6,6 +6,7 @@
 #include <iterator>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /////////////////////
@@ -386,4 +387,5 @@ inline void GeometryData::displayInfo() const {
 }
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

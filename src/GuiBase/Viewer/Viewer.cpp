@@ -528,7 +528,7 @@ void Gui::Viewer::handleFileLoading( const std::string& file ) {
     }
 }
 
-void Gui::Viewer::handleFileLoading( const Ra::Asset::FileData& filedata ) {
+void Gui::Viewer::handleFileLoading( const Ra::Core::Asset::FileData& filedata ) {
     for ( auto& renderer : m_renderers )
     {
         if ( renderer )

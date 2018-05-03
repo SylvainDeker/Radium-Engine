@@ -5,6 +5,7 @@
 #include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class KeyRotation : public KeyFrame<Core::Quaternion> {
@@ -26,12 +27,13 @@ class KeyRotation : public KeyFrame<Core::Quaternion> {
     inline Core::Quaternion interpolate( const Core::Quaternion& F0, const Core::Quaternion& F1,
                                          const Scalar t ) const override {
         Core::Quaternion result;
-        Core::interpolate( F0, F1, t, result );
+        Core::Asset::interpolate( F0, F1, t, result );
         return result;
     }
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_KEY_ROTATION_HPP

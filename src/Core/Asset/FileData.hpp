@@ -8,6 +8,7 @@
 #include <Core/RaCore.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 class GeometryData;
 class HandleData;
@@ -68,6 +69,7 @@ class RA_CORE_API FileData final {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/FileData.inl>

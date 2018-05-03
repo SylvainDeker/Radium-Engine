@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 //////////////////////////////////////////////////////////////////////////////
 // CONSTRUCTOR
@@ -155,5 +156,6 @@ inline void FileManager<DATA, Binary>::saveLog( const std::string& filename ) {
     file.close();
 }
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra

@@ -18,6 +18,7 @@ class Light;
 }
 #endif
 
+namespace Core {
 namespace Asset {
 
 class RA_CORE_API LightData : public AssetData {
@@ -127,6 +128,7 @@ class RA_CORE_API LightData : public AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/LightData.inl>

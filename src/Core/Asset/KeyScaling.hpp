@@ -5,6 +5,7 @@
 #include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class KeyScaling : public KeyFrame<Core::Vector3> {
@@ -23,12 +24,13 @@ class KeyScaling : public KeyFrame<Core::Vector3> {
     inline Core::Vector3 interpolate( const Core::Vector3& F0, const Core::Vector3& F1,
                                       const Scalar t ) const override {
         Core::Vector3 result;
-        Core::interpolate( F0, F1, t, result );
+        Core::Asset::interpolate( F0, F1, t, result );
         return result;
     }
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_KEY_SCALING_HPP

@@ -6,6 +6,7 @@
 #include <Core/Asset/KeyFrame.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class KeyPose : public KeyFrame<Core::Animation::Pose> {
@@ -36,13 +37,14 @@ class KeyPose : public KeyFrame<Core::Animation::Pose> {
         Core::Animation::Pose result( pose_size );
         for ( uint i = 0; i < pose_size; ++i )
         {
-            Core::interpolate( F0[i], F1[i], t, result[i] );
+            Core::Asset::interpolate( F0[i], F1[i], t, result[i] );
         }
         return result;
     }
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_KEY_POSE_HPP

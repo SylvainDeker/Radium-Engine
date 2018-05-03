@@ -39,7 +39,7 @@ class SKIN_PLUGIN_API SkinningSystem : public Ra::Engine::System {
     }
 
     void handleAssetLoading( Ra::Engine::Entity* entity,
-                             const Ra::Asset::FileData* fileData ) override {
+                             const Ra::Core::Asset::FileData* fileData ) override {
 
         auto geomData = fileData->getGeometryData();
         auto skelData = fileData->getHandleData();

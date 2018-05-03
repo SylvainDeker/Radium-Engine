@@ -589,14 +589,14 @@ void Renderer::reloadShaders() {
 }
 
 // FIXME : this method is no longer needed ... Light are loaded by a System now.
-void Renderer::handleFileLoading( const Asset::FileData& filedata ) {
+void Renderer::handleFileLoading( const Core::Asset::FileData& filedata ) {
     if ( !filedata.hasLight() )
     {
         return;
     }
 #if 0
 // lights are loaded through the LightManager system ...
-    std::vector<Asset::LightData*> data = filedata.getLightData();
+    std::vector<Core::Asset::LightData*> data = filedata.getLightData();
     uint i = 0;
     for ( auto light : data )
     {

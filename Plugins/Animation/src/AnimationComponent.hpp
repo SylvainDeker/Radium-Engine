@@ -47,10 +47,10 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
     uint getBoneIdx( Ra::Core::Index index ) const;
     Scalar getTime() const;
 
-    void handleSkeletonLoading( const Ra::Asset::HandleData* data,
+    void handleSkeletonLoading( const Ra::Core::Asset::HandleData* data,
                                 const std::vector<Ra::Core::Index>& duplicateTable,
                                 uint nbMeshVertices );
-    void handleAnimationLoading( const std::vector<Ra::Asset::AnimationData*> data );
+    void handleAnimationLoading( const std::vector<Ra::Core::Asset::AnimationData*> data );
 
     //
     // Editable interface
@@ -86,7 +86,7 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
 
   private:
     // Internal function to create the skinning weights.
-    void createWeightMatrix( const Ra::Asset::HandleData* data,
+    void createWeightMatrix( const Ra::Core::Asset::HandleData* data,
                              const std::map<uint, uint>& indexTable,
                              const std::vector<Ra::Core::Index>& duplicateTable,
                              uint nbMeshVertices );

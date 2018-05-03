@@ -29,7 +29,7 @@ namespace FancyMeshPlugin {
  */
 class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
   public:
-    using DuplicateTable = Ra::Asset::GeometryData::DuplicateTable;
+    using DuplicateTable = Ra::Core::Asset::GeometryData::DuplicateTable;
 
     FancyMeshComponent( const std::string& name, bool deformable, Ra::Engine::Entity* entity );
     virtual ~FancyMeshComponent();
@@ -37,7 +37,7 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
     void initialize() override;
 
     void addMeshRenderObject( const Ra::Core::TriangleMesh& mesh, const std::string& name );
-    void handleMeshLoading( const Ra::Asset::GeometryData* data );
+    void handleMeshLoading( const Ra::Core::Asset::GeometryData* data );
 
     /// Returns the index of the associated RO (the display mesh)
     Ra::Core::Index getRenderObjectIndex() const;

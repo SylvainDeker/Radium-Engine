@@ -37,7 +37,7 @@ class SKIN_PLUGIN_API SkinningComponent : public Ra::Engine::Component {
     void setSkinningType( SkinningType type );
     inline SkinningType getSkinningType() const { return m_skinningType; }
 
-    virtual void handleWeightsLoading( const Ra::Asset::HandleData* data );
+    virtual void handleWeightsLoading( const Ra::Core::Asset::HandleData* data );
 
     const Ra::Core::Animation::RefData* getRefData() const { return &m_refData; }
     const Ra::Core::Animation::FrameData* getFrameData() const { return &m_frameData; }

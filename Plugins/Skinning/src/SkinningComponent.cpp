@@ -164,7 +164,7 @@ void SkinningComponent::endSkinning() {
     }
 }
 
-void SkinningComponent::handleWeightsLoading( const Ra::Asset::HandleData* data ) {
+void SkinningComponent::handleWeightsLoading( const Ra::Core::Asset::HandleData* data ) {
     m_contentsName = data->getName();
     setupIO( m_contentsName );
 }

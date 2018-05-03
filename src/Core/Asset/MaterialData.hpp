@@ -10,6 +10,7 @@
 #include <Core/Asset/AssetData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /** @brief represent material data loaded by a file loader.
@@ -19,7 +20,7 @@ namespace Asset {
  *  "BlinnPhong"        --> standar Blinn-Phong Material
  *
  *  When extending the material system with a loader plugin (or something similar) :
- *      Define your own "Asset" class derived from Ra::Asset::MaterialData with the "type" that
+ *      Define your own "Asset" class derived from Ra::Core::Asset::MaterialData with the "type" that
  * identifies it uniquely and corresponding to the external format of your material (in the file you
  * load). Define your own "Engine" class, derived from Ra::Engine::Material.
  *
@@ -110,6 +111,7 @@ class RA_CORE_API BlinnPhongMaterialData : public MaterialData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/MaterialData.inl>

@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 /// ===============================================================================
 /// CONSTRUCTOR
@@ -103,5 +104,6 @@ bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) 
     return true;
 }
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra

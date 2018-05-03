@@ -6,6 +6,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 /*
  * The class OFFFileManager handles the loading and storing of TriangleMesh in the standard OFF
@@ -29,6 +30,7 @@ class OFFFileManager : public FileManager<TriangleMesh> {
     virtual bool exportData( std::ostream& file, const TriangleMesh& data ) override;
 };
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra
 

@@ -497,7 +497,7 @@ void MainWindow::exportCurrentMesh() {
     // There could be a virtual method to get a mesh representation for any object.
     if ( e.isRoNode() )
     {
-        Ra::Core::OBJFileManager obj;
+        Ra::Core::Asset::OBJFileManager obj;
         auto ro = Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(
             e.m_roIndex );
         Ra::Core::TriangleMesh mesh = ro->getMesh()->getGeometry();

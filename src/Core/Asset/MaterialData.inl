@@ -6,6 +6,7 @@
 #include <iterator>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 ////////////////
@@ -107,4 +108,5 @@ inline void BlinnPhongMaterialData::displayInfo() const {
 }
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

@@ -111,7 +111,7 @@ class RA_GUIBASE_API Viewer : public QWindow {
     void handleFileLoading( const std::string& file );
 
     /// Load data from a FileData.
-    void handleFileLoading( const Ra::Asset::FileData& filedata );
+    void handleFileLoading( const Ra::Core::Asset::FileData& filedata );
 
     /// Emits signals corresponding to picking requests.
     void processPicking();

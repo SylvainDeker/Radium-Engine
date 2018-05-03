@@ -90,7 +90,7 @@ class RA_ENGINE_API LightManager : public System {
     void generateTasks( Core::TaskQueue* taskQueue, const Engine::FrameInfo& frameInfo ) override;
 
     /// Handle Lights loading.
-    void handleAssetLoading( Entity* entity, const Asset::FileData* data ) override;
+    void handleAssetLoading( Entity* entity, const Core::Asset::FileData* data ) override;
 
   protected:
     /// store the current renderData

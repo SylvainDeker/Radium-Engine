@@ -78,8 +78,8 @@ void LightManager::generateTasks( Core::TaskQueue* taskQueue, const Engine::Fram
     */
 }
 
-void LightManager::handleAssetLoading( Entity* entity, const Asset::FileData* data ) {
-    std::vector<Asset::LightData*> lightData = data->getLightData();
+void LightManager::handleAssetLoading( Entity* entity, const Core::Asset::FileData* data ) {
+    std::vector<Core::Asset::LightData*> lightData = data->getLightData();
     uint id = 0;
     m_data->clear();
     for ( const auto& data : lightData )
@@ -89,7 +89,7 @@ void LightManager::handleAssetLoading( Entity* entity, const Asset::FileData* da
 
         switch ( data->getType() )
         {
-        case Asset::LightData::DIRECTIONAL_LIGHT:
+        case Core::Asset::LightData::DIRECTIONAL_LIGHT:
         {
             auto thelight = new Engine::DirectionalLight( entity, data->getName() );
             thelight->setColor( data->m_color );
@@ -97,7 +97,7 @@ void LightManager::handleAssetLoading( Entity* entity, const Asset::FileData* da
             comp = thelight;
             break;
         }
-        case Asset::LightData::POINT_LIGHT:
+        case Core::Asset::LightData::POINT_LIGHT:
         {
             auto thelight = new Engine::PointLight( entity, data->getName() );
             thelight->setColor( data->m_color );
@@ -108,7 +108,7 @@ void LightManager::handleAssetLoading( Entity* entity, const Asset::FileData* da
             comp = thelight;
             break;
         }
-        case Asset::LightData::SPOT_LIGHT:
+        case Core::Asset::LightData::SPOT_LIGHT:
         {
             auto thelight = new Engine::SpotLight( entity, data->getName() );
             thelight->setColor( data->m_color );
@@ -122,7 +122,7 @@ void LightManager::handleAssetLoading( Entity* entity, const Asset::FileData* da
             comp = thelight;
             break;
         }
-        case Asset::LightData::AREA_LIGHT:
+        case Core::Asset::LightData::AREA_LIGHT:
         {
             // No arealight for now (see pbrplugin)
             comp = nullptr;
