@@ -59,7 +59,7 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
         maxWeightDistance = 0;
 
         // Stores the edges to split
-        std::vector<Index> edgesToSplit;
+        std::vector<Container::Index> edgesToSplit;
 
         // Compute all weights distances for all edges.
         for ( const auto& edge : dcel.m_fulledge )

@@ -55,7 +55,7 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
 
             const uint fiveColor = 5;
             const Scalar magenta = 5.0f / 6.0f;
-            Ra::Core::Vector4Array palette( fiveColor );
+            Ra::Core::Container::Vector4Array palette( fiveColor );
             for ( uint i = 0; i < fiveColor; ++i )
             {
                 Scalar hue = ( Scalar( i ) / Scalar( fiveColor - 1 ) ) * magenta;
@@ -116,7 +116,7 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
                 assignedColor[k] = *it;
             }
 
-            Ra::Core::Vector4Array color( size, Ra::Core::Vector4::Zero() );
+            Ra::Core::Container::Vector4Array color( size, Ra::Core::Vector4::Zero() );
 #pragma omp parallel for
             for ( int i = 0; i < int( size ); ++i )
             {

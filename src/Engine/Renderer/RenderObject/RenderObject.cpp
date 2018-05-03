@@ -20,7 +20,7 @@ namespace Ra {
 namespace Engine {
 RenderObject::RenderObject( const std::string& name, Component* comp, const RenderObjectType& type,
                             int lifetime ) :
-    Container::IndexedObject(),
+    Core::Container::IndexedObject(),
     m_localTransform( Core::Transform::Identity() ),
     m_component( comp ),
     m_name( name ),

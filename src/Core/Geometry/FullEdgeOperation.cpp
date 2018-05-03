@@ -12,7 +12,7 @@ namespace Ra {
 namespace Core {
 
 template <typename T>
-void insertInMap( IndexMap<T>& map, T& t ) {
+void insertInMap( Container::IndexMap<T>& map, T& t ) {
     t->idx = map.insert( t );
     CORE_ASSERT( t->idx.isValid(), "Not inserted" );
 }

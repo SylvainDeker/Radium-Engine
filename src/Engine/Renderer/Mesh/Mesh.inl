@@ -21,7 +21,7 @@ const Core::Container::Vector3Array& Mesh::getData( const Mesh::Vec3Data& type )
     return m_v3Data[static_cast<uint>( type )];
 }
 
-const Core::Vector4Array& Mesh::getData( const Mesh::Vec4Data& type ) const {
+const Core::Container::Vector4Array& Mesh::getData( const Mesh::Vec4Data& type ) const {
     return m_v4Data[static_cast<uint>( type )];
 }
 
@@ -29,7 +29,7 @@ Core::Container::Vector3Array& Mesh::getData( const Mesh::Vec3Data& type ) {
     return m_v3Data[static_cast<uint>( type )];
 }
 
-Core::Vector4Array& Mesh::getData( const Mesh::Vec4Data& type ) {
+Core::Container::Vector4Array& Mesh::getData( const Mesh::Vec4Data& type ) {
     return m_v4Data[static_cast<uint>( type )];
 }
 

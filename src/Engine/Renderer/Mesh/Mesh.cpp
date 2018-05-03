@@ -115,7 +115,7 @@ void Mesh::addData( const Vec3Data& type, const Core::Container::Vector3Array& d
     m_isDirty = true;
 }
 
-void Mesh::addData( const Vec4Data& type, const Core::Vector4Array& data ) {
+void Mesh::addData( const Vec4Data& type, const Core::Container::Vector4Array& data ) {
     m_v4Data[static_cast<uint>( type )] = data;
     m_dataDirty[MAX_MESH + MAX_VEC3 + static_cast<uint>( type )] = true;
     m_isDirty = true;

@@ -47,7 +47,7 @@ MeshPtr Point( const Core::Vector3& point, const Core::Color& color, Scalar scal
 
     std::vector<uint> indices = {0, 1, 2, 3, 4, 5};
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Point Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -61,7 +61,7 @@ MeshPtr Line( const Core::Vector3& a, const Core::Vector3& b, const Core::Color&
 
     std::vector<uint> indices = {0, 1};
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Line Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -84,7 +84,7 @@ MeshPtr Vector( const Core::Vector3& start, const Core::Vector3& v, const Core::
         start + ( ( 1.f - arrowFract ) * v ) - ( ( arrowFract * l ) * a )};
     std::vector<uint> indices = {0, 1, 1, 2, 1, 3};
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Vector Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -99,7 +99,7 @@ MeshPtr Ray( const Core::Ray& ray, const Core::Color& color ) {
     Core::Container::Vector3Array vertices = {ray.origin(), end};
     std::vector<uint> indices = {0, 1};
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Ray Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -121,7 +121,7 @@ MeshPtr Triangle( const Core::Vector3& a, const Core::Vector3& b, const Core::Ve
 
     Mesh::MeshRenderMode renderType = fill ? Mesh::RM_TRIANGLES : Mesh::RM_LINES;
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Triangle Primitive", renderType ) );
     mesh->loadGeometry( vertices, indices );
@@ -149,7 +149,7 @@ MeshPtr QuadStrip( const Core::Vector3& a, const Core::Vector3& x, const Core::V
         indices[2 * i + 3] = 2 * i + 3;
     }
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Quad Strip Primitive", Mesh::RM_TRIANGLE_STRIP ) );
     mesh->loadGeometry( vertices, indices );
@@ -180,7 +180,7 @@ MeshPtr Circle( const Core::Vector3& center, const Core::Vector3& normal, Scalar
         theta += thetaInc;
     }
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Circle Primitive", Mesh::RM_LINE_LOOP ) );
     mesh->loadGeometry( vertices, indices );
@@ -209,7 +209,7 @@ MeshPtr CircleArc( const Core::Vector3& center, const Core::Vector3& normal, Sca
         theta += thetaInc;
     }
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Arc Circle Primitive", Mesh::RM_LINE_STRIP ) );
     mesh->loadGeometry( vertices, indices );
@@ -226,7 +226,7 @@ MeshPtr Sphere( const Core::Vector3& center, Scalar radius, const Core::Color& c
         t += center;
     }
 
-    Core::Vector4Array colors( sphere.m_vertices.size(), color );
+    Core::Container::Vector4Array colors( sphere.m_vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Sphere Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( sphere );
@@ -257,7 +257,7 @@ MeshPtr Capsule( const Core::Vector3& p1, const Core::Vector3& p2, Scalar radius
         v = t * v;
     }
 
-    Core::Vector4Array colors( capsule.m_vertices.size(), color );
+    Core::Container::Vector4Array colors( capsule.m_vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Sphere Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( capsule );
@@ -293,7 +293,7 @@ MeshPtr Disk( const Core::Vector3& center, const Core::Vector3& normal, Scalar r
     }
     indices[seg] = 1;
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Disk Primitive", Mesh::RM_TRIANGLE_FAN ) );
     mesh->loadGeometry( vertices, indices );
@@ -328,7 +328,7 @@ MeshPtr Normal( const Core::Vector3& point, const Core::Vector3& normal, const C
         point - ( scale * b ),
     };
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     std::vector<uint> indices = {0, 1, 1, 2, 1, 3, 4, 5, 5, 6, 6, 7, 7, 4, 4, 6, 5, 7};
 
@@ -352,7 +352,7 @@ MeshPtr Frame( const Core::Transform& frameFromEntity, Scalar scale ) {
 
     std::vector<uint> indices = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
 
-    Core::Vector4Array colors = {
+    Core::Container::Vector4Array colors = {
         Core::Colors::Red(),   Core::Colors::Red(),  Core::Colors::Green(),
         Core::Colors::Green(), Core::Colors::Blue(), Core::Colors::Blue(),
     };
@@ -391,7 +391,7 @@ MeshPtr Grid( const Core::Vector3& center, const Core::Vector3& x, const Core::V
         indices.push_back( vertices.size() - 1 );
     }
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "GridPrimitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -414,7 +414,7 @@ MeshPtr AABB( const Core::Aabb& aabb, const Core::Color& color ) {
         4, 5, 5, 7, 7, 6, 6, 4, // Ceil
     };
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "AABB Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -437,7 +437,7 @@ MeshPtr OBB( const Core::Obb& obb, const Core::Color& color ) {
         0, 4, 1, 5, 2, 6, 3, 7, // Links
     };
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "OBB Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );
@@ -467,7 +467,7 @@ MeshPtr Spline( const Core::Spline<3, 3>& spline, uint pointCount, const Core::C
         indices.push_back( i + 1 );
     }
 
-    Core::Vector4Array colors( vertices.size(), color );
+    Core::Container::Vector4Array colors( vertices.size(), color );
 
     MeshPtr mesh( new Mesh( "Spline Primitive", Mesh::RM_LINES ) );
     mesh->loadGeometry( vertices, indices );

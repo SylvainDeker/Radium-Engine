@@ -43,7 +43,7 @@ RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
 
         Core::Color torusColor = Core::Color::Zero();
         torusColor[i] = 1.f;
-        Core::Vector4Array colors( torus.m_vertices.size(), torusColor );
+        Core::Container::Vector4Array colors( torus.m_vertices.size(), torusColor );
 
         std::shared_ptr<Engine::Mesh> mesh( new Engine::Mesh( "Gizmo Arrow" ) );
         mesh->loadGeometry( torus );

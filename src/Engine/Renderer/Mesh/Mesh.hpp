@@ -106,13 +106,13 @@ class RA_ENGINE_API Mesh final {
 
     /// Load additionnal vertex data.
     void addData( const Vec3Data& type, const Core::Container::Vector3Array& data );
-    void addData( const Vec4Data& type, const Core::Vector4Array& data );
+    void addData( const Vec4Data& type, const Core::Container::Vector4Array& data );
 
     /// Access the additionnal data arrays by type.
     inline const Core::Container::Vector3Array& getData( const Vec3Data& type ) const;
-    inline const Core::Vector4Array& getData( const Vec4Data& type ) const;
+    inline const Core::Container::Vector4Array& getData( const Vec4Data& type ) const;
     inline Core::Container::Vector3Array& getData( const Vec3Data& type );
-    inline Core::Vector4Array& getData( const Vec4Data& type );
+    inline Core::Container::Vector4Array& getData( const Vec4Data& type );
 
     /// Mark one of the data types as dirty, forcing an update of the openGL buffer.
     inline void setDirty( const MeshData& type );
@@ -143,7 +143,7 @@ class RA_ENGINE_API Mesh final {
     Core::TriangleMesh m_mesh; /// Base geometry : vertices, triangles and normals
 
     std::array<Core::Container::Vector3Array, MAX_VEC3> m_v3Data; /// Additionnal vertex vector 3 data
-    std::array<Core::Vector4Array, MAX_VEC4> m_v4Data; /// Additionnal vertex vector 4 data
+    std::array<Core::Container::Vector4Array, MAX_VEC4> m_v4Data; /// Additionnal vertex vector 4 data
 
     // Combined arrays store the flags in this order Mesh, then Vec3 then Vec4 data.
     // Following the enum declaration above.

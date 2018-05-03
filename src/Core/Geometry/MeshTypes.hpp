@@ -13,12 +13,9 @@ namespace Core {
 using Edge = Vector2ui;
 using Triangle = Vector3ui;
 
-namespace Container {
-
-using TriangleIdx = Index;
-using VertexIdx = Index;
-using HalfEdgeIdx = Index;
-} // namespace Container
+using TriangleIdx = Container::Index;
+using VertexIdx = Container::Index;
+using HalfEdgeIdx = Container::Index;
 } // namespace Core
 } // namespace Ra
 

@@ -45,8 +45,8 @@ class MESH_PAINT_PLUGIN_API MeshPaintComponent : public Ra::Engine::Component {
 
     // Initial RO shader config when not painting
     Ra::Engine::ShaderConfiguration m_baseConfig;
-    Ra::Core::Vector4Array m_baseColors;
-    Ra::Core::Vector4Array m_paintColors;
+    Ra::Core::Container::Vector4Array m_baseColors;
+    Ra::Core::Container::Vector4Array m_paintColors;
 };
 
 } // namespace MeshPaintPlugin

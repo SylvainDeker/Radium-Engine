@@ -536,7 +536,7 @@ TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Vector2& hal
     const Vector3 y = ( 2.0 * halfExts[1] * Y ) / ( Scalar )( rows );
     const Vector3 o = T.translation() - ( halfExts[0] * X ) - ( halfExts[1] * Y );
 
-    Grid<uint, 2> v( {R, C} );
+    Container::Grid<uint, 2> v( {R, C} );
     for ( uint i = 0; i < R; ++i )
     {
         for ( uint j = 0; j < C; ++j )
