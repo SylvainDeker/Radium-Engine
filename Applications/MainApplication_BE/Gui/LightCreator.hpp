@@ -2,7 +2,7 @@
 #define RADIUMENGINE_LIGHTCREATOR_HPP
 
 #include <QWidget>
-
+#include <QColor>
 #include <memory>
 
 #include <Core/Container/Index.hpp>
@@ -33,6 +33,9 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     LightCreator( QWidget* parent = nullptr );
 
   private slots:
+    void open_dialogColor();
+
+
 
 
   protected:
@@ -42,6 +45,8 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
 
   private:
+    QColor m_color;
+
 
 };
 } // namespace Gui

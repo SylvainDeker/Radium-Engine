@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>518</height>
+    <width>793</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,45 +19,184 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="m_verticalLayout">
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="m_groupBox">
      <property name="title">
       <string>Informations </string>
      </property>
-     <widget class="QWidget" name="formLayoutWidget">
+     <widget class="QWidget" name="m_formLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>19</x>
-        <y>39</y>
-        <width>431</width>
-        <height>201</height>
+        <x>10</x>
+        <y>30</y>
+        <width>761</width>
+        <height>251</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
+      <layout class="QFormLayout" name="m_formLayout">
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>40</number>
+       </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="m_name_lab">
          <property name="text">
           <string>Name : </string>
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="m_lineEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="m_type_lab">
+         <property name="text">
+          <string>Type : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="m_typeComboBox">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Direct Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Omni Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Point Light</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Spot Light</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="m_color_lab">
+         <property name="text">
+          <string>Color : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QGroupBox" name="m_color_layout">
+         <layout class="QHBoxLayout" name="m_layout_color">
+          <item>
+           <widget class="QPushButton" name="m_button_color">
+            <property name="text">
+             <string>Choose</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="m_result_color">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="m_intensity_lab">
+         <property name="text">
+          <string>Intensity :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="m_angle_lab">
+         <property name="text">
+          <string>Angle : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="m_falloff_lab">
+         <property name="text">
+          <string>Falloff :</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="m_intensity_layout">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="m_intensity_spinbox"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="m_intensity_slider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="1">
+        <layout class="QHBoxLayout" name="m_angle_layout">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="m_angle_spinbox"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="m_angle_slider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="1">
+        <layout class="QHBoxLayout" name="m_fallof_layout">
+         <item alignment="Qt::AlignLeft">
+          <widget class="QDoubleSpinBox" name="m_falloff_spinbox"/>
+         </item>
+         <item>
+          <widget class="QSlider" name="m_falloff_slider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="m_button_create">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>460</y>
+        <x>650</x>
+        <y>330</y>
         <width>111</width>
         <height>34</height>
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Create</string>
       </property>
      </widget>
     </widget>
