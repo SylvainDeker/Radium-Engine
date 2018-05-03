@@ -1,4 +1,4 @@
-#include <Gui/EditionPlugin.hpp>
+#include <Gui/EditionWidget.hpp>
 
 #include <QWidget>
 #include <QPushButton>
@@ -14,14 +14,21 @@
 #include <GuiBase/SelectionManager/SelectionManager.hpp>
 
 
-namespace EditionPlugin {
+namespace Ra{
+namespace Gui{
 
-    EditionPluginC::~EditionPluginC() {}
+    EditionWidget::EditionWidget(QWidget *parent) :
+        QWidget(parent)
+    {
+        QPushButton* resetButton = new QPushButton("Reset", this);
+        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedEntity()));
 
+        QVBoxLayout* layout = new QVBoxLayout(this);
 
+        layout->addWidget(resetButton);
+    }
 
-
-    void EditionPluginC::resetSelectedEntity()
+    void EditionWidget::resetSelectedEntity()
     {
         Ra::Engine::Renderer::PickingResult data = m_pickingManager->getCurrent();
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
@@ -75,4 +82,5 @@ namespace EditionPlugin {
         }
     }
 
+}
 }

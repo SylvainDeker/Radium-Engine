@@ -1,18 +1,19 @@
 #ifndef EDITIONPLUGIN_HPP_
 #define EDITIONPLUGIN_HPP_
 
+#include <QWidget>
 #include <PluginBase/RadiumPluginInterface.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
 
-namespace EditionPlugin {
+namespace Ra {
+namespace Gui {
 // Due to an ambigous name while compiling with Clang, must differentiate plugin class from plugin
 // namespace
-class EditionPluginC : public Qwidget{
+class EditionWidget : public QWidget{
     Q_OBJECT
 
 public:
-    EditionPluginC(QWidget* parent = nullptr);
-     ~EditionPluginC();
+    EditionWidget(QWidget* parent);
 
 public slots:
     void resetSelectedEntity();
@@ -23,6 +24,6 @@ private:
 
 };
 }
+}
 
 #endif //EDITIONPLUGIN_HPP_
-
