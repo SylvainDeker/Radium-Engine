@@ -113,7 +113,7 @@ class PolylineTests : public Test {
     void run() override {
         // 2 points polyline
         {
-            Ra::Core::Vector3Array v2{{1, 2, 3}, {4, 5, 6}};
+            Ra::Core::Container::Vector3Array v2{{1, 2, 3}, {4, 5, 6}};
             Ra::Core::PolyLine p( v2 );
 
             Ra::Core::Vector3 m = 0.5f * ( v2[0] + v2[1] );
@@ -127,7 +127,7 @@ class PolylineTests : public Test {
         // 4 points polyline
         {
 
-            Ra::Core::Vector3Array v4{{2, 3, 5}, {7, 11, 13}, {17, 23, 29}, {-1, -1, 30}};
+            Ra::Core::Container::Vector3Array v4{{2, 3, 5}, {7, 11, 13}, {17, 23, 29}, {-1, -1, 30}};
 
             Ra::Core::PolyLine p( v4 );
 

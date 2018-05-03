@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 // Helper functions
 namespace {
@@ -120,5 +121,6 @@ inline T Tex<T, N>::fetch( const Vector& v ) const {
 
     return NLinearInterpolator<N>::interpolate( *this, fact, size, clamped_nearest );
 }
+} // namespace Container
 } // namespace Core
 } // namespace Ra

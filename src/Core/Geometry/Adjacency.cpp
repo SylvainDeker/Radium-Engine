@@ -12,7 +12,7 @@ namespace Geometry {
 // ADJACENCY MATRIX //
 // //////////////// //
 
-AdjacencyMatrix uniformAdjacency( const uint point_size, const VectorArray<Triangle>& T ) {
+AdjacencyMatrix uniformAdjacency( const uint point_size, const Container::VectorArray<Triangle>& T ) {
     AdjacencyMatrix A( point_size, point_size );
     for ( const auto& t : T )
     {
@@ -26,7 +26,7 @@ AdjacencyMatrix uniformAdjacency( const uint point_size, const VectorArray<Trian
     return A;
 }
 
-AdjacencyMatrix uniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+AdjacencyMatrix uniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AdjacencyMatrix A( p.size(), p.size() );
     for ( const auto& t : T )
     {
@@ -40,7 +40,7 @@ AdjacencyMatrix uniformAdjacency( const VectorArray<Vector3>& p, const VectorArr
     return A;
 }
 
-void uniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
+void uniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
                        AdjacencyMatrix& Adj ) {
     Adj.resize( p.size(), p.size() );
 #pragma omp parallel for
@@ -59,7 +59,7 @@ void uniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle
     }
 }
 
-TVAdj triangleUniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+TVAdj triangleUniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     const uint p_size = p.size();
     const uint t_size = T.size();
     TVAdj A( t_size, p_size );
@@ -75,8 +75,8 @@ TVAdj triangleUniformAdjacency( const VectorArray<Vector3>& p, const VectorArray
     return A;
 }
 
-AdjacencyMatrix cotangentWeightAdjacency( const VectorArray<Vector3>& p,
-                                          const VectorArray<Triangle>& T ) {
+AdjacencyMatrix cotangentWeightAdjacency( const Container::VectorArray<Vector3>& p,
+                                          const Container::VectorArray<Triangle>& T ) {
     AdjacencyMatrix A( p.size(), p.size() );
     for ( const auto& t : T )
     {

@@ -116,7 +116,7 @@ void AssimpHandleDataLoader::loadHandleData(
 void AssimpHandleDataLoader::loadHandleComponentData( const aiScene* scene, const aiMesh* mesh,
                                                       Core::Asset::HandleData* data ) const {
     const uint size = mesh->mNumBones;
-    Core::AlignedStdVector<Core::Asset::HandleComponentData> component( size,
+    Core::Container::AlignedStdVector<Core::Asset::HandleComponentData> component( size,
                                                                   Core::Asset::HandleComponentData() );
     std::set<std::string> name;
     std::map<std::string, uint> nameTable;
@@ -208,7 +208,7 @@ void AssimpHandleDataLoader::loadHandleTopologyData( const aiScene* scene,
             }
         }
     }
-    Core::AlignedStdVector<Core::Vector2i> edge;
+    Core::Container::AlignedStdVector<Core::Vector2i> edge;
     edge.reserve( edgeList.size() );
     for ( const auto& it : edgeList )
     {

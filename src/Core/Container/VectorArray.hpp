@@ -8,6 +8,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 /// This class is a wrapper around a std::vector of Core::Vectors.
 /// which allow to use the stdlib's dynamic array implementation, yet pass it as
@@ -84,6 +85,7 @@ using Vector4Array = VectorArray<Vector4>;
 // [2] http://eigen.tuxfamily.org/dox-devel/group__TopicStlContainers.html
 // [3] http://eigen.tuxfamily.org/bz/show_bug.cgi?id=829
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

@@ -20,7 +20,7 @@ Pose relativePose( const Pose& modelPose, const RestPose& restPose ) {
     return T;
 }
 
-Pose applyTransformation( const Pose& pose, const AlignedStdVector<Transform>& transform ) {
+Pose applyTransformation( const Pose& pose, const Container::AlignedStdVector<Transform>& transform ) {
     Pose T( std::min( pose.size(), transform.size() ) );
 #pragma omp parallel for
     for ( int i = 0; i < int( T.size() ); ++i )

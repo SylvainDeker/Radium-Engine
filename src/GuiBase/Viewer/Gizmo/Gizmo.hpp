@@ -83,7 +83,7 @@ class Gizmo {
     Core::Transform m_transform; //! Transform to be edited.
     Engine::Component* m_comp;   //! Engine Ui component
     Mode m_mode;                 //! local or global
-    std::vector<Core::Index> m_renderObjects;
+    std::vector<Core::Container::Index> m_renderObjects;
 };
 } // namespace Gui
 } // namespace Ra

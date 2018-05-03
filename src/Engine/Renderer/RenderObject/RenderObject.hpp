@@ -27,7 +27,7 @@ namespace Ra {
 namespace Engine {
 
 // FIXME(Charly): Does this need a bit of cleanup ?
-class RA_ENGINE_API RenderObject final : public Core::IndexedObject {
+class RA_ENGINE_API RenderObject final : public Core::Container::IndexedObject {
   public:
     RA_CORE_ALIGNED_NEW
 

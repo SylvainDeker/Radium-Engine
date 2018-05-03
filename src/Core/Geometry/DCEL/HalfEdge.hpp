@@ -23,14 +23,14 @@ namespace Core {
  *
  */
 
-class[[deprecated]] RA_CORE_API HalfEdge : public IndexedObject {
+class[[deprecated]] RA_CORE_API HalfEdge : public Container::IndexedObject {
   public:
     /// CONSTRUCTOR
-    HalfEdge( const Index& index = Index::Invalid() ); // Build a HalfEdge with the given index
+    HalfEdge( const Container::Index& index = Container::Index::Invalid() ); // Build a HalfEdge with the given index
     HalfEdge( const Vertex_ptr& v, const HalfEdge_ptr& next = nullptr,
               const HalfEdge_ptr& prev = nullptr, const HalfEdge_ptr& twin = nullptr,
               const Face_ptr& f = nullptr,
-              const Index& index = Index::Invalid() ); // Build a complete Halfedge
+              const Container::Index& index = Container::Index::Invalid() ); // Build a complete Halfedge
     HalfEdge( const HalfEdge& he ) = default;          // Copy constructor
 
     /// DESTRUCTOR

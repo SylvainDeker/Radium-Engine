@@ -8,13 +8,17 @@
 namespace Ra {
 namespace Core {
 
+
 // todo : enclose this in a more specific namespace ?
 using Edge = Vector2ui;
 using Triangle = Vector3ui;
 
+namespace Container {
+
 using TriangleIdx = Index;
 using VertexIdx = Index;
 using HalfEdgeIdx = Index;
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

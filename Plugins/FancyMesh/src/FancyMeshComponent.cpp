@@ -72,7 +72,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
     m_duplicateTable = data->getDuplicateTable();
 
     auto displayMesh =
-        Ra::Core::make_shared<Ra::Engine::Mesh>( meshName /*, Ra::Engine::Mesh::RM_POINTS*/ );
+        Ra::Core::Container::make_shared<Ra::Engine::Mesh>( meshName /*, Ra::Engine::Mesh::RM_POINTS*/ );
 
     Ra::Core::TriangleMesh mesh;
     Ra::Core::Transform T = data->getFrame();
@@ -163,7 +163,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
         builder.second( rt, isTransparent );
     } else
     {
-        auto mat = Ra::Core::make_shared<Ra::Engine::BlinnPhongMaterial>( data->getName() +
+        auto mat = Ra::Core::Container::make_shared<Ra::Engine::BlinnPhongMaterial>( data->getName() +
                                                                           "_DefaulBPMaterial" );
         mat->m_kd = Ra::Core::Colors::Grey();
         mat->m_ks = Ra::Core::Colors::White();
@@ -180,7 +180,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
     m_meshIndex = addRenderObject( ro );
 }
 
-Ra::Core::Index FancyMeshComponent::getRenderObjectIndex() const {
+Ra::Core::Container::Index FancyMeshComponent::getRenderObjectIndex() const {
     return m_meshIndex;
 }
 
@@ -211,19 +211,19 @@ void FancyMeshComponent::setupIO( const std::string& id ) {
     ComponentMessenger::getInstance()->registerReadWrite<TriangleMesh>( getEntity(), this, id,
                                                                         cbRw );
 
-    ComponentMessenger::CallbackTypes<Ra::Core::Index>::Getter roOut =
+    ComponentMessenger::CallbackTypes<Ra::Core::Container::Index>::Getter roOut =
         std::bind( &FancyMeshComponent::roIndexRead, this );
-    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Index>( getEntity(), this, id,
+    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Container::Index>( getEntity(), this, id,
                                                                         roOut );
 
-    ComponentMessenger::CallbackTypes<Ra::Core::Vector3Array>::ReadWrite vRW =
+    ComponentMessenger::CallbackTypes<Ra::Core::Container::Vector3Array>::ReadWrite vRW =
         std::bind( &FancyMeshComponent::getVerticesRw, this );
-    ComponentMessenger::getInstance()->registerReadWrite<Ra::Core::Vector3Array>( getEntity(), this,
+    ComponentMessenger::getInstance()->registerReadWrite<Ra::Core::Container::Vector3Array>( getEntity(), this,
                                                                                   id + "v", vRW );
 
-    ComponentMessenger::CallbackTypes<Ra::Core::Vector3Array>::ReadWrite nRW =
+    ComponentMessenger::CallbackTypes<Ra::Core::Container::Vector3Array>::ReadWrite nRW =
         std::bind( &FancyMeshComponent::getNormalsRw, this );
-    ComponentMessenger::getInstance()->registerReadWrite<Ra::Core::Vector3Array>( getEntity(), this,
+    ComponentMessenger::getInstance()->registerReadWrite<Ra::Core::Container::Vector3Array>( getEntity(), this,
                                                                                   id + "n", nRW );
 
     ComponentMessenger::CallbackTypes<TriangleArray>::ReadWrite tRW =
@@ -271,12 +271,12 @@ void FancyMeshComponent::setMeshInput( const TriangleMesh* meshptr ) {
     displayMesh.loadGeometry( *meshptr );
 }
 
-Ra::Core::Vector3Array* FancyMeshComponent::getVerticesRw() {
+Ra::Core::Container::Vector3Array* FancyMeshComponent::getVerticesRw() {
     getDisplayMesh().setDirty( Ra::Engine::Mesh::VERTEX_POSITION );
     return &( getDisplayMesh().getGeometry().m_vertices );
 }
 
-Ra::Core::Vector3Array* FancyMeshComponent::getNormalsRw() {
+Ra::Core::Container::Vector3Array* FancyMeshComponent::getNormalsRw() {
     getDisplayMesh().setDirty( Ra::Engine::Mesh::VERTEX_NORMAL );
     return &( getDisplayMesh().getGeometry().m_normals );
 }
@@ -286,7 +286,7 @@ Ra::Core::VectorArray<Ra::Core::Triangle>* FancyMeshComponent::getTrianglesRw() 
     return &( getDisplayMesh().getGeometry().m_triangles );
 }
 
-const Ra::Core::Index* FancyMeshComponent::roIndexRead() const {
+const Ra::Core::Container::Index* FancyMeshComponent::roIndexRead() const {
     return &m_meshIndex;
 }
 

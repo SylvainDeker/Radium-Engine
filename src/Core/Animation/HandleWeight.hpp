@@ -17,10 +17,10 @@ using Weights = std::vector<SkinningWeights>;
 using SingleWeight = std::pair<uint, Scalar>;
 
 // Defining the vector of the skinning weights for a vertex
-using VertexWeight = AlignedStdVector<SingleWeight>;
+using VertexWeight = Container::AlignedStdVector<SingleWeight>;
 
 // Defining the vector of the skinning weights for the entire mesh
-using MeshWeight = AlignedStdVector<VertexWeight>;
+using MeshWeight = Container::AlignedStdVector<VertexWeight>;
 
 // Defining the weight matrix as the nxm matrix, where n are the vertices and m the handles
 // It is like an adjacency matrix between vertices and handle transforms.

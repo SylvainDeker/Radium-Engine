@@ -20,11 +20,11 @@ namespace Core {
  * Chapter 2, Paragraph 2.2, Page 29
  */
 
-class[[deprecated]] RA_CORE_API Dcel : public IndexedObject {
+class[[deprecated]] RA_CORE_API Dcel : public Container::IndexedObject {
   public:
     /// CONSTRUCTOR
-    Dcel( const Index& index =
-              Index::Invalid() ); // Build an empty DCEL with index equal to "index"
+    Dcel( const Container::Index& index =
+              Container::Index::Invalid() ); // Build an empty DCEL with index equal to "index"
     Dcel( const Dcel& dcel );     // Copy constructor
 
     /// DESTRUCTOR
@@ -37,10 +37,10 @@ class[[deprecated]] RA_CORE_API Dcel : public IndexedObject {
     inline bool empty() const;
 
     /// VARIABLE
-    IndexMap<Vertex_ptr> m_vertex;     // Vertices  Data
-    IndexMap<HalfEdge_ptr> m_halfedge; // HalfEdges Data
-    IndexMap<FullEdge_ptr> m_fulledge; // FullEdge  Data
-    IndexMap<Face_ptr> m_face;         // Faces     Data
+    Container::IndexMap<Vertex_ptr> m_vertex;     // Vertices  Data
+    Container::IndexMap<HalfEdge_ptr> m_halfedge; // HalfEdges Data
+    Container::IndexMap<FullEdge_ptr> m_fulledge; // FullEdge  Data
+    Container::IndexMap<Face_ptr> m_face;         // Faces     Data
 };
 
 } // namespace Core

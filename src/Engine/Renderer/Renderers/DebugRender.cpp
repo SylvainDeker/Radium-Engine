@@ -206,7 +206,7 @@ void DebugRender::render( const Core::Matrix4& viewMatrix, const Core::Matrix4& 
 
 void DebugRender::renderLines( const Core::Matrix4f& viewMatrix,
                                const Core::Matrix4f& projMatrix ) {
-    Core::Vector3Array vertices;
+    Core::Container::Vector3Array vertices;
     Core::Vector4Array colors;
     std::vector<GLuint> indices;
     unsigned int indexI = 0;
@@ -337,14 +337,14 @@ void DebugRender::addPoint( const Core::Vector3& p, const Core::Color& c ) {
     m_points.push_back( {p, c.head<3>()} );
 }
 
-void DebugRender::addPoints( const Core::Vector3Array& p, const Core::Color& c ) {
+void DebugRender::addPoints( const Core::Container::Vector3Array& p, const Core::Color& c ) {
     for ( uint i = 0; i < p.size(); ++i )
     {
         m_points.push_back( {p[i], c.head<3>()} );
     }
 }
 
-void DebugRender::addPoints( const Core::Vector3Array& p, const Core::Vector4Array& c ) {
+void DebugRender::addPoints( const Core::Container::Vector3Array& p, const Core::Vector4Array& c ) {
     CORE_ASSERT( p.size() == c.size(), "Data sizes mismatch." );
     for ( uint i = 0; i < p.size(); ++i )
     {

@@ -6,6 +6,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 class DLL_EXPORT IndexedObject {
   public:
@@ -20,6 +21,7 @@ class DLL_EXPORT IndexedObject {
     Index idx;
 };
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

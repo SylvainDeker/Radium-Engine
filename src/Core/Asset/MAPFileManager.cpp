@@ -53,7 +53,7 @@ bool MAPFileManager::importData( std::istream& file, Parametrization& data ) {
         Scalar beta;
         Scalar delta;
         file >> ID >> alpha >> beta >> delta;
-        data[i].setID( Index( ID ) );
+        data[i].setID( Container::Index( ID ) );
         data[i].setAlpha( alpha );
         data[i].setBeta( beta );
         data[i].setDelta( delta );

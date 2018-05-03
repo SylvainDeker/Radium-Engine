@@ -11,7 +11,7 @@ namespace Ra {
 namespace Engine {
 
 Entity::Entity( const std::string& name ) :
-    Core::IndexedObject(),
+    Core::Container::IndexedObject(),
     m_transform( Core::Transform::Identity() ),
     m_doubleBufferedTransform( Core::Transform::Identity() ),
     m_name( name ),

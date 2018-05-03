@@ -15,7 +15,7 @@
 namespace Ra {
 namespace Core {
 namespace MeshUtils {
-void getAutoNormals( TriangleMesh& mesh, VectorArray<Vector3>& normalsOut ) {
+void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Vector3>& normalsOut ) {
     const uint numVertices = mesh.m_vertices.size();
     const uint numTriangles = mesh.m_triangles.size();
 
@@ -42,8 +42,8 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
     const uint numVerts = mesh.m_vertices.size();
     duplicatesMap.resize( numVerts, VertexIdx( -1 ) );
 
-    VectorArray<Vector3>::const_iterator vertPos;
-    VectorArray<Vector3>::const_iterator duplicatePos;
+    Container::VectorArray<Vector3>::const_iterator vertPos;
+    Container::VectorArray<Vector3>::const_iterator duplicatePos;
     std::vector<std::pair<Vector3, VertexIdx>> vertices;
 
     for ( uint i = 0; i < numVerts; ++i )
@@ -88,7 +88,7 @@ void removeDuplicates( TriangleMesh& mesh, std::vector<VertexIdx>& vertexMap ) {
     findDuplicates( mesh, duplicatesMap );
 
     std::vector<VertexIdx> newIndices( mesh.m_vertices.size(), VertexIdx( -1 ) );
-    Vector3Array uniqueVertices;
+    Container::Vector3Array uniqueVertices;
     for ( uint i = 0; i < mesh.m_vertices.size(); i++ )
     {
         if ( duplicatesMap[i] == i )

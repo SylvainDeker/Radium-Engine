@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 // Anonymous helper functions to convert to/from multi-dimensional indices
 // If we want to  make the grid row-major we just need to overload these functions
 // by reversing the loops.
@@ -312,5 +313,6 @@ bool Grid<T, D>::Iterator::isValidOffset( const typename Grid<T, D>::OffsetVecto
               ( pos.array() >= m_sizes.template cast<int>().array() ).any() );
 }
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra

@@ -31,7 +31,7 @@ class RA_ENGINE_API DebugComponent : public Component {
     void initialize() override {}
 
     /// Access render object through RO manager
-    RenderObject* getRenderObject( Core::Index idx );
+    RenderObject* getRenderObject( Core::Container::Index idx );
 };
 
 #endif

@@ -22,8 +22,8 @@ class RA_ENGINE_API DebugRender {
 
     void addLine( const Core::Vector3& from, const Core::Vector3& to, const Core::Color& color );
     void addPoint( const Core::Vector3& p, const Core::Color& color );
-    void addPoints( const Core::Vector3Array& p, const Core::Color& color );
-    void addPoints( const Core::Vector3Array& p, const Core::Vector4Array& colors );
+    void addPoints( const Core::Container::Vector3Array& p, const Core::Color& color );
+    void addPoints( const Core::Container::Vector3Array& p, const Core::Vector4Array& colors );
     void addMesh( const std::shared_ptr<Mesh>& mesh,
                   const Core::Transform& transform = Core::Transform::Identity() );
 

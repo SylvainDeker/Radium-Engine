@@ -83,14 +83,14 @@ void findParametrization( const TriangleMesh& source, const TriangleMesh& target
             {
                 if ( std::abs( d ) < std::abs( map.getDelta() ) )
                 {
-                    map.setID( Index( t ) );
+                    map.setID( Container::Index( t ) );
                     map.setDelta( d );
                     map.setAlpha( b[0] );
                     map.setBeta( b[1] );
                 }
             } else
             {
-                map.setID( Index( t ) );
+                map.setID( Container::Index( t ) );
                 map.setDelta( d );
                 map.setAlpha( b[0] );
                 map.setBeta( b[1] );
@@ -102,7 +102,7 @@ void findParametrization( const TriangleMesh& source, const TriangleMesh& target
 }
 
 void applyParametrization( const TriangleMesh& inMesh, const Parametrization& param,
-                           Vector3Array& outPoint, const bool FORCE_DISPLACEMENT_TO_ZERO ) {
+                           Container::Vector3Array& outPoint, const bool FORCE_DISPLACEMENT_TO_ZERO ) {
     const uint size = param.size();
     outPoint.resize( size, Vector3::Zero() );
 #if defined( CORE_USE_OMP )

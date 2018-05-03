@@ -52,7 +52,7 @@ BitSet extractBitSet( const VertexSegment& v, const uint vertex_size );
 /*
  * Return the TriangleSegment from the given BitSet, for the given triangles.
  */
-TriangleSegment extractTriangleSegment( const BitSet& bit, const VectorArray<Triangle>& t );
+TriangleSegment extractTriangleSegment( const BitSet& bit, const Container::VectorArray<Triangle>& t );
 
 MeshPartition partition( const TriangleMesh& mesh, const Animation::WeightMatrix& weight,
                          const bool use_max = true );

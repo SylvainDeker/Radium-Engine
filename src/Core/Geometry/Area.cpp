@@ -12,7 +12,7 @@ namespace Geometry {
 /// GLOBAL MATRIX ///
 /////////////////////
 
-AreaMatrix oneRingArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+AreaMatrix oneRingArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -28,7 +28,7 @@ AreaMatrix oneRingArea( const VectorArray<Vector3>& p, const VectorArray<Triangl
     return A;
 }
 
-void oneRingArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T, AreaMatrix& A ) {
+void oneRingArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T, AreaMatrix& A ) {
     A.resize( p.size(), p.size() );
     A.reserve( p.size() );
 #pragma omp parallel for
@@ -48,11 +48,11 @@ void oneRingArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
     }
 }
 
-AreaMatrix barycentricArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+AreaMatrix barycentricArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     return ( ( 1.0f / 3.0f ) * oneRingArea( p, T ) );
 }
 
-void barycentricArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
+void barycentricArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
                       AreaMatrix& A ) {
     oneRingArea( p, T, A );
     const uint size = p.size();
@@ -63,7 +63,7 @@ void barycentricArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>
     }
 }
 
-AreaMatrix voronoiArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+AreaMatrix voronoiArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -81,7 +81,7 @@ AreaMatrix voronoiArea( const VectorArray<Vector3>& p, const VectorArray<Triangl
     return ( ( 1.0 / 8.0 ) * A );
 }
 
-AreaMatrix mixedArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T ) {
+AreaMatrix mixedArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -139,10 +139,10 @@ AreaMatrix mixedArea( const VectorArray<Vector3>& p, const VectorArray<Triangle>
 /// ONE RING ///
 ////////////////
 
-Scalar oneRingArea( const Vector3& v, const VectorArray<Vector3>& p ) {
+Scalar oneRingArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
@@ -152,14 +152,14 @@ Scalar oneRingArea( const Vector3& v, const VectorArray<Vector3>& p ) {
     return area;
 }
 
-Scalar barycentricArea( const Vector3& v, const VectorArray<Vector3>& p ) {
+Scalar barycentricArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     return ( oneRingArea( v, p ) / 3.0 );
 }
 
-Scalar voronoiArea( const Vector3& v, const VectorArray<Vector3>& p ) {
+Scalar voronoiArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
@@ -171,10 +171,10 @@ Scalar voronoiArea( const Vector3& v, const VectorArray<Vector3>& p ) {
     return ( ( 1.0 / 8.0 ) * area );
 }
 
-Scalar mixedArea( const Vector3& v, const VectorArray<Vector3>& p ) {
+Scalar mixedArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {

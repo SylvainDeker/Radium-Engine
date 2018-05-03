@@ -18,11 +18,11 @@ void PolyLine::update() {
     }
 }
 
-PolyLine::PolyLine( const Vector3Array& pts ) : m_pts( pts ) {
+PolyLine::PolyLine( const Container::Vector3Array& pts ) : m_pts( pts ) {
     update();
 }
 
-void PolyLine::setPoints( const Vector3Array& pts ) {
+void PolyLine::setPoints( const Container::Vector3Array& pts ) {
     m_pts = pts;
     update();
 }

@@ -11,6 +11,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 /*!
  * The class IndexMap define a map where a object is coupled with a index.
@@ -146,6 +147,7 @@ class IndexMap {
     IndexContainer m_free; /// List of available free indices.
 };
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

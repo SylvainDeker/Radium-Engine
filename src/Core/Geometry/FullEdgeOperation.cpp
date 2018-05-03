@@ -17,7 +17,7 @@ void insertInMap( IndexMap<T>& map, T& t ) {
     CORE_ASSERT( t->idx.isValid(), "Not inserted" );
 }
 
-void fulledgeSplit( Dcel& dcel, const Index fulledge_id ) {
+void fulledgeSplit( Dcel& dcel, const Container::Index fulledge_id ) {
     if ( dcel.m_fulledge.contains( fulledge_id ) )
     {
         FullEdge_ptr ptr = dcel.m_fulledge.at( fulledge_id );
@@ -90,7 +90,7 @@ void fulledgeSplit( Dcel& dcel, const Index fulledge_id ) {
     }
 }
 
-void fulledgeCollapse( Dcel& dcel, const Index fulledge_id ) {}
+void fulledgeCollapse( Dcel& dcel, const Container::Index fulledge_id ) {}
 
 } // namespace Core
 } // namespace Ra

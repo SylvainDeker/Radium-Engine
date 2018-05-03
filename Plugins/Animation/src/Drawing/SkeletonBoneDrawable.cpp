@@ -13,7 +13,7 @@ namespace AnimationPlugin {
 SkeletonBoneRenderObject::SkeletonBoneRenderObject( const std::string& name,
                                                     AnimationComponent* comp, uint id,
                                                     Ra::Engine::RenderObjectManager* roMgr ) :
-    m_roIdx( Ra::Core::Index::Invalid() ),
+    m_roIdx( Ra::Core::Container::Index::Invalid() ),
     m_id( id ),
     m_skel( comp->getSkeleton() ),
     m_roMgr( roMgr ) {

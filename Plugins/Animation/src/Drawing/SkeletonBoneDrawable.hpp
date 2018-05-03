@@ -26,7 +26,7 @@ class SkeletonBoneRenderObject {
 
     uint getBoneIndex() const { return m_id; }
 
-    Ra::Core::Index getRenderObjectIndex() const { return m_roIdx; }
+    Ra::Core::Container::Index getRenderObjectIndex() const { return m_roIdx; }
 
     void setXray( bool on );
 
@@ -34,7 +34,7 @@ class SkeletonBoneRenderObject {
     void updateLocalTransform();
 
   private:
-    Ra::Core::Index m_roIdx; /// Index of the corresponding render object
+    Ra::Core::Container::Index m_roIdx; /// Index of the corresponding render object
     uint m_id;               /// Bone index
 
     const Ra::Core::Animation::Skeleton& m_skel; /// Skeleton

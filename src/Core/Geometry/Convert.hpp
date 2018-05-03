@@ -7,7 +7,10 @@ namespace Ra {
 namespace Core {
 
 // Forward declaration
+namespace Container {
 class Index;
+} // namespace Container
+
 struct TriangleMesh;
 class Dcel;
 

@@ -98,8 +98,8 @@ LaplacianMatrix RA_CORE_API powerLaplacian( const LaplacianMatrix& L, const uint
  * semi-definite matrix.
  */
 /// WARNING: THIS IMPLEMENTATION IS FASTER THAN DOING L = D - A.
-LaplacianMatrix RA_CORE_API cotangentWeightLaplacian( const VectorArray<Vector3>& p,
-                                                      const VectorArray<Triangle>& T );
+LaplacianMatrix RA_CORE_API cotangentWeightLaplacian( const Container::VectorArray<Vector3>& p,
+                                                      const Container::VectorArray<Triangle>& T );
 
 ////////////////
 /// ONE RING ///
@@ -112,7 +112,7 @@ LaplacianMatrix RA_CORE_API cotangentWeightLaplacian( const VectorArray<Vector3>
  *       L = sum( ( v - p_j ) )
  */
 /// WARNING: THE IMPLEMENTATION COULD BE WRONG
-Vector3 RA_CORE_API uniformLaplacian( const Vector3& v, const VectorArray<Vector3>& p );
+Vector3 RA_CORE_API uniformLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p );
 
 /*
  * Return the Laplacian vector for the given point v and its one-ring.
@@ -121,7 +121,7 @@ Vector3 RA_CORE_API uniformLaplacian( const Vector3& v, const VectorArray<Vector
  *       L = 0.5 * sum( ( cot( alpha_vj ) + cot( beta_vj ) ) * ( v - p_j ) )
  * where alpha_ij and beta_ij are the angles opposite the edge { v, p_j }
  */
-Vector3 RA_CORE_API cotangentWeightLaplacian( const Vector3& v, const VectorArray<Vector3>& p );
+Vector3 RA_CORE_API cotangentWeightLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p );
 
 } // namespace Geometry
 } // namespace Core

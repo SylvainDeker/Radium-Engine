@@ -90,7 +90,7 @@ class Sequence {
 
   private:
     /// VARAIBLE
-    CircularIndex m_idx;
+    Container::CircularIndex m_idx;
     PoseType m_type;
 };
 

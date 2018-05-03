@@ -44,11 +44,11 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
     void toggleSlowMotion( const bool status );
     void setAnimation( const uint i );
 
-    uint getBoneIdx( Ra::Core::Index index ) const;
+    uint getBoneIdx( Ra::Core::Container::Index index ) const;
     Scalar getTime() const;
 
     void handleSkeletonLoading( const Ra::Core::Asset::HandleData* data,
-                                const std::vector<Ra::Core::Index>& duplicateTable,
+                                const std::vector<Ra::Core::Container::Index>& duplicateTable,
                                 uint nbMeshVertices );
     void handleAnimationLoading( const std::vector<Ra::Core::Asset::AnimationData*> data );
 
@@ -56,11 +56,11 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
     // Editable interface
     //
 
-    virtual bool canEdit( Ra::Core::Index roIdx ) const override;
+    virtual bool canEdit( Ra::Core::Container::Index roIdx ) const override;
 
-    virtual Ra::Core::Transform getTransform( Ra::Core::Index roIdx ) const override;
+    virtual Ra::Core::Transform getTransform( Ra::Core::Container::Index roIdx ) const override;
 
-    virtual void setTransform( Ra::Core::Index roIdx,
+    virtual void setTransform( Ra::Core::Container::Index roIdx,
                                const Ra::Core::Transform& transform ) override;
 
   public:
@@ -88,7 +88,7 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
     // Internal function to create the skinning weights.
     void createWeightMatrix( const Ra::Core::Asset::HandleData* data,
                              const std::map<uint, uint>& indexTable,
-                             const std::vector<Ra::Core::Index>& duplicateTable,
+                             const std::vector<Ra::Core::Container::Index>& duplicateTable,
                              uint nbMeshVertices );
 
     // Internal function to create the bone display objects.

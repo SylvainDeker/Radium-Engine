@@ -23,7 +23,7 @@ namespace Ra {
 namespace Engine {
 
 /// An entity is an scene element. It ties together components with a transform.
-class RA_ENGINE_API Entity : public Core::IndexedObject {
+class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
   public:
     RA_CORE_ALIGNED_NEW
     explicit Entity( const std::string& name = "" );

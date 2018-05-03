@@ -18,7 +18,7 @@ using HeatSource = Source;
 using Time = Scalar;
 
 // Defining the vector containing the heat value of each point of the surface
-using Heat = VectorArray<Scalar>;
+using Heat = Container::VectorArray<Scalar>;
 // using  Heat = Eigen::Matrix< Scalar, Eigen::Dynamic, 1 >;
 
 /*

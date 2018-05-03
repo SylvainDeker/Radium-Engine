@@ -4,7 +4,7 @@
 namespace Ra {
 namespace Core {
 
-const Vector3Array& PolyLine::getPoints() const {
+const Container::Vector3Array& PolyLine::getPoints() const {
     return m_pts;
 }
 
@@ -29,7 +29,7 @@ void PolyLine::getSegment( uint segment, Vector3& aOut, Vector3& abOut ) const {
     abOut = m_ptsDiff[segment];
 }
 
-const Vector3Array& PolyLine::getSegmentVectors() const {
+const Container::Vector3Array& PolyLine::getSegmentVectors() const {
     return m_ptsDiff;
 }
 

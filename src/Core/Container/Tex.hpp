@@ -8,6 +8,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 /// This class stores a discretized N-D function defined inside a N-D
 /// bounding box. It evaluates the function at a given point in space
 /// wrt the stored values N-linear interpolation.
@@ -48,6 +49,7 @@ using Tex2D = Tex<T, 2>;
 
 template <typename T>
 using Tex3D = Tex<T, 3>;
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 #include <Core/Container/Tex.inl>

@@ -6,7 +6,7 @@ namespace Ra {
 namespace Core {
 namespace Algorithm {
 
-Gradient gradientOfFieldS( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
+Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
                            const ScalarField& S ) {
     Gradient g;
     for ( const auto& t : T )
@@ -34,7 +34,7 @@ Gradient gradientOfFieldS( const VectorArray<Vector3>& p, const VectorArray<Tria
     return g;
 }
 
-Divergence divergenceOfFieldX( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
+Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
                                const Gradient& X ) {
     Divergence div( p.size() );
     div.setZero();

@@ -7,10 +7,10 @@ namespace Ra {
 namespace Core {
 namespace Graph {
 
-using ParentList = AlignedStdVector<int>;
-using LevelList = AlignedStdVector<uint8_t>;
-using ChildrenList = AlignedStdVector<uint8_t>;
-using Adjacency = AlignedStdVector<ChildrenList>;
+using ParentList = Container::AlignedStdVector<int>;
+using LevelList = Container::AlignedStdVector<uint8_t>;
+using ChildrenList = Container::AlignedStdVector<uint8_t>;
+using Adjacency = Container::AlignedStdVector<ChildrenList>;
 
 /**
  * The AdjacencyList contains the adjacency matrix expressed as a vector of indices and

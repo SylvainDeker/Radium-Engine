@@ -21,19 +21,19 @@ class MaterialData;
 class RA_CORE_API GeometryData : public AssetData {
 
   public:
-    using Vector3Array = Core::VectorArray<Core::Vector3>;
-    using Vector2iArray = Core::VectorArray<Core::Vector2i>;
-    using Vector2uArray = Core::VectorArray<Core::Vector2ui>;
-    using VectorNiArray = Core::VectorArray<Core::VectorNi>;
-    using VectorNuArray = Core::VectorArray<Core::VectorNui>;
-    using Vector4Array = Core::VectorArray<Core::Vector4>;
-    using ColorArray = Core::VectorArray<Core::Color>;
+    using Vector3Array = Core::Container::VectorArray<Vector3>;
+    using Vector2iArray = Core::Container::VectorArray<Vector2i>;
+    using Vector2uArray = Core::Container::VectorArray<Vector2ui>;
+    using VectorNiArray = Core::Container::VectorArray<VectorNi>;
+    using VectorNuArray = Core::Container::VectorArray<VectorNui>;
+    using Vector4Array = Core::Container::VectorArray<Vector4>;
+    using ColorArray = Core::Container::VectorArray<Core::Color>;
 
     using Weight = std::pair<Scalar, uint>;
     using VertexWeights = std::vector<Weight>;
     using WeightArray = std::vector<VertexWeights>;
 
-    using DuplicateTable = std::vector<Ra::Core::Index>;
+    using DuplicateTable = std::vector<Ra::Core::Container::Index>;
 
   public:
     RA_CORE_ALIGNED_NEW
@@ -96,8 +96,8 @@ class RA_CORE_API GeometryData : public AssetData {
     template <typename Container>
     inline void setPolyhedron( const Container& polyList );
 
-    inline Vector3Array& getNormals();
-    inline const Vector3Array& getNormals() const;
+    inline Container::Vector3Array& getNormals();
+    inline const Container::Vector3Array& getNormals() const;
     // Copy data from normalList. In-place setting with getNormals is preferred.
     template <typename Container>
     inline void setNormals( const Container& normalList );

@@ -64,7 +64,7 @@ void Mesh::loadGeometry( const Core::TriangleMesh& mesh ) {
     m_isDirty = true;
 }
 
-void Mesh::updateMeshGeometry( MeshData type, const Core::Vector3Array& data ) {
+void Mesh::updateMeshGeometry( MeshData type, const Core::Container::Vector3Array& data ) {
     if ( type == VERTEX_POSITION )
         m_mesh.m_vertices = data;
     if ( type == VERTEX_NORMAL )
@@ -73,7 +73,7 @@ void Mesh::updateMeshGeometry( MeshData type, const Core::Vector3Array& data ) {
     m_isDirty = true;
 }
 
-void Mesh::loadGeometry( const Core::Vector3Array& vertices, const std::vector<uint>& indices ) {
+void Mesh::loadGeometry( const Core::Container::Vector3Array& vertices, const std::vector<uint>& indices ) {
     // Do not remove this function to force everyone to use triangle mesh.
     //  ... because we have some line meshes as well...
     const uint nIdx = indices.size();
@@ -109,7 +109,7 @@ void Mesh::loadGeometry( const Core::Vector3Array& vertices, const std::vector<u
     m_isDirty = true;
 }
 
-void Mesh::addData( const Vec3Data& type, const Core::Vector3Array& data ) {
+void Mesh::addData( const Vec3Data& type, const Core::Container::Vector3Array& data ) {
     m_v3Data[static_cast<uint>( type )] = data;
     m_dataDirty[MAX_MESH + static_cast<uint>( type )] = true;
     m_isDirty = true;

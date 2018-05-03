@@ -91,7 +91,7 @@ void RotateGizmo::selectConstraint( int drawableIdx ) {
     if ( drawableIdx >= 0 )
     {
         auto found = std::find( m_renderObjects.cbegin(), m_renderObjects.cend(),
-                                Core::Index( drawableIdx ) );
+                                Core::Container::Index( drawableIdx ) );
         if ( found != m_renderObjects.cend() )
         {
             m_selectedAxis = int( found - m_renderObjects.begin() );

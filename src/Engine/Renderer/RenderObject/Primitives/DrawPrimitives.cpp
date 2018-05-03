@@ -36,7 +36,7 @@ RenderObject* Primitive( Component* component, const MeshPtr& mesh ) {
 
 // TODO(Charly): Factor mesh init code
 MeshPtr Point( const Core::Vector3& point, const Core::Color& color, Scalar scale ) {
-    Core::Vector3Array vertices = {( point + ( scale * Core::Vector3::UnitX() ) ),
+    Core::Container::Vector3Array vertices = {( point + ( scale * Core::Vector3::UnitX() ) ),
                                    ( point - ( scale * Core::Vector3::UnitX() ) ),
 
                                    ( point + ( scale * Core::Vector3::UnitY() ) ),
@@ -57,7 +57,7 @@ MeshPtr Point( const Core::Vector3& point, const Core::Color& color, Scalar scal
 }
 
 MeshPtr Line( const Core::Vector3& a, const Core::Vector3& b, const Core::Color& color ) {
-    Core::Vector3Array vertices = {a, b};
+    Core::Container::Vector3Array vertices = {a, b};
 
     std::vector<uint> indices = {0, 1};
 
@@ -79,7 +79,7 @@ MeshPtr Vector( const Core::Vector3& start, const Core::Vector3& v, const Core::
 
     const Scalar arrowFract = 0.1f;
 
-    Core::Vector3Array vertices = {
+    Core::Container::Vector3Array vertices = {
         start, end, start + ( ( 1.f - arrowFract ) * v ) + ( ( arrowFract * l ) * a ),
         start + ( ( 1.f - arrowFract ) * v ) - ( ( arrowFract * l ) * a )};
     std::vector<uint> indices = {0, 1, 1, 2, 1, 3};
@@ -96,7 +96,7 @@ MeshPtr Vector( const Core::Vector3& start, const Core::Vector3& v, const Core::
 MeshPtr Ray( const Core::Ray& ray, const Core::Color& color ) {
     Core::Vector3 end = ray.pointAt( 1000.f );
 
-    Core::Vector3Array vertices = {ray.origin(), end};
+    Core::Container::Vector3Array vertices = {ray.origin(), end};
     std::vector<uint> indices = {0, 1};
 
     Core::Vector4Array colors( vertices.size(), color );
@@ -110,7 +110,7 @@ MeshPtr Ray( const Core::Ray& ray, const Core::Color& color ) {
 
 MeshPtr Triangle( const Core::Vector3& a, const Core::Vector3& b, const Core::Vector3& c,
                   const Core::Color& color, bool fill ) {
-    Core::Vector3Array vertices = {a, b, c};
+    Core::Container::Vector3Array vertices = {a, b, c};
     std::vector<uint> indices;
 
     if ( fill )
@@ -132,7 +132,7 @@ MeshPtr Triangle( const Core::Vector3& a, const Core::Vector3& b, const Core::Ve
 
 MeshPtr QuadStrip( const Core::Vector3& a, const Core::Vector3& x, const Core::Vector3& y,
                    uint quads, const Core::Color& color ) {
-    Core::Vector3Array vertices( quads * 2 + 2 );
+    Core::Container::Vector3Array vertices( quads * 2 + 2 );
     std::vector<uint> indices( quads * 2 + 2 );
 
     Core::Vector3 B = a;
@@ -162,7 +162,7 @@ MeshPtr Circle( const Core::Vector3& center, const Core::Vector3& normal, Scalar
                 uint segments, const Core::Color& color ) {
     CORE_ASSERT( segments > 2, "Cannot draw a circle with less than 3 points" );
 
-    Core::Vector3Array vertices( segments );
+    Core::Container::Vector3Array vertices( segments );
     std::vector<uint> indices( segments );
 
     Core::Vector3 xPlane, yPlane;
@@ -191,7 +191,7 @@ MeshPtr Circle( const Core::Vector3& center, const Core::Vector3& normal, Scalar
 
 MeshPtr CircleArc( const Core::Vector3& center, const Core::Vector3& normal, Scalar radius,
                    Scalar angle, uint segments, const Core::Color& color ) {
-    Core::Vector3Array vertices( segments );
+    Core::Container::Vector3Array vertices( segments );
     std::vector<uint> indices( segments );
 
     Core::Vector3 xPlane, yPlane;
@@ -271,7 +271,7 @@ MeshPtr Disk( const Core::Vector3& center, const Core::Vector3& normal, Scalar r
     CORE_ASSERT( segments > 2, "Cannot draw a circle with less than 3 points" );
 
     uint seg = segments + 1;
-    Core::Vector3Array vertices( seg );
+    Core::Container::Vector3Array vertices( seg );
     std::vector<uint> indices( seg + 1 );
 
     Core::Vector3 xPlane, yPlane;
@@ -316,7 +316,7 @@ MeshPtr Normal( const Core::Vector3& point, const Core::Vector3& normal, const C
 
     const Scalar arrowFract = 0.1f;
 
-    Core::Vector3Array vertices = {
+    Core::Container::Vector3Array vertices = {
         point,
         end,
         point + ( ( 1.f - arrowFract ) * n ) + ( ( arrowFract * scale ) * a ),
@@ -347,7 +347,7 @@ MeshPtr Frame( const Core::Transform& frameFromEntity, Scalar scale ) {
     Core::Vector3 y = frameFromEntity.linear() * Core::Vector3::UnitY();
     Core::Vector3 z = frameFromEntity.linear() * Core::Vector3::UnitZ();
 
-    Core::Vector3Array vertices = {pos, pos + scale * x, pos, pos + scale * y,
+    Core::Container::Vector3Array vertices = {pos, pos + scale * x, pos, pos + scale * y,
                                    pos, pos + scale * z};
 
     std::vector<uint> indices = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
@@ -368,7 +368,7 @@ MeshPtr Grid( const Core::Vector3& center, const Core::Vector3& x, const Core::V
               const Core::Color& color, Scalar cellSize, uint res ) {
 
     CORE_ASSERT( res > 1, "Grid has to be at least a 2x2 grid." );
-    Core::Vector3Array vertices;
+    Core::Container::Vector3Array vertices;
     std::vector<uint> indices;
 
     Scalar halfWidth = ( cellSize * res ) / 2.f;
@@ -401,7 +401,7 @@ MeshPtr Grid( const Core::Vector3& center, const Core::Vector3& x, const Core::V
 }
 
 MeshPtr AABB( const Core::Aabb& aabb, const Core::Color& color ) {
-    Core::Vector3Array vertices( 8 );
+    Core::Container::Vector3Array vertices( 8 );
 
     for ( uint i = 0; i < 8; ++i )
     {
@@ -424,7 +424,7 @@ MeshPtr AABB( const Core::Aabb& aabb, const Core::Color& color ) {
 }
 
 MeshPtr OBB( const Core::Obb& obb, const Core::Color& color ) {
-    Core::Vector3Array vertices( 8 );
+    Core::Container::Vector3Array vertices( 8 );
 
     for ( uint i = 0; i < 8; ++i )
     {
@@ -448,7 +448,7 @@ MeshPtr OBB( const Core::Obb& obb, const Core::Color& color ) {
 
 MeshPtr Spline( const Core::Spline<3, 3>& spline, uint pointCount, const Core::Color& color,
                 Scalar scale ) {
-    Core::Vector3Array vertices;
+    Core::Container::Vector3Array vertices;
     vertices.reserve( pointCount );
 
     std::vector<uint> indices;

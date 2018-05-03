@@ -40,8 +40,8 @@ LaplacianMatrix powerLaplacian( const LaplacianMatrix& L, const uint k ) {
     return lap;
 }
 
-LaplacianMatrix cotangentWeightLaplacian( const VectorArray<Vector3>& p,
-                                          const VectorArray<Triangle>& T ) {
+LaplacianMatrix cotangentWeightLaplacian( const Container::VectorArray<Vector3>& p,
+                                          const Container::VectorArray<Triangle>& T ) {
     LaplacianMatrix L( p.size(), p.size() );
     for ( const auto& t : T )
     {
@@ -71,7 +71,7 @@ LaplacianMatrix cotangentWeightLaplacian( const VectorArray<Vector3>& p,
 /// ONE RING ///
 ////////////////
 
-Vector3 uniformLaplacian( const Vector3& v, const VectorArray<Vector3>& p ) {
+Vector3 uniformLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     Vector3 L;
     L.setZero();
     for ( const auto& pi : p )
@@ -81,11 +81,11 @@ Vector3 uniformLaplacian( const Vector3& v, const VectorArray<Vector3>& p ) {
     return L;
 }
 
-Vector3 cotangentWeightLaplacian( const Vector3& v, const VectorArray<Vector3>& p ) {
+Vector3 cotangentWeightLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
     Vector3 L;
     L.setZero();
     uint N = p.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {

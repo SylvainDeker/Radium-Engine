@@ -35,11 +35,11 @@ void SkinningComponent::setupSkinning() {
     {
         m_skeletonGetter = compMsg->getterCallback<Skeleton>( getEntity(), m_contentsName );
         m_verticesWriter =
-            compMsg->rwCallback<Ra::Core::Vector3Array>( getEntity(), m_contentsName + "v" );
+            compMsg->rwCallback<Ra::Core::Container::Vector3Array>( getEntity(), m_contentsName + "v" );
         m_normalsWriter =
-            compMsg->rwCallback<Ra::Core::Vector3Array>( getEntity(), m_contentsName + "n" );
+            compMsg->rwCallback<Ra::Core::Container::Vector3Array>( getEntity(), m_contentsName + "n" );
         m_duplicateTableGetter =
-            compMsg->getterCallback<std::vector<Ra::Core::Index>>( getEntity(), m_contentsName );
+            compMsg->getterCallback<std::vector<Ra::Core::Container::Index>>( getEntity(), m_contentsName );
 
         m_refData.m_skeleton = compMsg->get<Skeleton>( getEntity(), m_contentsName );
         m_refData.m_referenceMesh = compMsg->get<TriangleMesh>( getEntity(), m_contentsName );
@@ -108,7 +108,7 @@ void SkinningComponent::skin() {
             }
             case DQS:
             {
-                Ra::Core::AlignedStdVector<DualQuaternion> DQ;
+                Ra::Core::Container::AlignedStdVector<DualQuaternion> DQ;
                 // computeDQ( m_frameData.m_prevToCurrentRelPose, m_refData.m_weights, DQ );
                 Ra::Core::Animation::computeDQ( m_frameData.m_refToCurrentRelPose,
                                                 m_refData.m_weights, DQ );
@@ -133,8 +133,8 @@ void SkinningComponent::skin() {
 void SkinningComponent::endSkinning() {
     if ( m_frameData.m_doSkinning )
     {
-        Ra::Core::Vector3Array& vertices = *( m_verticesWriter() );
-        Ra::Core::Vector3Array& normals = *( m_normalsWriter() );
+        Ra::Core::Container::Vector3Array& vertices = *( m_verticesWriter() );
+        Ra::Core::Container::Vector3Array& normals = *( m_normalsWriter() );
 
         vertices = m_frameData.m_currentPos;
 
@@ -149,8 +149,8 @@ void SkinningComponent::endSkinning() {
     } else if ( m_frameData.m_doReset )
     {
         // Reset mesh to its initial state.
-        Ra::Core::Vector3Array& vertices = *( m_verticesWriter() );
-        Ra::Core::Vector3Array& normals = *( m_normalsWriter() );
+        Ra::Core::Container::Vector3Array& vertices = *( m_verticesWriter() );
+        Ra::Core::Container::Vector3Array& normals = *( m_normalsWriter() );
 
         vertices = m_refData.m_referenceMesh.m_vertices;
         normals = m_refData.m_referenceMesh.m_normals;
@@ -174,7 +174,7 @@ void SkinningComponent::setContentsName( const std::string name ) {
 }
 
 void SkinningComponent::setupIO( const std::string& id ) {
-    using DualQuatVector = Ra::Core::AlignedStdVector<Ra::Core::DualQuaternion>;
+    using DualQuatVector = Ra::Core::Container::AlignedStdVector<Ra::Core::DualQuaternion>;
 
     ComponentMessenger::CallbackTypes<DualQuatVector>::Getter dqOut =
         std::bind( &SkinningComponent::getDQ, this );

@@ -4,18 +4,18 @@ namespace Ra {
 namespace Core {
 namespace PointCloud {
 
-inline Vector3 meanPoint( const Vector3Array& pts ) {
+inline Vector3 meanPoint( const Container::Vector3Array& pts ) {
     return pts.getMap().rowwise().mean();
 }
 
-inline Transform principalAxis( const Vector3Array& pts ) {
+inline Transform principalAxis( const Container::Vector3Array& pts ) {
     Transform result;
 
     Vector3 meanPt = meanPoint( pts );
     result.translation() = meanPt;
 
     // Subtract points from their average.
-    Vector3Array ptsAvg( pts.size() );
+    Container::Vector3Array ptsAvg( pts.size() );
     ptsAvg.getMap() = pts.getMap().colwise() - meanPt;
     CORE_ASSERT( Math::areApproxEqual( meanPoint( ptsAvg ).squaredNorm(), 0.f ), "oops" );
 
@@ -29,12 +29,12 @@ inline Transform principalAxis( const Vector3Array& pts ) {
     return result;
 }
 
-Obb pcaObb( const Vector3Array& pts ) {
+Obb pcaObb( const Container::Vector3Array& pts ) {
     Transform pca = principalAxis( pts );
     Transform pcaInv = pca.inverse();
 
     // Compute the AABB in principal axis space.
-    Vector3Array alignedPts;
+    Container::Vector3Array alignedPts;
     alignedPts.reserve( pts.size() );
 
     // TODO : is there an eigen trick to do that without a loop ?
@@ -47,7 +47,7 @@ Obb pcaObb( const Vector3Array& pts ) {
     return Obb( aligned, pca );
 }
 
-Aabb aabb( const Vector3Array& pts ) {
+Aabb aabb( const Container::Vector3Array& pts ) {
     return pts.size() > 0
                ? Aabb( pts.getMap().rowwise().minCoeff(), pts.getMap().rowwise().maxCoeff() )
                : Aabb();

@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 /// A replacement for std::make_shared on platforms where it
 /// does not respect alignments.
@@ -25,6 +26,7 @@ inline std::shared_ptr<T> make_shared( Args&&... args ) {
 
 #endif
 }
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

@@ -60,7 +60,7 @@ class RA_ENGINE_API RenderParameters final {
     class UniformBindableVector final
         : public std::map<
               std::string, T, std::less<std::string>,
-              Core::AlignedAllocator<std::pair<const std::string, T>, RA_DEFAULT_ALIGN>> {
+              Core::Container::AlignedAllocator<std::pair<const std::string, T>, RA_DEFAULT_ALIGN>> {
       public:
         void bind( const ShaderProgram* shader ) const;
     };

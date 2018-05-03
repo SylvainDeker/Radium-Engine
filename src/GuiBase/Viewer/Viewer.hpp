@@ -165,7 +165,7 @@ class RA_GUIBASE_API Viewer : public QWindow {
      * int rendererId = addRenderer(new MyRenderer(width(), height()));
      * changeRenderer(rendererId);
      * getRenderer()->initialize();
-     * auto light = Ra::Core::make_shared<Engine::DirectionalLight>();
+     * auto light = Ra::Core::Container::make_shared<Engine::DirectionalLight>();
      * getRenderer()->addLight( light );
      * m_camera->attachLight( light );
      * \endcode

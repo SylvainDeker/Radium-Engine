@@ -99,19 +99,19 @@ class RA_ENGINE_API Mesh final {
     /// Use the given geometry as base for a display mesh. Normals are optionnal.
     void loadGeometry( const Core::TriangleMesh& mesh );
 
-    void updateMeshGeometry( MeshData type, const Core::Vector3Array& data );
+    void updateMeshGeometry( MeshData type, const Core::Container::Vector3Array& data );
 
     // TODO (val) : remove this function (it is used mostly in the display primitives)
-    void loadGeometry( const Core::Vector3Array& vertices, const std::vector<uint>& indices );
+    void loadGeometry( const Core::Container::Vector3Array& vertices, const std::vector<uint>& indices );
 
     /// Load additionnal vertex data.
-    void addData( const Vec3Data& type, const Core::Vector3Array& data );
+    void addData( const Vec3Data& type, const Core::Container::Vector3Array& data );
     void addData( const Vec4Data& type, const Core::Vector4Array& data );
 
     /// Access the additionnal data arrays by type.
-    inline const Core::Vector3Array& getData( const Vec3Data& type ) const;
+    inline const Core::Container::Vector3Array& getData( const Vec3Data& type ) const;
     inline const Core::Vector4Array& getData( const Vec4Data& type ) const;
-    inline Core::Vector3Array& getData( const Vec3Data& type );
+    inline Core::Container::Vector3Array& getData( const Vec3Data& type );
     inline Core::Vector4Array& getData( const Vec4Data& type );
 
     /// Mark one of the data types as dirty, forcing an update of the openGL buffer.
@@ -142,7 +142,7 @@ class RA_ENGINE_API Mesh final {
 
     Core::TriangleMesh m_mesh; /// Base geometry : vertices, triangles and normals
 
-    std::array<Core::Vector3Array, MAX_VEC3> m_v3Data; /// Additionnal vertex vector 3 data
+    std::array<Core::Container::Vector3Array, MAX_VEC3> m_v3Data; /// Additionnal vertex vector 3 data
     std::array<Core::Vector4Array, MAX_VEC4> m_v4Data; /// Additionnal vertex vector 4 data
 
     // Combined arrays store the flags in this order Mesh, then Vec3 then Vec4 data.

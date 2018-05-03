@@ -95,7 +95,7 @@ const ShaderProgram* ShaderProgramManager::addShaderProgram( const ShaderConfigu
     }
 
     // Try to load the shader
-    auto prog = Core::make_shared<ShaderProgram>( config );
+    auto prog = Core::Container::make_shared<ShaderProgram>( config );
 
     // FIXED : use isLinked not isValid
     if ( prog->getProgramObject()->isLinked() )
@@ -152,7 +152,7 @@ void ShaderProgramManager::reloadNotCompiledShaderPrograms() {
     for ( std::vector<ShaderConfiguration>::iterator conf = m_shaderFailedConfs.begin();
           conf != m_shaderFailedConfs.end(); ++conf )
     {
-        auto prog = Core::make_shared<ShaderProgram>( *conf );
+        auto prog = Core::Container::make_shared<ShaderProgram>( *conf );
 
         if ( prog->getProgramObject()->isValid() )
         {

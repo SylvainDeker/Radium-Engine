@@ -15,7 +15,7 @@ namespace Animation {
 /*
  * The Pose is represented just as a vector of Transforms.
  */
-using Pose = AlignedStdVector<Transform>;
+using Pose = Container::AlignedStdVector<Transform>;
 
 // Typedef for code redability purposes only.
 using RestPose = Pose;

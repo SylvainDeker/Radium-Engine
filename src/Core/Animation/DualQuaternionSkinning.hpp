@@ -12,7 +12,7 @@ namespace Ra {
 namespace Core {
 namespace Animation {
 
-using DQList = AlignedStdVector<DualQuaternion>;
+using DQList = Container::AlignedStdVector<DualQuaternion>;
 
 /*
  * computeDQ computes the dual quaternions from a given pose and a given set of skinning weights.
@@ -32,8 +32,8 @@ void RA_CORE_API computeDQ_naive( const Pose& pose, const WeightMatrix& weight, 
  * WARNING : in Debug the function will assert if input and DQ size mismatch. In Release will simply
  * crash.
  */
-void RA_CORE_API dualQuaternionSkinning( const Ra::Core::Vector3Array& input, const DQList& DQ,
-                                         Ra::Core::Vector3Array& output );
+void RA_CORE_API dualQuaternionSkinning( const Ra::Core::Container::Vector3Array& input, const DQList& DQ,
+                                         Ra::Core::Container::Vector3Array& output );
 
 } // namespace Animation
 } // namespace Core

@@ -29,7 +29,7 @@ RA_CORE_API Pose relativePose( const Pose& modelPose, const RestPose& restPose )
  *           pose[i] = transform[i] * pose[i];
  */
 RA_CORE_API Pose applyTransformation( const Pose& pose,
-                                      const AlignedStdVector<Transform>& transform );
+                                      const Container::AlignedStdVector<Transform>& transform );
 
 /*
  * Return the pose resulting in applying the transform to the pose transforms.

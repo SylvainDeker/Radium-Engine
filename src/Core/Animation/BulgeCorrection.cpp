@@ -15,8 +15,8 @@ void BulgeCorrectionData::resize( const uint size ) {
     m_dv.resize( size );
 }
 
-void bulgeCorrection( const Vector3Array& restMesh, const BulgeCorrectionData& restData,
-                      Vector3Array& currMesh, const BulgeCorrectionData& currData ) {
+void bulgeCorrection( const Container::Vector3Array& restMesh, const BulgeCorrectionData& restData,
+                      Container::Vector3Array& currMesh, const BulgeCorrectionData& currData ) {
     CORE_ASSERT( ( restMesh.size() == currMesh.size() ), " Meshes don't match " );
     const uint n = restMesh.size();
 #pragma omp parallel for
@@ -31,7 +31,7 @@ void bulgeCorrection( const Vector3Array& restMesh, const BulgeCorrectionData& r
     }
 }
 
-void findCorrectionData( const Vector3Array& mesh, const MaxWeightID& wID,
+void findCorrectionData( const Container::Vector3Array& mesh, const MaxWeightID& wID,
                          const Graph::AdjacencyList& graph, const Pose& pose,
                          BulgeCorrectionData& data ) {
     const uint n = mesh.size();

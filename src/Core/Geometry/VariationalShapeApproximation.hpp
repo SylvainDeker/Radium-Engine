@@ -41,8 +41,8 @@ class VariationalShapeApproximationBase {
     //////////////////////////////////////////////////////////////////////////////
     using Mesh = TriangleMesh; ///< Mesh class.
 
-    using FaceBarycenter = Vector3Array;   ///< Face barycenters.
-    using FaceNormal = Vector3Array;       ///< Face normals.
+    using FaceBarycenter = Container::Vector3Array;   ///< Face barycenters.
+    using FaceNormal = Container::Vector3Array;       ///< Face normals.
     using FaceArea = std::vector<Scalar>;  ///< Face areas.
     using FaceRegion = std::vector<uint>;  ///< Face region IDs.
     using FaceVisited = std::vector<bool>; ///< Dirty bits

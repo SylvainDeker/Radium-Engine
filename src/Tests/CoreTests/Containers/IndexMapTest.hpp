@@ -5,8 +5,8 @@
 #include <Tests/CoreTests/Tests.hpp>
 
 namespace RaTests {
-using Ra::Core::Index;
-using Ra::Core::IndexMap;
+using Ra::Core::Container::Index;
+using Ra::Core::Container::IndexMap;
 
 // Just a standard test structure
 struct Foo {
@@ -37,7 +37,7 @@ struct NonCopy {
 class IndexMapTest : public Test {
     void run() override {
         {
-            IndexMap<Foo> map1;
+            Container::IndexMap<Foo> map1;
 
             // Sanity checks
             RA_UNIT_TEST( map1.empty(), "New map should be empty" );
@@ -45,7 +45,7 @@ class IndexMapTest : public Test {
             RA_UNIT_TEST( !map1.full(), "New map should not be full" );
 
             // Inserting
-            Index i1 = map1.insert( Foo( 12 ) );
+            Container::Index i1 = map1.insert( Foo( 12 ) );
             RA_UNIT_TEST( i1.isValid(), "Insert" );
 
             // We expect to have one element now.
@@ -63,7 +63,7 @@ class IndexMapTest : public Test {
             RA_UNIT_TEST( map1.at( i1 ).value == 32, "map write (operator[])" );
 
             // Inserting a second element
-            Index i2 = map1.insert( Foo( 42 ) );
+            Container::Index i2 = map1.insert( Foo( 42 ) );
             RA_UNIT_TEST( map1.at( i2 ).value == 42, "map read " );
             RA_UNIT_TEST( map1.size() == 2, "Size is wrong" );
 
@@ -98,7 +98,7 @@ class IndexMapTest : public Test {
             // Test 'contains'
             RA_UNIT_TEST( map1.contains( i1 ), "map contains" );
             RA_UNIT_TEST( map1.contains( i2 ), "map contains" );
-            RA_UNIT_TEST( !map1.contains( Index( 12000 ) ), "Map contains" );
+            RA_UNIT_TEST( !map1.contains( Container::Index( 12000 ) ), "Map contains" );
 
             // Remove an item once.
             bool result = map1.remove( i1 );
@@ -110,7 +110,7 @@ class IndexMapTest : public Test {
             RA_UNIT_TEST( !result, "Map remove (twice)" );
 
             // Remove the other item
-            result = map1.remove( Index( 1000 ) );
+            result = map1.remove( Container::Index( 1000 ) );
             RA_UNIT_TEST( !result, "Map remove (non-exitent index)" );
 
             result = map1.remove( i2 );
@@ -122,11 +122,11 @@ class IndexMapTest : public Test {
 
         // Now try to insert non-copyable elements
         {
-            IndexMap<NonCopy> map2;
-            Index i1 = map2.emplace( std::move( 12 ) );
+            Container::IndexMap<NonCopy> map2;
+            Container::Index i1 = map2.emplace( std::move( 12 ) );
             RA_UNIT_TEST( i1.isValid(), "map insert (inplace)" );
 
-            Index i2 = map2.emplace( std::move( 42 ) );
+            Container::Index i2 = map2.emplace( std::move( 42 ) );
             RA_UNIT_TEST( i2.isValid(), "map insert (inplace)" );
 
             RA_UNIT_TEST( map2[i1].value == 12, "map access(inplace)" );

@@ -113,7 +113,7 @@ void MaterialEditor::closeEvent( QCloseEvent* e ) {
     hide();
 }
 
-void MaterialEditor::changeRenderObject( Core::Index roIdx ) {
+void MaterialEditor::changeRenderObject( Core::Container::Index roIdx ) {
     if ( !m_visible )
     {
         return;

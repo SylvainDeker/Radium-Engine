@@ -40,7 +40,7 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
     void handleMeshLoading( const Ra::Core::Asset::GeometryData* data );
 
     /// Returns the index of the associated RO (the display mesh)
-    Ra::Core::Index getRenderObjectIndex() const;
+    Ra::Core::Container::Index getRenderObjectIndex() const;
 
     /// Returns the current display geometry.
     const Ra::Core::TriangleMesh& getMesh() const;
@@ -60,11 +60,11 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
     const DuplicateTable* getDuplicateTableOutput() const;
     Ra::Core::TriangleMesh* getMeshRw();
     void setMeshInput( const Ra::Core::TriangleMesh* mesh );
-    Ra::Core::Vector3Array* getVerticesRw();
-    Ra::Core::Vector3Array* getNormalsRw();
-    Ra::Core::VectorArray<Ra::Core::Triangle>* getTrianglesRw();
+    Ra::Core::Container::Vector3Array* getVerticesRw();
+    Ra::Core::Container::Vector3Array* getNormalsRw();
+    Ra::Core::Container::VectorArray<Ra::Core::Triangle>* getTrianglesRw();
 
-    const Ra::Core::Index* roIndexRead() const;
+    const Ra::Core::Container::Index* roIndexRead() const;
 
   private:
     // The duplicate table for vertices, according to vertices position and normals in the mesh
@@ -76,8 +76,8 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
     // loaded, then m_duplicateTable[i] == i.
     DuplicateTable m_duplicateTable;
 
-    Ra::Core::Index m_meshIndex;
-    Ra::Core::Index m_aabbIndex;
+    Ra::Core::Container::Index m_meshIndex;
+    Ra::Core::Container::Index m_aabbIndex;
     std::string m_contentName;
     bool m_deformable;
 };

@@ -36,12 +36,12 @@ RenderObjectManager* Component::getRoMgr() {
     return RadiumEngine::getInstance()->getRenderObjectManager();
 }
 
-Core::Index Component::addRenderObject( RenderObject* renderObject ) {
+Core::Container::Index Component::addRenderObject( RenderObject* renderObject ) {
     m_renderObjects.push_back( getRoMgr()->addRenderObject( renderObject ) );
     return m_renderObjects.back();
 }
 
-void Component::removeRenderObject( Core::Index roIdx ) {
+void Component::removeRenderObject( Core::Container::Index roIdx ) {
     auto found = std::find( m_renderObjects.cbegin(), m_renderObjects.cend(), roIdx );
     CORE_WARN_IF( found == m_renderObjects.cend(), " Render object not found in component" );
     if ( ( found != m_renderObjects.cend() ) && getRoMgr() )
@@ -51,7 +51,7 @@ void Component::removeRenderObject( Core::Index roIdx ) {
     }
 }
 
-void Component::notifyRenderObjectExpired( const Core::Index& idx ) {
+void Component::notifyRenderObjectExpired( const Core::Container::Index& idx ) {
     auto found = std::find( m_renderObjects.cbegin(), m_renderObjects.cend(), idx );
     CORE_WARN_IF( found == m_renderObjects.cend(), " Render object not found in component" );
     if ( found != m_renderObjects.cend() )

@@ -91,7 +91,7 @@ void HalfEdgeData::build( const TriangleMesh& mesh ) {
 
         // This arrays contains the indices of all three half edges of
         // the current triangle in halfEdgeList.
-        Index triangleHalfEdges[3];
+        Container::Index triangleHalfEdges[3];
 
         // for all edges in triangle.
         for ( uint i = 0; i < 3; ++i )

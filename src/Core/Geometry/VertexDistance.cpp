@@ -4,7 +4,7 @@ namespace Ra {
 namespace Core {
 namespace Geometry {
 
-void vertexDistance( const VectorArray<Vector3>& v0, const VectorArray<Vector3>& v1,
+void vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1,
                      std::vector<Scalar>& sqrDist, Scalar& sqrMin, Scalar& sqrMax,
                      Scalar& sqrAvg ) {
     const uint n = v0.size();
@@ -21,7 +21,7 @@ void vertexDistance( const VectorArray<Vector3>& v0, const VectorArray<Vector3>&
     sqrAvg = ( sqrMax + sqrMin ) * 0.5;
 }
 
-void vertexDistance( const VectorArray<Vector3>& v0, const VectorArray<Vector3>& v1, Scalar& sqrMin,
+void vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1, Scalar& sqrMin,
                      Scalar& sqrMax, Scalar& sqrAvg ) {
     const uint n = v0.size();
     sqrMax = 0.0;
@@ -35,7 +35,7 @@ void vertexDistance( const VectorArray<Vector3>& v0, const VectorArray<Vector3>&
     sqrAvg = ( sqrMax + sqrMin ) * 0.5;
 }
 
-Scalar vertexDistance( const VectorArray<Vector3>& v0, const VectorArray<Vector3>& v1 ) {
+Scalar vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1 ) {
     const uint n = v0.size();
     Scalar sqrAvg = 0.0;
     for ( uint i = 0; i < n; ++i )

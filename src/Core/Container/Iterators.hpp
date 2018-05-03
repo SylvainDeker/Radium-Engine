@@ -3,6 +3,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 namespace _internalIterator {
 template <class T>
@@ -28,6 +29,7 @@ template <class T>
 _internalIterator::_reversed<T const> reversed( T const& t ) {
     return _internalIterator::_reversed<T const>( t );
 }
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

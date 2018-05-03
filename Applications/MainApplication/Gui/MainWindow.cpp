@@ -268,7 +268,7 @@ void Gui::MainWindow::toggleCirclePicking( bool on ) {
 }
 
 void MainWindow::handlePicking( const Engine::Renderer::PickingResult& pickingResult ) {
-    Ra::Core::Index roIndex( pickingResult.m_roIdx );
+    Ra::Core::Container::Index roIndex( pickingResult.m_roIdx );
     Ra::Engine::RadiumEngine* engine = Ra::Engine::RadiumEngine::getInstance();
     if ( roIndex.isValid() )
     {

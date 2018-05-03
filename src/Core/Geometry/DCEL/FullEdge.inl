@@ -72,10 +72,10 @@ inline bool FullEdge::operator==( const FullEdge& e ) const {
 inline bool FullEdge::operator<( const FullEdge& e ) const {
     CORE_ASSERT( ( m_he->Twin() != nullptr ), "LHS twin is nullptr" );
     CORE_ASSERT( ( e.HE( 0 )->Twin() != nullptr ), "RHS twin is nullptr" );
-    Index min = std::min( m_he->V()->idx, m_he->Twin()->V()->idx );
-    Index max = std::max( m_he->V()->idx, m_he->Twin()->V()->idx );
-    Index e_min = std::min( e.m_he->V()->idx, e.m_he->Twin()->V()->idx );
-    Index e_max = std::max( e.m_he->V()->idx, e.m_he->Twin()->V()->idx );
+    Container::Index min = std::min( m_he->V()->idx, m_he->Twin()->V()->idx );
+    Container::Index max = std::max( m_he->V()->idx, m_he->Twin()->V()->idx );
+    Container::Index e_min = std::min( e.m_he->V()->idx, e.m_he->Twin()->V()->idx );
+    Container::Index e_max = std::max( e.m_he->V()->idx, e.m_he->Twin()->V()->idx );
     if ( min < e_min )
         return true;
     if ( min == e_min )

@@ -47,16 +47,16 @@ inline uint HandleData::getComponentDataSize() const {
     return m_component.size();
 }
 
-inline const Core::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() const {
+inline const Core::Container::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() const {
     return m_component;
 }
 
-inline Core::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() {
+inline Core::Container::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() {
     return m_component;
 }
 
 inline void
-HandleData::setComponents( const Core::AlignedStdVector<HandleComponentData>& components ) {
+HandleData::setComponents( const Core::Container::AlignedStdVector<HandleComponentData>& components ) {
     const uint size = components.size();
     m_component.resize( size );
 #pragma omp parallel for
@@ -74,15 +74,15 @@ inline HandleComponentData& HandleData::getComponent( const uint i ) {
     return m_component.at( i );
 }
 
-inline const Core::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() const {
+inline const Core::Container::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() const {
     return m_edge;
 }
 
-inline Core::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() {
+inline Core::Container::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() {
     return m_edge;
 }
 
-inline void HandleData::setEdges( const Core::AlignedStdVector<Core::Vector2i>& edgeList ) {
+inline void HandleData::setEdges( const Core::Container::AlignedStdVector<Core::Vector2i>& edgeList ) {
     const uint size = edgeList.size();
     m_edge.resize( size );
 #pragma omp parallel for
@@ -92,15 +92,15 @@ inline void HandleData::setEdges( const Core::AlignedStdVector<Core::Vector2i>& 
     }
 }
 
-inline const Core::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() const {
+inline const Core::Container::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() const {
     return m_face;
 }
 
-inline Core::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() {
+inline Core::Container::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() {
     return m_face;
 }
 
-inline void HandleData::setFaces( const Core::AlignedStdVector<Core::VectorNi>& faceList ) {
+inline void HandleData::setFaces( const Core::Container::AlignedStdVector<Core::VectorNi>& faceList ) {
     const uint size = faceList.size();
     m_face.resize( size );
 #pragma omp parallel for

@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 class Index {
   public:
@@ -78,6 +79,7 @@ class Index {
     static const int s_invalid = -1;
     static const int s_maxIdx = std::numeric_limits<int>::max();
 };
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

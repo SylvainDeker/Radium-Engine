@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 // ===============================================================================
 // CONSTRUCTOR
@@ -259,5 +260,6 @@ size_t IndexMap<T>::idxfromIndex( const typename IndexMap<T>::ConstIndexIterator
     return std::distance( m_index.cbegin(), it );
 }
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra

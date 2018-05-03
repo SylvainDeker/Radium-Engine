@@ -26,7 +26,7 @@ struct RefData {
     Ra::Core::Animation::WeightMatrix m_weights;
 
     /// Optionnal centers of rotations for CoR skinning
-    Ra::Core::Vector3Array m_CoR;
+    Ra::Core::Container::Vector3Array m_CoR;
 };
 
 /// Pose data of one frame. Poses are in model space
@@ -44,13 +44,13 @@ struct FrameData {
     Ra::Core::Animation::Pose m_refToCurrentRelPose;
 
     /// Previous position of the vertices
-    Ra::Core::Vector3Array m_previousPos;
+    Ra::Core::Container::Vector3Array m_previousPos;
 
     /// Current position of the vertices
-    Ra::Core::Vector3Array m_currentPos;
+    Ra::Core::Container::Vector3Array m_currentPos;
 
     /// Current vertex normals
-    Ra::Core::Vector3Array m_currentNormal;
+    Ra::Core::Container::Vector3Array m_currentNormal;
 
     /// Number of animation frames
     uint m_frameCounter;

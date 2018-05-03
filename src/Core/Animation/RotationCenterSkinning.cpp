@@ -169,20 +169,20 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
     }
 }
 
-void corSkinning( const Vector3Array& input, const Animation::Pose& pose,
-                  const Animation::WeightMatrix& weight, const Vector3Array& CoR,
-                  Vector3Array& output ) {
+void corSkinning( const Container::Vector3Array& input, const Animation::Pose& pose,
+                  const Animation::WeightMatrix& weight, const Container::Vector3Array& CoR,
+                  Container::Vector3Array& output ) {
     const uint size = input.size();
     output.resize( size );
 
     CORE_ASSERT( CoR.size() == size, "Invalid center of rotations" );
 
     // Compute the dual quaternions
-    AlignedStdVector<DualQuaternion> DQ;
+    Container::AlignedStdVector<DualQuaternion> DQ;
     Animation::computeDQ( pose, weight, DQ );
 
     // Do LBS on the COR with weights of their associated vertices
-    Vector3Array transformedCoR;
+    Container::Vector3Array transformedCoR;
     Animation::linearBlendSkinning( CoR, pose, weight, transformedCoR );
 #pragma omp parallel for
     for ( int i = 0; i < int( size ); ++i )

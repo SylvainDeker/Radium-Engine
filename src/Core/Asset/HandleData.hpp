@@ -60,17 +60,17 @@ class RA_CORE_API HandleData : public AssetData {
 
     /// DATA
     inline uint getComponentDataSize() const;
-    inline const Core::AlignedStdVector<HandleComponentData>& getComponentData() const;
-    inline Core::AlignedStdVector<HandleComponentData>& getComponentData();
+    inline const Core::Container::AlignedStdVector<HandleComponentData>& getComponentData() const;
+    inline Core::Container::AlignedStdVector<HandleComponentData>& getComponentData();
     inline const HandleComponentData& getComponent( const uint i ) const;
     inline HandleComponentData& getComponent( const uint i );
-    inline void setComponents( const Core::AlignedStdVector<HandleComponentData>& components );
-    inline const Core::AlignedStdVector<Core::Vector2i>& getEdgeData() const;
-    inline Core::AlignedStdVector<Core::Vector2i>& getEdgeData();
-    inline void setEdges( const Core::AlignedStdVector<Core::Vector2i>& edgeList );
-    inline const Core::AlignedStdVector<Core::VectorNi>& getFaceData() const;
-    inline Core::AlignedStdVector<Core::VectorNi>& getFaceData();
-    inline void setFaces( const Core::AlignedStdVector<Core::VectorNi>& faceList );
+    inline void setComponents( const Core::Container::AlignedStdVector<HandleComponentData>& components );
+    inline const Core::Container::AlignedStdVector<Core::Vector2i>& getEdgeData() const;
+    inline Core::Container::AlignedStdVector<Core::Vector2i>& getEdgeData();
+    inline void setEdges( const Core::Container::AlignedStdVector<Core::Vector2i>& edgeList );
+    inline const Core::Container::AlignedStdVector<Core::VectorNi>& getFaceData() const;
+    inline Core::Container::AlignedStdVector<Core::VectorNi>& getFaceData();
+    inline void setFaces( const Core::Container::AlignedStdVector<Core::VectorNi>& faceList );
     inline void recomputeAllIndices();
 
     /// QUERY
@@ -97,9 +97,9 @@ class RA_CORE_API HandleData : public AssetData {
     uint m_vertexSize;
     std::map<std::string, uint> m_nameTable;
 
-    Core::AlignedStdVector<HandleComponentData> m_component;
-    Core::AlignedStdVector<Core::Vector2i> m_edge;
-    Core::AlignedStdVector<Core::VectorNi> m_face;
+    Core::Container::AlignedStdVector<HandleComponentData> m_component;
+    Core::Container::AlignedStdVector<Core::Vector2i> m_edge;
+    Core::Container::AlignedStdVector<Core::VectorNi> m_face;
 };
 
 } // namespace Asset

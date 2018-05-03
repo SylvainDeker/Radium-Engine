@@ -13,8 +13,8 @@ namespace Geometry {
 /// GLOBAL ///
 //////////////
 
-void uniformNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
-                    VectorArray<Vector3>& normal ) {
+void uniformNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+                    Container::VectorArray<Vector3>& normal ) {
     const uint N = p.size();
     normal.clear();
     normal.resize( N, Vector3::Zero() );
@@ -44,18 +44,18 @@ void uniformNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& 
     }
 }
 
-void uniformNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
-                    const std::vector<Ra::Core::Index>& duplicateTable,
-                    VectorArray<Vector3>& normal ) {
+void uniformNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+                    const std::vector<Ra::Core::Container::Index>& duplicateTable,
+                    Container::VectorArray<Vector3>& normal ) {
     const uint N = p.size();
     normal.clear();
     normal.resize( N, Vector3::Zero() );
 
     for ( const auto& t : T )
     {
-        const Index i = duplicateTable.at( t( 0 ) );
-        const Index j = duplicateTable.at( t( 1 ) );
-        const Index k = duplicateTable.at( t( 2 ) );
+        const Container::Index i = duplicateTable.at( t( 0 ) );
+        const Container::Index j = duplicateTable.at( t( 1 ) );
+        const Container::Index k = duplicateTable.at( t( 2 ) );
         const Vector3 triN = triangleNormal( p[i], p[j], p[k] );
         if ( !triN.allFinite() )
         {
@@ -82,8 +82,8 @@ void uniformNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& 
     }
 }
 
-Vector3 localUniformNormal( const uint i, const VectorArray<Vector3>& p,
-                            const VectorArray<Triangle>& T, const TVAdj& adj ) {
+Vector3 localUniformNormal( const uint i, const Container::VectorArray<Vector3>& p,
+                            const Container::VectorArray<Triangle>& T, const TVAdj& adj ) {
     Vector3 normal = Vector3::Zero();
     for ( TVAdj::InnerIterator it( adj, i ); it; ++it )
     {
@@ -96,8 +96,8 @@ Vector3 localUniformNormal( const uint i, const VectorArray<Vector3>& p,
     return normal; //.normalized();
 }
 
-void angleWeightedNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
-                          VectorArray<Vector3>& normal ) {
+void angleWeightedNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+                          Container::VectorArray<Vector3>& normal ) {
     const uint N = p.size();
     normal.clear();
     normal.resize( N, Vector3::Zero() );
@@ -120,8 +120,8 @@ void angleWeightedNormal( const VectorArray<Vector3>& p, const VectorArray<Trian
     }
 }
 
-void areaWeightedNormal( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
-                         VectorArray<Vector3>& normal ) {
+void areaWeightedNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+                         Container::VectorArray<Vector3>& normal ) {
     const uint N = p.size();
     normal.clear();
     normal.resize( N, Vector3::Zero() );
@@ -146,11 +146,11 @@ void areaWeightedNormal( const VectorArray<Vector3>& p, const VectorArray<Triang
 /// ONE RING ///
 ////////////////
 
-Vector3 uniformNormal( const Vector3& v, const VectorArray<Vector3>& one_ring ) {
+Vector3 uniformNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring ) {
     Vector3 normal;
     normal.setZero();
     uint N = one_ring.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
@@ -164,11 +164,11 @@ Vector3 uniformNormal( const Vector3& v, const VectorArray<Vector3>& one_ring ) 
     return Vector3::Zero();
 }
 
-Vector3 angleWeightedNormal( const Vector3& v, const VectorArray<Vector3>& one_ring ) {
+Vector3 angleWeightedNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring ) {
     Vector3 normal;
     normal.setZero();
     uint N = one_ring.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
@@ -183,11 +183,11 @@ Vector3 angleWeightedNormal( const Vector3& v, const VectorArray<Vector3>& one_r
     return Vector3::Zero();
 }
 
-Vector3 areaWeightedNormal( const Vector3& v, const VectorArray<Vector3>& one_ring ) {
+Vector3 areaWeightedNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring ) {
     Vector3 normal;
     normal.setZero();
     uint N = one_ring.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
