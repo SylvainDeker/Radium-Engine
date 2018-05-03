@@ -45,8 +45,8 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
 
   private:
-    QColor color;
-  
+    QColor m_color;
+
 
 };
 } // namespace Gui

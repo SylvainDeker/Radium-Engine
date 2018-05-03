@@ -19,16 +19,16 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="m_verticalLayout">
    <property name="rightMargin">
     <number>6</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="m_groupBox">
      <property name="title">
       <string>Informations </string>
      </property>
-     <widget class="QWidget" name="formLayoutWidget">
+     <widget class="QWidget" name="m_formLayoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -37,7 +37,7 @@
         <height>251</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QFormLayout" name="m_formLayout">
        <property name="leftMargin">
         <number>10</number>
        </property>
@@ -45,24 +45,24 @@
         <number>40</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="name_lab">
+        <widget class="QLabel" name="m_name_lab">
          <property name="text">
           <string>Name : </string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="m_lineEdit"/>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="type_lab">
+        <widget class="QLabel" name="m_type_lab">
          <property name="text">
           <string>Type : </string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="typeComboBox">
+        <widget class="QComboBox" name="m_typeComboBox">
          <property name="minimumSize">
           <size>
            <width>120</width>
@@ -92,24 +92,24 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QLabel" name="color_lab">
+        <widget class="QLabel" name="m_color_lab">
          <property name="text">
           <string>Color : </string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QGroupBox" name="color_layout">
-         <layout class="QHBoxLayout" name="layout_color">
+        <widget class="QGroupBox" name="m_color_layout">
+         <layout class="QHBoxLayout" name="m_layout_color">
           <item>
-           <widget class="QPushButton" name="button_color">
+           <widget class="QPushButton" name="m_button_color">
             <property name="text">
              <string>Choose</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="result_color">
+           <widget class="QFrame" name="m_result_color">
             <property name="minimumSize">
              <size>
               <width>40</width>
@@ -122,33 +122,33 @@
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="intensity_lab">
+        <widget class="QLabel" name="m_intensity_lab">
          <property name="text">
           <string>Intensity :</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="angle_lab">
+        <widget class="QLabel" name="m_angle_lab">
          <property name="text">
           <string>Angle : </string>
          </property>
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="falloff_lab">
+        <widget class="QLabel" name="m_falloff_lab">
          <property name="text">
           <string>Falloff :</string>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <layout class="QHBoxLayout" name="intensity_layout">
+        <layout class="QHBoxLayout" name="m_intensity_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="intensity_spinbox"/>
+          <widget class="QDoubleSpinBox" name="m_intensity_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="intensity_slider">
+          <widget class="QSlider" name="m_intensity_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -157,12 +157,12 @@
         </layout>
        </item>
        <item row="4" column="1">
-        <layout class="QHBoxLayout" name="angle_layout">
+        <layout class="QHBoxLayout" name="m_angle_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="angle_spinbox"/>
+          <widget class="QDoubleSpinBox" name="m_angle_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="angle_slider">
+          <widget class="QSlider" name="m_angle_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -171,12 +171,12 @@
         </layout>
        </item>
        <item row="5" column="1">
-        <layout class="QHBoxLayout" name="fallof_layout">
+        <layout class="QHBoxLayout" name="m_fallof_layout">
          <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="falloff_spinbox"/>
+          <widget class="QDoubleSpinBox" name="m_falloff_spinbox"/>
          </item>
          <item>
-          <widget class="QSlider" name="falloff_slider">
+          <widget class="QSlider" name="m_falloff_slider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -186,7 +186,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="button_create">
+     <widget class="QPushButton" name="m_button_create">
       <property name="geometry">
        <rect>
         <x>650</x>
