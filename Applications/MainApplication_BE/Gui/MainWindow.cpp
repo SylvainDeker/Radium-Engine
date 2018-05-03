@@ -297,11 +297,11 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
         emit selectedItem( ent );
         m_selectedItemName->setText(
             QString::fromStdString( getEntryName( mainApp->getEngine(), ent ) ) );
-        m_editRenderObjectButton->setEnabled( false );
+        m_editRenderObjectButton->setEnabled( true );
 
         if ( ent.isRoNode() )
         {
-            m_editRenderObjectButton->setEnabled( true );
+            m_editRenderObjectButton->setEnabled( false );
 
             m_materialEditor->changeRenderObject( ent.m_roIndex );
             const std::string& shaderName = mainApp->m_engine->getRenderObjectManager()
@@ -321,7 +321,7 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
     {
         emit selectedItem( ItemEntry() );
         m_selectedItemName->setText( "" );
-        m_editRenderObjectButton->setEnabled( false );
+        m_editRenderObjectButton->setEnabled( true );
         m_materialEditor->hide();
     }
 }
