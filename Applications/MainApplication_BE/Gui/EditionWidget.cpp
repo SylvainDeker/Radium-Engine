@@ -23,12 +23,9 @@ namespace Gui{
         QWidget(parent),
         m_selectionManager(selectionManager)
     {
-        QPushButton* resetButton = new QPushButton("Reset", this);
+        setupUi(this);
         QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedEntity()));
 
-        QVBoxLayout* layout = new QVBoxLayout(this);
-
-        layout->addWidget(resetButton);
     }
 
     void EditionWidget::resetSelectedEntity()

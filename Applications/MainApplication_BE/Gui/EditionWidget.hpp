@@ -4,12 +4,13 @@
 #include <QWidget>
 #include <PluginBase/RadiumPluginInterface.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
+#include <ui_EditionWidget.h>
 
 namespace Ra {
 namespace Gui {
 // Due to an ambigous name while compiling with Clang, must differentiate plugin class from plugin
 // namespace
-class EditionWidget : public QWidget{
+class EditionWidget : public QWidget , private Ui::EditionWidget{
     Q_OBJECT
 
 public:

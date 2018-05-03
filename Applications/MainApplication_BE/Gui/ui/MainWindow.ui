@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1350</width>
-    <height>877</height>
+    <height>913</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFILE">
@@ -67,8 +67,8 @@
       <widget class="QWidget" name="widget" native="true">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
              <widget class="QTreeView" name="m_entitiesTreeView">
@@ -155,7 +155,7 @@
             </item>
            </layout>
           </item>
-          <item>
+          <item row="1" column="0">
            <layout class="QHBoxLayout" name="shaderLayout">
             <item>
              <widget class="QLabel" name="label">
@@ -195,7 +195,7 @@
             </item>
            </layout>
           </item>
-          <item>
+          <item row="2" column="0">
            <widget class="QTabWidget" name="toolBox">
             <property name="minimumSize">
              <size>
@@ -213,7 +213,7 @@
              <enum>QTabWidget::West</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="tab_stats">
              <attribute name="title">
@@ -455,6 +455,20 @@
              <attribute name="title">
               <string>Edition</string>
              </attribute>
+            </widget>
+            <widget class="QWidget" name="tabpage">
+             <attribute name="title">
+              <string>Page</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="pushButton">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </widget>
           </item>
