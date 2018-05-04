@@ -171,7 +171,7 @@
         </layout>
        </item>
        <item row="5" column="1">
-        <layout class="QHBoxLayout" name="m_fallof_layout">
+        <layout class="QHBoxLayout" name="m_falloff_layout">
          <item alignment="Qt::AlignLeft">
           <widget class="QDoubleSpinBox" name="m_falloff_spinbox"/>
          </item>
