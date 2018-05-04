@@ -1,5 +1,5 @@
-#ifndef RADIUMENGINE_LightEditor_HPP
-#define RADIUMENGINE_LightEditor_HPP
+#ifndef RADIUMENGINE_LIGHTEDITOR_HPP
+#define RADIUMENGINE_LIGHTEDITOR_HPP
 
 #include <QWidget>
 
@@ -47,4 +47,4 @@ class LightEditor : public QWidget, private Ui::LightEditor {
 } // namespace Gui
 } // namespace Ra
 
-#endif // RADIUMENGINE_LightEditor_HPP
+#endif // RADIUMENGINE_LIGHTEDITOR_HPP
