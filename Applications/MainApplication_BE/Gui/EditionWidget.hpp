@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <PluginBase/RadiumPluginInterface.hpp>
 #include <Engine/Renderer/RenderObject/RenderObjectManager.hpp>
+#include <ui_EditionWidget.h>
 
 namespace Ra {
 namespace Gui {
