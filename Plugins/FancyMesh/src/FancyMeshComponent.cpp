@@ -30,7 +30,7 @@
 using Ra::Core::TriangleMesh;
 using Ra::Engine::ComponentMessenger;
 
-using TriangleArray = Ra::Core::VectorArray<Ra::Core::Triangle>;
+using TriangleArray = Ra::Core::Container::VectorArray<Ra::Core::Triangle>;
 
 namespace FancyMeshPlugin {
 FancyMeshComponent::FancyMeshComponent( const std::string& name, bool deformable,
@@ -281,7 +281,7 @@ Ra::Core::Container::Vector3Array* FancyMeshComponent::getNormalsRw() {
     return &( getDisplayMesh().getGeometry().m_normals );
 }
 
-Ra::Core::VectorArray<Ra::Core::Triangle>* FancyMeshComponent::getTrianglesRw() {
+Ra::Core::Container::VectorArray<Ra::Core::Triangle>* FancyMeshComponent::getTrianglesRw() {
     getDisplayMesh().setDirty( Ra::Engine::Mesh::INDEX );
     return &( getDisplayMesh().getGeometry().m_triangles );
 }

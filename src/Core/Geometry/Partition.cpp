@@ -7,7 +7,7 @@ namespace Ra {
 namespace Core {
 namespace Geometry {
 
-VertexSegment extractVertexSegment( const Animation::MeshWeight& weights, const Container::Index& id,
+VertexSegment extractVertexSegment( const Animation::MeshWeight& weights, const Index& id,
                                     const bool use_max ) {
     VertexSegment v;
     for ( uint i = 0; i < weights.size(); ++i )
@@ -33,7 +33,7 @@ VertexSegment extractVertexSegment( const Animation::MeshWeight& weights, const 
     return v;
 }
 
-VertexSegment extractVertexSegment( const Animation::WeightMatrix& weights, const Container::Index& id,
+VertexSegment extractVertexSegment( const Animation::WeightMatrix& weights, const Index& id,
                                     const bool use_max ) {
     VertexSegment v;
     const VectorN col = weights.col( id );
