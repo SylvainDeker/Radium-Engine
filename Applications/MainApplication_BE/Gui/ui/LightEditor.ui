@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="m_renderObjectName">
+    <widget class="QLabel" name="m_lightName">
      <property name="text">
       <string>Light Name</string>
      </property>
@@ -89,7 +89,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="m_intensityLabel">
        <property name="text">
         <string>Intensity :</string>
        </property>
@@ -98,10 +98,10 @@
      <item row="2" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        <widget class="QDoubleSpinBox" name="m_intensitySpinBox"/>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider">
+        <widget class="QSlider" name="m_intensitySlider">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -110,14 +110,14 @@
       </layout>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="m_angleLabel">
        <property name="text">
         <string>Angle :</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="m_falloffLabel">
        <property name="text">
         <string>Falloff :</string>
        </property>
@@ -126,10 +126,10 @@
      <item row="3" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+        <widget class="QDoubleSpinBox" name="m_angleSpinBox"/>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider_2">
+        <widget class="QSlider" name="m_angleSlider">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -140,10 +140,10 @@
      <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+        <widget class="QDoubleSpinBox" name="m_falloffSpinBox"/>
        </item>
        <item>
-        <widget class="QSlider" name="horizontalSlider_3">
+        <widget class="QSlider" name="m_falloffSlider">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -152,7 +152,7 @@
       </layout>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="m_typeComboBox">
        <property name="enabled">
         <bool>false</bool>
        </property>
