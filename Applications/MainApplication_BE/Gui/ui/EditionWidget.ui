@@ -6,60 +6,194 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>190</width>
-    <height>212</height>
+    <width>352</width>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_6">
+   <item row="2" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Apply</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>Undo</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
+     <item row="2" column="0">
       <widget class="QPushButton" name="resetButton">
        <property name="text">
-        <string>reset</string>
+        <string>reset transformation</string>
        </property>
       </widget>
+     </item>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="2" column="2">
+        <widget class="QSpinBox" name="spinBox_7"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QSpinBox" name="spinBox"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QSpinBox" name="spinBox_5"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>rotation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QSpinBox" name="spinBox_3"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>scale</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QSpinBox" name="spinBox_2"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="spinBox_6"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSpinBox" name="spinBox_8"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QSpinBox" name="spinBox_4"/>
+       </item>
+       <item row="3" column="2">
+        <widget class="QSpinBox" name="spinBox_9"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>translation</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="3" column="0">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QRadioButton" name="radioButton">
        <property name="text">
-        <string>PushButton</string>
+        <string>Use transfrom matrix</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout_5">
+     <item row="0" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
-         <string>Tab 1</string>
+         <string>Wolfram</string>
         </attribute>
-        <layout class="QGridLayout" name="gridLayout_3">
+        <layout class="QGridLayout" name="gridLayout_9">
          <item row="0" column="0">
-          <widget class="QRadioButton" name="radioButton">
-           <property name="text">
-            <string>RadioButton</string>
-           </property>
-          </widget>
+          <widget class="QTextEdit" name="textEdit"/>
          </item>
         </layout>
        </widget>
        <widget class="QWidget" name="tab_2">
         <attribute name="title">
-         <string>Tab 2</string>
+         <string>direct</string>
         </attribute>
-        <layout class="QGridLayout" name="gridLayout_4">
+        <layout class="QGridLayout" name="gridLayout_8">
          <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string>CheckBox</string>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <property name="leftMargin">
+            <number>0</number>
            </property>
-          </widget>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="3">
+            <widget class="QSpinBox" name="spinBox_10"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QSpinBox" name="spinBox_13"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="spinBox_12"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QSpinBox" name="spinBox_11"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QSpinBox" name="spinBox_14"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QSpinBox" name="spinBox_15"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QSpinBox" name="spinBox_16"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="spinBox_17"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QSpinBox" name="spinBox_18"/>
+           </item>
+           <item row="1" column="3">
+            <widget class="QSpinBox" name="spinBox_19"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinBox_20"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="spinBox_21"/>
+           </item>
+           <item row="3" column="2">
+            <widget class="QSpinBox" name="spinBox_22"/>
+           </item>
+           <item row="2" column="2">
+            <widget class="QSpinBox" name="spinBox_23"/>
+           </item>
+           <item row="2" column="3">
+            <widget class="QSpinBox" name="spinBox_24"/>
+           </item>
+           <item row="3" column="3">
+            <widget class="QSpinBox" name="spinBox_25"/>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
