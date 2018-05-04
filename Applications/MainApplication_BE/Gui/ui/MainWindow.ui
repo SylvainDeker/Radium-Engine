@@ -462,11 +462,7 @@
              </attribute>
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="0" column="0">
-               <widget class="QPushButton" name="pushButton">
-                <property name="text">
-                 <string>PushButton</string>
-                </property>
-               </widget>
+               <layout class="QGridLayout" name="gridLayout_2"/>
               </item>
              </layout>
             </widget>

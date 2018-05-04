@@ -55,7 +55,8 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_materialEditor = new MaterialEditor();
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
-    m_edition = new EditionWidget(tabpage, m_selectionManager);
+    m_edition = new EditionWidget(nullptr, m_selectionManager);
+   this->gridLayout_2->addWidget(m_edition);
 
 
     createConnections();
