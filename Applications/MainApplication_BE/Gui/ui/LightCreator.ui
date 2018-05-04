@@ -196,7 +196,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Create</string>
+       <string>OK</string>
       </property>
      </widget>
     </widget>
