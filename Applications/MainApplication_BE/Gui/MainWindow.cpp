@@ -27,6 +27,7 @@
 #include <QSettings>
 #include <QToolButton>
 
+
 #include <iostream>
 
 using Ra::Engine::ItemEntry;
@@ -60,7 +61,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_materialEditor = new MaterialEditor();
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
-    m_lightCreator = new Gui::LightCreator();
+    m_lightCreator = new Gui::LightCreator(this);
     m_lightEditor = new Gui::LightEditor();
 
     createConnections();
@@ -77,6 +78,8 @@ void MainWindow::cleanup() {
 }
 
 void MainWindow::createConnections() {
+    connect(m_lightCreator, &LightCreator::sig_onItemAdded,this, &MainWindow::onItemAdded);
+
     connect( actionOpenMesh, &QAction::triggered, this, &MainWindow::loadFile );
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,
