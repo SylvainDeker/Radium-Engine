@@ -15,11 +15,12 @@ public:
     EditionWidget(QWidget* parent, Ra::GuiBase::SelectionManager* selectionManager);
 
     ///set the transform on the selected object, return false in case of failure
-    bool selectedSetTransform(Ra::Core::Transform &tf);
+    bool setTransform(Ra::Core::Transform &tf);
+    Ra::Core::Transform* getTransform();
 
 public slots:
     void resetSelectedObject();
-    void selectedSetMatrix(Ra::Core::Matrix4 &m);
+    void applyMatrix(Ra::Core::Matrix4 &m);
 
 private:
     Ra::Gui::PickingManager* m_pickingManager;

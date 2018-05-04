@@ -31,12 +31,9 @@ namespace Gui{
         layout->addWidget(resetButton);
     }
 
-    //TODO remove debug output
-    bool EditionWidget::selectedSetTransform(Ra::Core::Transform& tf)
+    bool EditionWidget::setTransform(Ra::Core::Transform& tf)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
-
-        std::cout << "selection ROidx :" << item.m_roIndex << std::endl;
 
         if(item.isValid())
         {
@@ -44,10 +41,7 @@ namespace Gui{
             {
                 item.m_entity->setTransform(tf);
                 item.m_entity->swapTransformBuffers();
-                std::cout << "entity reset done" << std::endl;
                 return true;
-            } else {
-                std::cout << "not an entity" << std::endl;
             }
 
             //no action if the item is only a component
@@ -55,27 +49,46 @@ namespace Gui{
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 item.m_component->setTransform(item.m_roIndex, tf);
-                std::cout << "reset done" << std::endl;
                 return true;
-            } else {
-                std::cout << "not a editable RO" << std::endl;
             }
         }
 
         return false;
     }
 
+    Ra::Core::Transform* EditionWidget::getTransform()
+    {
+        Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
+
+        if(item.isValid())
+        {
+            if (item.isEntityNode())
+            {
+                return item.m_entity->getTransform();
+            }
+
+            //no action if the item is only a component
+
+            if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
+            {
+                return item.m_component->getTransform(item.m_roIndex);
+            }
+        }
+
+        return nullptr;
+    }
+
     void EditionWidget::resetSelectedObject()
     {
         //we don't care of failure here
         Ra::Core::Transform id = Ra::Core::Transform::Identity();
-        selectedSetTransform(id);
+        setTransform(id);
     }
 
-    void EditionWidget::selectedSetMatrix(Core::Matrix4 &m)
+    void EditionWidget::applyMatrix(Core::Matrix4 &m)
     {
         Ra::Core::Transform tf = Ra::Core::Transform(m);
-        if(selectedSetTransform(tf))
+        if(setTransform(tf))
         {
             //TODO if failure ?
         }
