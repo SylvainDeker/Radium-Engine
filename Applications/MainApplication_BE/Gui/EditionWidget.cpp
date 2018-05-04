@@ -24,7 +24,7 @@ namespace Gui{
         m_selectionManager(selectionManager)
     {
         setupUi(this);
-        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedEntity()));
+        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
 
     }
 
@@ -53,7 +53,7 @@ namespace Gui{
         return false;
     }
 
-    Ra::Core::Transform* EditionWidget::getTransform()
+    bool EditionWidget::getTransform(Ra::Core::Transform* tf)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
 
@@ -61,18 +61,20 @@ namespace Gui{
         {
             if (item.isEntityNode())
             {
-                return item.m_entity->getTransform();
+                *tf = item.m_entity->getTransform();
+                return true;
             }
 
             //no action if the item is only a component
 
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
-                return item.m_component->getTransform(item.m_roIndex);
+                *tf = item.m_component->getTransform(item.m_roIndex);
+                return true;
             }
         }
 
-        return nullptr;
+        return false;
     }
 
     void EditionWidget::resetSelectedObject()

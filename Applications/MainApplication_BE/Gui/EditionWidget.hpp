@@ -1,5 +1,5 @@
-#ifndef EDITIONPLUGIN_HPP_
-#define EDITIONPLUGIN_HPP_
+#ifndef EDITIONWIDEGET_HPP_
+#define EDITIONWIDEGET_HPP_
 
 #include <QWidget>
 #include <PluginBase/RadiumPluginInterface.hpp>
@@ -9,7 +9,7 @@
 namespace Ra {
 namespace Gui {
 
-class EditionWidget : public QWidget{
+class EditionWidget : public QWidget, private Ui::EditionWidget{
     Q_OBJECT
 
 public:
@@ -17,7 +17,7 @@ public:
 
     ///set the transform on the selected object, return false in case of failure
     bool setTransform(Ra::Core::Transform &tf);
-    Ra::Core::Transform* getTransform();
+    bool getTransform(Ra::Core::Transform* tf);
 
 public slots:
     void resetSelectedObject();
@@ -31,4 +31,4 @@ private:
 }
 }
 
-#endif //EDITIONPLUGIN_HPP_
+#endif //EDITIONWIDEGET_HPP_
