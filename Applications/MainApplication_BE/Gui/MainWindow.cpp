@@ -13,6 +13,7 @@
 #include <Engine/Renderer/Renderers/ForwardRenderer.hpp>
 #include <Gui/MaterialEditor.hpp>
 #include <Gui/LightCreator.hpp>
+#include <Gui/LightEditor.hpp>
 #include <GuiBase/TreeModel/EntityTreeModel.hpp>
 #include <GuiBase/Utils/KeyMappingManager.hpp>
 #include <GuiBase/Utils/qt_utils.hpp>
@@ -24,6 +25,8 @@
 #include <QFileDialog>
 #include <QSettings>
 #include <QToolButton>
+
+#include <iostream>
 
 using Ra::Engine::ItemEntry;
 
@@ -56,7 +59,8 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_materialEditor = new MaterialEditor();
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
-    m_lightcreator = new Gui::LightCreator();
+    m_lightCreator = new Gui::LightCreator();
+    m_lightEditor = new Gui::LightEditor();
 
     createConnections();
 
@@ -76,7 +80,7 @@ void MainWindow::createConnections() {
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,
              &MainWindow::openMaterialEditor );
-    connect( actionLightCreator, &QAction::triggered,m_lightcreator,&QWidget::show);
+    connect( actionLightCreator, &QAction::triggered,m_lightCreator,&QWidget::show);
     // Toolbox setup
     connect( actionToggle_Local_Global, &QAction::toggled, m_viewer->getGizmoManager(),
              &GizmoManager::setLocal );
@@ -126,7 +130,7 @@ void MainWindow::createConnections() {
     // RO Stuff
     connect( m_toggleRenderObjectButton, &QPushButton::clicked, this,
              &MainWindow::toggleVisisbleRO );
-    connect( m_editRenderObjectButton, &QPushButton::clicked, this, &MainWindow::editRO );
+    connect( m_editRenderObjectButton, &QPushButton::clicked, this, &MainWindow::editObject );
     connect( m_exportMeshButton, &QPushButton::clicked, this, &MainWindow::exportCurrentMesh );
     connect( m_removeEntityButton, &QPushButton::clicked, this, &MainWindow::deleteCurrentItem );
     connect( m_clearSceneButton, &QPushButton::clicked, this, &MainWindow::resetScene );
@@ -297,7 +301,7 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
         emit selectedItem( ent );
         m_selectedItemName->setText(
             QString::fromStdString( getEntryName( mainApp->getEngine(), ent ) ) );
-        m_editRenderObjectButton->setEnabled( true );
+        m_editRenderObjectButton->setEnabled( false );
 
         if ( ent.isRoNode() )
         {
@@ -320,7 +324,8 @@ void MainWindow::onSelectionChanged( const QItemSelection& selected,
         else if ( ent.isComponentNode() )
         {
             m_editRenderObjectButton->setEnabled( true );
-            // !TODO: Continuer en suivant le modele precedent
+            emit selectedItem( ent );
+            // !TODO: Continuer
         }
     }
     else
@@ -431,23 +436,31 @@ void Gui::MainWindow::toggleVisisbleRO() {
     }
 }
 
-void Gui::MainWindow::editRO() {
+void Gui::MainWindow::editObject(){
     ItemEntry item = m_selectionManager->currentItem();
     if ( item.isRoNode() )
-    {
-        m_materialEditor->changeRenderObject( item.m_roIndex );
-        m_materialEditor->show();
-    }
+    { Gui::MainWindow::editRO(); }
     else if (item.isComponentNode())
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        m_lightEditor->changeLight(item.isCompIndex());
-//        m_lightEditor->show();
-    }
+    {Gui::MainWindow::editLight(); }
+}
+
+void Gui::MainWindow::editRO() {
+    ItemEntry item = m_selectionManager->currentItem();
+    m_materialEditor->changeRenderObject( item.m_roIndex );
+    m_materialEditor->show();
 }
 
 void Gui::MainWindow::openMaterialEditor() {
     m_materialEditor->show();
+}
+
+void Gui::MainWindow::editLight(){
+    //ItemEntry item = m_selectionManager->currentItem();
+    m_lightEditor->show();
+}
+
+void Gui::MainWindow::openLightEditor(){
+    m_lightEditor->show();
 }
 
 void Gui::MainWindow::updateUi( Plugins::RadiumPluginInterface* plugin ) {

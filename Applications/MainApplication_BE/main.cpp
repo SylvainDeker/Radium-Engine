@@ -19,7 +19,6 @@ int main( int argc, char** argv ) {
     const Scalar deltaTime( fpsMax == 0 ? 0.f : 1.f / Scalar( fpsMax ) );
 
     Ra::Core::Timer::TimePoint t0, t1;
-
     while ( app.isRunning() )
     {
         t0 = Ra::Core::Timer::Clock::now();
