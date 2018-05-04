@@ -31,6 +31,7 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
   public:
     LightCreator( QWidget* parent = nullptr );
+    ~LightCreator();
 
   private slots:
     void open_dialogColor();

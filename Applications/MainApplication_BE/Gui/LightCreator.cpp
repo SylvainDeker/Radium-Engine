@@ -1,4 +1,5 @@
 #include <Gui/LightCreator.hpp>
+#include <Gui/MainWindow.hpp>
 #include <QPushButton>
 #include <QColorDialog>
 #include <QPalette>
@@ -51,6 +52,15 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( parent )    {
     connect(this,&LightCreator::sig_close_windows,this,&QWidget::close);
 
 }
+
+LightCreator::~LightCreator(){
+  delete m_color;
+  delete m_intensity_val;
+  delete m_angle_val;
+  delete m_falloff_val;
+  delete m_name;
+}
+
 
 void LightCreator::open_dialogColor(){
   *m_color = QColorDialog::getColor ();
