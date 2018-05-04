@@ -17,13 +17,18 @@ public:
 
     ///set the transform on the selected object, return false in case of failure
     bool setTransform(Ra::Core::Transform &tf);
-    bool getTransform(Ra::Core::Transform* tf);
+
+    ///get the transform of the selected object, return false in case of failure
+    bool getTransform(Ra::Core::Transform *tf);
 
 public slots:
     void resetSelectedObject();
-    void applyMatrix(Ra::Core::Matrix4 &m);
+    void applyMatrix();
 
 private:
+    bool applyWolfram();
+    bool applyDirect();
+
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
 
