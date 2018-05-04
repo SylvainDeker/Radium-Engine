@@ -19,14 +19,14 @@
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="applyButton">
          <property name="text">
           <string>Apply</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="undoButton">
          <property name="text">
           <string>Undo</string>
          </property>
@@ -48,13 +48,13 @@
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="2" column="2">
-        <widget class="QSpinBox" name="spinBox_7"/>
+        <widget class="QSpinBox" name="scale_y"/>
        </item>
        <item row="1" column="0">
-        <widget class="QSpinBox" name="spinBox"/>
+        <widget class="QSpinBox" name="translation_x"/>
        </item>
        <item row="3" column="0">
-        <widget class="QSpinBox" name="spinBox_5"/>
+        <widget class="QSpinBox" name="translation_z"/>
        </item>
        <item row="0" column="1">
         <widget class="QLabel" name="label_2">
@@ -64,7 +64,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QSpinBox" name="spinBox_3"/>
+        <widget class="QSpinBox" name="scale_x"/>
        </item>
        <item row="0" column="2">
         <widget class="QLabel" name="label_3">
@@ -74,19 +74,19 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spinBox_2"/>
+        <widget class="QSpinBox" name="rotation_x"/>
        </item>
        <item row="2" column="1">
-        <widget class="QSpinBox" name="spinBox_6"/>
+        <widget class="QSpinBox" name="rotation_y"/>
        </item>
        <item row="3" column="1">
-        <widget class="QSpinBox" name="spinBox_8"/>
+        <widget class="QSpinBox" name="rotation_z"/>
        </item>
        <item row="2" column="0">
-        <widget class="QSpinBox" name="spinBox_4"/>
+        <widget class="QSpinBox" name="translation_y"/>
        </item>
        <item row="3" column="2">
-        <widget class="QSpinBox" name="spinBox_9"/>
+        <widget class="QSpinBox" name="scale_z"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label">
@@ -98,7 +98,7 @@
       </layout>
      </item>
      <item row="3" column="0">
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QRadioButton" name="use_tranform_matrix">
        <property name="text">
         <string>Use transfrom matrix</string>
        </property>
@@ -113,7 +113,7 @@
        <property name="currentIndex">
         <number>1</number>
        </property>
-       <widget class="QWidget" name="tab">
+       <widget class="QWidget" name="wolfram">
         <attribute name="title">
          <string>Wolfram</string>
         </attribute>
@@ -123,7 +123,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="tab_2">
+       <widget class="QWidget" name="direct">
         <attribute name="title">
          <string>direct</string>
         </attribute>
@@ -146,52 +146,52 @@
             <number>0</number>
            </property>
            <item row="0" column="3">
-            <widget class="QSpinBox" name="spinBox_10"/>
+            <widget class="QSpinBox" name="direct_14"/>
            </item>
            <item row="0" column="0">
-            <widget class="QSpinBox" name="spinBox_13"/>
+            <widget class="QSpinBox" name="direct_11"/>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_12"/>
+            <widget class="QSpinBox" name="direct_12"/>
            </item>
            <item row="0" column="2">
-            <widget class="QSpinBox" name="spinBox_11"/>
+            <widget class="QSpinBox" name="direct_13"/>
            </item>
            <item row="1" column="0">
-            <widget class="QSpinBox" name="spinBox_14"/>
+            <widget class="QSpinBox" name="direct_21"/>
            </item>
            <item row="2" column="0">
-            <widget class="QSpinBox" name="spinBox_15"/>
+            <widget class="QSpinBox" name="direct_31"/>
            </item>
            <item row="3" column="0">
-            <widget class="QSpinBox" name="spinBox_16"/>
+            <widget class="QSpinBox" name="direct_41"/>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox_17"/>
+            <widget class="QSpinBox" name="direct_22"/>
            </item>
            <item row="1" column="2">
-            <widget class="QSpinBox" name="spinBox_18"/>
+            <widget class="QSpinBox" name="direct_23"/>
            </item>
            <item row="1" column="3">
-            <widget class="QSpinBox" name="spinBox_19"/>
+            <widget class="QSpinBox" name="direct_24"/>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_20"/>
+            <widget class="QSpinBox" name="direct_32"/>
            </item>
            <item row="3" column="1">
-            <widget class="QSpinBox" name="spinBox_21"/>
+            <widget class="QSpinBox" name="direct_42"/>
            </item>
            <item row="3" column="2">
-            <widget class="QSpinBox" name="spinBox_22"/>
+            <widget class="QSpinBox" name="direct_43"/>
            </item>
            <item row="2" column="2">
-            <widget class="QSpinBox" name="spinBox_23"/>
+            <widget class="QSpinBox" name="direct_33"/>
            </item>
            <item row="2" column="3">
-            <widget class="QSpinBox" name="spinBox_24"/>
+            <widget class="QSpinBox" name="direct_34"/>
            </item>
            <item row="3" column="3">
-            <widget class="QSpinBox" name="spinBox_25"/>
+            <widget class="QSpinBox" name="direct_44"/>
            </item>
           </layout>
          </item>

@@ -213,7 +213,7 @@
              <enum>QTabWidget::West</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_stats">
              <attribute name="title">
@@ -451,18 +451,13 @@
               </item>
              </layout>
             </widget>
-            <widget class="Ra::Gui::TransformEditorWidget" name="tab_edition">
+            <widget class="QWidget" name="tab">
              <attribute name="title">
               <string>Edition</string>
              </attribute>
-            </widget>
-            <widget class="QWidget" name="tabpage">
-             <attribute name="title">
-              <string>Page</string>
-             </attribute>
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="0" column="0">
-               <layout class="QGridLayout" name="gridLayout_2"/>
+               <layout class="QGridLayout" name="layoutForEdition"/>
               </item>
              </layout>
             </widget>
@@ -721,14 +716,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>Ra::Gui::TransformEditorWidget</class>
-   <extends>QWidget</extends>
-   <header>Gui/TransformEditorWidget.hpp</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../../../icons.qrc"/>
  </resources>

@@ -56,7 +56,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
     m_edition = new EditionWidget(nullptr, m_selectionManager);
-   this->gridLayout_2->addWidget(m_edition);
+   this->layoutForEdition->addWidget(m_edition);
 
 
     createConnections();
@@ -472,7 +472,7 @@ void MainWindow::onRendererReady() {
 }
 
 void MainWindow::onFrameComplete() {
-    tab_edition->updateValues();
+    //tab_edition->updateValues();
     m_viewer->getGizmoManager()->updateValues();
 }
 
