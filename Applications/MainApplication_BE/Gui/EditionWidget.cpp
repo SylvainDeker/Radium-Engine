@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <cstdio>
+#include <locale>
 
 #include <QWidget>
 #include <QPushButton>
@@ -120,8 +121,7 @@ namespace Gui{
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
     {
-        std::cout << "Wolfram !" << std::endl;
-
+        struct lconv *locale = localeconv();
         Core::Matrix4 m;
         m << 1, 0, 0, 0,
              0, 1, 0, 0,
@@ -133,13 +133,24 @@ namespace Gui{
         for(size_t pos = input.find(" "); pos != std::string::npos; pos = input.find(" ")){
             input.erase(pos, 1);
         }
+        //remove all returns
+        for(size_t pos = input.find("\n"); pos != std::string::npos; pos = input.find("\n")){
+            input.erase(pos, 1);
+        }
 
         std::vector<std::string> toks = Ra::Core::StringUtils::splitString(input, ',');
         if( toks.size() == 9 )
         {
+            float read;
             std::string format = "";
             for(int i = 0; i < 9; ++i)
             {
+                //deal with locale
+                size_t point = toks[i].find(".");
+                if( point != std::string::npos ){
+                    toks[i].replace(point, 1, locale->decimal_point);
+                }
+
                 switch (i) {
                 case 0:
                     format = "{{%f";
@@ -159,12 +170,14 @@ namespace Gui{
                     format = "%f";
                     break;
                 }
-                if( std::sscanf(toks[i].c_str(), format.c_str(), &m(i/3,i%3)) != 1 )
+                if( std::sscanf(toks[i].c_str(), format.c_str(), &read) != 1 )
                 {
                     //failure
                     return false;
                 }
-                std::cout << m(i/3,i%3) << std::endl;
+                std::cout << "r=" << read << std::endl;
+                m(i/3,i%3) = read;
+                std::cout << "m=" << m(i/3,i%3) << std::endl;
             }
         } else if( toks.size() == 16 )
         {
@@ -203,6 +216,9 @@ namespace Gui{
             return false;
         }
 
+        for(int i = 0; i < 4; ++i){
+            std::cout << m(i,0) << " " << m(i,1) << " " << m(i,2) << " " << m(i,3) << std::endl;
+        }
         return setMatrix(m);;
     }
 
