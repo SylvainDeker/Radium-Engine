@@ -122,11 +122,7 @@ namespace Gui{
     bool EditionWidget::applyWolfram()
     {
         struct lconv *locale = localeconv();
-        Core::Matrix4 m;
-        m << 1, 0, 0, 0,
-             0, 1, 0, 0,
-             0, 0, 1, 0,
-             0, 0, 0, 1;
+        Core::Matrix4 m = Core::Transform::Identity().matrix();
         std::string input = m_wolframEdit->toPlainText().toStdString();
 
         //remove all spaces
@@ -139,18 +135,19 @@ namespace Gui{
         }
 
         std::vector<std::string> toks = Ra::Core::StringUtils::splitString(input, ',');
+        //deal with locale
+        for(size_t i = 0; i < toks.size(); ++i){
+            size_t point = toks[i].find(".");
+            if( point != std::string::npos ){
+                toks[i].replace(point, 1, locale->decimal_point);
+            }
+        }
+
         if( toks.size() == 9 )
         {
-            float read;
             std::string format = "";
             for(int i = 0; i < 9; ++i)
             {
-                //deal with locale
-                size_t point = toks[i].find(".");
-                if( point != std::string::npos ){
-                    toks[i].replace(point, 1, locale->decimal_point);
-                }
-
                 switch (i) {
                 case 0:
                     format = "{{%f";
@@ -170,14 +167,11 @@ namespace Gui{
                     format = "%f";
                     break;
                 }
-                if( std::sscanf(toks[i].c_str(), format.c_str(), &read) != 1 )
+                if( std::sscanf(toks[i].c_str(), format.c_str(), &m(i/3,i%3)) != 1 )
                 {
                     //failure
                     return false;
                 }
-                std::cout << "r=" << read << std::endl;
-                m(i/3,i%3) = read;
-                std::cout << "m=" << m(i/3,i%3) << std::endl;
             }
         } else if( toks.size() == 16 )
         {
@@ -216,9 +210,6 @@ namespace Gui{
             return false;
         }
 
-        for(int i = 0; i < 4; ++i){
-            std::cout << m(i,0) << " " << m(i,1) << " " << m(i,2) << " " << m(i,3) << std::endl;
-        }
         return setMatrix(m);;
     }
 
