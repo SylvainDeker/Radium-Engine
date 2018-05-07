@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdio>
 
 #include <QWidget>
 #include <QPushButton>
@@ -119,43 +120,78 @@ namespace Gui{
              0, 0, 0, 1;
         std::string input = m_wolframEdit->toPlainText().toStdString();
 
-        if( input.find("{") != 0 )
-        {
-            //bad input
-            return false;
-        }
-
         //remove all spaces
         for(size_t pos = input.find(" "); pos != std::string::npos; pos = input.find(" ")){
-            input.erase(pos, pos+1);
+            input.erase(pos, 1);
         }
 
-        int l = 0;
-        size_t spos = 0;
-        size_t epos = input.find("}");
-        while ( (spos != std::string::npos) &&
-                (epos != std::string::npos) &&
-                (l < 4) )
+        std::vector<std::string> toks = Ra::Core::StringUtils::splitString(input, ',');
+        if( toks.size() == 9 )
         {
-            std::string line = input.substr(spos+1, epos-1);
-            input.erase(spos, epos+1);
-            int r = 0;
-            size_t colon = line.find(",");
-            while( (colon != std::string::npos) &&
-                   (r < 4) )
+            std::string format = "";
+            for(int i = 0; i < 9; ++i)
             {
-                colon = line.find(",");
-                std::string num = line.substr(0,colon);
-                std::cout << num << std::endl;
-                m(l,r) = std::stoi(num);
-                line.erase(0,colon+1);
-                ++r;
+                switch (i) {
+                case 0:
+                    format = "{{%f";
+                    break;
+                case 8:
+                    format = "%f}}";
+                    break;
+                case 2:
+                case 5:
+                    format = "%f}";
+                    break;
+                case 3:
+                case 6:
+                    format = "{%f";
+                    break;
+                default:
+                    format = "%f";
+                    break;
+                }
+                if( std::sscanf(toks[i].c_str(), format.c_str(), &m(i/3,i%3)) != 1 )
+                {
+                    //failure
+                    return false;
+                }
+                std::cout << m(i/3,i%3) << std::endl;
             }
-            spos = input.find("{");
-            input.erase(0,spos);
-            spos = input.find("{");
-            epos = input.find("}");
-            ++l;
+        } else if( toks.size() == 16 )
+        {
+            std::string format = "";
+            for(int i = 0; i < 16; ++i)
+            {
+                switch (i) {
+                case 0:
+                    format = "{{%f";
+                    break;
+                case 15:
+                    format = "%f}}";
+                    break;
+                case 3:
+                case 7:
+                case 11:
+                    format = "%f}";
+                    break;
+                case 4:
+                case 8:
+                case 12:
+                    format = "{%f";
+                    break;
+                default:
+                    format = "%f";
+                    break;
+                }
+                if( std::sscanf(toks[i].c_str(), format.c_str(), &m(i/4,i%4)) != 1 )
+                {
+                    //failure
+                    return false;
+                }
+            }
+        } else
+        {
+            return false;
         }
 
         for(int i = 0; i < 4; ++i){
