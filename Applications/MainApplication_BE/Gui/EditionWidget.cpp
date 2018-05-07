@@ -27,8 +27,8 @@ namespace Gui{
         m_selectionManager(selectionManager)
     {
         setupUi(this);
-        QObject::connect(resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
-        QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
+        QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
+        QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
 
     }
 
@@ -117,7 +117,7 @@ namespace Gui{
              0, 1, 0, 0,
              0, 0, 1, 0,
              0, 0, 0, 1;
-        std::string input = textEdit->toPlainText().toStdString();
+        std::string input = m_wolframEdit->toPlainText().toStdString();
 
         if( input.find("{") != 0 )
         {
