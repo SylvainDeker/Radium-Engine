@@ -58,6 +58,12 @@ namespace Gui{
         return false;
     }
 
+    bool EditionWidget::setMatrix(Core::Matrix4 &m)
+    {
+        Ra::Core::Transform tf(m);
+        return setTransform(tf);
+    }
+
     bool EditionWidget::getTransform(Ra::Core::Transform* tf)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
@@ -97,7 +103,9 @@ namespace Gui{
         {
         case 0 :
             //wolfram
-            applyWolfram();
+            if(!applyWolfram()){
+                std::cout << "error wolfram" << std::endl;
+            }
             break;
         case 1 :
             //direct
@@ -109,6 +117,7 @@ namespace Gui{
         }
     }
 
+    ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
     {
         std::cout << "Wolfram !" << std::endl;
@@ -194,10 +203,7 @@ namespace Gui{
             return false;
         }
 
-        for(int i = 0; i < 4; ++i){
-            std::cout << m(i,0) << " " << m(i,1) << " " << m(i,2) << " " << m(i,3) << std::endl;
-        }
-        return true;
+        return setMatrix(m);;
     }
 
     bool EditionWidget::applyDirect()

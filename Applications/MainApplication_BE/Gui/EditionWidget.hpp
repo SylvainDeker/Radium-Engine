@@ -17,6 +17,7 @@ public:
 
     ///set the transform on the selected object, return false in case of failure
     bool setTransform(Ra::Core::Transform &tf);
+    bool setMatrix(Ra::Core::Matrix4 &m);
 
     ///get the transform of the selected object, return false in case of failure
     bool getTransform(Ra::Core::Transform *tf);
