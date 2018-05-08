@@ -31,6 +31,7 @@ namespace Gui{
         setupUi(this);
         QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
         QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
+        QObject::connect(m_use_tranform_matrix,SIGNAL(clicked(bool)),this,SLOT(matriceSize3()));
         for( int i =0 ; i <4 ;i++){
             for ( int j = 0 ; j<4; j++){
                 m_TabButtonDirect[i*4+j] = new QSpinBox(direct);
@@ -123,7 +124,16 @@ namespace Gui{
             break;
         }
     }
+    void EditionWidget::matriceSize3()
+    {
+        const bool m_visible = !m_use_tranform_matrix->isChecked();
+        for( int i =0 ; i<4 ; i++)
+            m_TabButtonDirect[i*4+3]->setVisible(m_visible);
 
+        for( int i =0 ; i<4 ; i++)
+            m_TabButtonDirect[12+i]->setVisible(m_visible);
+
+    }
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
     {

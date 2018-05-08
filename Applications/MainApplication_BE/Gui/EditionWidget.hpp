@@ -25,6 +25,7 @@ public:
 public slots:
     void resetSelectedObject();
     void applyMatrix();
+    void matriceSize3();
 
 private:
     bool applyWolfram();
