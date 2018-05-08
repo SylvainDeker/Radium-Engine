@@ -29,15 +29,19 @@ namespace Gui{
         m_selectionManager(selectionManager)
     {
         setupUi(this);
-        QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
-        QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
-        QObject::connect(m_use_tranform_matrix,SIGNAL(clicked(bool)),this,SLOT(matriceSize3()));
         for( int i =0 ; i <4 ;i++){
             for ( int j = 0 ; j<4; j++){
                 m_TabButtonDirect[i*4+j] = new QSpinBox(direct);
-                m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i,j,1,1);
+                m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i+1,j,1,1);
             }
         }
+        m_matrice3 = new QRadioButton(direct);
+        m_matrice3->setObjectName(QStringLiteral("m_matrice3"));
+        m_matrice3->setText(QApplication::translate("EditionWidget", "use matrice 3 * 3", nullptr));
+        m_directLayout->addWidget(m_matrice3,0,0,1,4);
+        QObject::connect(m_matrice3,SIGNAL(clicked(bool)),this,SLOT(matriceSize3()));
+        QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
+        QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
 
     }
 
@@ -126,7 +130,7 @@ namespace Gui{
     }
     void EditionWidget::matriceSize3()
     {
-        const bool m_visible = !m_use_tranform_matrix->isChecked();
+        const bool m_visible = !m_matrice3->isChecked();
         for( int i =0 ; i<4 ; i++)
             m_TabButtonDirect[i*4+3]->setVisible(m_visible);
 
@@ -226,13 +230,20 @@ namespace Gui{
             return false;
         }
 
-        return setMatrix(m);;
+        return setMatrix(m);
     }
 
     bool EditionWidget::applyDirect()
     {
-        std::cout << "Direct !" << std::endl;
-        return true;
+        Core::Matrix4 m = Core::Transform::Identity().matrix();
+        for (int i=0 ; i<4 ;i++){
+            for (int j=0; j<4 ; j++){
+                if (!((i==4 || j==4)&& m_matrice3->isChecked())){
+                    m(i,j) = m_TabButtonDirect[i*4+j]->value();
+                }
+            }
+        }
+        return setMatrix(m);
     }
 
 }
