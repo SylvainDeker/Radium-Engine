@@ -26,6 +26,7 @@ public slots:
     void resetSelectedObject();
     void applyMatrix();
     void matriceSize3();
+    void onCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void useTransformMatrix();
 
 private:

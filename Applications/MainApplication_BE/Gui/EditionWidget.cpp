@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdio>
 #include <locale>
+#include <iostream>
+#include <sstream>
 
 #include <QWidget>
 #include <QPushButton>
@@ -44,7 +46,31 @@ namespace Gui{
         QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
         QObject::connect(m_use_tranform_matrix,SIGNAL(clicked(bool)),this,SLOT(useTransformMatrix()));
         useTransformMatrix();
+        QObject::connect(selectionManager, SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(onCurrentChanged(QModelIndex,QModelIndex)));
 
+    }
+
+    void EditionWidget::onCurrentChanged(const QModelIndex &current, const QModelIndex &previous)
+    {
+        Ra::Core::Transform tf;
+        if(getTransform(&tf))
+        {
+            std::cout << "update info" << std::endl;
+            Ra::Core::Matrix4 m = tf.matrix();
+
+            std::ostringstream matrixText;
+            matrixText << "{{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},{"
+                       << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},{"
+                       << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},{"
+                       << m(3,0) << "," << m(3,1) << "," << m(3,2) << "," << m(3,3) << "}}";
+            std::cout << matrixText.str() << std::endl;
+            //std::string str(matrixText.str());
+            //QString qstr(str);
+            m_wolframEdit->setText(QString::fromStdString(matrixText.str()));
+
+        } else {
+            std::cout << "set blank" << std::endl;
+        }
     }
 
     bool EditionWidget::setTransform(Ra::Core::Transform& tf)
