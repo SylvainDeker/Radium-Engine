@@ -47,6 +47,7 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     void slot_falloff_linear_spin_to_slide(double val);
     void slot_falloff_quadratic_slide_to_spin(int val);
     void slot_falloff_quadratic_spin_to_slide(double val);
+    void slot_select_light(int val);
     /// Used to check if the name is not empty
     void open_dialogueConfirm();
 
@@ -62,6 +63,15 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     void sig_falloff_quadratic_slide_to_spin(double);
     void sig_falloff_quadratic_spin_to_slide(int);
 
+    void sig_hide_angle();
+    void sig_hide_dir();
+    void sig_hide_pos();
+    // void sig_hide_falloff();
+
+    void sig_show_angle();
+    void sig_show_dir();
+    void sig_show_pos();
+    // void sig_show_falloff();
 
 
     void sig_onItemAdded( const Engine::ItemEntry& ent );
@@ -72,11 +82,9 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
   protected:
 
-
   private:
 
-
-  private:
+    int * m_lightType;
     QColor *m_color;
     double *m_intensity_val;
     double *m_angle_val;
