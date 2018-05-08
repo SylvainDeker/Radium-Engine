@@ -31,6 +31,12 @@ namespace Gui{
         setupUi(this);
         QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
         QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
+        for( int i =0 ; i <4 ;i++){
+            for ( int j = 0 ; j<4; j++){
+                m_TabButtonDirect[i*4+j] = new QSpinBox(direct);
+                m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i,j,1,1);
+            }
+        }
 
     }
 

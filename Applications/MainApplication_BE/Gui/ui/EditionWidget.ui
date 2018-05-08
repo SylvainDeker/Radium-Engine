@@ -129,7 +129,7 @@
         </attribute>
         <layout class="QGridLayout" name="gridLayout_8">
          <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_7">
+          <layout class="QGridLayout" name="m_directLayout">
            <property name="leftMargin">
             <number>0</number>
            </property>
@@ -145,54 +145,6 @@
            <property name="spacing">
             <number>0</number>
            </property>
-           <item row="0" column="3">
-            <widget class="QSpinBox" name="m_direct_14"/>
-           </item>
-           <item row="0" column="0">
-            <widget class="QSpinBox" name="m_direct_11"/>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="m_direct_12"/>
-           </item>
-           <item row="0" column="2">
-            <widget class="QSpinBox" name="m_direct_13"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QSpinBox" name="m_direct_21"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QSpinBox" name="m_direct_31"/>
-           </item>
-           <item row="3" column="0">
-            <widget class="QSpinBox" name="m_direct_41"/>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="m_direct_22"/>
-           </item>
-           <item row="1" column="2">
-            <widget class="QSpinBox" name="m_direct_23"/>
-           </item>
-           <item row="1" column="3">
-            <widget class="QSpinBox" name="m_direct_24"/>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="m_direct_32"/>
-           </item>
-           <item row="3" column="1">
-            <widget class="QSpinBox" name="m_direct_42"/>
-           </item>
-           <item row="3" column="2">
-            <widget class="QSpinBox" name="m_direct_43"/>
-           </item>
-           <item row="2" column="2">
-            <widget class="QSpinBox" name="m_direct_33"/>
-           </item>
-           <item row="2" column="3">
-            <widget class="QSpinBox" name="m_direct_34"/>
-           </item>
-           <item row="3" column="3">
-            <widget class="QSpinBox" name="m_direct_44"/>
-           </item>
           </layout>
          </item>
         </layout>

@@ -32,6 +32,7 @@ private:
 
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
+    QSpinBox* m_TabButtonDirect[16];
 
 };
 }
