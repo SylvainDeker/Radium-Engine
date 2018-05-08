@@ -35,7 +35,7 @@ namespace Gui{
                 m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i+1,j,1,1);
             }
         }
-        m_matrice3 = new QRadioButton(direct);
+        m_matrice3 = new QCheckBox(direct);
         m_matrice3->setObjectName(QStringLiteral("m_matrice3"));
         m_matrice3->setText(QApplication::translate("EditionWidget", "use matrice 3 * 3", nullptr));
         m_directLayout->addWidget(m_matrice3,0,0,1,4);

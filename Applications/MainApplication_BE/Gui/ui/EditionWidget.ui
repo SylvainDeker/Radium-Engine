@@ -98,7 +98,7 @@
       </layout>
      </item>
      <item row="3" column="0">
-      <widget class="QRadioButton" name="m_use_tranform_matrix">
+      <widget class="QCheckBox" name="m_use_tranform_matrix">
        <property name="text">
         <string>Use transfrom matrix</string>
        </property>

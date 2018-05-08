@@ -34,7 +34,7 @@ private:
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
     QSpinBox* m_TabButtonDirect[16];
-    QRadioButton* m_matrice3;
+    QCheckBox* m_matrice3;
 
 };
 }
