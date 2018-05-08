@@ -42,6 +42,8 @@ namespace Gui{
         QObject::connect(m_matrice3,SIGNAL(clicked(bool)),this,SLOT(matriceSize3()));
         QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
         QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
+        QObject::connect(m_use_tranform_matrix,SIGNAL(clicked(bool)),this,SLOT(useTransformMatrix()));
+        useTransformMatrix();
 
     }
 
@@ -137,6 +139,19 @@ namespace Gui{
         for( int i =0 ; i<4 ; i++)
             m_TabButtonDirect[12+i]->setVisible(m_visible);
 
+    }
+    void EditionWidget::useTransformMatrix(){
+        const bool m_visible = !m_use_tranform_matrix->isChecked();
+        m_translation_x->setEnabled(m_visible);
+        m_translation_y->setEnabled(m_visible);
+        m_translation_z->setEnabled(m_visible);
+        m_rotation_x->setEnabled(m_visible);
+        m_rotation_y->setEnabled(m_visible);
+        m_rotation_z->setEnabled(m_visible);
+        m_scale_x->setEnabled(m_visible);
+        m_scale_y->setEnabled(m_visible);
+        m_scale_z->setEnabled(m_visible);
+        tabWidget->setEnabled(!m_visible);
     }
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
