@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>519</height>
+    <width>827</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,15 +26,15 @@
    <item>
     <widget class="QGroupBox" name="m_groupBox">
      <property name="title">
-      <string>Informations </string>
+      <string>Informations</string>
      </property>
      <widget class="QWidget" name="m_formLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>0</x>
         <y>30</y>
-        <width>771</width>
-        <height>451</height>
+        <width>811</width>
+        <height>491</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="m_formLayout">
@@ -170,88 +170,6 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="m_coord_lab">
-         <property name="text">
-          <string>Position : </string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <layout class="QHBoxLayout" name="m_pos_layout">
-         <item>
-          <widget class="QLabel" name="m_pos_x_lab">
-           <property name="text">
-            <string>x :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_pos_x_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="m_pos_y_lab">
-           <property name="text">
-            <string>y :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_pos_y_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="m_pos_z_lab">
-           <property name="text">
-            <string>z :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_pos_z_spin"/>
-         </item>
-        </layout>
-       </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="m_direction_lab">
-         <property name="text">
-          <string>Direction : </string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1">
-        <layout class="QHBoxLayout" name="m_dir_layout">
-         <item>
-          <widget class="QLabel" name="m_dir_x_lab">
-           <property name="text">
-            <string>x :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_dir_y_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="m_dir_y_lab">
-           <property name="text">
-            <string>y :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_dir_x_spin"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="m_dir_z_lab">
-           <property name="text">
-            <string>z :</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="m_dir_z_spin"/>
-         </item>
-        </layout>
-       </item>
        <item row="5" column="1">
         <layout class="QVBoxLayout" name="m_falloff_layout_main">
          <item>
@@ -319,21 +237,102 @@
          </item>
         </layout>
        </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="m_coord_lab">
+         <property name="text">
+          <string>Position : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <layout class="QHBoxLayout" name="m_pos_layout">
+         <item>
+          <widget class="QLabel" name="m_pos_x_lab">
+           <property name="text">
+            <string>x :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_pos_x_spin"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_pos_y_lab">
+           <property name="text">
+            <string>y :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_pos_y_spin"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_pos_z_lab">
+           <property name="text">
+            <string>z :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_pos_z_spin"/>
+         </item>
+        </layout>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="m_direction_lab">
+         <property name="text">
+          <string>Direction : </string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <layout class="QHBoxLayout" name="m_dir_layout">
+         <item>
+          <widget class="QLabel" name="m_dir_x_lab">
+           <property name="text">
+            <string>x :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_dir_y_spin"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_dir_y_lab">
+           <property name="text">
+            <string>y :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_dir_x_spin"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="m_dir_z_lab">
+           <property name="text">
+            <string>z :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="m_dir_z_spin"/>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="m_button_create">
-      <property name="geometry">
-       <rect>
-        <x>670</x>
-        <y>420</y>
-        <width>111</width>
-        <height>34</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Create</string>
-      </property>
-     </widget>
+     <zorder>m_formLayoutWidget</zorder>
+     <zorder>m_name_lab</zorder>
+     <zorder>m_lineEdit</zorder>
+     <zorder>m_name_lab</zorder>
+     <zorder>groupBox</zorder>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="m_button_create">
+     <property name="text">
+      <string>OK</string>
+     </property>
     </widget>
    </item>
   </layout>
