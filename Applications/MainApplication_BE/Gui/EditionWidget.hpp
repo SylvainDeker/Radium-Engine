@@ -35,6 +35,7 @@ private:
     bool applyDirect();
     bool transformation();
 
+    const float M_DEGREE_TO_RADIAN = M_PI/180;
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
     QSpinBox* m_TabButtonDirect[16];

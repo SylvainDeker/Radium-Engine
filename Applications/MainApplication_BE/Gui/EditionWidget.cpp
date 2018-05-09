@@ -6,6 +6,7 @@
 #include <locale>
 #include <iostream>
 #include <sstream>
+#include <cmath>
 
 #include <QWidget>
 #include <QPushButton>
@@ -62,14 +63,18 @@ namespace Gui{
             m_translation_x->setValue(m(0,3));
             m_translation_y->setValue(m(1,3));
             m_translation_z->setValue(m(2,3));
-            m_scale_x->setValue(m(0,0)/rotation(0,0));
+            //TODO broken
+            /*m_scale_x->setValue(m(0,0)/rotation(0,0));
             m_scale_y->setValue(m(1,1)/rotation(1,1));
             m_scale_z->setValue(m(2,2)/rotation(2,2));
+            m_rotation_x->setValue(std::asin(rotation(2,1))/M_DEGREE_TO_RADIAN);
+            m_rotation_y->setValue(std::asin(rotation(0,2))/M_DEGREE_TO_RADIAN);
+            m_rotation_y->setValue(std::asin(rotation(1,0))/M_DEGREE_TO_RADIAN);*/
 
             std::ostringstream matrixText;
-            matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n {"
-                       << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},\n {"
-                       << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},\n {"
+            matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n{"
+                       << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},\n{"
+                       << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},\n{"
                        << m(3,0) << "," << m(3,1) << "," << m(3,2) << "," << m(3,3) << "}\n}";
             m_wolframEdit->setText(QString::fromStdString(matrixText.str()));
 
@@ -203,14 +208,14 @@ namespace Gui{
     }
 
     bool EditionWidget::transformation(){
-        Core::Matrix4 m = Core::Transform::Identity().matrix();
-        m(0,3)=m_translation_x->value();
-        m(1,3)=m_translation_y->value();
-        m(2,3)=m_translation_z->value();
-        m(0,0)=m_scale_x->value();
-        m(1,1)=m_scale_y->value();
-        m(2,2)=m_scale_z->value();
-        return setMatrix(m);
+        Core::Transform tf = Core::Transform::Identity();
+        //scale, then rotation, and finally translation (inverted because matrix multiplication)
+        tf.translate(Core::Vector3(m_translation_x->value(), m_translation_y->value(), m_translation_z->value()));
+        tf.rotate(Eigen::AngleAxisf(m_rotation_x->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitX()));
+        tf.rotate(Eigen::AngleAxisf(m_rotation_y->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitY()));
+        tf.rotate(Eigen::AngleAxisf(m_rotation_z->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitZ()));
+        tf.scale(Core::Vector3(m_scale_x->value(), m_scale_y->value(), m_scale_z->value()));
+        return setTransform(tf);
     }
 
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
@@ -313,9 +318,7 @@ namespace Gui{
         Core::Matrix4 m = Core::Transform::Identity().matrix();
         for (int i=0 ; i<4 ;i++){
             for (int j=0; j<4 ; j++){
-                if (!((i==3 || j==3)&& m_matrice3->isChecked())){
-                    m(i,j) = m_TabButtonDirect[i*4+j]->value();
-                }
+                m(i,j) = m_TabButtonDirect[i*4+j]->value();
             }
         }
         return setMatrix(m);
