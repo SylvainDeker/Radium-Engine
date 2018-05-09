@@ -184,6 +184,7 @@ namespace Gui{
         m_scale_z->setEnabled(m_visible);
         tabWidget->setEnabled(!m_visible);
     }
+
     bool EditionWidget::transformation(){
         Core::Matrix4 m = Core::Transform::Identity().matrix();
         m(0,3)=m_translation_x->value();
@@ -192,10 +193,8 @@ namespace Gui{
         m(0,0)=m_scale_x->value();
         m(1,1)=m_scale_y->value();
         m(2,2)=m_scale_z->value();
-        std::cout << "translation" << std::endl;
         return setMatrix(m);
     }
-
 
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
@@ -297,7 +296,7 @@ namespace Gui{
         Core::Matrix4 m = Core::Transform::Identity().matrix();
         for (int i=0 ; i<4 ;i++){
             for (int j=0; j<4 ; j++){
-                if (!((i==4 || j==4)&& m_matrice3->isChecked())){
+                if (!((i==3 || j==3)&& m_matrice3->isChecked())){
                     m(i,j) = m_TabButtonDirect[i*4+j]->value();
                 }
             }
