@@ -137,24 +137,29 @@ namespace Gui{
 
     void EditionWidget::applyMatrix()
     {
-        int index = tabWidget->currentIndex();
+       if (m_use_tranform_matrix->isChecked()){
+            int index = tabWidget->currentIndex();
 
-        switch(index)
-        {
-        case 0 :
-            //wolfram
-            if(!applyWolfram()){
-                std::cout << "error wolfram" << std::endl;
+            switch(index)
+            {
+            case 0 :
+                //wolfram
+                if(!applyWolfram()){
+                    std::cout << "error wolfram" << std::endl;
+                }
+                break;
+            case 1 :
+                //direct
+                applyDirect();
+                break;
+            default :
+                //TODO ?
+                break;
             }
-            break;
-        case 1 :
-            //direct
-            applyDirect();
-            break;
-        default :
-            //TODO ?
-            break;
-        }
+       }else{
+           transformation();
+
+       }
     }
     void EditionWidget::matriceSize3()
     {
@@ -179,6 +184,19 @@ namespace Gui{
         m_scale_z->setEnabled(m_visible);
         tabWidget->setEnabled(!m_visible);
     }
+    bool EditionWidget::transformation(){
+        Core::Matrix4 m = Core::Transform::Identity().matrix();
+        m(0,3)=m_translation_x->value();
+        m(1,3)=m_translation_y->value();
+        m(2,3)=m_translation_z->value();
+        m(0,0)=m_scale_x->value();
+        m(1,1)=m_scale_y->value();
+        m(2,2)=m_scale_z->value();
+        std::cout << "translation" << std::endl;
+        return setMatrix(m);
+    }
+
+
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
     bool EditionWidget::applyWolfram()
     {

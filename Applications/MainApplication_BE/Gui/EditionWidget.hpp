@@ -32,6 +32,7 @@ public slots:
 private:
     bool applyWolfram();
     bool applyDirect();
+    bool transformation();
 
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
