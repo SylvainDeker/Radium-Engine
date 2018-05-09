@@ -50,27 +50,42 @@ namespace Gui{
 
     }
 
-    void EditionWidget::onCurrentChanged(const QModelIndex &current, const QModelIndex &previous)
+    void EditionWidget::updateInfos()
     {
         Ra::Core::Transform tf;
         if(getTransform(&tf))
         {
-            std::cout << "update info" << std::endl;
+            std::cout << "update infos" << std::endl;
             Ra::Core::Matrix4 m = tf.matrix();
+            Ra::Core::Matrix3 rotation = tf.rotation();
+
+            m_translation_x->setValue(m(0,3));
+            m_translation_y->setValue(m(1,3));
+            m_translation_z->setValue(m(2,3));
+            m_scale_x->setValue(m(0,0)/rotation(0,0));
+            m_scale_y->setValue(m(1,1)/rotation(1,1));
+            m_scale_z->setValue(m(2,2)/rotation(2,2));
 
             std::ostringstream matrixText;
-            matrixText << "{{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},{"
-                       << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},{"
-                       << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},{"
-                       << m(3,0) << "," << m(3,1) << "," << m(3,2) << "," << m(3,3) << "}}";
-            std::cout << matrixText.str() << std::endl;
-            //std::string str(matrixText.str());
-            //QString qstr(str);
+            matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n {"
+                       << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},\n {"
+                       << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},\n {"
+                       << m(3,0) << "," << m(3,1) << "," << m(3,2) << "," << m(3,3) << "}\n}";
             m_wolframEdit->setText(QString::fromStdString(matrixText.str()));
+
+            for(int i = 0; i < 16; ++i)
+            {
+                m_TabButtonDirect[i]->setValue(m(i/4,i%4));
+            }
 
         } else {
             std::cout << "set blank" << std::endl;
         }
+    }
+
+    void EditionWidget::onCurrentChanged(const QModelIndex &current, const QModelIndex &previous)
+    {
+        updateInfos();
     }
 
     bool EditionWidget::setTransform(Ra::Core::Transform& tf)
@@ -83,6 +98,7 @@ namespace Gui{
             {
                 item.m_entity->setTransform(tf);
                 item.m_entity->swapTransformBuffers();
+                updateInfos();
                 return true;
             }
 
@@ -91,6 +107,7 @@ namespace Gui{
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 item.m_component->setTransform(item.m_roIndex, tf);
+                updateInfos();
                 return true;
             }
         }

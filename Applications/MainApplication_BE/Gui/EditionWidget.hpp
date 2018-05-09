@@ -28,6 +28,7 @@ public slots:
     void matriceSize3();
     void onCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void useTransformMatrix();
+    void updateInfos();
 
 private:
     bool applyWolfram();
