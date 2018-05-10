@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <limits>
 
 #include <QWidget>
 #include <QPushButton>
@@ -34,10 +35,33 @@ namespace Gui{
         setupUi(this);
         for( int i =0 ; i <4 ;i++){
             for ( int j = 0 ; j<4; j++){
-                m_TabButtonDirect[i*4+j] = new QSpinBox(direct);
+                m_TabButtonDirect[i*4+j] = new QDoubleSpinBox(direct);
+                m_TabButtonDirect[i*4+j]->setDecimals(10);
+                m_TabButtonDirect[i*4+j]->setMaximum(std::numeric_limits<float>::max());
+                m_TabButtonDirect[i*4+j]->setMinimum(-std::numeric_limits<float>::max());
                 m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i+1,j,1,1);
             }
         }
+        //I hate qt designer
+        m_rotation_x->setMaximum(std::numeric_limits<float>::max());
+        m_rotation_x->setMinimum(-std::numeric_limits<float>::max());
+        m_rotation_y->setMaximum(std::numeric_limits<float>::max());
+        m_rotation_y->setMinimum(-std::numeric_limits<float>::max());
+        m_rotation_z->setMaximum(std::numeric_limits<float>::max());
+        m_rotation_z->setMinimum(-std::numeric_limits<float>::max());
+        m_translation_x->setMaximum(std::numeric_limits<float>::max());
+        m_translation_x->setMinimum(-std::numeric_limits<float>::max());
+        m_translation_y->setMaximum(std::numeric_limits<float>::max());
+        m_translation_y->setMinimum(-std::numeric_limits<float>::max());
+        m_translation_z->setMaximum(std::numeric_limits<float>::max());
+        m_translation_z->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_x->setMaximum(std::numeric_limits<float>::max());
+        m_scale_x->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_y->setMaximum(std::numeric_limits<float>::max());
+        m_scale_y->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_z->setMaximum(std::numeric_limits<float>::max());
+        m_scale_z->setMinimum(-std::numeric_limits<float>::max());
+
         m_matrice3 = new QCheckBox(direct);
         m_matrice3->setObjectName(QStringLiteral("m_matrice3"));
         m_matrice3->setText(QApplication::translate("EditionWidget", "use matrice 3 * 3", nullptr));
@@ -58,18 +82,19 @@ namespace Gui{
         {
             std::cout << "update infos" << std::endl;
             Ra::Core::Matrix4 m = tf.matrix();
-            Ra::Core::Matrix3 rotation = tf.rotation();
+            Ra::Core::Matrix3 r = tf.rotation();
 
             m_translation_x->setValue(m(0,3));
             m_translation_y->setValue(m(1,3));
             m_translation_z->setValue(m(2,3));
-            //TODO broken
-            /*m_scale_x->setValue(m(0,0)/rotation(0,0));
-            m_scale_y->setValue(m(1,1)/rotation(1,1));
-            m_scale_z->setValue(m(2,2)/rotation(2,2));
-            m_rotation_x->setValue(std::asin(rotation(2,1))/M_DEGREE_TO_RADIAN);
-            m_rotation_y->setValue(std::asin(rotation(0,2))/M_DEGREE_TO_RADIAN);
-            m_rotation_y->setValue(std::asin(rotation(1,0))/M_DEGREE_TO_RADIAN);*/
+            //TODO maybe broken
+            m_scale_x->setValue(m(0,0)/r(0,0));
+            m_scale_y->setValue(m(1,1)/r(1,1));
+            m_scale_z->setValue(m(2,2)/r(2,2));
+            //see decomposition of r matrix
+            m_rotation_x->setValue(std::atan2(r(2,1), r(2,2))/M_DEGREE_TO_RADIAN);
+            m_rotation_y->setValue(std::atan2(-r(2,0), std::sqrt(r(2,1)*r(2,1)+r(2,2)*r(2,2)))/M_DEGREE_TO_RADIAN);
+            m_rotation_z->setValue(std::atan2(r(1,0), r(0,0))/M_DEGREE_TO_RADIAN);
 
             std::ostringstream matrixText;
             matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n{"

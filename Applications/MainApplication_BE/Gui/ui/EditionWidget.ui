@@ -47,30 +47,10 @@
      </item>
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="2" column="2">
-        <widget class="QSpinBox" name="m_scale_y">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QSpinBox" name="m_translation_x"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QSpinBox" name="m_translation_z"/>
-       </item>
        <item row="0" column="1">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>rotation</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QSpinBox" name="m_scale_x">
-         <property name="minimum">
-          <number>1</number>
          </property>
         </widget>
        </item>
@@ -81,31 +61,39 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QSpinBox" name="m_rotation_x"/>
-       </item>
-       <item row="2" column="1">
-        <widget class="QSpinBox" name="m_rotation_y"/>
-       </item>
-       <item row="3" column="1">
-        <widget class="QSpinBox" name="m_rotation_z"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QSpinBox" name="m_translation_y"/>
-       </item>
-       <item row="3" column="2">
-        <widget class="QSpinBox" name="m_scale_z">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>translation</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QDoubleSpinBox" name="m_translation_x"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="m_rotation_x"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDoubleSpinBox" name="m_scale_x"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QDoubleSpinBox" name="m_translation_y"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QDoubleSpinBox" name="m_rotation_y"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QDoubleSpinBox" name="m_scale_y"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QDoubleSpinBox" name="m_translation_z"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="m_rotation_z"/>
+       </item>
+       <item row="3" column="2">
+        <widget class="QDoubleSpinBox" name="m_scale_z"/>
        </item>
       </layout>
      </item>
