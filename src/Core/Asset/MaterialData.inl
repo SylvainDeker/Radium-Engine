@@ -95,16 +95,16 @@ inline void BlinnPhongMaterialData::displayInfo() const {
         Core::Utils::stringPrintf( op, "%.15f", m_opacity );
     }
 
-    LOG( logINFO ) << "======== MATERIAL INFO ========";
-    LOG( logINFO ) << " Kd             : " << ( hasDiffuse() ? kd : "NO" );
-    LOG( logINFO ) << " Ks             : " << ( hasSpecular() ? ks : "NO" );
-    LOG( logINFO ) << " Ns             : " << ( hasShininess() ? ns : "NO" );
-    LOG( logINFO ) << " Opacity        : " << ( hasOpacity() ? op : "NO" );
-    LOG( logINFO ) << " Kd Texture     : " << ( hasDiffuseTexture() ? m_texDiffuse : "NO" );
-    LOG( logINFO ) << " Ks Texture     : " << ( hasSpecularTexture() ? m_texSpecular : "NO" );
-    LOG( logINFO ) << " Ns Texture     : " << ( hasShininessTexture() ? m_texShininess : "NO" );
-    LOG( logINFO ) << " Normal Texture : " << ( hasNormalTexture() ? m_texNormal : "NO" );
-    LOG( logINFO ) << " Alpha Texture  : " << ( hasOpacityTexture() ? m_texOpacity : "NO" );
+    LOG( Utils::logINFO ) << "======== MATERIAL INFO ========";
+    LOG( Utils::logINFO ) << " Kd             : " << ( hasDiffuse() ? kd : "NO" );
+    LOG( Utils::logINFO ) << " Ks             : " << ( hasSpecular() ? ks : "NO" );
+    LOG( Utils::logINFO ) << " Ns             : " << ( hasShininess() ? ns : "NO" );
+    LOG( Utils::logINFO ) << " Opacity        : " << ( hasOpacity() ? op : "NO" );
+    LOG( Utils::logINFO ) << " Kd Texture     : " << ( hasDiffuseTexture() ? m_texDiffuse : "NO" );
+    LOG( Utils::logINFO ) << " Ks Texture     : " << ( hasSpecularTexture() ? m_texSpecular : "NO" );
+    LOG( Utils::logINFO ) << " Ns Texture     : " << ( hasShininessTexture() ? m_texShininess : "NO" );
+    LOG( Utils::logINFO ) << " Normal Texture : " << ( hasNormalTexture() ? m_texNormal : "NO" );
+    LOG( Utils::logINFO ) << " Alpha Texture  : " << ( hasOpacityTexture() ? m_texOpacity : "NO" );
 }
 
 } // namespace Asset

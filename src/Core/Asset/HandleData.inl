@@ -179,13 +179,13 @@ inline void HandleData::displayInfo() const {
         type = "CAGE";
         break;
     }
-    LOG( logDEBUG ) << "======== HANDLE INFO ========";
-    LOG( logDEBUG ) << " Name            : " << m_name;
-    LOG( logDEBUG ) << " Type            : " << type;
-    LOG( logDEBUG ) << " Element #       : " << m_component.size();
-    LOG( logDEBUG ) << " Edge #          : " << m_edge.size();
-    LOG( logDEBUG ) << " Face #          : " << m_face.size();
-    LOG( logDEBUG ) << " Need EndNodes ? : " << ( ( m_endNode ) ? "YES" : "NO" );
+    LOG( Utils::logDEBUG ) << "======== HANDLE INFO ========";
+    LOG( Utils::logDEBUG ) << " Name            : " << m_name;
+    LOG( Utils::logDEBUG ) << " Type            : " << type;
+    LOG( Utils::logDEBUG ) << " Element #       : " << m_component.size();
+    LOG( Utils::logDEBUG ) << " Edge #          : " << m_edge.size();
+    LOG( Utils::logDEBUG ) << " Face #          : " << m_face.size();
+    LOG( Utils::logDEBUG ) << " Need EndNodes ? : " << ( ( m_endNode ) ? "YES" : "NO" );
 }
 
 } // namespace Asset

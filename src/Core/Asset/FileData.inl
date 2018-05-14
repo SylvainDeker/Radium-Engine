@@ -112,12 +112,12 @@ inline void FileData::displayInfo() const {
     {
         vtxCount += geom->getVerticesSize();
     }
-    LOG( logINFO ) << "======== LOADING SUMMARY ========";
-    LOG( logINFO ) << "Mesh loaded        : " << m_geometryData.size();
-    LOG( logINFO ) << "Total vertex count : " << vtxCount;
-    LOG( logINFO ) << "Handle loaded      : " << m_handleData.size();
-    LOG( logINFO ) << "Animation loaded   : " << m_animationData.size();
-    LOG( logINFO ) << "Loading Time (sec) : " << m_loadingTime;
+    LOG( Utils::logINFO ) << "======== LOADING SUMMARY ========";
+    LOG( Utils::logINFO ) << "Mesh loaded        : " << m_geometryData.size();
+    LOG( Utils::logINFO ) << "Total vertex count : " << vtxCount;
+    LOG( Utils::logINFO ) << "Handle loaded      : " << m_handleData.size();
+    LOG( Utils::logINFO ) << "Animation loaded   : " << m_animationData.size();
+    LOG( Utils::logINFO ) << "Loading Time (sec) : " << m_loadingTime;
 }
 
 } // namespace Asset

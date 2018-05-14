@@ -47,7 +47,7 @@ void ShaderProgram::loadShader( ShaderType type, const std::string& name,
 #ifdef OS_MACOS
     if ( type == ShaderType_COMPUTE )
     {
-        LOG( logERROR ) << "No compute shader on OsX <= El Capitan";
+        LOG( Core::Utils::logERROR ) << "No compute shader on OsX <= El Capitan";
         return;
     }
 #endif
@@ -175,7 +175,7 @@ void ShaderProgram::load( const ShaderConfiguration& shaderConfig ) {
     {
         if ( m_configuration.m_shaders[i] != "" )
         {
-            LOG( logDEBUG ) << "Loading shader " << m_configuration.m_shaders[i];
+            LOG( Core::Utils::logDEBUG ) << "Loading shader " << m_configuration.m_shaders[i];
             loadShader( ShaderType( i ), m_configuration.m_shaders[i],
                         m_configuration.getProperties(), m_configuration.getIncludes(),
                         m_configuration.m_version );
@@ -208,7 +208,7 @@ void ShaderProgram::validate() const {
     m_program->validate();
     if ( !m_program->isValid() )
     {
-        LOG( logDEBUG ) << m_program->infoLog();
+        LOG( Core::Utils::logDEBUG ) << m_program->infoLog();
     }
 }
 
@@ -221,7 +221,7 @@ void ShaderProgram::reload() {
     {
         if ( m_shaderObjects[i] != nullptr )
         {
-            LOG( logDEBUG ) << "Reloading shader " << m_shaderObjects[i]->name();
+            LOG( Core::Utils::logDEBUG ) << "Reloading shader " << m_shaderObjects[i]->name();
 
             m_program->detach( m_shaderObjects[i].get() );
             loadShader( getGLenumAsType( m_shaderObjects[i]->type() ), m_shaderObjects[i]->name(),
@@ -378,7 +378,7 @@ std::string ShaderProgram::preprocessIncludes( const std::string& name, const st
 
             } else
             {
-                LOG( logWARNING ) << "Cannot open included file " << match[1].str() << " at line"
+                LOG( Core::Utils::logWARNING ) << "Cannot open included file " << match[1].str() << " at line"
                                   << nline << " of file " << name << ". Ignored.";
                 continue;
             }
@@ -396,7 +396,7 @@ std::string ShaderProgram::preprocessIncludes( const std::string& name, const st
              }
              else
              {
-             LOG(logWARNING) << "Cannot open included file " << file << " from " << m_filename << ".
+             LOG(Core::Utils::logWARNING) << "Cannot open included file " << file << " from " << m_filename << ".
              Ignored."; continue;
              }
              */

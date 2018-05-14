@@ -29,27 +29,27 @@ void AssimpAnimationDataLoader::loadData(
 
     if ( scene == nullptr )
     {
-        LOG( logDEBUG ) << "AssimpAnimationDataLoader : scene is nullptr.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpAnimationDataLoader : scene is nullptr.";
         return;
     }
 
     if ( !sceneHasAnimation( scene ) )
     {
-        LOG( logDEBUG ) << "AssimpAnimationDataLoader : scene has no animation.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpAnimationDataLoader : scene has no animation.";
         return;
     }
 
     if ( m_verbose )
     {
-        LOG( logDEBUG ) << "File contains animation.";
-        LOG( logDEBUG ) << "Animation Loading begin...";
+        LOG( Core::Utils::logDEBUG ) << "File contains animation.";
+        LOG( Core::Utils::logDEBUG ) << "Animation Loading begin...";
     }
 
     loadAnimationData( scene, data );
 
     if ( m_verbose )
     {
-        LOG( logDEBUG ) << "Animation Loading end.\n";
+        LOG( Core::Utils::logDEBUG ) << "Animation Loading end.\n";
     }
 }
 

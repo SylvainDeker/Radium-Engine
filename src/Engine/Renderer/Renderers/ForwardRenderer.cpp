@@ -178,7 +178,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
 
     GL_ASSERT( glDrawBuffers( 1, buffers ) ); // Draw color texture
 
-    // LOG(logDEBUG) << "Forward renderer has " << m_lightmanagers[0]->count() << " lights.";
+    // LOG(Core::Utils::logDEBUG) << "Forward renderer has " << m_lightmanagers[0]->count() << " lights.";
     // forward renderer only use one light manager
     if ( m_lightmanagers[0]->count() > 0 )
     {
@@ -542,7 +542,7 @@ void ForwardRenderer::resizeInternal() {
                           m_textures[RendererTextures_Specular].get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 
@@ -556,7 +556,7 @@ void ForwardRenderer::resizeInternal() {
                              m_textures[RendererTextures_OITRevealage].get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 #endif
@@ -567,7 +567,7 @@ void ForwardRenderer::resizeInternal() {
     m_postprocessFbo->attachTexture( GL_COLOR_ATTACHMENT0, m_fancyTexture.get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 

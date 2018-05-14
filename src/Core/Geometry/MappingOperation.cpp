@@ -14,7 +14,7 @@ bool isAllFinite( const Parametrization& param ) {
         if ( !param.at( i ).isFinite() )
         {
 #ifdef CORE_DEBUG
-            LOG( logWARNING ) << "Element " << i << " not finite.";
+            LOG( Core::Utils::logWARNING ) << "Element " << i << " not finite.";
             print( param.at( i ) );
 #endif
             status = false;
@@ -31,7 +31,7 @@ bool isAllInside( const Parametrization& param ) {
         if ( !param.at( i ).isInside() )
         {
 #ifdef CORE_DEBUG
-            LOG( logWARNING ) << "Element " << i << " not inside.";
+            LOG( Core::Utils::logWARNING ) << "Element " << i << " not inside.";
             print( param.at( i ) );
 #endif
             status = false;
@@ -48,7 +48,7 @@ bool isAllBoundToElement( const Parametrization& param ) {
         if ( !param.at( i ).isBoundToElement() )
         {
 #ifdef CORE_DEBUG
-            LOG( logWARNING ) << "Element " << i << " not bound.";
+            LOG( Core::Utils::logWARNING ) << "Element " << i << " not bound.";
 #endif
             status = false;
         }
@@ -132,11 +132,11 @@ void applyParametrization( const TriangleMesh& inMesh, const Parametrization& pa
 }
 
 void print( const Mapping& map ) {
-    LOG( logINFO ) << "Alpha : " << map.getAlpha();
-    LOG( logINFO ) << "Beta  : " << map.getBeta();
-    LOG( logINFO ) << "Gamma : " << map.getGamma();
-    LOG( logINFO ) << "Delta : " << map.getDelta();
-    LOG( logINFO ) << "ID    : " << map.getID().getValue();
+    LOG( Utils::logINFO ) << "Alpha : " << map.getAlpha();
+    LOG( Utils::logINFO ) << "Beta  : " << map.getBeta();
+    LOG( Utils::logINFO ) << "Gamma : " << map.getGamma();
+    LOG( Utils::logINFO ) << "Delta : " << map.getDelta();
+    LOG( Utils::logINFO ) << "ID    : " << map.getID().getValue();
 }
 
 void print( const Parametrization& param ) {

@@ -39,7 +39,7 @@ void DebugRender::initialize() {
             std::vector<GLchar> log( length );
             glGetShaderInfoLog( vert, length, &length, log.data() );
 
-            LOG( logERROR ) << "Vertex shader not compiled : " << std::string( log.data() ) << "\n"
+            LOG( Core::Utils::logERROR ) << "Vertex shader not compiled : " << std::string( log.data() ) << "\n"
                             << vertStr;
         }
 
@@ -57,7 +57,7 @@ void DebugRender::initialize() {
             std::vector<GLchar> log( length );
             glGetShaderInfoLog( frag, length, &length, log.data() );
 
-            LOG( logERROR ) << "Fragment shader not compiled : " << std::string( log.data() )
+            LOG( Core::Utils::logERROR ) << "Fragment shader not compiled : " << std::string( log.data() )
                             << "\n"
                             << fragStr;
         }
@@ -74,7 +74,7 @@ void DebugRender::initialize() {
             glGetProgramiv( prog, GL_INFO_LOG_LENGTH, &length );
             std::vector<GLchar> log( length );
             glGetProgramInfoLog( prog, length, &length, log.data() );
-            LOG( logERROR ) << "Program not linked : " << std::string( log.data() );
+            LOG( Core::Utils::logERROR ) << "Program not linked : " << std::string( log.data() );
         }
 
         glDetachShader( prog, vert );

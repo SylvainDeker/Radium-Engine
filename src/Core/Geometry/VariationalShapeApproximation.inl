@@ -53,13 +53,13 @@ inline void VariationalShapeApproximationBase<K_Region>::exec( const uint iterat
         CORE_WARN_IF( false, "V.S.A. NOT INITIALIZED" );
         return;
     }
-    LOG( logDEBUG ) << "Computing V.S.A. ...";
+    LOG( Utils::logDEBUG ) << "Computing V.S.A. ...";
     for ( uint i = 0; i < iteration; ++i )
     {
         this->proxy_fitting();
         this->geometry_partitioning();
     }
-    LOG( logDEBUG ) << "V.S.A. completed.";
+    LOG( Utils::logDEBUG ) << "V.S.A. completed.";
 }
 
 template <uint K_Region>
@@ -70,13 +70,13 @@ inline void VariationalShapeApproximationBase<K_Region>::exec() {
         CORE_WARN_IF( false, "V.S.A. NOT INITIALIZED" );
         return;
     }
-    LOG( logDEBUG ) << "Computing V.S.A. ...";
+    LOG( Utils::logDEBUG ) << "Computing V.S.A. ...";
     for ( uint i = 0; i < Iteration; ++i )
     {
         this->proxy_fitting();
         this->geometry_partitioning();
     }
-    LOG( logDEBUG ) << "V.S.A. completed.";
+    LOG( Utils::logDEBUG ) << "V.S.A. completed.";
 }
 
 //////////////////////////////////////////////////////////////////////////////

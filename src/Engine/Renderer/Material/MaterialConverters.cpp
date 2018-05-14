@@ -17,7 +17,7 @@ namespace Engine {
 ///////////////////////////////////////////////
 
 Material* MaterialConverter::operator()( const Ra::Core::Asset::MaterialData* toconvert ) {
-    LOG( logERROR ) << "Trying to convert a abstract material ... !";
+    LOG( Core::Utils::logERROR ) << "Trying to convert a abstract material ... !";
     return nullptr;
 }
 
@@ -78,7 +78,7 @@ std::pair<bool, ConverterFunction> getMaterialConverter( const std::string& name
         return {true, search->second};
     }
     auto result = std::make_pair( false, [name]( AssetMaterialPtr ) -> RadiumMaterialPtr {
-        LOG( logERROR ) << "Required material converter " << name << " not found!";
+        LOG( Core::Utils::logERROR ) << "Required material converter " << name << " not found!";
         return nullptr;
     } );
     return result;

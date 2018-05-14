@@ -24,20 +24,20 @@ void AssimpLightDataLoader::loadData( const aiScene* scene,
 
     if ( scene == nullptr )
     {
-        LOG( logDEBUG ) << "AssimpLightDataLoader : scene is nullptr.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpLightDataLoader : scene is nullptr.";
         return;
     }
 
     if ( !sceneHasLight( scene ) )
     {
-        LOG( logDEBUG ) << "AssimpLightDataLoader : scene has no lights.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpLightDataLoader : scene has no lights.";
         return;
     }
 
     if ( m_verbose )
     {
-        LOG( logINFO ) << "File contains light.";
-        LOG( logINFO ) << "Light Loading begin...";
+        LOG( Core::Utils::logINFO ) << "File contains light.";
+        LOG( Core::Utils::logINFO ) << "Light Loading begin...";
     }
 
     uint lightSize = sceneLightSize( scene );
@@ -51,7 +51,7 @@ void AssimpLightDataLoader::loadData( const aiScene* scene,
 
     if ( m_verbose )
     {
-        LOG( logINFO ) << "Light Loading end.\n";
+        LOG( Core::Utils::logINFO ) << "Light Loading end.\n";
     }
 }
 
@@ -121,10 +121,10 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
     break;
 
     case Core::Asset::LightData::AREA_LIGHT:
-    { LOG( logWARNING ) << "Light " << data.getName() << " : AREA light are not yet supported."; }
+    { LOG( Core::Utils::logWARNING ) << "Light " << data.getName() << " : AREA light are not yet supported."; }
     break;
     default:
-    { LOG( logWARNING ) << "Light " << data.getName() << " : unknown type."; }
+    { LOG( Core::Utils::logWARNING ) << "Light " << data.getName() << " : unknown type."; }
     break;
     }
 }

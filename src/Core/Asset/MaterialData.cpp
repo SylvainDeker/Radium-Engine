@@ -13,7 +13,7 @@ MaterialData::~MaterialData() {}
 
 /// DEBUG
 void MaterialData::displayInfo() const {
-    LOG( logERROR ) << "MaterialData : unkonwn material type : " << m_type;
+    LOG( Core::Utils::logERROR ) << "MaterialData : unkonwn material type : " << m_type;
 }
 
 ///////////////////

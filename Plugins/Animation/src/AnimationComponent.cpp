@@ -103,7 +103,7 @@ void AnimationComponent::setupSkeletonDisplay() {
                 new SkeletonBoneRenderObject( name, this, i, getRoMgr() ) );
             m_renderObjects.push_back( m_boneDrawables.back()->getRenderObjectIndex() );
         } else
-        { LOG( logDEBUG ) << "Bone " << m_skel.getLabel( i ) << " not displayed."; }
+        { LOG( Ra::Core::Utils::logDEBUG ) << "Bone " << m_skel.getLabel( i ) << " not displayed."; }
     }
 }
 
@@ -247,7 +247,7 @@ void AnimationComponent::createWeightMatrix( const Ra::Core::Asset::HandleData* 
 
     if ( Ra::Core::Animation::normalizeWeights( m_weights, true ) )
     {
-        LOG( logINFO ) << "Skinning weights have been normalized";
+        LOG( Ra::Core::Utils::logINFO ) << "Skinning weights have been normalized";
     }
 }
 

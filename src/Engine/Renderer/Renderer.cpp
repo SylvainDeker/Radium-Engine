@@ -553,7 +553,7 @@ void Renderer::resize( uint w, uint h ) {
     m_pickingFbo->attachTexture( GL_COLOR_ATTACHMENT0, m_pickingTexture.get()->texture() );
     if ( m_pickingFbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_pickingFbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_pickingFbo->checkStatus();
     }
     m_pickingFbo->unbind();
     GL_CHECK_ERROR;
@@ -607,10 +607,10 @@ void Renderer::handleFileLoading( const Core::Asset::FileData& filedata ) {
             ++i;
         }
     }
-    LOG( logINFO ) << "Added " << i << " lights in the renderer";
+    LOG( Core::Utils::logINFO ) << "Added " << i << " lights in the renderer";
     if ( data.size() > i )
     {
-        LOG( logWARNING ) << data.size() - i << " lights where of unknown or unsupported type.";
+        LOG( Core::Utils::logWARNING ) << data.size() - i << " lights where of unknown or unsupported type.";
     }
 #endif
 }

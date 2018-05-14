@@ -36,7 +36,7 @@ void MeshPaintComponent::initialize() {
 
     if ( !geometryData )
     {
-        LOG( logWARNING ) << "Cannot initialize MeshPaint Component: no geometry data."
+        LOG( Ra::Core::Utils::logWARNING ) << "Cannot initialize MeshPaint Component: no geometry data."
                           << std::endl;
         return;
     }

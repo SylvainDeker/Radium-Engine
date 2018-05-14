@@ -27,27 +27,27 @@ void AssimpHandleDataLoader::loadData( const aiScene* scene,
 
     if ( scene == nullptr )
     {
-        LOG( logDEBUG ) << "AssimpHandleDataLoader : scene is nullptr.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpHandleDataLoader : scene is nullptr.";
         return;
     }
 
     if ( !sceneHasHandle( scene ) )
     {
-        LOG( logDEBUG ) << "AssimpHandleDataLoader : scene has no handle.";
+        LOG( Core::Utils::logDEBUG ) << "AssimpHandleDataLoader : scene has no handle.";
         return;
     }
 
     if ( m_verbose )
     {
-        LOG( logDEBUG ) << "File contains handle.";
-        LOG( logDEBUG ) << "Handle Loading begin...";
+        LOG( Core::Utils::logDEBUG ) << "File contains handle.";
+        LOG( Core::Utils::logDEBUG ) << "Handle Loading begin...";
     }
 
     loadHandleData( scene, data );
 
     if ( m_verbose )
     {
-        LOG( logDEBUG ) << "Handle Loading end.\n";
+        LOG( Core::Utils::logDEBUG ) << "Handle Loading end.\n";
     }
 }
 

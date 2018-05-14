@@ -49,12 +49,12 @@ inline void AnimationData::setFrames( const std::vector<HandleAnimation>& frameL
 
 /// DEBUG
 inline void AnimationData::displayInfo() const {
-    LOG( logDEBUG ) << "======== ANIMATION INFO ========";
-    LOG( logDEBUG ) << " Name              : " << m_name;
-    LOG( logDEBUG ) << " Start Time        : " << m_time.getStart();
-    LOG( logDEBUG ) << " End   Time        : " << m_time.getEnd();
-    LOG( logDEBUG ) << " Time Step         : " << m_dt;
-    LOG( logDEBUG ) << " Animated Object # : " << m_keyFrame.size();
+    LOG( Utils::logDEBUG ) << "======== ANIMATION INFO ========";
+    LOG( Utils::logDEBUG ) << " Name              : " << m_name;
+    LOG( Utils::logDEBUG ) << " Start Time        : " << m_time.getStart();
+    LOG( Utils::logDEBUG ) << " End   Time        : " << m_time.getEnd();
+    LOG( Utils::logDEBUG ) << " Time Step         : " << m_dt;
+    LOG( Utils::logDEBUG ) << " Animated Object # : " << m_keyFrame.size();
 }
 
 } // namespace Asset

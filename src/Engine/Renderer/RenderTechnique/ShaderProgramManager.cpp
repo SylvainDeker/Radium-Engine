@@ -58,7 +58,7 @@ void ShaderProgramManager::initialize() {
 
 void ShaderProgramManager::addNamedString( const std::string& includepath,
                                            const std::string& realfile ) {
-    LOG( logINFO ) << "Inserting named string : " << includepath << " --> " << realfile;
+    LOG( Core::Utils::logINFO ) << "Inserting named string : " << includepath << " --> " << realfile;
     m_files.push_back( globjects::File::create( realfile ) );
     m_namedStrings.push_back(
         globjects::NamedString::create( includepath, m_files[m_files.size() - 1].get() ) );
@@ -109,7 +109,7 @@ const ShaderProgram* ShaderProgramManager::addShaderProgram( const ShaderConfigu
                                          "Error occurred while loading shader program %s "
                                          ":\nDefault shader program used instead.\n",
                                          config.m_name.c_str() );
-        LOG( logERROR ) << error;
+        LOG( Core::Utils::logERROR ) << error;
 
         // insert in the failed shaders list
         m_shaderFailedConfs.push_back( config );

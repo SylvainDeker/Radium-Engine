@@ -37,7 +37,7 @@ Scalar weightSimilarity( const Eigen::SparseVector<Scalar>& v1w,
 }
 
 void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
-    LOG( logDEBUG ) << "Precomputing CoRs";
+    LOG( Utils::logDEBUG ) << "Precomputing CoRs";
 
     // First step : subdivide the original mesh until weights are sufficiently close enough.
     Scalar maxWeightDistance = 0.f;
@@ -77,12 +77,12 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
             }
         }
 
-        LOG( logDEBUG ) << "Max weight distance is " << maxWeightDistance;
+        LOG( Utils::logDEBUG ) << "Max weight distance is " << maxWeightDistance;
 
         // We found some edges over the limit, so we split them.
         if ( !edgesToSplit.empty() )
         {
-            LOG( logDEBUG ) << "Splitting " << edgesToSplit.size() << " edges";
+            LOG( Utils::logDEBUG ) << "Splitting " << edgesToSplit.size() << " edges";
             int startIndex = subdividedWeights.rows();
             int numCols = subdividedWeights.cols();
 
@@ -163,7 +163,7 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
 #if defined CORE_DEBUG
         if ( i % 100 == 0 )
         {
-            LOG( logDEBUG ) << "CoR:" << i << " / " << nVerts;
+            LOG( Utils::logDEBUG ) << "CoR:" << i << " / " << nVerts;
         }
 #endif // CORE_DEBUG
     }

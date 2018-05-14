@@ -117,9 +117,9 @@ inline void LightData::displayInfo() const {
         type = "AREA LIGHT";
         break;
     }
-    LOG( logINFO ) << "======== LIGHT INFO ========";
-    LOG( logINFO ) << " Name           : " << m_name;
-    LOG( logINFO ) << " Type           : " << type;
+    LOG( Utils::logINFO ) << "======== LIGHT INFO ========";
+    LOG( Utils::logINFO ) << " Name           : " << m_name;
+    LOG( Utils::logINFO ) << " Type           : " << type;
 }
 
 } // namespace Asset

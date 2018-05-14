@@ -120,7 +120,7 @@ class RA_ENGINE_API RenderParameters final {
     void print() const {
         for ( const auto& p : m_scalarParamsVector )
         {
-            LOG( logDEBUG ) << "  " << p.first << " : " << p.second.m_name;
+            LOG( Core::Utils::logDEBUG ) << "  " << p.first << " : " << p.second.m_name;
         }
     }
 

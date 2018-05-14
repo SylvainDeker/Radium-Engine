@@ -50,27 +50,27 @@ void AssimpGeometryDataLoader::loadData( const aiScene* scene,
 
     if ( scene == nullptr )
     {
-        LOG( logINFO ) << "AssimpGeometryDataLoader : scene is nullptr.";
+        LOG( Core::Utils::logINFO ) << "AssimpGeometryDataLoader : scene is nullptr.";
         return;
     }
 
     if ( !sceneHasGeometry( scene ) )
     {
-        LOG( logINFO ) << "AssimpGeometryDataLoader : scene has no mesh.";
+        LOG( Core::Utils::logINFO ) << "AssimpGeometryDataLoader : scene has no mesh.";
         return;
     }
 
     if ( m_verbose )
     {
-        LOG( logINFO ) << "File contains geometry.";
-        LOG( logINFO ) << "Geometry Loading begin...";
+        LOG( Core::Utils::logINFO ) << "File contains geometry.";
+        LOG( Core::Utils::logINFO ) << "Geometry Loading begin...";
     }
 
     loadGeometryData( scene, data );
 
     if ( m_verbose )
     {
-        LOG( logINFO ) << "Geometry Loading end.\n";
+        LOG( Core::Utils::logINFO ) << "Geometry Loading end.\n";
     }
 }
 
@@ -377,11 +377,11 @@ void AssimpGeometryDataLoader::loadMaterial( const aiMaterial& material,
      aiShadingMode shading;
      if( AI_SUCCESS == material.Get( AI_MATKEY_SHADING_MODEL, shading ) )
      {
-     LOG(logINFO) << "Got a "  << shading << " shading model.";
+     LOG(Core::Utils::logINFO) << "Got a "  << shading << " shading model.";
      }
      else
      {
-     LOG(logINFO) << "Unable to retrieve shading model.";
+     LOG(Core::Utils::logINFO) << "Unable to retrieve shading model.";
      }
      */
 

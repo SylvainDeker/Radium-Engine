@@ -26,7 +26,7 @@ Entity* EntityManager::createEntity( const std::string& name ) {
     std::string entityName = name;
     if ( entityExists( name ) )
     {
-        LOG( logWARNING ) << "Entity `" << name << "` already exists";
+        LOG( Core::Utils::logWARNING ) << "Entity `" << name << "` already exists";
         entityName = name + "_";
     }
     Core::Container::Index idx = m_entities.emplace( new Entity( entityName ) );

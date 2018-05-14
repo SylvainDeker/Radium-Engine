@@ -39,7 +39,7 @@ Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename 
         if ( e.name.compare( "face" ) == 0 && e.size != 0 )
         {
             // Mesh found. Let the other loaders handle it
-            LOG( logINFO ) << "[TinyPLY] Faces found. Aborting" << std::endl;
+            LOG( Core::Utils::logINFO ) << "[TinyPLY] Faces found. Aborting" << std::endl;
             return nullptr;
         }
     }
@@ -50,13 +50,13 @@ Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename 
     if ( !fileData->isInitialized() )
     {
         delete fileData;
-        LOG( logINFO ) << "[TinyPLY] Filedata cannot be initialized...";
+        LOG( Core::Utils::logINFO ) << "[TinyPLY] Filedata cannot be initialized...";
         return nullptr;
     }
 
     if ( fileData->isVerbose() )
     {
-        LOG( logINFO ) << "[TinyPLY] File Loading begin...";
+        LOG( Core::Utils::logINFO ) << "[TinyPLY] File Loading begin...";
     }
 
     // Define containers to hold the extracted data. The type must match
@@ -72,7 +72,7 @@ Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename 
     if ( vertexCount == 0 )
     {
         delete fileData;
-        LOG( logINFO ) << "[TinyPLY] No vertice found";
+        LOG( Core::Utils::logINFO ) << "[TinyPLY] No vertice found";
         return nullptr;
     }
 
@@ -120,7 +120,7 @@ Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename 
 
     if ( fileData->isVerbose() )
     {
-        LOG( logINFO ) << "[TinyPLY] File Loading end.";
+        LOG( Core::Utils::logINFO ) << "[TinyPLY] File Loading end.";
 
         fileData->displayInfo();
     }

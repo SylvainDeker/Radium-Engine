@@ -504,12 +504,12 @@ void MainWindow::exportCurrentMesh() {
         bool result = obj.save( filename, mesh );
         if ( result )
         {
-            LOG( logINFO ) << "Mesh from " << ro->getName() << " successfully exported to "
+            LOG( Core::Utils::logINFO ) << "Mesh from " << ro->getName() << " successfully exported to "
                            << filename;
         } else
-        { LOG( logERROR ) << "Mesh from " << ro->getName() << "failed to export"; }
+        { LOG( Core::Utils::logERROR ) << "Mesh from " << ro->getName() << "failed to export"; }
     } else
-    { LOG( logWARNING ) << "Current entry was not a render object. No mesh was exported."; }
+    { LOG( Core::Utils::logWARNING ) << "Current entry was not a render object. No mesh was exported."; }
 }
 
 void MainWindow::deleteCurrentItem() {

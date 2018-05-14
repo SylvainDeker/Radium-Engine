@@ -78,12 +78,12 @@ void Component::rayCastQuery( const Core::Ray& ray ) const {
                 const Ra::Core::Vector3 pEntity = t * pLocal;
                 const Ra::Core::Vector3 pWorld = getEntity()->getTransform() * pEntity;
 
-                LOG( logINFO ) << " Ray cast vs " << ro->getName();
-                LOG( logINFO ) << " Hit triangle " << tidx;
-                LOG( logINFO ) << " Nearest vertex " << result.m_nearestVertex;
-                LOG( logINFO ) << "Hit position (RO): " << pLocal.transpose();
-                LOG( logINFO ) << "Hit position (Comp): " << pEntity.transpose();
-                LOG( logINFO ) << "Hit position (World): " << pWorld.transpose();
+                LOG( Core::Utils::logINFO ) << " Ray cast vs " << ro->getName();
+                LOG( Core::Utils::logINFO ) << " Hit triangle " << tidx;
+                LOG( Core::Utils::logINFO ) << " Nearest vertex " << result.m_nearestVertex;
+                LOG( Core::Utils::logINFO ) << "Hit position (RO): " << pLocal.transpose();
+                LOG( Core::Utils::logINFO ) << "Hit position (Comp): " << pEntity.transpose();
+                LOG( Core::Utils::logINFO ) << "Hit position (World): " << pWorld.transpose();
             }
         }
     }

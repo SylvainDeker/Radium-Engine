@@ -120,7 +120,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     QDir().mkdir( m_exportFoldername.c_str() );
 
     // Boilerplate print.
-    LOG( logINFO ) << "*** Radium Engine Main App  ***";
+    LOG( Core::Utils::logINFO ) << "*** Radium Engine Main App  ***";
     std::stringstream config;
 #if defined( CORE_DEBUG )
     config << "Debug Build ";
@@ -138,7 +138,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
 #elif defined( ARCH_X64 )
     config << " 64 bits x64";
 #endif
-    LOG( logINFO ) << config.str();
+    LOG( Core::Utils::logINFO ) << config.str();
 
     config.str( std::string() );
     config << "Floating point format : ";
@@ -148,7 +148,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     config << "single precision";
 #endif
 
-    LOG( logINFO ) << config.str();
+    LOG( Core::Utils::logINFO ) << config.str();
 
     config.str( std::string() );
     config << "Texture support : ";
@@ -158,18 +158,18 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     config << "disabled";
 #endif
 
-    LOG( logINFO ) << config.str();
+    LOG( Core::Utils::logINFO ) << config.str();
 
     config.str( std::string() );
     config << "core build: " << Core::Utils::compiler << " - " << Core::Utils::compileDate << " "
            << Core::Utils::compileTime;
-    LOG( logINFO ) << config.str();
+    LOG( Core::Utils::logINFO ) << config.str();
 
-    LOG( logINFO ) << "Git changeset: " << Core::Utils::gitChangeSet;
+    LOG( Core::Utils::logINFO ) << "Git changeset: " << Core::Utils::gitChangeSet;
 
-    LOG( logINFO ) << "Qt Version: " << qVersion();
+    LOG( Core::Utils::logINFO ) << "Qt Version: " << qVersion();
 
-    LOG( logINFO ) << "Max Thread: " << m_maxThreads;
+    LOG( Core::Utils::logINFO ) << "Max Thread: " << m_maxThreads;
 
     // Create default format for Qt.
     QSurfaceFormat format;
@@ -210,7 +210,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     if ( !loadPlugins( pluginsPath, parser.values( pluginLoadOpt ),
                        parser.values( pluginIgnoreOpt ) ) )
     {
-        LOG( logERROR ) << "An error occurred while trying to load plugins.";
+        LOG( Core::Utils::logERROR ) << "An error occurred while trying to load plugins.";
     }
 
     // Make builtin loaders the fallback if no plugins can load some file format
@@ -280,12 +280,12 @@ void BaseApplication::setupScene() {
 
 void BaseApplication::loadFile( QString path ) {
     std::string pathStr = path.toLocal8Bit().data();
-    LOG( logINFO ) << "Loading file " << pathStr << "...";
+    LOG( Core::Utils::logINFO ) << "Loading file " << pathStr << "...";
     bool res = m_engine->loadFile( pathStr );
 
     if ( !res )
     {
-        LOG( logERROR ) << "Aborting file loading !";
+        LOG( Core::Utils::logERROR ) << "Aborting file loading !";
 
         return;
     }
@@ -427,7 +427,7 @@ void BaseApplication::radiumFrame() {
 }
 
 void BaseApplication::appNeedsToQuit() {
-    LOG( logDEBUG ) << "About to quit.";
+    LOG( Core::Utils::logDEBUG ) << "About to quit.";
     m_isAboutToQuit = true;
 }
 
@@ -474,16 +474,16 @@ BaseApplication::~BaseApplication() {
 bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QStringList& loadList,
                                    const QStringList& ignoreList ) {
     QDir pluginsDir( qApp->applicationDirPath() );
-    LOG( logINFO ) << " *** Loading Plugins ***";
+    LOG( Core::Utils::logINFO ) << " *** Loading Plugins ***";
     bool result = pluginsDir.cd( pluginsPath.c_str() );
 
     if ( !result )
     {
-        LOG( logERROR ) << "Cannot open specified plugins directory " << pluginsPath;
+        LOG( Core::Utils::logERROR ) << "Cannot open specified plugins directory " << pluginsPath;
         return false;
     }
 
-    LOG( logDEBUG ) << "Plugin directory :" << pluginsDir.absolutePath().toStdString();
+    LOG( Core::Utils::logDEBUG ) << "Plugin directory :" << pluginsDir.absolutePath().toStdString();
     bool res = true;
     uint pluginCpt = 0;
 
@@ -516,13 +516,13 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
             if ( !loadList.empty() &&
                  std::find_if( loadList.begin(), loadList.end(), stringCmp ) == loadList.end() )
             {
-                LOG( logDEBUG ) << "Ignoring " << filename.toStdString() << " (not on load list)";
+                LOG( Core::Utils::logDEBUG ) << "Ignoring " << filename.toStdString() << " (not on load list)";
                 continue;
             }
             if ( std::find_if( ignoreList.begin(), ignoreList.end(), stringCmp ) !=
                  ignoreList.end() )
             {
-                LOG( logDEBUG ) << "Ignoring " << filename.toStdString() << " (on ignore list)";
+                LOG( Core::Utils::logDEBUG ) << "Ignoring " << filename.toStdString() << " (on ignore list)";
                 continue;
             }
 
@@ -530,7 +530,7 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
             // Force symbol resolution at load time.
             pluginLoader.setLoadHints( QLibrary::ResolveAllSymbolsHint );
 
-            LOG( logINFO ) << "Found plugin " << filename.toStdString();
+            LOG( Core::Utils::logINFO ) << "Found plugin " << filename.toStdString();
 
             QObject* plugin = pluginLoader.instance();
             Plugins::RadiumPluginInterface* loadedPlugin;
@@ -572,27 +572,27 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
                     {
                         if ( m_viewer->isOpenGlInitialized() )
                         {
-                            LOG( logINFO ) << "Direct OpenGL initialization for plugin "
+                            LOG( Core::Utils::logINFO ) << "Direct OpenGL initialization for plugin "
                                            << filename.toStdString();
                             // OpenGL is ready, initialize openGL part of the plugin
                             loadedPlugin->openGlInitialize( context, m_viewer->getContext() );
                         } else
                         {
                             // Defer OpenGL initialisation
-                            LOG( logINFO ) << "Defered OpenGL initialization for plugin "
+                            LOG( Core::Utils::logINFO ) << "Defered OpenGL initialization for plugin "
                                            << filename.toStdString();
                             m_openGLPlugins.push_back( loadedPlugin );
                         }
                     }
                 } else
                 {
-                    LOG( logERROR ) << "Something went wrong while trying to cast plugin"
+                    LOG( Core::Utils::logERROR ) << "Something went wrong while trying to cast plugin"
                                     << filename.toStdString();
                     res = false;
                 }
             } else
             {
-                LOG( logERROR ) << "Something went wrong while trying to load plugin "
+                LOG( Core::Utils::logERROR ) << "Something went wrong while trying to load plugin "
                                 << filename.toStdString() << " : "
                                 << pluginLoader.errorString().toStdString();
                 res = false;
@@ -602,9 +602,9 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
 
     if ( pluginCpt == 0 )
     {
-        LOG( logINFO ) << "No plugin found or loaded.";
+        LOG( Core::Utils::logINFO ) << "No plugin found or loaded.";
     } else
-    { LOG( logINFO ) << "Loaded " << pluginCpt << " plugins."; }
+    { LOG( Core::Utils::logINFO ) << "Loaded " << pluginCpt << " plugins."; }
 
     return res;
 }

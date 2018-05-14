@@ -37,7 +37,7 @@ RadiumEngine::RadiumEngine() {}
 RadiumEngine::~RadiumEngine() {}
 
 void RadiumEngine::initialize() {
-    LOG( logINFO ) << "*** Radium Engine ***";
+    LOG( Core::Utils::logINFO ) << "*** Radium Engine ***";
     m_signalManager.reset( new SignalManager );
     m_entityManager.reset( new EntityManager );
     m_renderObjectManager.reset( new RenderObjectManager );
@@ -115,7 +115,7 @@ void RadiumEngine::registerSystem( const std::string& name, System* system ) {
     CORE_ASSERT( m_systems.find( name ) == m_systems.end(), "Same system added multiple times." );
 
     m_systems[name] = std::shared_ptr<System>( system );
-    LOG( logINFO ) << "Loaded : " << name;
+    LOG( Core::Utils::logINFO ) << "Loaded : " << name;
 }
 
 System* RadiumEngine::getSystem( const std::string& system ) const {
@@ -183,7 +183,7 @@ bool RadiumEngine::loadFile( const std::string& filename ) {
 
     if ( m_loadedFile == nullptr )
     {
-        LOG( logERROR ) << "There is no loader to handle \"" << extension
+        LOG( Core::Utils::logERROR ) << "There is no loader to handle \"" << extension
                         << "\" extension ! File can't be loaded.";
 
         return false;
@@ -206,7 +206,7 @@ bool RadiumEngine::loadFile( const std::string& filename ) {
         }
     } else
     {
-        LOG( logWARNING ) << "File \"" << filename << "\" has no usable data. Deleting entity...";
+        LOG( Core::Utils::logWARNING ) << "File \"" << filename << "\" has no usable data. Deleting entity...";
         m_entityManager->removeEntity( entity );
     }
 

@@ -365,19 +365,19 @@ inline void GeometryData::displayInfo() const {
         type = "HEX MESH";
         break;
     }
-    LOG( logINFO ) << "======== MESH INFO ========";
-    LOG( logINFO ) << " Name           : " << m_name;
-    LOG( logINFO ) << " Type           : " << type;
-    LOG( logINFO ) << " Vertex #       : " << m_vertex.size();
-    LOG( logINFO ) << " Edge #         : " << m_edge.size();
-    LOG( logINFO ) << " Face #         : " << m_faces.size();
-    LOG( logINFO ) << " Normal ?       : " << ( ( m_normal.empty() ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Tangent ?      : " << ( ( m_tangent.empty() ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Bitangent ?    : " << ( ( m_bitangent.empty() ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Tex.Coord. ?   : " << ( ( m_texCoord.empty() ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Color ?        : " << ( ( m_color.empty() ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Material ?     : " << ( ( !m_hasMaterial ) ? "NO" : "YES" );
-    LOG( logINFO ) << " Has Dup. Vert. : "
+    LOG( Utils::logINFO ) << "======== MESH INFO ========";
+    LOG( Utils::logINFO ) << " Name           : " << m_name;
+    LOG( Utils::logINFO ) << " Type           : " << type;
+    LOG( Utils::logINFO ) << " Vertex #       : " << m_vertex.size();
+    LOG( Utils::logINFO ) << " Edge #         : " << m_edge.size();
+    LOG( Utils::logINFO ) << " Face #         : " << m_faces.size();
+    LOG( Utils::logINFO ) << " Normal ?       : " << ( ( m_normal.empty() ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Tangent ?      : " << ( ( m_tangent.empty() ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Bitangent ?    : " << ( ( m_bitangent.empty() ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Tex.Coord. ?   : " << ( ( m_texCoord.empty() ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Color ?        : " << ( ( m_color.empty() ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Material ?     : " << ( ( !m_hasMaterial ) ? "NO" : "YES" );
+    LOG( Utils::logINFO ) << " Has Dup. Vert. : "
                    << ( ( m_duplicateTable.size() == m_vertex.size() ) ? "NO" : "YES" );
 
     if ( m_hasMaterial )

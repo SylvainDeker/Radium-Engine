@@ -48,14 +48,14 @@ Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename )
 
     if ( scene == nullptr )
     {
-        LOG( logINFO ) << "File \"" << fileData->getFileName()
+        LOG( Core::Utils::logINFO ) << "File \"" << fileData->getFileName()
                        << "\" assimp error : " << m_importer.GetErrorString() << ".";
         return nullptr;
     }
 
     if ( fileData->isVerbose() )
     {
-        LOG( logINFO ) << "File Loading begin...";
+        LOG( Core::Utils::logINFO ) << "File Loading begin...";
     }
 
     std::clock_t startTime;
@@ -82,7 +82,7 @@ Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename )
     {
         if ( fileData->isVerbose() )
         {
-            LOG( logINFO ) << "Point-cloud found. Aborting";
+            LOG( Core::Utils::logINFO ) << "Point-cloud found. Aborting";
             delete fileData;
             return nullptr;
         }
@@ -102,7 +102,7 @@ Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename )
 
     if ( fileData->isVerbose() )
     {
-        LOG( logINFO ) << "File Loading end.";
+        LOG( Core::Utils::logINFO ) << "File Loading end.";
 
         fileData->displayInfo();
     }

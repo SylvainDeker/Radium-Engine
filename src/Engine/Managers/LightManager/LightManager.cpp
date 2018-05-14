@@ -140,7 +140,7 @@ void LightManager::handleAssetLoading( Entity* entity, const Core::Asset::FileDa
         registerComponent( entity, comp );
         m_data->push( comp );
     }
-    LOG( logINFO ) << "LightManager : loaded " << count() << " lights.";
+    LOG( Core::Utils::logINFO ) << "LightManager : loaded " << count() << " lights.";
 }
 } // namespace Engine
 } // namespace Ra

@@ -64,7 +64,7 @@ bool checkWeightMatrix( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_O
 
     if ( !ok )
     {
-        LOG( logDEBUG ) << "Matrix is not good.";
+        LOG( Utils::logDEBUG ) << "Matrix is not good.";
     }
 
     return ok;
@@ -73,7 +73,7 @@ bool checkWeightMatrix( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_O
 bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_ON_ASSERT,
                           const bool MT ) {
     int status = 1;
-    LOG( logDEBUG ) << "Searching for empty rows in the matrix...";
+    LOG( Utils::logDEBUG ) << "Searching for empty rows in the matrix...";
     if ( MT )
     {
 #pragma omp parallel for
@@ -90,7 +90,7 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
             {
                 CORE_ASSERT( false, "At least a vertex as no weights" );
             } else
-            { LOG( logDEBUG ) << "At least a vertex as no weights"; }
+            { LOG( Utils::logDEBUG ) << "At least a vertex as no weights"; }
         }
     } else
     {
@@ -106,7 +106,7 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
                 {
                     CORE_ASSERT( false, text.c_str() );
                 } else
-                { LOG( logDEBUG ) << text; }
+                { LOG( Utils::logDEBUG ) << text; }
             }
         }
     }
