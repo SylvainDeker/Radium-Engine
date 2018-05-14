@@ -29,6 +29,7 @@ public slots:
     void onCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void useTransformMatrix();
     void updateInfos();
+    void onValueChanged(double);
 
 private:
     bool applyWolfram();

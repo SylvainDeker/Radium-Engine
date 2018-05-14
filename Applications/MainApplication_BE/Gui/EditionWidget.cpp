@@ -33,16 +33,14 @@ namespace Gui{
         m_selectionManager(selectionManager)
     {
         setupUi(this);
-        for( int i =0 ; i <4 ;i++){
-            for ( int j = 0 ; j<4; j++){
-                m_TabButtonDirect[i*4+j] = new QDoubleSpinBox(direct);
-                m_TabButtonDirect[i*4+j]->setDecimals(10);
-                m_TabButtonDirect[i*4+j]->setMaximum(std::numeric_limits<float>::max());
-                m_TabButtonDirect[i*4+j]->setMinimum(-std::numeric_limits<float>::max());
-                m_directLayout->addWidget(m_TabButtonDirect[i*4+j],i+1,j,1,1);
-            }
+        for( int i =0 ; i <16 ;++i){
+            m_TabButtonDirect[i] = new QDoubleSpinBox(direct);
+            m_TabButtonDirect[i]->setDecimals(5);
+            m_TabButtonDirect[i]->setMaximum(std::numeric_limits<float>::max());
+            m_TabButtonDirect[i]->setMinimum(-std::numeric_limits<float>::max());
+            m_directLayout->addWidget(m_TabButtonDirect[i],(i/4)+1,(i%4),1,1);
         }
-        //I hate qt designer
+
         m_rotation_x->setMaximum(std::numeric_limits<float>::max());
         m_rotation_x->setMinimum(-std::numeric_limits<float>::max());
         m_rotation_y->setMaximum(std::numeric_limits<float>::max());
@@ -61,6 +59,15 @@ namespace Gui{
         m_scale_y->setMinimum(-std::numeric_limits<float>::max());
         m_scale_z->setMaximum(std::numeric_limits<float>::max());
         m_scale_z->setMinimum(-std::numeric_limits<float>::max());
+        QObject::connect(m_rotation_x, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_rotation_y, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_rotation_z, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_translation_x, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_translation_y, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_translation_z, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_scale_x, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_scale_y, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
+        QObject::connect(m_scale_z, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
 
         m_matrice3 = new QCheckBox(direct);
         m_matrice3->setObjectName(QStringLiteral("m_matrice3"));
@@ -83,18 +90,17 @@ namespace Gui{
             std::cout << "update infos" << std::endl;
             Ra::Core::Matrix4 m = tf.matrix();
             Ra::Core::Matrix3 r = tf.rotation();
+            Ra::Core::Vector3 angles = r.eulerAngles(0,1,2);
 
             m_translation_x->setValue(m(0,3));
             m_translation_y->setValue(m(1,3));
             m_translation_z->setValue(m(2,3));
-            //TODO maybe broken
             m_scale_x->setValue(m(0,0)/r(0,0));
             m_scale_y->setValue(m(1,1)/r(1,1));
             m_scale_z->setValue(m(2,2)/r(2,2));
-            //see decomposition of r matrix
-            m_rotation_x->setValue(std::atan2(r(2,1), r(2,2))/M_DEGREE_TO_RADIAN);
-            m_rotation_y->setValue(std::atan2(-r(2,0), std::sqrt(r(2,1)*r(2,1)+r(2,2)*r(2,2)))/M_DEGREE_TO_RADIAN);
-            m_rotation_z->setValue(std::atan2(r(1,0), r(0,0))/M_DEGREE_TO_RADIAN);
+            m_rotation_x->setValue(Ra::Core::Math::toDegrees(angles(0)));
+            m_rotation_y->setValue(Ra::Core::Math::toDegrees(angles(1)));
+            m_rotation_z->setValue(Ra::Core::Math::toDegrees(angles(2)));
 
             std::ostringstream matrixText;
             matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n{"
@@ -186,7 +192,6 @@ namespace Gui{
     {
        if (m_use_tranform_matrix->isChecked()){
             int index = tabWidget->currentIndex();
-
             switch(index)
             {
             case 0 :
@@ -203,42 +208,41 @@ namespace Gui{
                 //TODO ?
                 break;
             }
-       }else{
-           transformation();
-
        }
     }
     void EditionWidget::matriceSize3()
     {
         const bool m_visible = !m_matrice3->isChecked();
         for( int i =0 ; i<4 ; i++)
+        {
             m_TabButtonDirect[i*4+3]->setVisible(m_visible);
-
-        for( int i =0 ; i<4 ; i++)
             m_TabButtonDirect[12+i]->setVisible(m_visible);
+        }
 
     }
     void EditionWidget::useTransformMatrix(){
-        const bool m_visible = !m_use_tranform_matrix->isChecked();
-        m_translation_x->setEnabled(m_visible);
-        m_translation_y->setEnabled(m_visible);
-        m_translation_z->setEnabled(m_visible);
-        m_rotation_x->setEnabled(m_visible);
-        m_rotation_y->setEnabled(m_visible);
-        m_rotation_z->setEnabled(m_visible);
-        m_scale_x->setEnabled(m_visible);
-        m_scale_y->setEnabled(m_visible);
-        m_scale_z->setEnabled(m_visible);
-        tabWidget->setEnabled(!m_visible);
+        const bool visible = !m_use_tranform_matrix->isChecked();
+        m_translation_x->setEnabled(visible);
+        m_translation_y->setEnabled(visible);
+        m_translation_z->setEnabled(visible);
+        m_rotation_x->setEnabled(visible);
+        m_rotation_y->setEnabled(visible);
+        m_rotation_z->setEnabled(visible);
+        m_scale_x->setEnabled(visible);
+        m_scale_y->setEnabled(visible);
+        m_scale_z->setEnabled(visible);
+        tabWidget->setEnabled(!visible);
+        m_applyButton->setEnabled(!visible);
+        m_undoButton->setEnabled(!visible);
     }
 
     bool EditionWidget::transformation(){
         Core::Transform tf = Core::Transform::Identity();
         //scale, then rotation, and finally translation (inverted because matrix multiplication)
         tf.translate(Core::Vector3(m_translation_x->value(), m_translation_y->value(), m_translation_z->value()));
-        tf.rotate(Eigen::AngleAxisf(m_rotation_x->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitX()));
-        tf.rotate(Eigen::AngleAxisf(m_rotation_y->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitY()));
-        tf.rotate(Eigen::AngleAxisf(m_rotation_z->value()*M_DEGREE_TO_RADIAN, Eigen::Vector3f::UnitZ()));
+        tf.rotate(Eigen::AngleAxisf(Ra::Core::Math::toRadians(m_rotation_x->value()), Eigen::Vector3f::UnitX()));
+        tf.rotate(Eigen::AngleAxisf(Ra::Core::Math::toRadians(m_rotation_y->value()), Eigen::Vector3f::UnitY()));
+        tf.rotate(Eigen::AngleAxisf(Ra::Core::Math::toRadians(m_rotation_z->value()), Eigen::Vector3f::UnitZ()));
         tf.scale(Core::Vector3(m_scale_x->value(), m_scale_y->value(), m_scale_z->value()));
         return setTransform(tf);
     }
@@ -347,6 +351,11 @@ namespace Gui{
             }
         }
         return setMatrix(m);
+    }
+
+    void EditionWidget::onValueChanged(double)
+    {
+        transformation();
     }
 
 }
