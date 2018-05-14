@@ -9,7 +9,7 @@
 
 namespace Ra {
 namespace Core {
-
+namespace Geometry {
 template <typename T>
 inline BVH<T>::Node::Node( const std::shared_ptr<T>& t ) : m_aabb( t->getAabb() ), m_data( t ) {}
 
@@ -163,5 +163,6 @@ inline void BVH<T>::getInFrustumSlow( std::vector<std::shared_ptr<T>>& objects,
         }
     }
 }
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

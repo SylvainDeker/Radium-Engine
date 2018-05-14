@@ -11,6 +11,8 @@ namespace Container {
 class Index;
 } // namespace Container
 
+//namespace Geometry {
+
 struct TriangleMesh;
 class Dcel;
 
@@ -27,6 +29,7 @@ struct Twin {
 RA_CORE_API void convert( const TriangleMesh& mesh, Dcel& dcel );
 RA_CORE_API void convert( const Dcel& dcel, TriangleMesh& mesh );
 
+//} //namespace Geometry
 } // namespace Core
 } // namespace Ra
 
