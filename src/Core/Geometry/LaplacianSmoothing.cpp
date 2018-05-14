@@ -4,13 +4,13 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry{
 
-Geometry::ScalarValue smartClamp( const Geometry::BitSet& bit, const Geometry::ScalarValue& value, const bool flag ) {
-    Geometry::ScalarValue s( value );
+ScalarValue smartClamp( const BitSet& bit, const ScalarValue& value, const bool flag ) {
+    ScalarValue s( value );
     Scalar zero = 0.0;
     s.prune( zero );
-    for ( Geometry::ScalarValue::InnerIterator it( s, 0 ); it; ++it )
+    for ( ScalarValue::InnerIterator it( s, 0 ); it; ++it )
     {
         uint i = it.row();
         if ( !( bit[i] || flag ) )
@@ -21,12 +21,12 @@ Geometry::ScalarValue smartClamp( const Geometry::BitSet& bit, const Geometry::S
     return s;
 }
 
-void smartClamp( const Geometry::BitSet& bit, const Geometry::ScalarValue& value, Geometry::ScalarValue& clamped,
+void smartClamp( const BitSet& bit, const ScalarValue& value, ScalarValue& clamped,
                  const bool flag ) {
-    Geometry::ScalarValue s( value );
+    ScalarValue s( value );
     Scalar zero = 0.0;
     s.prune( zero );
-    for ( Geometry::ScalarValue::InnerIterator it( s, 0 ); it; ++it )
+    for ( ScalarValue::InnerIterator it( s, 0 ); it; ++it )
     {
         uint i = it.row();
         if ( !( bit[i] || flag ) )
@@ -39,7 +39,7 @@ void smartClamp( const Geometry::BitSet& bit, const Geometry::ScalarValue& value
 
 Container::VectorArray<Vector3> laplacianSmoothing( const Container::VectorArray<Vector3>& v,
                                          const Ra::Core::Geometry::LaplacianMatrix& L,
-                                         const Geometry::ScalarValue& weight, const uint iteration ) {
+                                         const ScalarValue& weight, const uint iteration ) {
     Container::VectorArray<Vector3> p( v );
     auto pM = p.getMap();
     Container::VectorArray<Vector3> tmp( v );
@@ -58,7 +58,7 @@ Container::VectorArray<Vector3> laplacianSmoothing( const Container::VectorArray
 }
 
 void laplacianSmoothing( const Container::VectorArray<Vector3>& v,
-                         const Ra::Core::Geometry::LaplacianMatrix& L, const Geometry::ScalarValue& weight,
+                         const Ra::Core::Geometry::LaplacianMatrix& L, const ScalarValue& weight,
                          const uint iteration, Container::VectorArray<Vector3>& p ) {
     p = v;
     auto pM = p.getMap();
@@ -77,6 +77,6 @@ void laplacianSmoothing( const Container::VectorArray<Vector3>& v,
     std::swap( p, tmp );
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
