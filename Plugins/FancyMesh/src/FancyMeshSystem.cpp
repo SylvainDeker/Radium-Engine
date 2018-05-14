@@ -36,7 +36,7 @@ void FancyMeshSystem::handleAssetLoading( Ra::Engine::Entity* entity,
     }
 }
 
-void FancyMeshSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
+void FancyMeshSystem::generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                      const Ra::Engine::FrameInfo& frameInfo ) {
     // Do nothing, as this system only displays meshes.
 }

@@ -22,7 +22,7 @@ MeshPaintComponent::MeshPaintComponent( const std::string& name, Ra::Engine::Ent
 
 MeshPaintComponent::~MeshPaintComponent() {}
 
-void MeshPaintComponent::addTasks( Ra::Core::TaskQueue* taskQueue,
+void MeshPaintComponent::addTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                    const Ra::Engine::FrameInfo& info ) {}
 
 void MeshPaintComponent::setDataId( const std::string& id ) {

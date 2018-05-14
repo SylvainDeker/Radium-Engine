@@ -229,7 +229,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     // unless monothread CPU
     uint numThreads =
         std::max( m_maxThreads == 0 ? RA_MAX_THREAD : std::min( m_maxThreads, RA_MAX_THREAD ), 1u );
-    m_taskQueue.reset( new Core::TaskQueue( numThreads ) );
+    m_taskQueue.reset( new Core::Utils::TaskQueue( numThreads ) );
 
     setupScene();
     emit starting();

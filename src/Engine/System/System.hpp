@@ -11,6 +11,8 @@
 
 #include <Engine/Component/Component.hpp>
 
+#include <Core/Utils/TaskQueue.hpp>
+
 namespace Ra {
 namespace Core {
 class TaskQueue;
@@ -44,7 +46,7 @@ class RA_ENGINE_API System {
      *
      * @param dt Time elapsed since last call.
      */
-    virtual void generateTasks( Core::TaskQueue* taskQueue,
+    virtual void generateTasks( Core::Utils::TaskQueue* taskQueue,
                                 const Engine::FrameInfo& frameInfo ) = 0;
 
     /// Registers a component belonging to an entity, making it active within the system.

@@ -5,6 +5,7 @@
 
 #include <Engine/Renderer/Renderer.hpp>
 #include <Engine/System/System.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 namespace Ra {
 namespace Core {
@@ -33,7 +34,7 @@ class MESH_PAINT_PLUGIN_API MeshPaintSystem : public Ra::Engine::System {
     virtual void handleAssetLoading( Ra::Engine::Entity* entity,
                                      const Ra::Core::Asset::FileData* fileData ) override;
 
-    virtual void generateTasks( Ra::Core::TaskQueue* taskQueue,
+    virtual void generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                 const Ra::Engine::FrameInfo& frameInfo ) override;
 
     void startPaintMesh( bool start );

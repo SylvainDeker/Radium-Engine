@@ -14,12 +14,10 @@
 
 namespace Ra {
 namespace Core {
-class Task;
-}
-} // namespace Ra
+namespace Utils {
 
-namespace Ra {
-namespace Core {
+class Task;
+
 /// This class allows tasks to be registered and then executed in parallel on separate threads.
 /// it maintains an internal pool of threads. When instructed, it dispatches the tasks to the
 /// pooled threads.
@@ -55,7 +53,7 @@ class RA_CORE_API TaskQueue {
     /// Registers a task to be executed.
     /// Task must have been created with new and be initialized with its parameter.
     /// The task queue assumes ownership of the task.
-    TaskId registerTask( Task* task );
+    TaskId registerTask( Utils::Task* task );
 
     /// Add dependency between two tasks. The successor task will be executed only when all
     /// its predecessor completed.
@@ -140,6 +138,8 @@ class RA_CORE_API TaskQueue {
     std::mutex m_taskQueueMutex;
 };
 
+
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

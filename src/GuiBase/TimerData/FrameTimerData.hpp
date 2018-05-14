@@ -23,7 +23,7 @@ struct RA_GUIBASE_API FrameTimerData {
     Core::Utils::TimePoint tasksEnd;
     Core::Utils::TimePoint frameEnd;
     Engine::Renderer::TimerData renderData;
-    std::vector<Core::TaskQueue::TimerData> taskData;
+    std::vector<Core::Utils::TaskQueue::TimerData> taskData;
 
     void print( std::ostream& ostream ) const;
 };

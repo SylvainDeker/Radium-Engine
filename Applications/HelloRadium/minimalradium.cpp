@@ -43,12 +43,12 @@ void MinimalComponent::spin() {
 
 /// This system will be added to the engine. Every frame it will
 /// add a task to be executed, calling the spin function of the component.
-void MinimalSystem::generateTasks( Ra::Core::TaskQueue* q, const Ra::Engine::FrameInfo& info ) {
+void MinimalSystem::generateTasks( Ra::Core::Utils::TaskQueue* q, const Ra::Engine::FrameInfo& info ) {
     // We check that our component is here.
     CORE_ASSERT( m_components.size() == 1, "System incorrectly initialized" );
     MinimalComponent* c = static_cast<MinimalComponent*>( m_components[0].second );
 
     // Create a new task which wil call c->spin() when executed.
     q->registerTask(
-        new Ra::Core::FunctionTask( std::bind( &MinimalComponent::spin, c ), "spin" ) );
+        new Ra::Core::Utils::FunctionTask( std::bind( &MinimalComponent::spin, c ), "spin" ) );
 }

@@ -7,6 +7,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Utils {
 
 TaskQueue::TaskQueue( uint numThreads ) : m_processingTasks( 0 ), m_shuttingDown( false ) {
     CORE_ASSERT( numThreads > 0, " You need at least one thread" );
@@ -315,5 +316,7 @@ void TaskQueue::printTaskGraph( std::ostream& output ) const {
 
     output << "}" << std::endl;
 }
+
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

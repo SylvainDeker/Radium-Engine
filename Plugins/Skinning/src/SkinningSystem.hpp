@@ -20,19 +20,19 @@ namespace SkinningPlugin {
 class SKIN_PLUGIN_API SkinningSystem : public Ra::Engine::System {
   public:
     SkinningSystem() {}
-    virtual void generateTasks( Ra::Core::TaskQueue* taskQueue,
+    virtual void generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                 const Ra::Engine::FrameInfo& frameInfo ) override {
         for ( const auto& compEntry : m_components )
         {
             SkinningComponent* comp = static_cast<SkinningComponent*>( compEntry.second );
-            Ra::Core::FunctionTask* skinTask = new Ra::Core::FunctionTask(
+            Ra::Core::Utils::FunctionTask* skinTask = new Ra::Core::Utils::FunctionTask(
                 std::bind( &SkinningComponent::skin, comp ), "SkinnerTask" );
 
-            Ra::Core::FunctionTask* endTask = new Ra::Core::FunctionTask(
+            Ra::Core::Utils::FunctionTask* endTask = new Ra::Core::Utils::FunctionTask(
                 std::bind( &SkinningComponent::endSkinning, comp ), "SkinnerEndTask" );
 
-            Ra::Core::TaskQueue::TaskId skinTaskId = taskQueue->registerTask( skinTask );
-            Ra::Core::TaskQueue::TaskId endTaskId = taskQueue->registerTask( endTask );
+            Ra::Core::Utils::TaskQueue::TaskId skinTaskId = taskQueue->registerTask( skinTask );
+            Ra::Core::Utils::TaskQueue::TaskId endTaskId = taskQueue->registerTask( endTask );
             taskQueue->addPendingDependency( "AnimatorTask", skinTaskId );
             taskQueue->addDependency( skinTaskId, endTaskId );
         }

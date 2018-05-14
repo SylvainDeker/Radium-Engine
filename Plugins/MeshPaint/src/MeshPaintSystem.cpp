@@ -34,7 +34,7 @@ void MeshPaintSystem::handleAssetLoading( Ra::Engine::Entity* entity,
     }
 }
 
-void MeshPaintSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
+void MeshPaintSystem::generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                      const Ra::Engine::FrameInfo& frameInfo ) {
     // Do nothing, as this system only displays painted meshes.
 }

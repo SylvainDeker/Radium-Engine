@@ -5,6 +5,8 @@
 
 #include <Engine/System/System.hpp>
 
+#include <Core/Utils/TaskQueue.hpp>
+
 namespace Ra {
 namespace Core {
 struct TriangleMesh;
@@ -32,7 +34,7 @@ class FM_PLUGIN_API FancyMeshSystem : public Ra::Engine::System {
     void handleAssetLoading( Ra::Engine::Entity* entity,
                              const Ra::Core::Asset::FileData* fileData ) override;
 
-    void generateTasks( Ra::Core::TaskQueue* taskQueue,
+    void generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                         const Ra::Engine::FrameInfo& frameInfo ) override;
 };
 

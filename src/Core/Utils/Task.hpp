@@ -7,6 +7,8 @@
 
 namespace Ra {
 namespace Core {
+namespace Utils {
+
 /// An interface class representing a basic task.
 /// Tasks are basic processing units of the engine. Tasks are run
 /// in parallel on separate threads by the engine. The work of
@@ -44,6 +46,7 @@ class FunctionTask : public Task {
     std::string m_name;              /// Name of the task
 };
 
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

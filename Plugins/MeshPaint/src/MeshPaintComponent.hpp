@@ -9,6 +9,7 @@
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>
 #include <Engine/Renderer/RenderObject/RenderObject.hpp>
 #include <Engine/Renderer/Renderer.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 namespace Ra {
 namespace Core {
@@ -28,7 +29,7 @@ class MESH_PAINT_PLUGIN_API MeshPaintComponent : public Ra::Engine::Component {
     virtual ~MeshPaintComponent();
 
     virtual void initialize() override;
-    virtual void addTasks( Ra::Core::TaskQueue* taskQueue, const Ra::Engine::FrameInfo& info );
+    virtual void addTasks( Ra::Core::Utils::TaskQueue* taskQueue, const Ra::Engine::FrameInfo& info );
 
     void setDataId( const std::string& id );
 

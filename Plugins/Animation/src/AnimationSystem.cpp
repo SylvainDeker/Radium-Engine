@@ -20,7 +20,7 @@ AnimationSystem::AnimationSystem() {
     m_xrayOn = false;
 }
 
-void AnimationSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
+void AnimationSystem::generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                      const Ra::Engine::FrameInfo& frameInfo ) {
     const bool playFrame = m_isPlaying || m_oneStep;
 
@@ -29,7 +29,7 @@ void AnimationSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
     for ( auto compEntry : this->m_components )
     {
         AnimationComponent* component = static_cast<AnimationComponent*>( compEntry.second );
-        Ra::Core::FunctionTask* task = new Ra::Core::FunctionTask(
+        Ra::Core::Utils::FunctionTask* task = new Ra::Core::Utils::FunctionTask(
             std::bind( &AnimationComponent::update, component, currentDelta ), "AnimatorTask" );
         taskQueue->registerTask( task );
     }

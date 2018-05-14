@@ -7,6 +7,7 @@
 
 #include <Core/Asset/FileData.hpp>
 #include <Core/Asset/FileLoaderInterface.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 
 #include <map>
 #include <memory>
@@ -14,13 +15,17 @@
 
 namespace Ra {
 namespace Core {
+
 class TaskQueue;
 struct MouseEvent;
 struct KeyEvent;
+
 } // namespace Core
 } // namespace Ra
+
 namespace Ra {
 namespace Engine {
+
 class System;
 class Entity;
 class Component;
@@ -28,11 +33,13 @@ class Mesh;
 class RenderObjectManager;
 class EntityManager;
 class SignalManager;
+
 } // namespace Engine
 } // namespace Ra
 
 namespace Ra {
 namespace Engine {
+
 class RA_ENGINE_API RadiumEngine {
     RA_SINGLETON_INTERFACE( RadiumEngine );
 
@@ -43,7 +50,7 @@ class RA_ENGINE_API RadiumEngine {
     void initialize();
     void cleanup();
 
-    void getTasks( Core::TaskQueue* taskQueue, Scalar dt );
+    void getTasks( Core::Utils::TaskQueue* taskQueue, Scalar dt );
 
     void registerSystem( const std::string& name, System* system );
     System* getSystem( const std::string& system ) const;

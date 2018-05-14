@@ -100,7 +100,7 @@ void RadiumEngine::endFrameSync() {
     m_signalManager->fireFrameEnded();
 }
 
-void RadiumEngine::getTasks( Core::TaskQueue* taskQueue, Scalar dt ) {
+void RadiumEngine::getTasks( Ra::Core::Utils::TaskQueue* taskQueue, Scalar dt ) {
     static uint frameCounter = 0;
     FrameInfo frameInfo;
     frameInfo.m_dt = dt;

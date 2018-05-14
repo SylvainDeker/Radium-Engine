@@ -7,6 +7,7 @@
 #include <QApplication>
 
 #include <Core/Utils/Timer.hpp>
+#include <Core/Utils/TaskQueue.hpp>
 #include <GuiBase/TimerData/FrameTimerData.hpp>
 #include <GuiBase/Viewer/Viewer.hpp>
 
@@ -125,7 +126,7 @@ class RA_GUIBASE_API BaseApplication : public QApplication {
     std::unique_ptr<Engine::RadiumEngine> m_engine;
 
     /// Task queue for processing tasks.
-    std::unique_ptr<Core::TaskQueue> m_taskQueue;
+    std::unique_ptr<Core::Utils::TaskQueue> m_taskQueue;
 
     /// Number of frames per second to generate.
     uint m_targetFPS;

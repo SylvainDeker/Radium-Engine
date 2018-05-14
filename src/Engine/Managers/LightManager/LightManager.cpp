@@ -32,16 +32,16 @@ size_t LightManager::count() const {
 // System
 //
 
-void LightManager::generateTasks( Core::TaskQueue* taskQueue, const Engine::FrameInfo& frameInfo ) {
+void LightManager::generateTasks( Core::Utils::TaskQueue* taskQueue, const Engine::FrameInfo& frameInfo ) {
     /*
     futur work for async rendering
-    Ra::Core::FunctionTask* preprocess_task = new Ra::Core::FunctionTask(
+    Ra::Core::Utils::FunctionTask* preprocess_task = new Ra::Core::Utils::FunctionTask(
         std::bind(&LightManager::preprocess, this),
         "PreProcessLight"
     );
 
-    Ra::Core::TaskQueue::TaskId preprocess_id = taskQueue->registerTask( preprocess_task );
-    Ra::Core::TaskQueue::TaskId lastprocess_id = preprocess_id;
+    Ra::Core::Utils::TaskQueue::TaskId preprocess_id = taskQueue->registerTask( preprocess_task );
+    Ra::Core::Utils::TaskQueue::TaskId lastprocess_id = preprocess_id;
 
     for (const auto& compEntry : m_components)
     {
@@ -50,16 +50,16 @@ void LightManager::generateTasks( Core::TaskQueue* taskQueue, const Engine::Fram
         if(!comp)
             continue;
 
-        Ra::Core::FunctionTask* prerender_task = new Ra::Core::FunctionTask(
+        Ra::Core::Utils::FunctionTask* prerender_task = new Ra::Core::Utils::FunctionTask(
            [this,comp]() { this->prerender(*comp); }, "PreRenderLight"
         );
 
-        Ra::Core::FunctionTask* postrender_task = new Ra::Core::FunctionTask(
+        Ra::Core::Utils::FunctionTask* postrender_task = new Ra::Core::Utils::FunctionTask(
            [this,comp]() { this->postrender(*comp); }, "PostRenderLight"
         );
 
-        Ra::Core::TaskQueue::TaskId prerender_id = taskQueue->registerTask( prerender_task );
-        Ra::Core::TaskQueue::TaskId postrender_id = taskQueue->registerTask( postrender_task );
+        Ra::Core::Utils::TaskQueue::TaskId prerender_id = taskQueue->registerTask( prerender_task );
+        Ra::Core::Utils::TaskQueue::TaskId postrender_id = taskQueue->registerTask( postrender_task );
 
         taskQueue->addDependency( preprocess_id, prerender_id);
         taskQueue->addDependency( prerender_id, postrender_id);
@@ -67,12 +67,12 @@ void LightManager::generateTasks( Core::TaskQueue* taskQueue, const Engine::Fram
         lastprocess_id = postrender_id;
     }
 
-    Ra::Core::FunctionTask* postprocess_task = new Ra::Core::FunctionTask(
+    Ra::Core::Utils::FunctionTask* postprocess_task = new Ra::Core::Utils::FunctionTask(
         std::bind(&LightManager::postprocess, this),
         "PostProcess"
     );
 
-    Ra::Core::TaskQueue::TaskId postprocess_id = taskQueue->registerTask( postprocess_task );
+    Ra::Core::Utils::TaskQueue::TaskId postprocess_id = taskQueue->registerTask( postprocess_task );
 
     taskQueue->addDependency( postprocess_id, lastprocess_id);
     */
