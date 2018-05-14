@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>827</width>
-    <height>531</height>
+    <width>830</width>
+    <height>529</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,7 +34,7 @@
         <x>0</x>
         <y>30</y>
         <width>811</width>
-        <height>491</height>
+        <height>441</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="m_formLayout">
@@ -82,11 +82,6 @@
          <item>
           <property name="text">
            <string>Point</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Area</string>
           </property>
          </item>
         </widget>
@@ -321,11 +316,6 @@
        </item>
       </layout>
      </widget>
-     <zorder>m_formLayoutWidget</zorder>
-     <zorder>m_name_lab</zorder>
-     <zorder>m_lineEdit</zorder>
-     <zorder>m_name_lab</zorder>
-     <zorder>groupBox</zorder>
     </widget>
    </item>
    <item>

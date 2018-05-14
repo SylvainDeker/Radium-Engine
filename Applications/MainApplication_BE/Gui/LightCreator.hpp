@@ -7,6 +7,7 @@
 
 #include <Core/Container/Index.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
+#include <Core/Math/Math.hpp>
 
 #include <ui_LightCreator.h>
 
@@ -66,12 +67,12 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     void sig_hide_angle();
     void sig_hide_dir();
     void sig_hide_pos();
-    // void sig_hide_falloff();
+    void sig_hide_falloff();
 
     void sig_show_angle();
     void sig_show_dir();
     void sig_show_pos();
-    // void sig_show_falloff();
+    void sig_show_falloff();
 
 
     void sig_onItemAdded( const Engine::ItemEntry& ent );
@@ -92,7 +93,10 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     double *m_falloff_val_linear;
     double *m_falloff_val_quadratic;
     QString *m_name;
+    Core::Vector3 *m_position;
+    Core::Vector3 *m_direction;
 
+    void save_light(Ra::Engine::Entity *entity);
 };
 } // namespace Gui
 } // namespace Ra
