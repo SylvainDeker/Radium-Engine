@@ -113,7 +113,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
 
     std::time_t startTime = std::time( nullptr );
     std::tm* startTm = std::localtime( &startTime );
-    Ra::Core::StringUtils::stringPrintf( m_exportFoldername, "%4u%02u%02u-%02u%02u",
+    Ra::Core::Utils::stringPrintf( m_exportFoldername, "%4u%02u%02u-%02u%02u",
                                          1900 + startTm->tm_year, startTm->tm_mon, startTm->tm_mday,
                                          startTm->tm_hour, startTm->tm_min );
 
@@ -161,11 +161,11 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
     LOG( logINFO ) << config.str();
 
     config.str( std::string() );
-    config << "core build: " << Version::compiler << " - " << Version::compileDate << " "
-           << Version::compileTime;
+    config << "core build: " << Core::Utils::compiler << " - " << Core::Utils::compileDate << " "
+           << Core::Utils::compileTime;
     LOG( logINFO ) << config.str();
 
-    LOG( logINFO ) << "Git changeset: " << Version::gitChangeSet;
+    LOG( logINFO ) << "Git changeset: " << Core::Utils::gitChangeSet;
 
     LOG( logINFO ) << "Qt Version: " << qVersion();
 
@@ -457,7 +457,7 @@ void BaseApplication::setRecordFrames( bool on ) {
 
 void BaseApplication::recordFrame() {
     std::string filename;
-    Ra::Core::StringUtils::stringPrintf( filename, "%s/radiumframe_%06u.png",
+    Ra::Core::Utils::stringPrintf( filename, "%s/radiumframe_%06u.png",
                                          m_exportFoldername.c_str(), m_frameCounter );
     m_viewer->grabFrame( filename );
 }
@@ -495,7 +495,7 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
     for ( const auto& filename : pluginsDir.entryList( QDir::Files ) )
     {
 
-        std::string ext = Core::StringUtils::getFileExt( filename.toStdString() );
+        std::string ext = Core::Utils::getFileExt( filename.toStdString() );
 #if defined( OS_WINDOWS )
         std::string sysDllExt = "dll";
 #elif defined( OS_LINUX )
@@ -507,7 +507,7 @@ bool BaseApplication::loadPlugins( const std::string& pluginsPath, const QString
 #endif
         if ( ext == sysDllExt )
         {
-            std::string basename = Core::StringUtils::getBaseName( filename.toStdString(), false );
+            std::string basename = Core::Utils::getBaseName( filename.toStdString(), false );
 
             auto stringCmp = [basename]( const QString& str ) {
                 return str.toStdString() == basename;

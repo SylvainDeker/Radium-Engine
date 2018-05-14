@@ -36,7 +36,7 @@ Entity* EntityManager::createEntity( const std::string& name ) {
     if ( name == "" )
     {
         std::string name;
-        Core::StringUtils::stringPrintf( name, "Entity_%u", idx.getValue() );
+        Core::Utils::stringPrintf( name, "Entity_%u", idx.getValue() );
         ent->rename( name );
     }
 

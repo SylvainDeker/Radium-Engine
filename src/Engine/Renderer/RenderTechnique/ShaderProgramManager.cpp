@@ -105,7 +105,7 @@ const ShaderProgram* ShaderProgramManager::addShaderProgram( const ShaderConfigu
     } else
     {
         std::string error;
-        Core::StringUtils::stringPrintf( error,
+        Core::Utils::stringPrintf( error,
                                          "Error occurred while loading shader program %s "
                                          ":\nDefault shader program used instead.\n",
                                          config.m_name.c_str() );

@@ -75,24 +75,24 @@ inline void BlinnPhongMaterialData::displayInfo() const {
 
     if ( hasDiffuse() )
     {
-        Core::StringUtils::stringPrintf( kd, "%.3f %.3f %.3f %.3f", m_diffuse.x(), m_diffuse.y(),
+        Core::Utils::stringPrintf( kd, "%.3f %.3f %.3f %.3f", m_diffuse.x(), m_diffuse.y(),
                                          m_diffuse.z(), m_diffuse.w() );
     }
 
     if ( hasSpecular() )
     {
-        Core::StringUtils::stringPrintf( ks, "%.3f %.3f %.3f %.3f", m_specular.x(),
+        Core::Utils::stringPrintf( ks, "%.3f %.3f %.3f %.3f", m_specular.x(),
                                          m_specular.w() );
     }
 
     if ( hasShininess() )
     {
-        Core::StringUtils::stringPrintf( ns, "%.1f", m_shininess );
+        Core::Utils::stringPrintf( ns, "%.1f", m_shininess );
     }
 
     if ( hasOpacity() )
     {
-        Core::StringUtils::stringPrintf( op, "%.15f", m_opacity );
+        Core::Utils::stringPrintf( op, "%.15f", m_opacity );
     }
 
     LOG( logINFO ) << "======== MATERIAL INFO ========";

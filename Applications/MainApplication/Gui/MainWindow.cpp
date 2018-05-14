@@ -490,7 +490,7 @@ void MainWindow::onItemRemoved( const Engine::ItemEntry& ent ) {
 
 void MainWindow::exportCurrentMesh() {
     std::string filename;
-    Ra::Core::StringUtils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
+    Ra::Core::Utils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
     ItemEntry e = m_selectionManager->currentItem();
 
     // For now we only export a mesh if the selected entry is a render object.

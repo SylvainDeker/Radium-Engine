@@ -98,7 +98,7 @@ void AnimationComponent::setupSkeletonDisplay() {
         if ( !m_skel.m_graph.isLeaf( i ) )
         {
             std::string name = m_skel.getLabel( i );
-            Ra::Core::StringUtils::appendPrintf( name, " (%d)", i );
+            Ra::Core::Utils::appendPrintf( name, " (%d)", i );
             m_boneDrawables.emplace_back(
                 new SkeletonBoneRenderObject( name, this, i, getRoMgr() ) );
             m_renderObjects.push_back( m_boneDrawables.back()->getRenderObjectIndex() );

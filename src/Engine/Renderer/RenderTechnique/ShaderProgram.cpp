@@ -354,7 +354,7 @@ std::string ShaderProgram::preprocessIncludes( const std::string& name, const st
 
     std::string result = "";
     std::vector<std::string> finalStrings;
-    auto shaderLines = Core::StringUtils::splitString( shader, '\n' );
+    auto shaderLines = Core::Utils::splitString( shader, '\n' );
     finalStrings.reserve( shaderLines.size() );
 
     uint nline = 0;

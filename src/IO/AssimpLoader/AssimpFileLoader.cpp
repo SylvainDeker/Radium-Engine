@@ -24,7 +24,7 @@ std::vector<std::string> AssimpFileLoader::getFileExtensions() const {
 
     m_importer.GetExtensionList( extensionsList );
 
-    std::vector<std::string> extensions = Core::StringUtils::splitString( extensionsList, ';' );
+    std::vector<std::string> extensions = Core::Utils::splitString( extensionsList, ';' );
 
     return extensions;
 }
@@ -61,7 +61,7 @@ Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename )
     std::clock_t startTime;
     startTime = std::clock();
 
-    AssimpGeometryDataLoader geometryLoader( Core::StringUtils::getDirName( filename ),
+    AssimpGeometryDataLoader geometryLoader( Core::Utils::getDirName( filename ),
                                              fileData->isVerbose() );
     geometryLoader.loadData( scene, fileData->m_geometryData );
 
@@ -94,7 +94,7 @@ Core::Asset::FileData* AssimpFileLoader::loadFile( const std::string& filename )
     AssimpAnimationDataLoader animationLoader( fileData->isVerbose() );
     animationLoader.loadData( scene, fileData->m_animationData );
 
-    AssimpLightDataLoader lightLoader( Core::StringUtils::getDirName( filename ),
+    AssimpLightDataLoader lightLoader( Core::Utils::getDirName( filename ),
                                        fileData->isVerbose() );
     lightLoader.loadData( scene, fileData->m_lightData );
 

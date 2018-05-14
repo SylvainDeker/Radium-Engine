@@ -591,7 +591,7 @@ void Gui::Viewer::grabFrame( const std::string& filename ) {
     uint w, h;
     uchar* writtenPixels = m_currentRenderer->grabFrame( w, h );
 
-    std::string ext = Core::StringUtils::getFileExt( filename );
+    std::string ext = Core::Utils::getFileExt( filename );
 
     if ( ext == "bmp" )
     {
