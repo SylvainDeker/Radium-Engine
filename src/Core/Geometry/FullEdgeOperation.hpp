@@ -8,7 +8,6 @@ namespace Core {
 
 class Dcel;
 
-namespace Container {
 class Index;
 
 [[deprecated( "Dcel will be removed without notice." )]] RA_CORE_API void
@@ -16,7 +15,7 @@ fulledgeSplit( Dcel& dcel, const Index fulledge_id );
 [[deprecated( "Dcel will be removed without notice." )]] RA_CORE_API void
 fulledgeCollapse( Dcel& dcel, const Index fulledge_id );
 
-} // namespace Container
+
 } // namespace Core
 } // namespace Ra
 

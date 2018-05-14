@@ -4,7 +4,7 @@
 
 namespace Ra {
 namespace Core {
-namespace TMOperations {
+namespace Geometry {
 
 void splitEdge( TopologicalMesh& topologicalMesh, TopologicalMesh::EdgeHandle edgeHandle,
                 Scalar fraction ) {
@@ -47,6 +47,6 @@ void splitEdge( TopologicalMesh& topologicalMesh, TopologicalMesh::EdgeHandle ed
     topologicalMesh.set_normal( vh, n );
     topologicalMesh.split( edgeHandle, vh );
 }
-} // namespace TMOperations
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
