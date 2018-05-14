@@ -5,11 +5,11 @@
 #include <Core/Math/PolyLine.hpp>
 
 using Ra::Core::Vector3;
-using Ra::Core::DistanceQueries::FlagsInternal;
-using Ra::Core::DistanceQueries::pointToLineSq;
-using Ra::Core::DistanceQueries::pointToSegmentSq;
-using Ra::Core::DistanceQueries::PointToTriangleOutput;
-using Ra::Core::DistanceQueries::pointToTriSq;
+using Ra::Core::Geometry::FlagsInternal;
+using Ra::Core::Geometry::pointToLineSq;
+using Ra::Core::Geometry::pointToSegmentSq;
+using Ra::Core::Geometry::PointToTriangleOutput;
+using Ra::Core::Geometry::pointToTriSq;
 using Ra::Core::Math::areApproxEqual;
 namespace RaTests {
 class GeometryTests : public Test {
