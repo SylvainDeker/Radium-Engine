@@ -3,7 +3,7 @@
 
 namespace Ra {
 namespace Core {
-namespace DistanceQueries {
+namespace Geometry {
 // Line funcs
 
 inline RA_CORE_API Scalar pointToLineSq( const Vector3& q, const Vector3& a, const Vector3& dir ) {
@@ -442,6 +442,6 @@ inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Vector3 v1[3]
     return output;
 }
 
-} // namespace DistanceQueries
+} // namespace Geometry::
 } // namespace Core
 } // namespace Ra
