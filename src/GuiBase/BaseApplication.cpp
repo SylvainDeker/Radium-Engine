@@ -240,7 +240,7 @@ BaseApplication::BaseApplication( int argc, char** argv, const WindowFactory& fa
         loadFile( parser.value( fileOpt ) );
     }
 
-    m_lastFrameStart = Core::Timer::Clock::now();
+    m_lastFrameStart = Core::Utils::Clock::now();
 }
 
 void BaseApplication::createConnections() {
@@ -341,18 +341,18 @@ void BaseApplication::addBasicShaders() {
 
 void BaseApplication::radiumFrame() {
     FrameTimerData timerData;
-    timerData.frameStart = Core::Timer::Clock::now();
+    timerData.frameStart = Core::Utils::Clock::now();
 
     // ----------
     // 0. Compute time since last frame.
     const Scalar dt =
-        m_realFrameRate ? Core::Timer::getIntervalSeconds( m_lastFrameStart, timerData.frameStart )
+        m_realFrameRate ? Core::Utils::getIntervalSeconds( m_lastFrameStart, timerData.frameStart )
                         : 1.f / Scalar( m_targetFPS );
     m_lastFrameStart = timerData.frameStart;
 
-    timerData.eventsStart = Core::Timer::Clock::now();
+    timerData.eventsStart = Core::Utils::Clock::now();
     processEvents();
-    timerData.eventsEnd = Core::Timer::Clock::now();
+    timerData.eventsEnd = Core::Utils::Clock::now();
 
     // ----------
     // 1. Gather user input and dispatch it.
@@ -364,7 +364,7 @@ void BaseApplication::radiumFrame() {
     // 2. Kickoff rendering
     m_viewer->startRendering( dt );
 
-    timerData.tasksStart = Core::Timer::Clock::now();
+    timerData.tasksStart = Core::Utils::Clock::now();
 
     // ----------
     // 3. Run the engine task queue.
@@ -381,7 +381,7 @@ void BaseApplication::radiumFrame() {
     timerData.taskData = m_taskQueue->getTimerData();
     m_taskQueue->flushTaskQueue();
 
-    timerData.tasksEnd = Core::Timer::Clock::now();
+    timerData.tasksEnd = Core::Utils::Clock::now();
 
     // ----------
     // 4. Wait until frame is fully rendered and display.
@@ -395,7 +395,7 @@ void BaseApplication::radiumFrame() {
 
     // ----------
     // 6. Frame end.
-    timerData.frameEnd = Core::Timer::Clock::now();
+    timerData.frameEnd = Core::Utils::Clock::now();
     timerData.numFrame = m_frameCounter;
 
     if ( m_recordTimings )

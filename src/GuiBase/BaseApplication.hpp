@@ -141,7 +141,7 @@ class RA_GUIBASE_API BaseApplication : public QApplication {
     QTimer* m_frameTimer;
 
     /// Time since the last frame start.
-    Core::Timer::TimePoint m_lastFrameStart;
+    Core::Utils::TimePoint m_lastFrameStart;
 
     uint m_frameCounter;
     uint m_frameCountBeforeUpdate;

@@ -132,7 +132,7 @@ void Renderer::render( const RenderData& data ) {
     std::lock_guard<std::mutex> renderLock( m_renderMutex );
     CORE_UNUSED( renderLock );
 
-    m_timerData.renderStart = Core::Timer::Clock::now();
+    m_timerData.renderStart = Core::Utils::Clock::now();
 
     // 0. Save eventual already bound FBO (e.g. QtOpenGLWidget) and viewport
     saveExternalFBOInternal();
@@ -140,13 +140,13 @@ void Renderer::render( const RenderData& data ) {
     // 1. Gather render objects if needed
     feedRenderQueuesInternal( data );
 
-    m_timerData.feedRenderQueuesEnd = Core::Timer::Clock::now();
+    m_timerData.feedRenderQueuesEnd = Core::Utils::Clock::now();
 
     // 2. Update them (from an opengl point of view)
     // FIXME(Charly): Maybe we could just update objects if they need it
     // before drawing them, that would be cleaner (performance problem ?)
     updateRenderObjectsInternal( data );
-    m_timerData.updateEnd = Core::Timer::Clock::now();
+    m_timerData.updateEnd = Core::Utils::Clock::now();
 
     // 3. Do picking if needed
     m_pickingResults.clear();
@@ -161,11 +161,11 @@ void Renderer::render( const RenderData& data ) {
 
     // 4. Do the rendering.
     renderInternal( data );
-    m_timerData.mainRenderEnd = Core::Timer::Clock::now();
+    m_timerData.mainRenderEnd = Core::Utils::Clock::now();
 
     // 5. Post processing
     postProcessInternal( data );
-    m_timerData.postProcessEnd = Core::Timer::Clock::now();
+    m_timerData.postProcessEnd = Core::Utils::Clock::now();
 
     // 6. Debug
     debugInternal( data );
@@ -175,7 +175,7 @@ void Renderer::render( const RenderData& data ) {
 
     // 8. Write image to Qt framebuffer.
     drawScreenInternal();
-    m_timerData.renderEnd = Core::Timer::Clock::now();
+    m_timerData.renderEnd = Core::Utils::Clock::now();
 
     // 9. Tell renderobjects they have been drawn (to decreaase the counter)
     notifyRenderObjectsRenderingInternal();

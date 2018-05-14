@@ -5,7 +5,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Timer {
+namespace Utils {
 
 /**
  * @brief The Chrono class represents a chronometer for timing generic functions
@@ -149,7 +149,7 @@ class Chrono {
     TimePoint m_end;   ///< Time after running the function.
 };
 
-} // namespace Timer
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

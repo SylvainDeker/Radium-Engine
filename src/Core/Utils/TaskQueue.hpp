@@ -35,8 +35,8 @@ class RA_CORE_API TaskQueue {
 
     /// Record of a task's start and end time.
     struct TimerData {
-        Timer::TimePoint start;
-        Timer::TimePoint end;
+        Utils::TimePoint start;
+        Utils::TimePoint end;
         uint threadId;
         std::string taskName;
     };

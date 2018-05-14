@@ -54,12 +54,12 @@ class RA_ENGINE_API Renderer {
 
   public:
     struct TimerData {
-        Core::Timer::TimePoint renderStart;
-        Core::Timer::TimePoint updateEnd;
-        Core::Timer::TimePoint feedRenderQueuesEnd;
-        Core::Timer::TimePoint mainRenderEnd;
-        Core::Timer::TimePoint postProcessEnd;
-        Core::Timer::TimePoint renderEnd;
+        Core::Utils::TimePoint renderStart;
+        Core::Utils::TimePoint updateEnd;
+        Core::Utils::TimePoint feedRenderQueuesEnd;
+        Core::Utils::TimePoint mainRenderEnd;
+        Core::Utils::TimePoint postProcessEnd;
+        Core::Utils::TimePoint renderEnd;
     };
 
     enum PickingMode {
