@@ -7,7 +7,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 void check( const AdjacencyList& adj ) {
 #if defined CORE_DEBUG
@@ -93,6 +93,6 @@ void storeAdjacencyList( const AdjacencyList& adj, const std::string& name ) {
     myfile.close();
 }
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

@@ -5,7 +5,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 using ParentList = Container::AlignedStdVector<int>;
 using LevelList = Container::AlignedStdVector<uint8_t>;
@@ -67,7 +67,7 @@ class /*RA_CORE_API*/ AdjacencyList {
     LevelList m_level;
 };
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

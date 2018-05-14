@@ -32,7 +32,7 @@ void bulgeCorrection( const Container::Vector3Array& restMesh, const BulgeCorrec
 }
 
 void findCorrectionData( const Container::Vector3Array& mesh, const MaxWeightID& wID,
-                         const Graph::AdjacencyList& graph, const Pose& pose,
+                         const Utils::AdjacencyList& graph, const Pose& pose,
                          BulgeCorrectionData& data ) {
     const uint n = mesh.size();
     data.resize( n );

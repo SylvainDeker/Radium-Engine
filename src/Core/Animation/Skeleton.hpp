@@ -46,7 +46,7 @@ class RA_CORE_API Skeleton : public PointCloud {
     void getBonePoints( uint i, Vector3& startOut, Vector3& endOut ) const;
 
     /// VARIABLE
-    Ra::Core::Graph::AdjacencyList m_graph; // The adjacency list.
+    Ra::Core::Utils::AdjacencyList m_graph; // The adjacency list.
 
   protected:
     /// VARIABLE

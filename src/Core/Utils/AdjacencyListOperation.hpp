@@ -8,7 +8,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 /*
  * Check the integrity of the given AdjacencyList.
@@ -36,7 +36,7 @@ RA_CORE_API Container::VectorArray<Edge> extractEdgeList( const AdjacencyList& a
  */
 RA_CORE_API void storeAdjacencyList( const AdjacencyList& adj, const std::string& name );
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

@@ -94,11 +94,11 @@ RA_CORE_API DegreeMatrix adjacencyDegree( const AdjacencyMatrix& A );
 /// ONE RING ///
 ////////////////
 
-// using OneRing = Graph::ChildrenList;
+// using OneRing = Utils::ChildrenList;
 
 // OneRing vertexOneRing( const uint v, const Container::VectorArray< Triangle >& T );
 
-// Graph::Adjacency meshOneRing( const Container::VectorArray< Vector3 >& p, const Container::VectorArray< Triangle >& T
+// Utils::Adjacency meshOneRing( const Container::VectorArray< Vector3 >& p, const Container::VectorArray< Triangle >& T
 // );
 
 } // namespace Geometry

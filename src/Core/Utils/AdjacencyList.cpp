@@ -2,7 +2,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 /// CONSTRUCTOR
 AdjacencyList::AdjacencyList() : m_child(), m_parent() {}
@@ -14,6 +14,6 @@ AdjacencyList::AdjacencyList( const AdjacencyList& adj ) :
 /// DESTRUCTOR
 AdjacencyList::~AdjacencyList() {}
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

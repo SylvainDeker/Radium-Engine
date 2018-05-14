@@ -29,7 +29,7 @@ void bulgeCorrection( const Container::Vector3Array& restMesh, const BulgeCorrec
                       Container::Vector3Array& currMesh, const BulgeCorrectionData& currData );
 
 void findCorrectionData( const Container::Vector3Array& mesh, const MaxWeightID& wID,
-                         const Graph::AdjacencyList& graph, const Pose& pose,
+                         const Utils::AdjacencyList& graph, const Pose& pose,
                          BulgeCorrectionData& data );
 
 } // namespace Animation
