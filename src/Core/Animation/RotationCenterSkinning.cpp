@@ -48,8 +48,7 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
 
     // Convert the mesh to DCEL for easy processing.
     Dcel dcel;
-    convert( subdividedMesh, dcel );
-
+    convert(subdividedMesh, dcel );
     // The mesh will be subdivided by repeated edge-split, so that adjacent vertices
     // weights are distant of at most `weightEpsilon`.
     // New vertices created by the edge splitting and their new weights are computed

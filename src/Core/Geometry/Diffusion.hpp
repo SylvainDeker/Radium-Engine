@@ -22,7 +22,7 @@ using ScalarValue = Sparse;
  * where C_i is the value of the centroid of v_i one-ring.
  */
 /// WARNING: THE IMPLEMENTATION COULD BE WRONG
-RA_CORE_API ScalarValue diffuseDelta( const Geometry::AdjacencyMatrix& A, const Delta& delta,
+RA_CORE_API ScalarValue diffuseDelta( const Geometry::AdjacencyMatrix& A, const Geometry::Delta& delta,
                                       const Scalar lambda, const uint iteration );
 
 /*
@@ -35,7 +35,7 @@ RA_CORE_API ScalarValue diffuseDelta( const Geometry::AdjacencyMatrix& A, const 
  * where C_i is the value of the centroid of v_i one-ring.
  */
 /// WARNING: THE IMPLEMENTATION COULD BE WRONG
-RA_CORE_API void diffuseDelta( const Geometry::AdjacencyMatrix& A, const Delta& delta,
+RA_CORE_API void diffuseDelta( const Geometry::AdjacencyMatrix& A, const Geometry::Delta& delta,
                                const Scalar lambda, const uint iteration, ScalarValue& value );
 
 } // namespace Algorithm

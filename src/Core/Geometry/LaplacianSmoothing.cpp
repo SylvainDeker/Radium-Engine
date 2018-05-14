@@ -6,7 +6,7 @@ namespace Ra {
 namespace Core {
 namespace Algorithm {
 
-ScalarValue smartClamp( const BitSet& bit, const ScalarValue& value, const bool flag ) {
+ScalarValue smartClamp( const Geometry::BitSet& bit, const ScalarValue& value, const bool flag ) {
     ScalarValue s( value );
     Scalar zero = 0.0;
     s.prune( zero );
@@ -21,7 +21,7 @@ ScalarValue smartClamp( const BitSet& bit, const ScalarValue& value, const bool 
     return s;
 }
 
-void smartClamp( const BitSet& bit, const ScalarValue& value, ScalarValue& clamped,
+void smartClamp( const Geometry::BitSet& bit, const ScalarValue& value, ScalarValue& clamped,
                  const bool flag ) {
     ScalarValue s( value );
     Scalar zero = 0.0;

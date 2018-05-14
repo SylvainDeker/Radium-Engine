@@ -5,7 +5,7 @@ namespace Ra {
 namespace Core {
 namespace Algorithm {
 
-ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& delta,
+ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Geometry::Delta& delta,
                           const Scalar lambda, const uint iteration ) {
     ScalarValue u( delta );
     ScalarValue tmp( delta );
@@ -13,7 +13,7 @@ ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const De
     iter = iter + ( iter % 2 );
     for ( uint n = 0; n < iter; ++n )
     {
-        for ( Delta::InnerIterator u_it( u, 0 ); u_it; ++u_it )
+        for ( Geometry::Delta::InnerIterator u_it( u, 0 ); u_it; ++u_it )
         {
             Scalar oneRingMeanValue = 0.0;
             for ( Geometry::AdjacencyMatrix::InnerIterator A_it( A, u_it.row() ); A_it; ++A_it )
@@ -29,7 +29,7 @@ ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const De
     return u;
 }
 
-void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& delta,
+void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Geometry::Delta& delta,
                    const Scalar lambda, const uint iteration, ScalarValue& value ) {
     ScalarValue u = delta;
     ScalarValue tmp = delta;

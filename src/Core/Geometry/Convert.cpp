@@ -13,6 +13,8 @@
 
 namespace Ra {
 namespace Core {
+//namespace Geometry {
+
 
 Twin::Twin() {
     m_id[0] = uint( -1 );
@@ -33,7 +35,7 @@ bool Twin::operator<( const Twin& twin ) const {
              ( ( m_id[0] == twin.m_id[0] ) && ( m_id[1] < twin.m_id[1] ) ) );
 }
 
-void convert( const TriangleMesh& mesh, Dcel& dcel ) {
+void convert( const Ra::Core::TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
     dcel.clear();
     // Create vertices
     for ( unsigned int i = 0; i < mesh.m_vertices.size(); ++i )
@@ -108,7 +110,7 @@ void convert( const TriangleMesh& mesh, Dcel& dcel ) {
     }
 }
 
-void convert( const Dcel& dcel, TriangleMesh& mesh ) {
+void convert( const Ra::Core::Dcel& dcel, Ra::Core::TriangleMesh& mesh ) {
     const uint v_size = dcel.m_vertex.size();
     const uint f_size = dcel.m_face.size();
     mesh.m_vertices.resize( v_size );
@@ -135,5 +137,6 @@ void convert( const Dcel& dcel, TriangleMesh& mesh ) {
     }
 }
 
+//} // namespace Geometry
 } // namespace Core
 } // namespace Ra

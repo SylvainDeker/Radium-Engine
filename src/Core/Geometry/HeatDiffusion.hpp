@@ -12,7 +12,7 @@ namespace Core {
 namespace Algorithm {
 
 // Defining a vector containing the indices of the heat sources
-using HeatSource = Source;
+using HeatSource = Geometry::Source;
 
 // Defining the time the heat is allowed to travel through the surface
 using Time = Scalar;
@@ -45,7 +45,7 @@ RA_CORE_API Time t( const Scalar& m, const Scalar& h );
  */
 /// WARNING: L must be a positive semi-definite matrix
 RA_CORE_API void heat( const Geometry::AreaMatrix& A, const Time& t,
-                       const Geometry::LaplacianMatrix& L, Heat& u, const Delta& delta );
+                       const Geometry::LaplacianMatrix& L, Heat& u, const Geometry::Delta& delta );
 
 /*
  * Solve the heating equation from the given AreaMatrix, the Time, the LaplacianMatrix and the
@@ -59,7 +59,7 @@ RA_CORE_API void heat( const Geometry::AreaMatrix& A, const Time& t,
  */
 /// WARNING: L must be a positive semi-definite matrix
 RA_CORE_API Heat heat( const Geometry::AreaMatrix& A, const Time& t,
-                       const Geometry::LaplacianMatrix& L, const Delta& delta );
+                       const Geometry::LaplacianMatrix& L, const Geometry::Delta& delta );
 
 } // namespace Algorithm
 } // namespace Core
