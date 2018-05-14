@@ -2,6 +2,8 @@
 #include <Gui/MainWindow.hpp>
 #include <Engine/Renderer/Light/PointLight.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
+#include <Engine/Entity/Entity.hpp>
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
 
 #include <QPushButton>
 #include <QColorDialog>
@@ -238,10 +240,11 @@ void LightCreator::open_dialogueConfirm(){
   if( m_name->isEmpty())
     QMessageBox::critical(this, "Watch out !","A new light must have a name !");
   else {
-    // Ra::Engine::Entity *e=new Ra::Engine::Entity("Entity_Test");
-    // Ra::Engine::PointLight *p = new Ra::Engine::PointLight(e,"PointLight_Test");
-    // Ra::Engine::ItemEntry *m = new Ra::Engine::ItemEntry(e, p);
-    // emit sig_onItemAdded(*m);
+
+    Ra::Engine::Entity *e = Engine::RadiumEngine::getInstance()->getEntityManager()->createEntity("Entity_Test");
+
+
+
     emit sig_close_windows() ;
   }
 }
