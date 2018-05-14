@@ -16,7 +16,7 @@ public:
     EditionWidget(QWidget* parent, Ra::GuiBase::SelectionManager* selectionManager);
 
     ///set the transform on the selected object, return false in case of failure
-    bool setTransform(Ra::Core::Transform &tf);
+    bool setTransform(Ra::Core::Transform &tf, bool doUpdateInfos);
     bool setMatrix(Ra::Core::Matrix4 &m);
 
     ///get the transform of the selected object, return false in case of failure
@@ -28,7 +28,7 @@ public slots:
     void matriceSize3();
     void onCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void useTransformMatrix();
-    void updateInfos();
+    void updateInfos(bool doProperties);
     void onValueChanged(double);
 
 private:

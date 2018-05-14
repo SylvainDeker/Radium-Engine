@@ -82,25 +82,28 @@ namespace Gui{
 
     }
 
-    void EditionWidget::updateInfos()
+    void EditionWidget::updateInfos(bool doProperties=true)
     {
         Ra::Core::Transform tf;
         if(getTransform(&tf))
         {
-            std::cout << "update infos" << std::endl;
+            setEnabled(true);
             Ra::Core::Matrix4 m = tf.matrix();
             Ra::Core::Matrix3 r = tf.rotation();
             Ra::Core::Vector3 angles = r.eulerAngles(0,1,2);
 
-            m_translation_x->setValue(m(0,3));
-            m_translation_y->setValue(m(1,3));
-            m_translation_z->setValue(m(2,3));
-            m_scale_x->setValue(m(0,0)/r(0,0));
-            m_scale_y->setValue(m(1,1)/r(1,1));
-            m_scale_z->setValue(m(2,2)/r(2,2));
-            m_rotation_x->setValue(Ra::Core::Math::toDegrees(angles(0)));
-            m_rotation_y->setValue(Ra::Core::Math::toDegrees(angles(1)));
-            m_rotation_z->setValue(Ra::Core::Math::toDegrees(angles(2)));
+            if(doProperties)
+            {
+                m_translation_x->setValue(m(0,3));
+                m_translation_y->setValue(m(1,3));
+                m_translation_z->setValue(m(2,3));
+                m_scale_x->setValue(m(0,0)/r(0,0));
+                m_scale_y->setValue(m(1,1)/r(1,1));
+                m_scale_z->setValue(m(2,2)/r(2,2));
+                m_rotation_x->setValue(Ra::Core::Math::toDegrees(angles(0)));
+                m_rotation_y->setValue(Ra::Core::Math::toDegrees(angles(1)));
+                m_rotation_z->setValue(Ra::Core::Math::toDegrees(angles(2)));
+            }
 
             std::ostringstream matrixText;
             matrixText << "{\n{" << m(0,0) << "," << m(0,1) << "," << m(0,2) << "," << m(0,3) << "},\n{"
@@ -115,7 +118,22 @@ namespace Gui{
             }
 
         } else {
-            std::cout << "set blank" << std::endl;
+            //nothing to display
+            m_translation_x->setValue(0);
+            m_translation_y->setValue(0);
+            m_translation_z->setValue(0);
+            m_scale_x->setValue(0);
+            m_scale_y->setValue(0);
+            m_scale_z->setValue(0);
+            m_rotation_x->setValue(0);
+            m_rotation_y->setValue(0);
+            m_rotation_z->setValue(0);
+            m_wolframEdit->setText("");
+            for(int i = 0; i < 16; ++i)
+            {
+                m_TabButtonDirect[i]->setValue(0);
+            }
+            setEnabled(false);
         }
     }
 
@@ -124,7 +142,7 @@ namespace Gui{
         updateInfos();
     }
 
-    bool EditionWidget::setTransform(Ra::Core::Transform& tf)
+    bool EditionWidget::setTransform(Ra::Core::Transform& tf, bool doUpdateInfos=true)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
 
@@ -134,7 +152,9 @@ namespace Gui{
             {
                 item.m_entity->setTransform(tf);
                 item.m_entity->swapTransformBuffers();
-                updateInfos();
+                if(doUpdateInfos){
+                    updateInfos();
+                }
                 return true;
             }
 
@@ -143,7 +163,9 @@ namespace Gui{
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 item.m_component->setTransform(item.m_roIndex, tf);
-                updateInfos();
+                if(doUpdateInfos){
+                    updateInfos();
+                }
                 return true;
             }
         }
@@ -197,12 +219,16 @@ namespace Gui{
             case 0 :
                 //wolfram
                 if(!applyWolfram()){
-                    std::cout << "error wolfram" << std::endl;
+                    //TODO more visible error
+                    LOG(logINFO) << "Cannot apply matrix : bad format or non-editable object.";
                 }
                 break;
             case 1 :
                 //direct
-                applyDirect();
+                if(!applyDirect()){
+                    //TODO more visible error
+                    LOG(logINFO) << "Cannot apply matrix : bad format or non-editable object.";
+                }
                 break;
             default :
                 //TODO ?
@@ -244,7 +270,9 @@ namespace Gui{
         tf.rotate(Eigen::AngleAxisf(Ra::Core::Math::toRadians(m_rotation_y->value()), Eigen::Vector3f::UnitY()));
         tf.rotate(Eigen::AngleAxisf(Ra::Core::Math::toRadians(m_rotation_z->value()), Eigen::Vector3f::UnitZ()));
         tf.scale(Core::Vector3(m_scale_x->value(), m_scale_y->value(), m_scale_z->value()));
-        return setTransform(tf);
+        bool ret = setTransform(tf, false);
+        updateInfos(false);
+        return ret;
     }
 
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
