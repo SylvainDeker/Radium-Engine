@@ -16,7 +16,7 @@ namespace Algorithm {
  *       - v_i < 0
  *       - ( bit_i || flag ) == false
  */
-RA_CORE_API ScalarValue smartClamp( const Geometry::BitSet& bit, const ScalarValue& value, const bool flag );
+RA_CORE_API Geometry::ScalarValue smartClamp( const Geometry::BitSet& bit, const Geometry::ScalarValue& value, const bool flag );
 
 /*
  * Return the clamped version of the value vector given in input.
@@ -24,7 +24,7 @@ RA_CORE_API ScalarValue smartClamp( const Geometry::BitSet& bit, const ScalarVal
  *       - v_i < 0
  *       - ( bit_i || flag ) == false
  */
-RA_CORE_API void smartClamp( const Geometry::BitSet& bit, const ScalarValue& value, ScalarValue& clamped,
+RA_CORE_API void smartClamp( const Geometry::BitSet& bit, const Geometry::ScalarValue& value, Geometry::ScalarValue& clamped,
                              const bool flag );
 
 /*
@@ -34,7 +34,7 @@ RA_CORE_API void smartClamp( const Geometry::BitSet& bit, const ScalarValue& val
  */
 RA_CORE_API Container::VectorArray<Vector3> laplacianSmoothing( const Container::VectorArray<Vector3>& v,
                                                      const Ra::Core::Geometry::LaplacianMatrix& L,
-                                                     const ScalarValue& weight,
+                                                     const Geometry::ScalarValue& weight,
                                                      const uint iteration );
 
 /*
@@ -44,7 +44,7 @@ RA_CORE_API Container::VectorArray<Vector3> laplacianSmoothing( const Container:
  */
 RA_CORE_API void laplacianSmoothing( const Container::VectorArray<Vector3>& v,
                                      const Ra::Core::Geometry::LaplacianMatrix& L,
-                                     const ScalarValue& weight, const uint iteration,
+                                     const Geometry::ScalarValue& weight, const uint iteration,
                                      Container::VectorArray<Vector3>& p );
 
 } // namespace Algorithm
