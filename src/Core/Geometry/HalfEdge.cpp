@@ -166,7 +166,7 @@ void HalfEdgeData::build( const TriangleMesh& mesh ) {
     checkConsistency();
 }
 
-void AdjacencyQueries::getVertexFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void Geometry::getVertexFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                        VertexIdx vertex, std::vector<TriangleIdx>& facesOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
     for ( HalfEdgeIdx idx : heData.getVertexHalfEdges( vertex ) )
@@ -178,7 +178,7 @@ void AdjacencyQueries::getVertexFaces( const TriangleMesh& mesh, const HalfEdgeD
         }
     }
 }
-void AdjacencyQueries::getVertexNeighbors( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void Geometry::getVertexNeighbors( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                            VertexIdx vertex,
                                            std::vector<VertexIdx>& neighborsOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
@@ -188,7 +188,7 @@ void AdjacencyQueries::getVertexNeighbors( const TriangleMesh& mesh, const HalfE
     }
 }
 
-void AdjacencyQueries::getAdjacentFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void Geometry::getAdjacentFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                          TriangleIdx triangle,
                                          std::array<TriangleIdx, 3>& adjOut ) {
     HalfEdgeIdx currentHe = heData.getFirstTriangleHalfEdge( triangle );
@@ -202,7 +202,7 @@ void AdjacencyQueries::getAdjacentFaces( const TriangleMesh& mesh, const HalfEdg
 
 // This function is a good example on how to process the neighbors of a vertex
 // in order. We could have an iterator-like interface(TODO).
-void AdjacencyQueries::getVertexFirstRing( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void Geometry::getVertexFirstRing( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                            VertexIdx vertex, std::vector<VertexIdx>& ringOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
     CORE_ASSERT( heData.getVertexHalfEdges( vertex ).size() > 0, "Vertex has no neighbors" );
