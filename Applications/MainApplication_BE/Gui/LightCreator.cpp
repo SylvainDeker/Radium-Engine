@@ -4,6 +4,10 @@
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Engine/Entity/Entity.hpp>
 #include <Engine/Managers/EntityManager/EntityManager.hpp>
+#include <Engine/Renderer/Light/DirLight.hpp>
+#include <Engine/Renderer/Light/SpotLight.hpp>
+#include <Engine/Renderer/Light/PointLight.hpp>
+
 
 #include <QPushButton>
 #include <QColorDialog>
@@ -31,6 +35,8 @@ namespace Gui {
 
 LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     setupUi( this );
+    setWindowTitle("Light Creator");
+    setWindowIcon(parent->windowIcon());
     m_color = new QColor(255,255,255);
     m_name = new QString("");
     m_intensity_val = new double(0);
@@ -39,6 +45,42 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
     m_lightType = new int(0);
+    m_position = new Core::Vector3(0,0,0);
+    m_direction = new Core::Vector3(0,0,1);
+
+    // Init with Directionnal selected by default
+    m_angle_lab->setVisible(false);
+    m_angle_spinbox->setVisible(false);
+    m_angle_slider->setVisible(false);
+    m_pos_x_lab->setVisible(false);
+    m_pos_y_lab->setVisible(false);
+    m_pos_z_lab->setVisible(false);
+    m_pos_x_spin->setVisible(false);
+    m_pos_y_spin->setVisible(false);
+    m_pos_z_spin->setVisible(false);
+    m_coord_lab->setVisible(false);
+    m_falloff_lab->setVisible(false);
+    m_falloff_spinbox_linear->setVisible(false);
+    m_falloff_spinbox_constant->setVisible(false);
+    m_falloff_spinbox_quadratic->setVisible(false);
+    m_falloff_slider_linear->setVisible(false);
+    m_falloff_slider_constant->setVisible(false);
+    m_falloff_slider_quadratic->setVisible(false);
+    m_falloff_lab_linear->setVisible(false);
+    m_falloff_lab_constant->setVisible(false);
+    m_falloff_lab_quadratic->setVisible(false);
+
+    m_lineEdit->setPlaceholderText(*m_name);
+
+    m_dir_x_spin->setValue((double) m_direction->x());
+    m_dir_y_spin->setValue((double) m_direction->y());
+    m_dir_z_spin->setValue((double) m_direction->z());
+
+    m_pos_x_spin->setValue((double) m_position->x());
+    m_pos_y_spin->setValue((double) m_position->y());
+    m_pos_z_spin->setValue((double) m_position->z());
+
+
 
 
 
@@ -102,10 +144,6 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     m_dir_z_spin->setMinimum(-MAX_COORD);
 
 
-    // Init with Directionnal selected by default
-    m_angle_lab->setVisible(false);
-    m_angle_spinbox->setVisible(false);
-    m_angle_slider->setVisible(false);
 
 
 
@@ -115,7 +153,7 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
 
 
 
-    setWindowTitle("Light Creator");
+
     QPalette p;
     p.setColor(QPalette::Background,*m_color);
     m_result_color->setAutoFillBackground(true);
@@ -151,6 +189,19 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
 
     connect(this,&LightCreator::sig_hide_dir,m_direction_lab,&QLabel::hide);
     connect(this,&LightCreator::sig_show_dir,m_direction_lab,&QLabel::show);
+
+    // Selecter Falloff
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_quadratic,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_constant,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_linear,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_linear,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_constant,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_quadratic,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_linear,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_constant,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_quadratic,&QSlider::hide);
+
 
     //Selecter Position
 
@@ -236,19 +287,54 @@ void LightCreator::open_dialogColor(){
 }
 
 void LightCreator::open_dialogueConfirm(){
+  Ra::Engine::EntityManager *em = Ra::Engine::RadiumEngine::getInstance()->getEntityManager();
+  Ra::Engine::Entity *entity = em->entityExists( "Lights" )  ? em->getEntity( "Lights" ) : em->createEntity( "Lights" );
+
   *m_name = m_lineEdit->text();
   if( m_name->isEmpty())
     QMessageBox::critical(this, "Watch out !","A new light must have a name !");
+  else if( entity->getComponent( m_name->toStdString()) != nullptr) {
+    QMessageBox::critical(this, "Watch out !","The name is already used !");
+  }
+  else if ( *m_lightType <= 1 && m_dir_x_spin->value()*m_dir_y_spin->value()*m_dir_z_spin->value() == 0 ){
+    QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
+  }
   else {
 
-    Ra::Engine::Entity *e = Engine::RadiumEngine::getInstance()->getEntityManager()->createEntity("Entity_Test");
-
-
+    save_light(entity); // private function
 
     emit sig_close_windows() ;
   }
 }
 
+void LightCreator::save_light(Ra::Engine::Entity *entity){
+  Ra::Engine::Light * light;
+
+  switch (*m_lightType) {
+    case 0:
+      light = new Ra::Engine::DirectionalLight( entity,m_name->toStdString() );
+      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      light->setPosition(*m_position);
+
+      break;
+    case 1:
+      light = new Ra::Engine::SpotLight( entity, m_name->toStdString() );
+      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      light->setPosition(*m_position);
+      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      light->setDirection(*m_direction);
+
+        break;
+    case 2:
+      light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
+      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      light->setPosition(*m_position);
+
+        break;
+    default:
+      assert(false);
+  }
+}
 
 
 
@@ -256,37 +342,45 @@ void LightCreator::open_dialogueConfirm(){
 void LightCreator::slot_select_light(int val){
     *m_lightType = val;
     /*
+    usable in the switch  :
+
     emit sig_show_angle();
     emit sig_show_dir();
     emit sig_show_pos();
-    emit sig_show_falloff();
+
+
+    emit sig_hide_angle();
+    emit sig_hide_dir();
+    emit sig_hide_pos();
+
+
     */
 
     switch (val) {
       case 0: // Directionnal
       emit sig_show_dir();
-      emit sig_show_pos();
-
+        emit sig_hide_pos();
+        emit sig_hide_falloff();
         emit sig_hide_angle(); break;
       case 1: // Spot
           emit sig_show_angle();
           emit sig_show_dir();
+          emit sig_show_falloff();
           emit sig_show_pos();
                               break;
       case 2: // Point
 
       emit sig_show_pos();
-      // emit sig_show_falloff();
-
+        emit sig_show_falloff();
         emit sig_hide_dir();
         emit sig_hide_angle(); break;
 
-      case 3: //Area
-      // emit sig_hide_falloff();
-
-          emit sig_hide_dir();
-          emit sig_hide_angle();
-          emit sig_hide_pos(); break;
+      // case 3: //Area
+      //
+      //
+      //     emit sig_hide_dir();
+      //     emit sig_hide_angle();
+      //     emit sig_hide_pos(); break;
 
       default:
         assert(false);
