@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
 // useful : http://www.realtimerendering.com/intersections.html
 namespace RayCast {
 /// Intersect a ray with an axis-aligned bounding box.
@@ -383,5 +384,6 @@ bool vsTriangleMesh( const Ray& r, const TriangleMesh& mesh, std::vector<Scalar>
     return hit;
 }
 } // namespace RayCast
+} // namespace Math
 } // namespace Core
 } // namespace Ra

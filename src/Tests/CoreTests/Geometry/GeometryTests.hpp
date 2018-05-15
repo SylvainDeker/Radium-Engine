@@ -114,7 +114,7 @@ class PolylineTests : public Test {
         // 2 points polyline
         {
             Ra::Core::Container::Vector3Array v2{{1, 2, 3}, {4, 5, 6}};
-            Ra::Core::PolyLine p( v2 );
+            Ra::Core::Math::PolyLine p( v2 );
 
             Ra::Core::Math::Vector3 m = 0.5f * ( v2[0] + v2[1] );
 
@@ -129,7 +129,7 @@ class PolylineTests : public Test {
 
             Ra::Core::Container::Vector3Array v4{{2, 3, 5}, {7, 11, 13}, {17, 23, 29}, {-1, -1, 30}};
 
-            Ra::Core::PolyLine p( v4 );
+            Ra::Core::Math::PolyLine p( v4 );
 
             RA_UNIT_TEST( p.f( 0 ) == v4[0], "Parametrization fail" );
             RA_UNIT_TEST( p.f( 1 ) == v4[3], "Parametrization fail" );

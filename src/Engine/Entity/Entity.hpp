@@ -65,7 +65,7 @@ class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
     inline uint getNumComponents() const;
 
     // Queries
-    virtual void rayCastQuery( const Core::Ray& r ) const;
+    virtual void rayCastQuery( const Core::Math::Ray& r ) const;
 
   private:
     Core::Math::Transform m_transform;

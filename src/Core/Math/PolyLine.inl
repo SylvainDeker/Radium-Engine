@@ -3,6 +3,8 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
 
 const Container::Vector3Array& PolyLine::getPoints() const {
     return m_pts;
@@ -44,5 +46,6 @@ uint PolyLine::getSegmentIndex( Scalar t ) const {
     return i;
 }
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra

@@ -37,7 +37,7 @@ RA_ENGINE_API MeshPtr Vector( const Core::Math::Vector3& start, const Core::Math
                               const Core::Math::Color& color );
 
 /// Displays given ray as a straight line.
-RA_ENGINE_API MeshPtr Ray( const Core::Ray& ray, const Core::Math::Color& color );
+RA_ENGINE_API MeshPtr Ray( const Core::Math::Ray& ray, const Core::Math::Color& color );
 
 /// Displays given triangle ABC, either in wireframe (fill = false)
 /// or filled with the color(fill = true).
@@ -97,7 +97,7 @@ RA_ENGINE_API MeshPtr AABB( const Core::Math::Aabb& aabb, const Core::Math::Colo
 /// Display a wireframe OBB
 RA_ENGINE_API MeshPtr OBB( const Core::Obb& obb, const Core::Math::Color& color );
 
-RA_ENGINE_API MeshPtr Spline( const Core::Spline<3, 3>& spline, uint pointCount,
+RA_ENGINE_API MeshPtr Spline( const Core::Math::Spline<3, 3>& spline, uint pointCount,
                               const Core::Math::Color& color, Scalar scale = 1.0f );
 } // namespace DrawPrimitives
 } // namespace Engine

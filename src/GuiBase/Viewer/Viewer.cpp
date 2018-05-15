@@ -277,7 +277,7 @@ void Gui::Viewer::mousePressEvent( QMouseEvent* event ) {
          isKeyPressed( keyMap->getKeyFromAction( Gui::KeyMappingManager::VIEWER_RAYCAST_QUERY ) ) )
     {
         LOG( Core::Utils::logINFO ) << "Raycast query launched";
-        Core::Ray r =
+        Core::Math::Ray r =
             m_camera->getCamera()->getRayFromScreen( Core::Math::Vector2( event->x(), event->y() ) );
         RA_DISPLAY_POINT( r.origin(), Core::Math::Cyan(), 0.1f );
         RA_DISPLAY_RAY( r, Core::Math::Yellow() );

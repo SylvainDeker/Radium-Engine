@@ -10,6 +10,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+
 /// Low-level intersection functions of line versus various abstract shapes.
 /// All functions return true if there was a hit, false if not.
 /// If a ray starts inside the shape, the resulting hit will be at the ray's origin (t=0).
@@ -39,6 +42,7 @@ inline bool vsTriangle( const Ray& r, const Core::Math::Vector3 a, const Core::M
 inline bool vsTriangleMesh( const Ray& r, const TriangleMesh& mesh, std::vector<Scalar>& hitsOut,
                             std::vector<Triangle>& trianglesIdxOut );
 } // namespace RayCast
+} // namespace Math
 } // namespace Core
 } // namespace Ra
 #include <Core/Math/RayCast.inl>

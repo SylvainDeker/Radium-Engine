@@ -60,14 +60,14 @@ void Component::notifyRenderObjectExpired( const Core::Container::Index& idx ) {
     }
 }
 
-void Component::rayCastQuery( const Core::Ray& ray ) const {
+void Component::rayCastQuery( const Core::Math::Ray& ray ) const {
     for ( const auto& idx : m_renderObjects )
     {
         const auto ro = getRoMgr()->getRenderObject( idx );
         if ( ro->isVisible() )
         {
             const Ra::Core::Math::Transform& t = ro->getLocalTransform();
-            Core::Ray transformedRay = Ra::Core::transformRay( ray, t.inverse() );
+            Core::Math::Ray transformedRay = Ra::Core::Math::transformRay( ray, t.inverse() );
             auto result =
                 Ra::Core::MeshUtils::castRay( ro->getMesh()->getGeometry(), transformedRay );
             const int& tidx = result.m_hitTriangle;
