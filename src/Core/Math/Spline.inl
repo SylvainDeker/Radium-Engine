@@ -4,6 +4,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+
 template <uint D, uint K>
 inline Spline<D, K>::Spline( typename Spline<D, K>::Type type ) : m_type( type ) {
     static_assert( K >= 2, "Order must be at least two" );
@@ -190,5 +193,6 @@ Spline<D, K>::evalRec( Scalar u, const Core::Container::VectorArray<Vector>& poi
     }
     return evalRec( u, pOut, nodeOut, k - 1 );
 }
+} // namespace Math
 } // namespace Core
 } // namespace Ra

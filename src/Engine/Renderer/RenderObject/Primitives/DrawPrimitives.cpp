@@ -93,7 +93,7 @@ MeshPtr Vector( const Core::Math::Vector3& start, const Core::Math::Vector3& v, 
     return mesh;
 }
 
-MeshPtr Ray( const Core::Ray& ray, const Core::Math::Color& color ) {
+MeshPtr Ray( const Core::Math::Ray& ray, const Core::Math::Color& color ) {
     Core::Math::Vector3 end = ray.pointAt( 1000.f );
 
     Core::Container::Vector3Array vertices = {ray.origin(), end};
@@ -446,7 +446,7 @@ MeshPtr OBB( const Core::Obb& obb, const Core::Math::Color& color ) {
     return mesh;
 }
 
-MeshPtr Spline( const Core::Spline<3, 3>& spline, uint pointCount, const Core::Math::Color& color,
+MeshPtr Spline( const Core::Math::Spline<3, 3>& spline, uint pointCount, const Core::Math::Color& color,
                 Scalar scale ) {
     Core::Container::Vector3Array vertices;
     vertices.reserve( pointCount );

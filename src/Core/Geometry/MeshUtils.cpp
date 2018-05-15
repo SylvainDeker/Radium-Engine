@@ -115,7 +115,7 @@ void removeDuplicates( TriangleMesh& mesh, std::vector<VertexIdx>& vertexMap ) {
     mesh.m_vertices = uniqueVertices;
 }
 
-RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
+RayCastResult castRay( const TriangleMesh& mesh, const Math::Ray& ray ) {
     RayCastResult result;
 
     // point cloud: get closest point
@@ -146,7 +146,7 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
         {
             tValues.clear();
             getTriangleVertices( mesh, i, v );
-            if ( RayCast::vsTriangle( ray, v[0], v[1], v[2], tValues ) && tValues[0] < minT )
+            if ( Math::RayCast::vsTriangle( ray, v[0], v[1], v[2], tValues ) && tValues[0] < minT )
             {
                 minT = tValues[0];
                 result.m_hitTriangle = int( i );

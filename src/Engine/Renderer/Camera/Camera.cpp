@@ -97,9 +97,9 @@ void Camera::updateProjMatrix() {
     }
 }
 
-Core::Ray Camera::getRayFromScreen( const Core::Math::Vector2& pix ) const {
+Core::Math::Ray Camera::getRayFromScreen( const Core::Math::Vector2& pix ) const {
     // Ray starts from the camera's current position.
-    return Core::Ray::Through( getPosition(), unProject( pix ) );
+    return Core::Math::Ray::Through( getPosition(), unProject( pix ) );
 }
 } // namespace Engine
 } // namespace Ra

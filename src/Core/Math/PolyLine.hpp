@@ -8,6 +8,8 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
 /// A parametrized polyline, i.e. a continuous polygonal chain of segments.
 /// Points go from P0 to Pn. The ith segments joins Pi and Pi+1.
 class RA_CORE_API PolyLine {
@@ -76,6 +78,7 @@ class RA_CORE_API PolyLine {
     std::vector<Scalar> m_lengths;
 };
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra
 #include <Core/Math/PolyLine.inl>

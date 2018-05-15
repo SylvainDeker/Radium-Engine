@@ -7,6 +7,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+
 /**
  * @class Spline
  *
@@ -92,6 +95,8 @@ class Spline {
     std::vector<Scalar> m_node;         ///< Nodal vector
     Type m_type;                        ///< Nodal vector type
 };
+
+} // namespace Math
 } // namespace Core
 } // namespace Ra
 

@@ -133,7 +133,7 @@ class RA_ENGINE_API Camera final {
 
     /// Return a ray emanating from the camera, passing by the point given by
     /// screen coordinates x and y.
-    Core::Ray getRayFromScreen( const Core::Math::Vector2& pix ) const;
+    Core::Math::Ray getRayFromScreen( const Core::Math::Vector2& pix ) const;
 
     /// Return the screen coordinates of the given point p (in world coordinates).
     inline Core::Math::Vector2 project( const Core::Math::Vector3& p ) const;

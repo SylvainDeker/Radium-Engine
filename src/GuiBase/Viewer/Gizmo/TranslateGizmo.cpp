@@ -122,8 +122,8 @@ bool findPointOnAxis( const Engine::Camera& cam, const Ra::Core::Math::Vector3& 
         ( ortho.squaredNorm() > 0 ) ? axis.cross( ortho ) : axis.cross( cam.getUpVector() );
 
     std::vector<Scalar> hit;
-    const Core::Ray ray = cam.getRayFromScreen( pix );
-    bool hasHit = Core::RayCast::vsPlane( ray, origin, normal, hit );
+    const Core::Math::Ray ray = cam.getRayFromScreen( pix );
+    bool hasHit = Core::Math::RayCast::vsPlane( ray, origin, normal, hit );
     if ( hasHit )
     {
         pointOut = origin + ( axis.dot( ray.pointAt( hit[0] ) - origin ) ) * axis;

@@ -28,11 +28,11 @@ class RayCastAabbTests : public Test {
 
                         // Fire a ray towards the box (some hit, some miss).
                         {
-                            Ra::Core::Ray r = Ra::Core::Ray( s, dir.normalized() );
+                            Ra::Core::Math::Ray r = Ra::Core::Math::Ray( s, dir.normalized() );
 
                             Scalar t = 0.f;
                             Ra::Core::Math::Vector3 n = Ra::Core::Math::Vector3::Zero();
-                            const bool result = Ra::Core::RayCast::vsAabb( r, ones, t, n );
+                            const bool result = Ra::Core::Math::RayCast::vsAabb( r, ones, t, n );
 
                             if ( std::abs( p ) <= 5 && std::abs( q ) <= 5 )
                             {
@@ -48,23 +48,23 @@ class RayCastAabbTests : public Test {
 
                         // Fire a ray on the other direction (which should miss)
                         {
-                            Ra::Core::Ray r = Ra::Core::Ray( s, -dir.normalized() );
+                            Ra::Core::Math::Ray r = Ra::Core::Math::Ray( s, -dir.normalized() );
 
                             Scalar t;
                             Ra::Core::Math::Vector3 n;
-                            const bool result = Ra::Core::RayCast::vsAabb( r, ones, t, n );
+                            const bool result = Ra::Core::Math::RayCast::vsAabb( r, ones, t, n );
 
                             RA_UNIT_TEST( !result, "The ray should have missed (t<0)" );
                         }
 
                         // Fire a ray from within the box.
                         {
-                            Ra::Core::Ray r =
-                                Ra::Core::Ray( Ra::Core::Math::Vector3::Zero(), dir.normalized() );
+                            Ra::Core::Math::Ray r =
+                                Ra::Core::Math::Ray( Ra::Core::Math::Vector3::Zero(), dir.normalized() );
 
                             Scalar t;
                             Ra::Core::Math::Vector3 n{0, 0, 0};
-                            const bool result = Ra::Core::RayCast::vsAabb( r, ones, t, n );
+                            const bool result = Ra::Core::Math::RayCast::vsAabb( r, ones, t, n );
 
                             RA_UNIT_TEST( result, "The ray should have hit (inside hit)" );
                             RA_UNIT_TEST( t == 0, "Hit should be at origin" );

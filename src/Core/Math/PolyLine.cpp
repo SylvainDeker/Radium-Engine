@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
 
 void PolyLine::update() {
     m_ptsDiff.clear();
@@ -135,5 +136,6 @@ uint PolyLine::getNearestSegment( const Math::Vector3& p ) const {
     return segment;
 }
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra

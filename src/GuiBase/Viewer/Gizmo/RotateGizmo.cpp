@@ -132,11 +132,11 @@ Core::Math::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const C
 
         // Project the clicked points against the plane defined by the rotation circles.
         std::vector<Scalar> hits1, hits2;
-        Core::Ray rayToFirstClick = cam.getRayFromScreen( m_initialPix );
-        Core::Ray rayToCurrentClick = cam.getRayFromScreen( nextXY );
-        bool hit1 = Core::RayCast::vsPlane( rayToFirstClick, m_worldTo * origin,
+        Core::Math::Ray rayToFirstClick = cam.getRayFromScreen( m_initialPix );
+        Core::Math::Ray rayToCurrentClick = cam.getRayFromScreen( nextXY );
+        bool hit1 = Core::Math::RayCast::vsPlane( rayToFirstClick, m_worldTo * origin,
                                             m_worldTo * rotationAxis, hits1 );
-        bool hit2 = Core::RayCast::vsPlane( rayToCurrentClick, m_worldTo * origin,
+        bool hit2 = Core::Math::RayCast::vsPlane( rayToCurrentClick, m_worldTo * origin,
                                             m_worldTo * rotationAxis, hits2 );
 
         Core::Math::Vector2 nextXY_ = nextXY;
