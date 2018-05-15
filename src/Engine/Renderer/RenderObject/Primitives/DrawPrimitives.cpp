@@ -245,10 +245,10 @@ MeshPtr Capsule( const Core::Math::Vector3& p1, const Core::Math::Vector3& p2, S
     // (0,0,-l/2) maps to p1 and (0,0,l/2) maps to p2
 
     const Core::Math::Vector3 trans = 0.5f * ( p2 + p1 );
-    Core::Quaternion rot =
-        Core::Quaternion::FromTwoVectors( Core::Math::Vector3{0, 0, l / 2}, 0.5f * ( p1 - p2 ) );
+    Core::Math::Quaternion rot =
+        Core::Math::Quaternion::FromTwoVectors( Core::Math::Vector3{0, 0, l / 2}, 0.5f * ( p1 - p2 ) );
 
-    Core::Transform t = Core::Transform::Identity();
+    Core::Math::Transform t = Core::Math::Transform::Identity();
     t.rotate( rot );
     t.pretranslate( trans );
 
@@ -339,7 +339,7 @@ MeshPtr Normal( const Core::Math::Vector3& point, const Core::Math::Vector3& nor
     return mesh;
 }
 
-MeshPtr Frame( const Core::Transform& frameFromEntity, Scalar scale ) {
+MeshPtr Frame( const Core::Math::Transform& frameFromEntity, Scalar scale ) {
     // Frame is a bit different from the others
     // since there are 3 lines of different colors.
     Core::Math::Vector3 pos = frameFromEntity.translation();
@@ -400,12 +400,12 @@ MeshPtr Grid( const Core::Math::Vector3& center, const Core::Math::Vector3& x, c
     return mesh;
 }
 
-MeshPtr AABB( const Core::Aabb& aabb, const Core::Math::Color& color ) {
+MeshPtr AABB( const Core::Math::Aabb& aabb, const Core::Math::Color& color ) {
     Core::Container::Vector3Array vertices( 8 );
 
     for ( uint i = 0; i < 8; ++i )
     {
-        vertices[i] = aabb.corner( static_cast<Core::Aabb::CornerType>( i ) );
+        vertices[i] = aabb.corner( static_cast<Core::Math::Aabb::CornerType>( i ) );
     }
 
     std::vector<uint> indices = {

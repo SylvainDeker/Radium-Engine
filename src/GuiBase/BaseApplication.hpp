@@ -79,7 +79,7 @@ class RA_GUIBASE_API BaseApplication : public QApplication {
     void stopping();
 
     /// Fired when the scene has changed.
-    void sceneChanged( const Core::Aabb& );
+    void sceneChanged( const Core::Math::Aabb& );
 
     void updateFrameStats( const std::vector<FrameTimerData>& );
 

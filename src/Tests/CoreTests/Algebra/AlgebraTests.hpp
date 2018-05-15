@@ -23,19 +23,19 @@ class AlgebraTests : public Test {
         }
 
         // Test the quaternion function.
-        Ra::Core::Quaternion qr( 1.f, 2.f, 3.f, 4.f );
+        Ra::Core::Math::Quaternion qr( 1.f, 2.f, 3.f, 4.f );
         qr.normalize();
         RA_UNIT_TEST( ( 3.14f * qr ).isApprox( qr * 3.14f ),
                       "Quaternion multiplication does not commute" );
 
-        Ra::Core::Quaternion qt, qs;
+        Ra::Core::Math::Quaternion qt, qs;
 
-        Ra::Core::QuaternionUtils::getSwingTwist( qr, qs, qt );
+        Ra::Core::Math::QuaternionUtils::getSwingTwist( qr, qs, qt );
 
         RA_UNIT_TEST( qr.isApprox( qs * qt ), "Swing decomposition fail." );
-        RA_UNIT_TEST( Ra::Core::AngleAxis( qt ).axis().isApprox( Ra::Core::Math::Vector3::UnitZ() ),
+        RA_UNIT_TEST( Ra::Core::Math::AngleAxis( qt ).axis().isApprox( Ra::Core::Math::Vector3::UnitZ() ),
                       "Twist should be around z" );
-        RA_UNIT_TEST( Ra::Core::AngleAxis( qs ).axis().dot( Ra::Core::Math::Vector3::UnitZ() ) == 0,
+        RA_UNIT_TEST( Ra::Core::Math::AngleAxis( qs ).axis().dot( Ra::Core::Math::Vector3::UnitZ() ) == 0,
                       "Swing should be in xy" );
     }
 };

@@ -198,14 +198,14 @@ void DebugRender::initialize() {
     GL_CHECK_ERROR;
 }
 
-void DebugRender::render( const Core::Matrix4& viewMatrix, const Core::Matrix4& projMatrix ) {
+void DebugRender::render( const Core::Math::Matrix4& viewMatrix, const Core::Math::Matrix4& projMatrix ) {
     renderLines( viewMatrix.cast<float>(), projMatrix.cast<float>() );
     renderPoints( viewMatrix.cast<float>(), projMatrix.cast<float>() );
     renderMeshes( viewMatrix.cast<float>(), projMatrix.cast<float>() );
 }
 
-void DebugRender::renderLines( const Core::Matrix4f& viewMatrix,
-                               const Core::Matrix4f& projMatrix ) {
+void DebugRender::renderLines( const Core::Math::Matrix4f& viewMatrix,
+                               const Core::Math::Matrix4f& projMatrix ) {
     Core::Container::Vector3Array vertices;
     Core::Container::Vector4Array colors;
     std::vector<GLuint> indices;
@@ -224,7 +224,7 @@ void DebugRender::renderLines( const Core::Matrix4f& viewMatrix,
 
     if ( vertices.size() > 0 )
     {
-        const Core::Matrix4f id = Core::Matrix4f::Identity();
+        const Core::Math::Matrix4f id = Core::Math::Matrix4f::Identity();
 
         glUseProgram( m_lineProg );
         glUniformMatrix4fv( m_modelLineLoc, 1, GL_FALSE, id.data() );
@@ -241,8 +241,8 @@ void DebugRender::renderLines( const Core::Matrix4f& viewMatrix,
     m_lines.clear();
 }
 
-void DebugRender::renderPoints( const Core::Matrix4f& viewMatrix,
-                                const Core::Matrix4f& projMatrix ) {
+void DebugRender::renderPoints( const Core::Math::Matrix4f& viewMatrix,
+                                const Core::Math::Matrix4f& projMatrix ) {
     uint size = m_points.size();
     if ( 0 == size )
     {
@@ -285,7 +285,7 @@ void DebugRender::renderPoints( const Core::Matrix4f& viewMatrix,
     m_points.clear();
 }
 
-void DebugRender::renderMeshes( const Core::Matrix4f& view, const Core::Matrix4f& proj ) {
+void DebugRender::renderMeshes( const Core::Math::Matrix4f& view, const Core::Math::Matrix4f& proj ) {
     if ( m_meshes.empty() )
     {
         return;
@@ -306,7 +306,7 @@ void DebugRender::renderMeshes( const Core::Matrix4f& view, const Core::Matrix4f
 
     for ( uint i = 0; i < idx; ++i )
     {
-        Core::Matrix4f model = m_meshes[i].transform.matrix().cast<float>();
+        Core::Math::Matrix4f model = m_meshes[i].transform.matrix().cast<float>();
         glUniformMatrix4fv( m_modelLineLoc, 1, GL_FALSE, model.data() );
         m_meshes[i].mesh->updateGL();
         m_meshes[i].mesh->render();
@@ -318,7 +318,7 @@ void DebugRender::renderMeshes( const Core::Matrix4f& view, const Core::Matrix4f
 
     for ( uint i = idx; i < m_meshes.size(); ++i )
     {
-        Core::Matrix4f model = m_meshes[i].transform.matrix().cast<float>();
+        Core::Math::Matrix4f model = m_meshes[i].transform.matrix().cast<float>();
         glUniformMatrix4fv( m_modelMeshLoc, 1, GL_FALSE, model.data() );
         m_meshes[i].mesh->updateGL();
         m_meshes[i].mesh->render();
@@ -352,7 +352,7 @@ void DebugRender::addPoints( const Core::Container::Vector3Array& p, const Core:
     }
 }
 
-void DebugRender::addMesh( const std::shared_ptr<Mesh>& mesh, const Core::Transform& transform ) {
+void DebugRender::addMesh( const std::shared_ptr<Mesh>& mesh, const Core::Math::Transform& transform ) {
     m_meshes.push_back( {mesh, transform} );
 }
 
@@ -380,7 +380,7 @@ void DebugRender::addCircle( const Core::Math::Vector3& center, const Core::Math
     addMesh( DrawPrimitives::Circle( center, normal, radius, 64, color ) );
 }
 
-void DebugRender::addFrame( const Core::Transform& transform, Scalar size ) {
+void DebugRender::addFrame( const Core::Math::Transform& transform, Scalar size ) {
     addMesh( DrawPrimitives::Frame( transform, size ) );
 }
 
@@ -389,11 +389,11 @@ void DebugRender::addTriangle( const Core::Math::Vector3& p0, const Core::Math::
     addMesh( DrawPrimitives::Triangle( p0, p1, p2, color ) );
 }
 
-void DebugRender::addAABB( const Core::Aabb& box, const Core::Math::Color& color ) {
+void DebugRender::addAABB( const Core::Math::Aabb& box, const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::AABB( box, color ) );
 }
 
-void DebugRender::addOBB( const Core::Aabb& box, const Core::Transform& transform,
+void DebugRender::addOBB( const Core::Math::Aabb& box, const Core::Math::Transform& transform,
                           const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::AABB( box, color ), transform );
 }

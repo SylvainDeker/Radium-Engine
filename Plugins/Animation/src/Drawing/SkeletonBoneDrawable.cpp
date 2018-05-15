@@ -57,16 +57,16 @@ void SkeletonBoneRenderObject::updateLocalTransform() {
     Ra::Core::Math::Vector3 end;
     Ra::Core::Animation::getBonePoints( m_skel, m_id, start, end );
 
-    Ra::Core::Transform scale = Ra::Core::Transform::Identity();
+    Ra::Core::Math::Transform scale = Ra::Core::Math::Transform::Identity();
     scale.scale( ( end - start ).norm() );
 
-    Ra::Core::Quaternion rot =
-        Ra::Core::Quaternion::FromTwoVectors( Ra::Core::Math::Vector3::UnitZ(), end - start );
+    Ra::Core::Math::Quaternion rot =
+        Ra::Core::Math::Quaternion::FromTwoVectors( Ra::Core::Math::Vector3::UnitZ(), end - start );
 
-    Ra::Core::Transform boneTransform =
+    Ra::Core::Math::Transform boneTransform =
         m_skel.getTransform( m_id, Ra::Core::Animation::Handle::SpaceType::MODEL );
-    Ra::Core::Matrix3 rotation = rot.toRotationMatrix();
-    Ra::Core::Transform drawTransform;
+    Ra::Core::Math::Matrix3 rotation = rot.toRotationMatrix();
+    Ra::Core::Math::Transform drawTransform;
     drawTransform.linear() = rotation;
     drawTransform.translation() = boneTransform.translation();
 

@@ -78,9 +78,9 @@ class RA_ENGINE_API RenderParameters final {
     using Vec3Parameter = TParameter<Core::Math::Vector3>;
     using Vec4Parameter = TParameter<Core::Math::Vector4>;
 
-    using Mat2Parameter = TParameter<Core::Matrix2>;
-    using Mat3Parameter = TParameter<Core::Matrix3>;
-    using Mat4Parameter = TParameter<Core::Matrix4>;
+    using Mat2Parameter = TParameter<Core::Math::Matrix2>;
+    using Mat3Parameter = TParameter<Core::Math::Matrix3>;
+    using Mat4Parameter = TParameter<Core::Math::Matrix4>;
 
   public:
     void addParameter( const char* name, int value );
@@ -95,9 +95,9 @@ class RA_ENGINE_API RenderParameters final {
     void addParameter( const char* name, const Core::Math::Vector3& value );
     void addParameter( const char* name, const Core::Math::Vector4& value );
 
-    void addParameter( const char* name, const Core::Matrix2& value );
-    void addParameter( const char* name, const Core::Matrix3& value );
-    void addParameter( const char* name, const Core::Matrix4& value );
+    void addParameter( const char* name, const Core::Math::Matrix2& value );
+    void addParameter( const char* name, const Core::Math::Matrix3& value );
+    void addParameter( const char* name, const Core::Math::Matrix4& value );
 
     void addParameter( const char* name, Texture* tex, int texUnit );
 
@@ -109,9 +109,9 @@ class RA_ENGINE_API RenderParameters final {
     void updateParameter( const char* name, const Core::Math::Vector3& value );
     void updateParameter( const char* name, const Core::Math::Vector4& value );
 
-    void updateParameter( const char* name, const Core::Matrix2& value );
-    void updateParameter( const char* name, const Core::Matrix3& value );
-    void updateParameter( const char* name, const Core::Matrix4& value );
+    void updateParameter( const char* name, const Core::Math::Matrix2& value );
+    void updateParameter( const char* name, const Core::Math::Matrix3& value );
+    void updateParameter( const char* name, const Core::Math::Matrix4& value );
 
     void concatParameters( const RenderParameters& params );
 

@@ -67,9 +67,9 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
                                            Core::Asset::LightData& data ) {
     fetchName( light, data );
     fetchType( light, data );
-    Core::Matrix4 rootMatrix;
-    rootMatrix = Core::Matrix4::Identity();
-    Core::Matrix4 frame = loadLightFrame( scene, rootMatrix, data );
+    Core::Math::Matrix4 rootMatrix;
+    rootMatrix = Core::Math::Matrix4::Identity();
+    Core::Math::Matrix4 frame = loadLightFrame( scene, rootMatrix, data );
     setFrame( frame );
     Core::Math::Color color( light.mColorDiffuse.r, light.mColorDiffuse.g, light.mColorDiffuse.b, 1.0 );
 
@@ -129,17 +129,17 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
     }
 }
 
-Core::Matrix4 AssimpLightDataLoader::loadLightFrame( const aiScene* scene,
-                                                     const Core::Matrix4& parentFrame,
+Core::Math::Matrix4 AssimpLightDataLoader::loadLightFrame( const aiScene* scene,
+                                                     const Core::Math::Matrix4& parentFrame,
                                                      Core::Asset::LightData& data ) const {
     const aiNode* lightNode = scene->mRootNode->FindNode( data.getName().c_str() );
-    Core::Matrix4 transform;
-    transform = Core::Matrix4::Identity();
+    Core::Math::Matrix4 transform;
+    transform = Core::Math::Matrix4::Identity();
 
     if ( lightNode != nullptr )
     {
-        Core::Matrix4 t0;
-        Core::Matrix4 t1;
+        Core::Math::Matrix4 t0;
+        Core::Math::Matrix4 t1;
 
         for ( uint i = 0; i < 4; ++i )
         {

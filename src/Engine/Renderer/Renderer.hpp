@@ -43,8 +43,8 @@ class Framebuffer;
 namespace Ra {
 namespace Engine {
 struct RA_ENGINE_API RenderData {
-    Core::Matrix4 viewMatrix;
-    Core::Matrix4 projMatrix;
+    Core::Math::Matrix4 viewMatrix;
+    Core::Math::Matrix4 projMatrix;
     Scalar dt;
 };
 

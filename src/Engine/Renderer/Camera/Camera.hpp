@@ -37,10 +37,10 @@ class RA_ENGINE_API Camera final {
 
     /// Return the frame of the camera.
     /// Where Y is the up vector and -Z is the direction vector.
-    inline Core::Transform getFrame() const;
+    inline Core::Math::Transform getFrame() const;
 
     /// Set the frame of the camera to 'frame'
-    inline void setFrame( const Core::Transform& frame );
+    inline void setFrame( const Core::Math::Transform& frame );
 
     /// Return the position.
     inline Core::Math::Vector3 getPosition() const;
@@ -65,7 +65,7 @@ class RA_ENGINE_API Camera final {
     inline Core::Math::Vector3 getRightVector() const;
 
     /// Apply the transformation 'T' to the camera.
-    void applyTransform( const Core::Transform& T );
+    void applyTransform( const Core::Math::Transform& T );
 
     //
     // Getters and setters for projection matrix parameters.
@@ -116,10 +116,10 @@ class RA_ENGINE_API Camera final {
     //
 
     /// Return the view matrix.
-    inline Core::Matrix4 getViewMatrix() const;
+    inline Core::Math::Matrix4 getViewMatrix() const;
 
     /// Return the projection matrix.
-    inline Core::Matrix4 getProjMatrix() const;
+    inline Core::Math::Matrix4 getProjMatrix() const;
 
     /// Update the projection matrix according to the current parameters.
     void updateProjMatrix();
@@ -142,8 +142,8 @@ class RA_ENGINE_API Camera final {
     inline Core::Math::Vector3 unProject( const Core::Math::Vector2& pix ) const;
 
   protected:
-    Core::Transform m_frame;    // Camera frame (inverse of the view matrix)
-    Core::Matrix4 m_projMatrix; // Projection matrix
+    Core::Math::Transform m_frame;    // Camera frame (inverse of the view matrix)
+    Core::Math::Matrix4 m_projMatrix; // Projection matrix
 
     Scalar m_fov;   // Field of view
     Scalar m_zNear; // Z Near plane distance

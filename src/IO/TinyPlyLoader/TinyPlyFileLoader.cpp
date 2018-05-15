@@ -96,7 +96,7 @@ Core::Asset::FileData* TinyPlyFileLoader::loadFile( const std::string& filename 
 
     geometry->setVertices( *(
         reinterpret_cast<std::vector<Eigen::Matrix<float, 3, 1, Eigen::DontAlign>>*>( &verts ) ) );
-    geometry->setFrame( Core::Transform::Identity() );
+    geometry->setFrame( Core::Math::Transform::Identity() );
 
     if ( normalCount != 0 )
     {

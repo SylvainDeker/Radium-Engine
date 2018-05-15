@@ -58,10 +58,10 @@ class ANIM_PLUGIN_API AnimationComponent : public Ra::Engine::Component {
 
     virtual bool canEdit( Ra::Core::Container::Index roIdx ) const override;
 
-    virtual Ra::Core::Transform getTransform( Ra::Core::Container::Index roIdx ) const override;
+    virtual Ra::Core::Math::Transform getTransform( Ra::Core::Container::Index roIdx ) const override;
 
     virtual void setTransform( Ra::Core::Container::Index roIdx,
-                               const Ra::Core::Transform& transform ) override;
+                               const Ra::Core::Math::Transform& transform ) override;
 
   public:
     // debug function to display the hierarchy

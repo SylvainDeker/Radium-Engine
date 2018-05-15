@@ -20,7 +20,7 @@ void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Math::Vector3>& 
     const uint numTriangles = mesh.m_triangles.size();
 
     normalsOut.clear();
-    normalsOut.resize( numVertices, Vector3::Zero() );
+    normalsOut.resize( numVertices, Math::Vector3::Zero() );
 
     for ( uint t = 0; t < numTriangles; t++ )
     {
@@ -44,7 +44,7 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
 
     Container::VectorArray<Math::Vector3>::const_iterator vertPos;
     Container::VectorArray<Math::Vector3>::const_iterator duplicatePos;
-    std::vector<std::pair<Vector3, VertexIdx>> vertices;
+    std::vector<std::pair<Math::Vector3, VertexIdx>> vertices;
 
     for ( uint i = 0; i < numVerts; ++i )
     {
@@ -52,7 +52,7 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
     }
 
     std::sort( vertices.begin(), vertices.end(),
-               []( std::pair<Vector3, int> a, std::pair<Vector3, int> b ) {
+               []( std::pair<Math::Vector3, int> a, std::pair<Math::Vector3, int> b ) {
                    if ( a.first.x() == b.first.x() )
                    {
                        if ( a.first.y() == b.first.y() )
@@ -141,7 +141,7 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
     {
         Scalar minT = std::numeric_limits<Scalar>::max();
         std::vector<Scalar> tValues;
-        std::array<Vector3, 3> v;
+        std::array<Math::Vector3, 3> v;
         for ( uint i = 0; i < mesh.m_triangles.size(); ++i )
         {
             tValues.clear();
@@ -157,7 +157,7 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
         {
             result.m_t = minT;
             Scalar minDist = std::numeric_limits<Scalar>::max();
-            std::array<Vector3, 3> V;
+            std::array<Math::Vector3, 3> V;
             getTriangleVertices( mesh, result.m_hitTriangle, V );
             const Triangle& T = mesh.m_triangles[result.m_hitTriangle];
             const Math::Vector3 I = ray.pointAt( minT );

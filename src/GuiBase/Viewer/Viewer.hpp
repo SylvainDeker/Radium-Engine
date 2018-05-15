@@ -117,7 +117,7 @@ class RA_GUIBASE_API Viewer : public QWindow {
     void processPicking();
 
     /// Moves the camera so that the whole scene is visible.
-    void fitCameraToScene( const Core::Aabb& sceneAabb );
+    void fitCameraToScene( const Core::Math::Aabb& sceneAabb );
 
     /// Returns the names of the different registred renderers.
     std::vector<std::string> getRenderersName() const;

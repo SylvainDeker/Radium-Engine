@@ -38,8 +38,8 @@ class CameraInterface : public QObject {
 
     void resizeViewport( uint width, uint height );
 
-    Core::Matrix4 getProjMatrix() const;
-    Core::Matrix4 getViewMatrix() const;
+    Core::Math::Matrix4 getProjMatrix() const;
+    Core::Math::Matrix4 getViewMatrix() const;
 
     /// @return true if the event has been taken into account, false otherwise
     virtual bool handleMousePressEvent( QMouseEvent* event ) = 0;
@@ -78,10 +78,10 @@ class CameraInterface : public QObject {
     void setCameraZNear( double zNear );
     void setCameraZFar( double zFar );
 
-    void mapCameraBehaviourToAabb( const Core::Aabb& aabb );
+    void mapCameraBehaviourToAabb( const Core::Math::Aabb& aabb );
     void unmapCameraBehaviourToAabb();
 
-    virtual void fitScene( const Core::Aabb& aabb ) = 0;
+    virtual void fitScene( const Core::Math::Aabb& aabb ) = 0;
 
     virtual void setCameraPosition( const Core::Math::Vector3& position ) = 0;
     virtual void setCameraTarget( const Core::Math::Vector3& target ) = 0;
@@ -93,7 +93,7 @@ class CameraInterface : public QObject {
     void cameraTargetChanged( const Core::Math::Vector3& );
 
   protected:
-    Core::Aabb m_targetedAabb;
+    Core::Math::Aabb m_targetedAabb;
 
     Scalar m_targetedAabbVolume;
     Scalar m_cameraSensitivity;

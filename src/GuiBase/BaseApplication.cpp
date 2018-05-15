@@ -261,7 +261,7 @@ void BaseApplication::setupScene() {
     Engine::SystemEntity::uiCmp()->addRenderObject( grid );
 
     auto frame =
-        Primitive( Engine::SystemEntity::uiCmp(), Frame( Ra::Core::Transform::Identity(), 0.05f ) );
+        Primitive( Engine::SystemEntity::uiCmp(), Frame( Ra::Core::Math::Transform::Identity(), 0.05f ) );
     frame->setPickable( false );
     Engine::SystemEntity::uiCmp()->addRenderObject( frame );
 

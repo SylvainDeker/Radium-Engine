@@ -51,7 +51,7 @@ class RA_IO_API AssimpHandleDataLoader : public Core::Asset::DataLoader<Core::As
                                   Core::Asset::HandleComponentData& data ) const;
     void loadHandleComponentData( const aiNode* node, Core::Asset::HandleComponentData& data ) const;
     void loadHandleTopologyData( const aiScene* scene, Core::Asset::HandleData* data ) const;
-    void loadHandleFrame( const aiNode* node, const Core::Transform& parentFrame,
+    void loadHandleFrame( const aiNode* node, const Core::Math::Transform& parentFrame,
                           const std::map<uint, uint>& indexTable,
                           std::vector<std::unique_ptr<Core::Asset::HandleData>>& data ) const;
 

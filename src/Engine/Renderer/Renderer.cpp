@@ -315,8 +315,8 @@ void Renderer::renderForPicking(
                 int id = ro->idx.getValue();
                 pickingShaders[i]->setUniform( "objectId", id );
 
-                Core::Matrix4 M = ro->getTransformAsMatrix();
-                Core::Matrix4 N = M.inverse().transpose();
+                Core::Math::Matrix4 M = ro->getTransformAsMatrix();
+                Core::Math::Matrix4 N = M.inverse().transpose();
                 pickingShaders[i]->setUniform( "transform.proj", renderData.projMatrix );
                 pickingShaders[i]->setUniform( "transform.view", renderData.viewMatrix );
                 pickingShaders[i]->setUniform( "transform.model", M );
@@ -383,15 +383,15 @@ void Renderer::doPicking( const RenderData& renderData ) {
                 int id = ro->idx.getValue();
                 m_pickingShaders[i]->setUniform( "objectId", id );
 
-                Core::Matrix4 M = ro->getTransformAsMatrix();
-                Core::Matrix4 MV = renderData.viewMatrix * M;
+                Core::Math::Matrix4 M = ro->getTransformAsMatrix();
+                Core::Math::Matrix4 MV = renderData.viewMatrix * M;
                 Scalar d = MV.block<3, 1>( 0, 3 ).norm();
 
-                Core::Matrix4 S = Core::Matrix4::Identity();
+                Core::Math::Matrix4 S = Core::Math::Matrix4::Identity();
                 S( 0, 0 ) = S( 1, 1 ) = S( 2, 2 ) = d;
 
                 M = M * S;
-                Core::Matrix4 N = M.inverse().transpose();
+                Core::Math::Matrix4 N = M.inverse().transpose();
 
                 m_pickingShaders[i]->setUniform( "transform.proj", renderData.projMatrix );
                 m_pickingShaders[i]->setUniform( "transform.view", renderData.viewMatrix );

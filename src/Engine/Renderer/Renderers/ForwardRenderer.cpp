@@ -435,7 +435,7 @@ void ForwardRenderer::debugInternal( const RenderData& renderData ) {
                 // bind data
                 shader->bind();
 
-                Core::Matrix4 M = ro->getTransformAsMatrix();
+                Core::Math::Matrix4 M = ro->getTransformAsMatrix();
                 shader->setUniform( "transform.proj", renderData.projMatrix );
                 shader->setUniform( "transform.view", renderData.viewMatrix );
                 shader->setUniform( "transform.model", M );
@@ -474,12 +474,12 @@ void ForwardRenderer::uiInternal( const RenderData& renderData ) {
             // bind data
             shader->bind();
 
-            Core::Matrix4 M = ro->getTransformAsMatrix();
-            Core::Matrix4 MV = renderData.viewMatrix * M;
+            Core::Math::Matrix4 M = ro->getTransformAsMatrix();
+            Core::Math::Matrix4 MV = renderData.viewMatrix * M;
             Core::Math::Vector3 V = MV.block<3, 1>( 0, 3 );
             Scalar d = V.norm();
 
-            Core::Matrix4 S = Core::Matrix4::Identity();
+            Core::Math::Matrix4 S = Core::Math::Matrix4::Identity();
             S( 0, 0 ) = S( 1, 1 ) = S( 2, 2 ) = d;
 
             M = M * S;

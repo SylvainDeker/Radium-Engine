@@ -75,12 +75,12 @@ class RA_ENGINE_API Component {
     virtual bool canEdit( Core::Container::Index roIdx ) const { return false; }
 
     /// Get the transform associated with the given RO index key.
-    virtual Core::Transform getTransform( Core::Container::Index roIdx ) const {
-        return Core::Transform::Identity();
+    virtual Core::Math::Transform getTransform( Core::Container::Index roIdx ) const {
+        return Core::Math::Transform::Identity();
     };
 
     /// Set the new transform associated with the RO index key.
-    virtual void setTransform( Core::Container::Index roIdx, const Core::Transform& transform ){};
+    virtual void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){};
 
     void notifyRenderObjectExpired( const Core::Container::Index& idx );
 

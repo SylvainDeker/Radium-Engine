@@ -63,15 +63,15 @@ void RenderParameters::addParameter( const char* name, const Core::Math::Vector4
     m_vec4ParamsVector[name] = Vec4Parameter( name, value );
 }
 
-void RenderParameters::addParameter( const char* name, const Core::Matrix2& value ) {
+void RenderParameters::addParameter( const char* name, const Core::Math::Matrix2& value ) {
     m_mat2ParamsVector[name] = Mat2Parameter( name, value );
 }
 
-void RenderParameters::addParameter( const char* name, const Core::Matrix3& value ) {
+void RenderParameters::addParameter( const char* name, const Core::Math::Matrix3& value ) {
     m_mat3ParamsVector[name] = Mat3Parameter( name, value );
 }
 
-void RenderParameters::addParameter( const char* name, const Core::Matrix4& value ) {
+void RenderParameters::addParameter( const char* name, const Core::Math::Matrix4& value ) {
     m_mat4ParamsVector[name] = Mat4Parameter( name, value );
 }
 
@@ -103,15 +103,15 @@ void RenderParameters::updateParameter( const char* name, const Core::Math::Vect
     m_vec4ParamsVector[name] = Vec4Parameter( name, value );
 }
 
-void RenderParameters::updateParameter( const char* name, const Core::Matrix2& value ) {
+void RenderParameters::updateParameter( const char* name, const Core::Math::Matrix2& value ) {
     m_mat2ParamsVector[name] = Mat2Parameter( name, value );
 }
 
-void RenderParameters::updateParameter( const char* name, const Core::Matrix3& value ) {
+void RenderParameters::updateParameter( const char* name, const Core::Math::Matrix3& value ) {
     m_mat3ParamsVector[name] = Mat3Parameter( name, value );
 }
 
-void RenderParameters::updateParameter( const char* name, const Core::Matrix4& value ) {
+void RenderParameters::updateParameter( const char* name, const Core::Math::Matrix4& value ) {
     m_mat4ParamsVector[name] = Mat4Parameter( name, value );
 }
 

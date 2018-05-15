@@ -170,7 +170,7 @@ void AssimpAnimationDataLoader::fetchHandleAnimation( aiNodeAnim* node,
     data.m_anim.setAnimationTime( Core::Asset::AnimationTime( *keyFrame.begin(), *keyFrame.rbegin() ) );
     for ( const auto& time : keyFrame )
     {
-        Core::Transform T;
+        Core::Math::Transform T;
         T.fromPositionOrientationScale( tr.at( time ), rot.at( time ), s.at( time ) );
         data.m_anim.insertKeyFrame( ( ( dt == 0 ) ? time : ( dt * time ) ), T );
     }

@@ -8,15 +8,15 @@ namespace Gui {
 class RotateGizmo : public Gizmo {
   public:
     // Draw a frame with : 3 RGB arrows
-    RotateGizmo( Engine::Component* c, const Core::Transform& worldTo, const Core::Transform& t,
+    RotateGizmo( Engine::Component* c, const Core::Math::Transform& worldTo, const Core::Math::Transform& t,
                  Mode mode );
 
-    virtual void updateTransform( Gizmo::Mode mode, const Core::Transform& worldTo,
-                                  const Core::Transform& t ) override;
+    virtual void updateTransform( Gizmo::Mode mode, const Core::Math::Transform& worldTo,
+                                  const Core::Math::Transform& t ) override;
     virtual void selectConstraint( int drawableIndex ) override;
     virtual void setInitialState( const Engine::Camera& cam,
                                   const Core::Math::Vector2& initialXY ) override;
-    virtual Core::Transform mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
+    virtual Core::Math::Transform mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
                                        bool stepped = false ) override;
 
   private:
@@ -25,7 +25,7 @@ class RotateGizmo : public Gizmo {
     bool m_start;
     bool m_stepped;
     float m_totalAngle;
-    Core::Matrix3 m_initialRot;
+    Core::Math::Matrix3 m_initialRot;
 };
 } // namespace Gui
 } // namespace Ra

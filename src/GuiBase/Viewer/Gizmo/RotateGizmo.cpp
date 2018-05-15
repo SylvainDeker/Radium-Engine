@@ -19,8 +19,8 @@
 
 namespace Ra {
 namespace Gui {
-RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
-                          const Core::Transform& t, Mode mode ) :
+RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Math::Transform& worldTo,
+                          const Core::Math::Transform& t, Mode mode ) :
     Gizmo( c, worldTo, t, mode ),
     m_initialPix( Core::Math::Vector2::Zero() ),
     m_selectedAxis( -1 ) {
@@ -64,12 +64,12 @@ RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
     }
 }
 
-void RotateGizmo::updateTransform( Gizmo::Mode mode, const Core::Transform& worldTo,
-                                   const Core::Transform& t ) {
+void RotateGizmo::updateTransform( Gizmo::Mode mode, const Core::Math::Transform& worldTo,
+                                   const Core::Math::Transform& t ) {
     m_mode = mode;
     m_worldTo = worldTo;
     m_transform = t;
-    Core::Transform displayTransform = Core::Transform::Identity();
+    Core::Math::Transform displayTransform = Core::Math::Transform::Identity();
     if ( m_mode == LOCAL )
     {
         displayTransform = m_transform;
@@ -104,7 +104,7 @@ void RotateGizmo::selectConstraint( int drawableIdx ) {
     }
 }
 
-Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
+Core::Math::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
                                         bool stepped ) {
     static const float step = Ra::Core::Math::Pi / 10.f;
     if ( m_selectedAxis >= 0 )
@@ -113,8 +113,8 @@ Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::M
         Core::Math::Vector3 rotationAxis = Core::Math::Vector3::Unit( m_selectedAxis );
 
         // Decompose the current transform's linear part into rotation and scale
-        Core::Matrix3 rotationMat;
-        Core::Matrix3 scaleMat;
+        Core::Math::Matrix3 rotationMat;
+        Core::Math::Matrix3 scaleMat;
         m_transform.computeRotationScaling( &rotationMat, &scaleMat );
 
         if ( m_mode == LOCAL )
@@ -174,7 +174,7 @@ Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::M
             m_totalAngle += angle;
             if ( angle != 0 )
             {
-                auto newRot = Core::AngleAxis( angle, rotationAxis ) * rotationMat;
+                auto newRot = Core::Math::AngleAxis( angle, rotationAxis ) * rotationMat;
                 m_transform.fromPositionOrientationScale( origin, newRot, scaleMat.diagonal() );
             }
         }
