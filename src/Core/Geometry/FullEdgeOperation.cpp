@@ -11,6 +11,8 @@
 namespace Ra {
 namespace Core {
 
+
+
 template <typename T>
 void insertInMap( Container::IndexMap<T>& map, T& t ) {
     t->idx = map.insert( t );
@@ -91,6 +93,7 @@ void fulledgeSplit( Dcel& dcel, const Container::Index fulledge_id ) {
 }
 
 void fulledgeCollapse( Dcel& dcel, const Container::Index fulledge_id ) {}
+
 
 } // namespace Core
 } // namespace Ra

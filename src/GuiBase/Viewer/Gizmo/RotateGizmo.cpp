@@ -29,7 +29,7 @@ RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
     // For x,y,z
     for ( uint i = 0; i < 3; ++i )
     {
-        Core::TriangleMesh torus = Core::MeshUtils::makeParametricTorus<32>(
+        Core::TriangleMesh torus = Core::Geometry::makeParametricTorus<32>(
             torusOutRadius, torusAspectRatio * torusOutRadius );
         // Transform the torus from z-axis to axis i.
         for ( auto& v : torus.m_vertices )

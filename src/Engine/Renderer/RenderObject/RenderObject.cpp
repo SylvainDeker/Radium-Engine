@@ -182,7 +182,7 @@ Core::Matrix4 RenderObject::getTransformAsMatrix() const {
 }
 
 Core::Aabb RenderObject::getAabb() const {
-    Core::Aabb aabb = Core::MeshUtils::getAabb( m_mesh->getGeometry() );
+    Core::Aabb aabb = Core::Geometry::getAabb( m_mesh->getGeometry() );
     Core::Aabb result;
 
     for ( int i = 0; i < 8; ++i )
@@ -194,7 +194,7 @@ Core::Aabb RenderObject::getAabb() const {
 }
 
 Core::Aabb RenderObject::getMeshAabb() const {
-    return Core::MeshUtils::getAabb( m_mesh->getGeometry() );
+    return Core::Geometry::getAabb( m_mesh->getGeometry() );
 }
 
 void RenderObject::setLocalTransform( const Core::Transform& transform ) {

@@ -219,7 +219,7 @@ MeshPtr CircleArc( const Core::Vector3& center, const Core::Vector3& normal, Sca
 }
 
 MeshPtr Sphere( const Core::Vector3& center, Scalar radius, const Core::Color& color ) {
-    Core::TriangleMesh sphere = Core::MeshUtils::makeGeodesicSphere( radius, 2 );
+    Core::TriangleMesh sphere = Core::Geometry::makeGeodesicSphere( radius, 2 );
 
     for ( auto& t : sphere.m_vertices )
     {
@@ -239,7 +239,7 @@ MeshPtr Capsule( const Core::Vector3& p1, const Core::Vector3& p2, Scalar radius
                  const Core::Color& color ) {
     const Scalar l = ( p2 - p1 ).norm();
 
-    Core::TriangleMesh capsule = Core::MeshUtils::makeCapsule( l, radius );
+    Core::TriangleMesh capsule = Core::Geometry::makeCapsule( l, radius );
 
     // Compute the transform so that
     // (0,0,-l/2) maps to p1 and (0,0,l/2) maps to p2

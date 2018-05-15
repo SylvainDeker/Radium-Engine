@@ -3,7 +3,7 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
+namespace Geometry {
 
 TriangleMesh makeXNormalQuad( const Vector2& halfExts ) {
     Transform T = Transform::Identity();
@@ -561,6 +561,6 @@ TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Vector2& hal
 
     return grid;
 }
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

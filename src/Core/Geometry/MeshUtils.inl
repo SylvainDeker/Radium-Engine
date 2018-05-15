@@ -6,7 +6,7 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
+namespace Geometry {
 inline Scalar getTriangleArea( const TriangleMesh& mesh, TriangleIdx triIdx ) {
     std::array<Vector3, 3> v;
     getTriangleVertices( mesh, triIdx, v );
@@ -83,6 +83,6 @@ std::vector<Ra::Core::Vector2ui> getEdges( const TriangleMesh& mesh ) {
     }
     return edges;
 }
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

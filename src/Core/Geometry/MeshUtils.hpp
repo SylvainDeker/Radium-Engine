@@ -12,7 +12,7 @@ namespace Ra {
 namespace Core {
 
 /// Functions to operate on a TriangleMesh
-namespace MeshUtils {
+namespace Geometry {
 //
 // Geometry/Topology  utils
 //
@@ -69,7 +69,7 @@ RA_CORE_API Scalar getMeanEdgeLength( const TriangleMesh& mesh );
 /// Check that the mesh is well built, asserting when it is not.
 /// only compiles to something when in debug mode.
 RA_CORE_API void checkConsistency( const TriangleMesh& mesh );
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

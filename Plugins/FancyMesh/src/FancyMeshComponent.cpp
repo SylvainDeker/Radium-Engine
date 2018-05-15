@@ -111,7 +111,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
         m_duplicateTable.resize( data->getVerticesSize() );
         std::iota( m_duplicateTable.begin(), m_duplicateTable.end(), 0 );
     } else
-    { Ra::Core::MeshUtils::findDuplicates( mesh, m_duplicateTable ); }
+    { Ra::Core::Geometry::findDuplicates( mesh, m_duplicateTable ); }
 
     if ( data->hasTangents() )
     {

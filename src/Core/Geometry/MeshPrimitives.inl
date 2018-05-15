@@ -4,7 +4,7 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
+namespace Geometry {
 
 template <uint U, uint V>
 TriangleMesh makeParametricSphere( Scalar radius ) {
@@ -90,6 +90,6 @@ TriangleMesh makeParametricTorus( Scalar majorRadius, Scalar minorRadius ) {
     checkConsistency( result );
     return result;
 }
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

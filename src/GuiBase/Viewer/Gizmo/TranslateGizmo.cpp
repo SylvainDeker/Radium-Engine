@@ -37,10 +37,10 @@ TranslateGizmo::TranslateGizmo( Engine::Component* c, const Core::Transform& wor
         cylinderEnd[i] = ( 1.f - arrowFrac );
         arrowEnd[i] = 1.f;
 
-        Core::TriangleMesh cylinder = Core::MeshUtils::makeCylinder(
+        Core::TriangleMesh cylinder = Core::Geometry::makeCylinder(
             Core::Vector3::Zero(), arrowScale * cylinderEnd, arrowScale * axisWidth / 2.f );
 
-        Core::TriangleMesh cone = Core::MeshUtils::makeCone(
+        Core::TriangleMesh cone = Core::Geometry::makeCone(
             arrowScale * cylinderEnd, arrowScale * arrowEnd, arrowScale * arrowFrac / 2.f );
 
         // Merge the cylinder and the cone to create the arrow shape.

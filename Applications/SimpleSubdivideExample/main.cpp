@@ -88,7 +88,7 @@ int main( int argc, char* argv[] ) {
         Ra::Core::Asset::OBJFileManager obj;
         if ( a.inputFilename.empty() )
         {
-            mesh = Ra::Core::MeshUtils::makeBox();
+            mesh = Ra::Core::Geometry::makeBox();
         } else
         { obj.load( a.inputFilename, mesh ); }
 

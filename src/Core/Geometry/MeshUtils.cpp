@@ -14,7 +14,7 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
+namespace Geometry {
 void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Vector3>& normalsOut ) {
     const uint numVertices = mesh.m_vertices.size();
     const uint numTriangles = mesh.m_triangles.size();
@@ -257,6 +257,6 @@ void checkConsistency( const TriangleMesh& mesh ) {
 #endif
 }
 
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

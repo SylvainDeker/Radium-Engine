@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 class Dcel;
 
@@ -16,6 +17,7 @@ fulledgeSplit( Dcel& dcel, const Index fulledge_id );
 fulledgeCollapse( Dcel& dcel, const Index fulledge_id );
 
 
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

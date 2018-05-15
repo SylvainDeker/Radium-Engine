@@ -138,9 +138,9 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
         {
             const Triangle& tri = subdividedMesh.m_triangles[t];
             std::array<Vector3, 3> triVerts;
-            MeshUtils::getTriangleVertices( subdividedMesh, t, triVerts );
+            Geometry::getTriangleVertices( subdividedMesh, t, triVerts );
 
-            const Scalar area = MeshUtils::getTriangleArea( subdividedMesh, t );
+            const Scalar area = Geometry::getTriangleArea( subdividedMesh, t );
             const Eigen::SparseVector<Scalar> triWeight =
                 ( 1 / 3.f ) * ( subdividedWeights.row( tri[0] ) + subdividedWeights.row( tri[1] ) +
                                 subdividedWeights.row( tri[2] ) );

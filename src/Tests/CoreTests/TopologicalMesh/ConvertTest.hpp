@@ -20,18 +20,18 @@ class ConvertTests : public Test {
         TopologicalMesh topologicalMesh;
 
         // Test for close mesh
-        mesh = Ra::Core::MeshUtils::makeBox();
+        mesh = Ra::Core::Geometry::makeBox();
         Ra::Core::MeshConverter::convert( mesh, topologicalMesh );
         Ra::Core::MeshConverter::convert( topologicalMesh, newMesh );
         RA_UNIT_TEST( isSameMesh( mesh, newMesh ), "Conversion to topological box mesh failed" );
 
         // Test for mesh with boundaries
-        mesh = Ra::Core::MeshUtils::makePlaneGrid( 2, 2 );
+        mesh = Ra::Core::Geometry::makePlaneGrid( 2, 2 );
         Ra::Core::MeshConverter::convert( mesh, topologicalMesh );
         Ra::Core::MeshConverter::convert( topologicalMesh, newMesh );
         RA_UNIT_TEST( isSameMesh( mesh, newMesh ), "Conversion to topological grid mesh failed" );
 
-        mesh = Ra::Core::MeshUtils::makeCylinder( Vector3( 0, 0, 0 ), Vector3( 0, 0, 1 ), 1 );
+        mesh = Ra::Core::Geometry::makeCylinder( Vector3( 0, 0, 0 ), Vector3( 0, 0, 1 ), 1 );
         Ra::Core::MeshConverter::convert( mesh, topologicalMesh );
         Ra::Core::MeshConverter::convert( topologicalMesh, newMesh );
         RA_UNIT_TEST( isSameMesh( mesh, newMesh ),
