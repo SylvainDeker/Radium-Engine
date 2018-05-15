@@ -8,6 +8,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+}
 class Curve2D {
   public:
     enum CurveType { LINE, CUBICBEZIER, SPLINE, SIZE };
@@ -94,6 +97,7 @@ class SplineCurve : public Curve2D {
     Core::Container::VectorArray<Vector> m_points;
 };
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra
 

@@ -12,7 +12,7 @@ namespace Ra {
 namespace Core {
 namespace Animation {
 
-using DQList = Container::AlignedStdVector<DualQuaternion>;
+using DQList = Container::AlignedStdVector<Math::DualQuaternion>;
 
 /*
  * computeDQ computes the dual quaternions from a given pose and a given set of skinning weights.

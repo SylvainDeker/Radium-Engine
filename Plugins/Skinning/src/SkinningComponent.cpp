@@ -6,7 +6,7 @@
 #include <Core/Animation/DualQuaternionSkinning.hpp>
 #include <Core/Animation/RotationCenterSkinning.hpp>
 
-using Ra::Core::DualQuaternion;
+using Ra::Core::Math::DualQuaternion;
 using Ra::Core::Quaternion;
 
 using Ra::Core::Geometry::TriangleMesh;
@@ -108,7 +108,7 @@ void SkinningComponent::skin() {
             }
             case DQS:
             {
-                Ra::Core::Container::AlignedStdVector<DualQuaternion> DQ;
+                Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion> DQ;
                 // computeDQ( m_frameData.m_prevToCurrentRelPose, m_refData.m_weights, DQ );
                 Ra::Core::Animation::computeDQ( m_frameData.m_refToCurrentRelPose,
                                                 m_refData.m_weights, DQ );
@@ -174,7 +174,7 @@ void SkinningComponent::setContentsName( const std::string name ) {
 }
 
 void SkinningComponent::setupIO( const std::string& id ) {
-    using DualQuatVector = Ra::Core::Container::AlignedStdVector<Ra::Core::DualQuaternion>;
+    using DualQuatVector = Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion>;
 
     ComponentMessenger::CallbackTypes<DualQuatVector>::Getter dqOut =
         std::bind( &SkinningComponent::getDQ, this );

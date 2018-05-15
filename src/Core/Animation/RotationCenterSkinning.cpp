@@ -177,7 +177,7 @@ void corSkinning( const Container::Vector3Array& input, const Animation::Pose& p
     CORE_ASSERT( CoR.size() == size, "Invalid center of rotations" );
 
     // Compute the dual quaternions
-    Container::AlignedStdVector<DualQuaternion> DQ;
+    Container::AlignedStdVector<Math::DualQuaternion> DQ;
     Animation::computeDQ( pose, weight, DQ );
 
     // Do LBS on the COR with weights of their associated vertices

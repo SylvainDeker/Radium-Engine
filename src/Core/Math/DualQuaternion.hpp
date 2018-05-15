@@ -6,6 +6,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+
 /// Dual quaternions are based on the dual-numbers algebra, somewhat
 /// analogous to complex numbers, but with the imaginary unit `e` defined
 /// such as e*e = 0 ; and using quaternions as the non-dual and dual part.
@@ -81,6 +84,8 @@ class DualQuaternion {
 
 /// Pre-multiplication of dual quaternion.
 inline DualQuaternion operator*( Scalar scalar, const DualQuaternion& dq );
+
+} // namespace Math
 } // namespace Core
 } // namespace Ra
 
