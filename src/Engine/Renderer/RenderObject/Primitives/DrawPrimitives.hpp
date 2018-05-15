@@ -95,7 +95,7 @@ RA_ENGINE_API MeshPtr Grid( const Core::Math::Vector3& center, const Core::Math:
 RA_ENGINE_API MeshPtr AABB( const Core::Math::Aabb& aabb, const Core::Math::Color& color );
 
 /// Display a wireframe OBB
-RA_ENGINE_API MeshPtr OBB( const Core::Obb& obb, const Core::Math::Color& color );
+RA_ENGINE_API MeshPtr OBB( const Core::Math::Obb& obb, const Core::Math::Color& color );
 
 RA_ENGINE_API MeshPtr Spline( const Core::Math::Spline<3, 3>& spline, uint pointCount,
                               const Core::Math::Color& color, Scalar scale = 1.0f );

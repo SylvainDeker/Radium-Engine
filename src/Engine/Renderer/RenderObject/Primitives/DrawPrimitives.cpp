@@ -423,7 +423,7 @@ MeshPtr AABB( const Core::Math::Aabb& aabb, const Core::Math::Color& color ) {
     return mesh;
 }
 
-MeshPtr OBB( const Core::Obb& obb, const Core::Math::Color& color ) {
+MeshPtr OBB( const Core::Math::Obb& obb, const Core::Math::Color& color ) {
     Core::Container::Vector3Array vertices( 8 );
 
     for ( uint i = 0; i < 8; ++i )

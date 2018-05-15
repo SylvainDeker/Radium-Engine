@@ -29,7 +29,7 @@ inline Math::Transform principalAxis( const Container::Vector3Array& pts ) {
     return result;
 }
 
-Obb pcaObb( const Container::Vector3Array& pts ) {
+Math::Obb pcaObb( const Container::Vector3Array& pts ) {
     Math::Transform pca = principalAxis( pts );
     Math::Transform pcaInv = pca.inverse();
 
@@ -44,7 +44,7 @@ Obb pcaObb( const Container::Vector3Array& pts ) {
     }
 
     Math::Aabb aligned = aabb( alignedPts );
-    return Obb( aligned, pca );
+    return Math::Obb( aligned, pca );
 }
 
 Math::Aabb aabb( const Container::Vector3Array& pts ) {
