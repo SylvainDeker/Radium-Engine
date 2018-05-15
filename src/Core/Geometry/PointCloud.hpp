@@ -31,7 +31,7 @@ RA_CORE_API inline Math::Transform principalAxis( const Container::Vector3Array&
 RA_CORE_API inline Math::Aabb aabb( const Container::Vector3Array& pts );
 
 /// Computes an oriented bounding box based on PCA of the points coordinates.
-RA_CORE_API inline Obb pcaObb( const Container::Vector3Array& pts );
+RA_CORE_API inline Math::Obb pcaObb( const Container::Vector3Array& pts );
 
 } // namespace PointCloud
 } // namespace Core
