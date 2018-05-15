@@ -80,8 +80,7 @@ void MainWindow::cleanup() {
 }
 
 void MainWindow::createConnections() {
-    connect(m_lightCreator, &LightCreator::sig_onItemAdded,this, &MainWindow::onItemAdded);
-
+    
     connect( actionOpenMesh, &QAction::triggered, this, &MainWindow::loadFile );
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,

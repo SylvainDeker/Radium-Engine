@@ -40,8 +40,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
     void slot_intensity_spin_to_slide(double val);
     void slot_inner_angle_slide_to_spin(int val);
     void slot_inner_angle_spin_to_slide(double val);
-    void slot_outter_angle_slide_to_spin(int val);
-    void slot_outter_angle_spin_to_slide(double val);
+    void slot_outer_angle_slide_to_spin(int val);
+    void slot_outer_angle_spin_to_slide(double val);
 
     void slot_falloff_constant_slide_to_spin(int val);
     void slot_falloff_constant_spin_to_slide(double val);
@@ -57,8 +57,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
     void sig_intensity_spin_to_slide(int);
     void sig_inner_angle_slide_to_spin(double);
     void sig_inner_angle_spin_to_slide(int);
-    void sig_outter_angle_slide_to_spin(double);
-    void sig_outter_angle_spin_to_slide(int);
+    void sig_outer_angle_slide_to_spin(double);
+    void sig_outer_angle_spin_to_slide(int);
     void sig_falloff_constant_slide_to_spin(double);
     void sig_falloff_constant_spin_to_slide(int);
     void sig_falloff_linear_slide_to_spin(double);
@@ -82,7 +82,7 @@ class LightEditor : public QWidget, private Ui::LightCreator {
         QColor *m_color;
         double *m_intensity_val;
         double *m_inner_angle_val;
-        double *m_outter_angle_val;
+        double *m_outer_angle_val;
         double *m_falloff_val_constant;
         double *m_falloff_val_linear;
         double *m_falloff_val_quadratic;

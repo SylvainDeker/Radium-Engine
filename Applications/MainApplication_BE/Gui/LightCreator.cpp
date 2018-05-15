@@ -7,6 +7,7 @@
 #include <Engine/Renderer/Light/DirLight.hpp>
 #include <Engine/Renderer/Light/SpotLight.hpp>
 #include <Engine/Renderer/Light/PointLight.hpp>
+#include <Core/Asset/LightData.hpp>
 
 
 #include <QPushButton>
@@ -41,7 +42,7 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     m_name = new QString("");
     m_intensity_val = new double(100);
     m_inner_angle_val = new double(0);
-    m_outter_angle_val = new double(0);
+    m_outer_angle_val = new double(0);
     m_falloff_val_constant = new double(0);
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
@@ -71,15 +72,15 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     connect(this,&LightCreator::sig_hide_angle,m_inner_angle_spinbox,&QDoubleSpinBox::hide);
     connect(this,&LightCreator::sig_hide_angle,m_inner_angle_lab,&QLabel::hide);
 
-    connect(this,&LightCreator::sig_show_angle,m_outter_angle_slider,&QSlider::show);
-    connect(this,&LightCreator::sig_show_angle,m_outter_angle_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_angle,m_outter_angle_spinbox,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_angle,m_outter_angle_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_angle,m_outer_angle_slider,&QSlider::show);
+    connect(this,&LightCreator::sig_show_angle,m_outer_angle_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_angle,m_outer_angle_spinbox,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_angle,m_outer_angle_lab,&QLabel::show);
 
-    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_slider,&QSlider::hide);
-    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_spinbox,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outer_angle_slider,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outer_angle_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outer_angle_spinbox,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outer_angle_lab,&QLabel::hide);
 
 
     // Selecter dir
@@ -159,11 +160,11 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     connect(m_inner_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_inner_angle_spin_to_slide );
     connect(this,&LightCreator::sig_inner_angle_spin_to_slide,m_inner_angle_slider,&QSlider::setValue);
 
-    connect(m_outter_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_outter_angle_slide_to_spin );
-    connect(this,&LightCreator::sig_outter_angle_slide_to_spin,m_outter_angle_spinbox,&QDoubleSpinBox::setValue);
+    connect(m_outer_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_outer_angle_slide_to_spin );
+    connect(this,&LightCreator::sig_outer_angle_slide_to_spin,m_outer_angle_spinbox,&QDoubleSpinBox::setValue);
 
-    connect(m_outter_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_outter_angle_spin_to_slide );
-    connect(this,&LightCreator::sig_outter_angle_spin_to_slide,m_outter_angle_slider,&QSlider::setValue);
+    connect(m_outer_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_outer_angle_spin_to_slide );
+    connect(this,&LightCreator::sig_outer_angle_spin_to_slide,m_outer_angle_slider,&QSlider::setValue);
 
 
     // Falloff
@@ -201,9 +202,9 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     m_inner_angle_spinbox->setVisible(false);
     m_inner_angle_slider->setVisible(false);
     m_inner_angle_lab->setVisible(false);
-    m_outter_angle_spinbox->setVisible(false);
-    m_outter_angle_slider->setVisible(false);
-    m_outter_angle_lab->setVisible(false);
+    m_outer_angle_spinbox->setVisible(false);
+    m_outer_angle_slider->setVisible(false);
+    m_outer_angle_lab->setVisible(false);
 
 
     m_pos_x_lab->setVisible(false);
@@ -248,9 +249,9 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
     m_inner_angle_slider->setMaximum(MAX_ANGLE);
 
-    m_outter_angle_spinbox-> setDecimals (NB_DECIMAL);
-    m_outter_angle_spinbox->setMaximum(MAX_ANGLE);
-    m_outter_angle_slider->setMaximum(MAX_ANGLE);
+    m_outer_angle_spinbox-> setDecimals (NB_DECIMAL);
+    m_outer_angle_spinbox->setMaximum(MAX_ANGLE);
+    m_outer_angle_slider->setMaximum(MAX_ANGLE);
 
     m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
@@ -328,6 +329,7 @@ LightCreator::~LightCreator(){
   delete m_color;
   delete m_intensity_val;
   delete m_inner_angle_val;
+  delete m_outer_angle_val;
   delete m_falloff_val_constant;
   delete m_falloff_val_linear;
   delete m_falloff_val_quadratic;
@@ -355,7 +357,7 @@ void LightCreator::open_dialogueConfirm(){
   else if( entity->getComponent( m_name->toStdString()) != nullptr) {
     QMessageBox::critical(this, "Watch out !","The name is already used !");
   }
-  else if ( *m_lightType <= 1 && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
+  else if ( *m_lightType !=1 && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
     QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
   }
   else {
@@ -367,7 +369,6 @@ void LightCreator::open_dialogueConfirm(){
 }
 
 void LightCreator::save_light(Ra::Engine::Entity *entity){
-  Ra::Engine::Light * light;
   double dr,dg,db;
   int ir,ig,ib;
   m_color->getRgb(&ir,&ig,&ib);
@@ -380,33 +381,43 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
   Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
 
 
+
   switch (*m_lightType) {
     case 0:
-      light = new Ra::Engine::DirectionalLight( entity,m_name->toStdString() );
+    Ra::Engine::DirectionalLight * dir_light;
+      dir_light = new Ra::Engine::DirectionalLight( entity,m_name->toStdString() );
       m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
-      light->setDirection(*m_direction);
-      light->setColor(c);
+      dir_light->setDirection(*m_direction);
+      dir_light->setColor(c);
       // End
 
       break;
     case 1:
-      light = new Ra::Engine::SpotLight( entity, m_name->toStdString() );
+      Ra::Engine::PointLight * point_light;
+      point_light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
       m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
-      light->setPosition(*m_position);
-      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
-      light->setDirection(*m_direction);
-      // TODO a finir
+      point_light->setPosition(*m_position);
+      point_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
 
         break;
     case 2:
-      light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
+      Ra::Engine::SpotLight * spot_light;
+      spot_light = new Ra::Engine::SpotLight( entity, m_name->toStdString() );
       m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
-      light->setPosition(*m_position);
-      // TODO à finir
+      spot_light->setPosition(*m_position);
+      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      spot_light->setDirection(*m_direction);
+
+      spot_light->setInnerAngleInDegrees((Scalar) *m_inner_angle_val );
+      spot_light->setOuterAngleInDegrees((Scalar) *m_outer_angle_val );
+      spot_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
+
         break;
+
     default:
       assert(false);
   }
+
 }
 
 
@@ -435,18 +446,20 @@ void LightCreator::slot_select_light(int val){
         emit sig_hide_pos();
         emit sig_hide_falloff();
         emit sig_hide_angle(); break;
-      case 1: // Spot
-          emit sig_show_angle();
-          emit sig_show_dir();
-          emit sig_show_falloff();
-          emit sig_show_pos();
-                              break;
-      case 2: // Point
+      case 1: // Point
 
       emit sig_show_pos();
         emit sig_show_falloff();
         emit sig_hide_dir();
         emit sig_hide_angle(); break;
+
+      case 2: // Spot
+          emit sig_show_angle();
+          emit sig_show_dir();
+          emit sig_show_falloff();
+          emit sig_show_pos();
+                              break;
+
 
       // case 3: //Area
       //
@@ -488,16 +501,16 @@ void LightCreator::slot_inner_angle_spin_to_slide(double val){
   emit sig_inner_angle_spin_to_slide(tmp);
 }
 
-void LightCreator::slot_outter_angle_slide_to_spin(int val){
+void LightCreator::slot_outer_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_outter_angle_val = tmp;
-  emit sig_outter_angle_slide_to_spin(tmp);
+  *m_outer_angle_val = tmp;
+  emit sig_outer_angle_slide_to_spin(tmp);
 }
 
-void LightCreator::slot_outter_angle_spin_to_slide(double val){
-  *m_outter_angle_val = val;
+void LightCreator::slot_outer_angle_spin_to_slide(double val){
+  *m_outer_angle_val = val;
   int tmp = (int) val;
-  emit sig_outter_angle_spin_to_slide(tmp);
+  emit sig_outer_angle_spin_to_slide(tmp);
 }
 
 
