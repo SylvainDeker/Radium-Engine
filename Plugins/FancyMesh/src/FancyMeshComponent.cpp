@@ -75,8 +75,8 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
         Ra::Core::Container::make_shared<Ra::Engine::Mesh>( meshName /*, Ra::Engine::Mesh::RM_POINTS*/ );
 
     Ra::Core::Geometry::TriangleMesh mesh;
-    Ra::Core::Transform T = data->getFrame();
-    Ra::Core::Transform N;
+    Ra::Core::Math::Transform T = data->getFrame();
+    Ra::Core::Math::Transform N;
     N.matrix() = ( T.matrix() ).inverse().transpose();
 
     mesh.m_vertices.resize( data->getVerticesSize(), Ra::Core::Math::Vector3::Zero() );

@@ -74,8 +74,8 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
     }
 
     /// Manually set a new value for the rotation.
-    void setValue( const Core::Quaternion& quat ) {
-        Core::Matrix3 m = quat.toRotationMatrix();
+    void setValue( const Core::Math::Quaternion& quat ) {
+        Core::Math::Matrix3 m = quat.toRotationMatrix();
         Core::Math::Vector3 ypr = m.eulerAngles( 2, 1, 0 ); // yaw pitch roll.
 
         // Note on rotation order : the Euler angles are gotten in the order 2,1,0, because
@@ -92,7 +92,7 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
 
   signals:
     /// Emitted when the value has changed through the UI.
-    void valueChanged( const Core::Quaternion& newValue, uint id );
+    void valueChanged( const Core::Math::Quaternion& newValue, uint id );
 
   private slots:
 
@@ -104,9 +104,9 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
         resetRel();
         updateAbsSlide( ypr );
         m_startRelTransformYpr = ypr;
-        Core::Quaternion quat = Core::AngleAxis( ypr[0], Core::Math::Vector3::UnitZ() ) *
-                                Core::AngleAxis( ypr[1], Core::Math::Vector3::UnitY() ) *
-                                Core::AngleAxis( ypr[2], Core::Math::Vector3::UnitX() );
+        Core::Math::Quaternion quat = Core::Math::AngleAxis( ypr[0], Core::Math::Vector3::UnitZ() ) *
+                                Core::Math::AngleAxis( ypr[1], Core::Math::Vector3::UnitY() ) *
+                                Core::Math::AngleAxis( ypr[2], Core::Math::Vector3::UnitX() );
 
         emit( valueChanged( quat, m_id ) );
     };
@@ -124,9 +124,9 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
         updateAbsSpin( ypr );
         m_startRelTransformYpr = ypr;
 
-        Core::Quaternion quat = Core::AngleAxis( ypr[0], Core::Math::Vector3::UnitZ() ) *
-                                Core::AngleAxis( ypr[1], Core::Math::Vector3::UnitY() ) *
-                                Core::AngleAxis( ypr[2], Core::Math::Vector3::UnitX() );
+        Core::Math::Quaternion quat = Core::Math::AngleAxis( ypr[0], Core::Math::Vector3::UnitZ() ) *
+                                Core::Math::AngleAxis( ypr[1], Core::Math::Vector3::UnitY() ) *
+                                Core::Math::AngleAxis( ypr[2], Core::Math::Vector3::UnitX() );
 
         emit valueChanged( quat, m_id );
     };
@@ -152,12 +152,12 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
                                Core::Math::toRadians( x ) );
         }
 
-        Core::Quaternion quat =
-            Core::AngleAxis( m_startRelTransformYpr[0], Core::Math::Vector3::UnitZ() ) *
-            Core::AngleAxis( m_startRelTransformYpr[1], Core::Math::Vector3::UnitY() ) *
-            Core::AngleAxis( m_startRelTransformYpr[2], Core::Math::Vector3::UnitX() );
+        Core::Math::Quaternion quat =
+            Core::Math::AngleAxis( m_startRelTransformYpr[0], Core::Math::Vector3::UnitZ() ) *
+            Core::Math::AngleAxis( m_startRelTransformYpr[1], Core::Math::Vector3::UnitY() ) *
+            Core::Math::AngleAxis( m_startRelTransformYpr[2], Core::Math::Vector3::UnitX() );
 
-        Core::Quaternion rotX( Core::AngleAxis(
+        Core::Math::Quaternion rotX( Core::Math::AngleAxis(
             Core::Math::toRadians( m_relSliders[axis]->value() ), Core::Math::Vector3::Unit( axis ) ) );
 
         quat = quat * rotX;
@@ -184,13 +184,13 @@ class RotationEditor : public QWidget, private Ui::RotationEditor {
                                Core::Math::toRadians( x ) );
         }
 
-        Core::Quaternion quat =
-            Core::AngleAxis( m_startRelTransformYpr[0], Core::Math::Vector3::UnitZ() ) *
-            Core::AngleAxis( m_startRelTransformYpr[1], Core::Math::Vector3::UnitY() ) *
-            Core::AngleAxis( m_startRelTransformYpr[2], Core::Math::Vector3::UnitX() );
+        Core::Math::Quaternion quat =
+            Core::Math::AngleAxis( m_startRelTransformYpr[0], Core::Math::Vector3::UnitZ() ) *
+            Core::Math::AngleAxis( m_startRelTransformYpr[1], Core::Math::Vector3::UnitY() ) *
+            Core::Math::AngleAxis( m_startRelTransformYpr[2], Core::Math::Vector3::UnitX() );
 
-        Core::Quaternion rotX(
-            Core::AngleAxis( Core::Math::toRadians( Scalar( m_relSliders[axis]->value() ) ),
+        Core::Math::Quaternion rotX(
+            Core::Math::AngleAxis( Core::Math::toRadians( Scalar( m_relSliders[axis]->value() ) ),
                              Core::Math::Vector3::Unit( axis ) ) );
 
         quat = quat * rotX;

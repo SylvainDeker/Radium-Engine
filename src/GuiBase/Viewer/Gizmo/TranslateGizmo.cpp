@@ -19,8 +19,8 @@
 
 namespace Ra {
 namespace Gui {
-TranslateGizmo::TranslateGizmo( Engine::Component* c, const Core::Transform& worldTo,
-                                const Core::Transform& t, Mode mode ) :
+TranslateGizmo::TranslateGizmo( Engine::Component* c, const Core::Math::Transform& worldTo,
+                                const Core::Math::Transform& t, Mode mode ) :
     Gizmo( c, worldTo, t, mode ),
     m_startPoint( Core::Math::Vector3::Zero() ),
     m_initialPix( Core::Math::Vector2::Zero() ),
@@ -69,12 +69,12 @@ TranslateGizmo::TranslateGizmo( Engine::Component* c, const Core::Transform& wor
     }
 }
 
-void TranslateGizmo::updateTransform( Gizmo::Mode mode, const Core::Transform& worldTo,
-                                      const Core::Transform& t ) {
+void TranslateGizmo::updateTransform( Gizmo::Mode mode, const Core::Math::Transform& worldTo,
+                                      const Core::Math::Transform& t ) {
     m_mode = mode;
     m_worldTo = worldTo;
     m_transform = t;
-    Core::Transform displayTransform = Core::Transform::Identity();
+    Core::Math::Transform displayTransform = Core::Math::Transform::Identity();
     if ( m_mode == LOCAL )
     {
         displayTransform = m_transform;
@@ -131,7 +131,7 @@ bool findPointOnAxis( const Engine::Camera& cam, const Ra::Core::Math::Vector3& 
     return hasHit;
 }
 
-Core::Transform TranslateGizmo::mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
+Core::Math::Transform TranslateGizmo::mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
                                            bool stepped ) {
     static const float step = 0.2;
     if ( m_selectedAxis >= 0 )

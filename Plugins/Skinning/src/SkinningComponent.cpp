@@ -7,7 +7,7 @@
 #include <Core/Animation/RotationCenterSkinning.hpp>
 
 using Ra::Core::Math::DualQuaternion;
-using Ra::Core::Quaternion;
+using Ra::Core::Math::Quaternion;
 
 using Ra::Core::Geometry::TriangleMesh;
 using Ra::Core::Animation::Pose;
@@ -211,8 +211,8 @@ void SkinningComponent::setupSkinningType( SkinningType type ) {
         if ( m_DQ.empty() )
         {
             m_DQ.resize( m_refData.m_weights.rows(),
-                         DualQuaternion( Quaternion( 0.0, 0.0, 0.0, 0.0 ),
-                                         Quaternion( 0.0, 0.0, 0.0, 0.0 ) ) );
+                         DualQuaternion( Ra::Core::Math::Quaternion( 0.0, 0.0, 0.0, 0.0 ),
+                                         Ra::Core::Math::Quaternion( 0.0, 0.0, 0.0, 0.0 ) ) );
         }
         break;
     }

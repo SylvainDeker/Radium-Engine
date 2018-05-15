@@ -341,7 +341,7 @@ bool AnimationComponent::canEdit( Ra::Core::Container::Index roIdx ) const {
         } ) != m_boneDrawables.end() );
 }
 
-Ra::Core::Transform AnimationComponent::getTransform( Ra::Core::Container::Index roIdx ) const {
+Ra::Core::Math::Transform AnimationComponent::getTransform( Ra::Core::Container::Index roIdx ) const {
     CORE_ASSERT( canEdit( roIdx ), "Transform is not editable" );
     const auto& bonePos =
         std::find_if( m_boneDrawables.begin(), m_boneDrawables.end(), [roIdx]( const auto& bone ) {
@@ -353,7 +353,7 @@ Ra::Core::Transform AnimationComponent::getTransform( Ra::Core::Container::Index
 }
 
 void AnimationComponent::setTransform( Ra::Core::Container::Index roIdx,
-                                       const Ra::Core::Transform& transform ) {
+                                       const Ra::Core::Math::Transform& transform ) {
     CORE_ASSERT( canEdit( roIdx ), "Transform is not editable" );
     const auto& bonePos =
         std::find_if( m_boneDrawables.begin(), m_boneDrawables.end(), [roIdx]( const auto& bone ) {
@@ -361,9 +361,9 @@ void AnimationComponent::setTransform( Ra::Core::Container::Index roIdx,
         } );
 
     const uint boneIdx = ( *bonePos )->getBoneIndex();
-    const Ra::Core::Transform& TBoneModel =
+    const Ra::Core::Math::Transform& TBoneModel =
         m_skel.getTransform( boneIdx, Ra::Core::Animation::Handle::SpaceType::MODEL );
-    const Ra::Core::Transform& TBoneLocal =
+    const Ra::Core::Math::Transform& TBoneLocal =
         m_skel.getTransform( boneIdx, Ra::Core::Animation::Handle::SpaceType::LOCAL );
     auto diff = TBoneModel.inverse() * transform;
     m_skel.setTransform( boneIdx, TBoneLocal * diff,

@@ -32,7 +32,7 @@ class TrackballCamera : public CameraInterface {
   public slots:
     virtual void setCameraPosition( const Core::Math::Vector3& position ) override;
     virtual void setCameraTarget( const Core::Math::Vector3& target ) override;
-    virtual void fitScene( const Core::Aabb& aabb ) override;
+    virtual void fitScene( const Core::Math::Aabb& aabb ) override;
 
     virtual void resetCamera() override;
 

@@ -39,7 +39,7 @@ Gui::TrackballCamera::TrackballCamera( uint width, uint height ) :
 Gui::TrackballCamera::~TrackballCamera() {}
 
 void Gui::TrackballCamera::resetCamera() {
-    m_camera->setFrame( Core::Transform::Identity() );
+    m_camera->setFrame( Core::Math::Transform::Identity() );
     m_camera->setPosition( Core::Math::Vector3( 0, 0, 1 ) );
     m_trackballCenter = Core::Math::Vector3::Zero();
     updatePhiTheta();
@@ -191,7 +191,7 @@ void Gui::TrackballCamera::setCameraTarget( const Core::Math::Vector3& target ) 
     emit cameraTargetChanged( m_trackballCenter );
 }
 
-void Gui::TrackballCamera::fitScene( const Core::Aabb& aabb ) {
+void Gui::TrackballCamera::fitScene( const Core::Math::Aabb& aabb ) {
     resetCamera();
 
     Scalar f = m_camera->getFOV();
@@ -248,18 +248,18 @@ void Gui::TrackballCamera::handleCameraRotate( Scalar dx, Scalar dy ) {
     Core::Math::Vector3 t( P - P0 );
 
     // Translate the camera given this translation
-    Core::Transform T( Core::Transform::Identity() );
+    Core::Math::Transform T( Core::Math::Transform::Identity() );
     T.translation() = t;
 
     // Rotate the camera so that it points to the center
-    Core::Transform R1( Core::Transform::Identity() );
-    Core::Transform R2( Core::Transform::Identity() );
+    Core::Math::Transform R1( Core::Math::Transform::Identity() );
+    Core::Math::Transform R2( Core::Math::Transform::Identity() );
 
     Core::Math::Vector3 U = Core::Math::Vector3( 0, 1, 0 );
     Core::Math::Vector3 R = -m_camera->getRightVector().normalized();
 
-    R1 = Core::AngleAxis( -dphi, U );
-    R2 = Core::AngleAxis( -dtheta, R );
+    R1 = Core::Math::AngleAxis( -dphi, U );
+    R2 = Core::Math::AngleAxis( -dtheta, R );
 
     m_camera->applyTransform( T * R1 * R2 );
 
@@ -274,7 +274,7 @@ void Gui::TrackballCamera::handleCameraPan( Scalar dx, Scalar dy ) {
     Core::Math::Vector3 R = -m_camera->getRightVector();
     Core::Math::Vector3 U = m_camera->getUpVector();
 
-    Core::Transform T( Core::Transform::Identity() );
+    Core::Math::Transform T( Core::Math::Transform::Identity() );
     Core::Math::Vector3 t = x * R + y * U;
     T.translate( t );
 
@@ -297,7 +297,7 @@ void Gui::TrackballCamera::handleCameraZoom( Scalar z ) {
         y = dist - m_camera->getZNear();
     }
 
-    Core::Transform T( Core::Transform::Identity() );
+    Core::Math::Transform T( Core::Math::Transform::Identity() );
     Core::Math::Vector3 t = y * F;
     T.translate( t );
 

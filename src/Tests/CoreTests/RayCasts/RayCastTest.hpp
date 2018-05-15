@@ -8,7 +8,7 @@ namespace RaTests {
 
 class RayCastAabbTests : public Test {
     void run() override {
-        Ra::Core::Aabb ones( -Ra::Core::Math::Vector3::Ones(), Ra::Core::Math::Vector3::Ones() );
+        Ra::Core::Math::Aabb ones( -Ra::Core::Math::Vector3::Ones(), Ra::Core::Math::Vector3::Ones() );
         // For all directions x, y, z
         for ( int i = 0; i < 3; ++i )
         {

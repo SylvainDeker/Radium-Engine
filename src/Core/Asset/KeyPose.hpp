@@ -25,7 +25,7 @@ class KeyPose : public KeyFrame<Core::Animation::Pose> {
 
     /// TRANSFORMATION
     inline Core::Animation::Pose defaultFrame() const override {
-        return Core::Animation::Pose( poseSize(), Core::Transform::Identity() );
+        return Core::Animation::Pose( poseSize(), Core::Math::Transform::Identity() );
     }
 
     inline Core::Animation::Pose interpolate( const Core::Animation::Pose& F0,

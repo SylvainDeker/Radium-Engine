@@ -49,7 +49,7 @@ class RA_IO_API AssimpLightDataLoader : public Core::Asset::DataLoader<Core::Ass
 
     void loadLightData( const aiScene* scene, const aiLight& light, Core::Asset::LightData& data );
 
-    Core::Matrix4 loadLightFrame( const aiScene* scene, const Core::Matrix4& parentFrame,
+    Core::Math::Matrix4 loadLightFrame( const aiScene* scene, const Core::Math::Matrix4& parentFrame,
                                   Core::Asset::LightData& data ) const;
 
     /// NAME
@@ -59,11 +59,11 @@ class RA_IO_API AssimpLightDataLoader : public Core::Asset::DataLoader<Core::Ass
     void fetchType( const aiLight& mesh, Core::Asset::LightData& data ) const;
 
     /// FRAME
-    inline void setFrame( const Core::Matrix4& frame ) { m_frame = frame; }
+    inline void setFrame( const Core::Math::Matrix4& frame ) { m_frame = frame; }
 
   private:
     std::string m_filepath;
-    Core::Transform m_frame;
+    Core::Math::Transform m_frame;
 };
 
 } // namespace IO

@@ -143,7 +143,7 @@ void AssimpGeometryDataLoader::loadMeshData( const aiMesh& mesh, Core::Asset::Ge
 }
 
 void AssimpGeometryDataLoader::loadMeshFrame(
-    const aiNode* node, const Core::Transform& parentFrame, const std::map<uint, uint>& indexTable,
+    const aiNode* node, const Core::Math::Transform& parentFrame, const std::map<uint, uint>& indexTable,
     std::vector<std::unique_ptr<Core::Asset::GeometryData>>& data ) const {
     const uint child_size = node->mNumChildren;
     const uint mesh_size = node->mNumMeshes;
@@ -152,7 +152,7 @@ void AssimpGeometryDataLoader::loadMeshFrame(
         return;
     }
 
-    Core::Transform frame = parentFrame * assimpToCore( node->mTransformation );
+    Core::Math::Transform frame = parentFrame * assimpToCore( node->mTransformation );
     for ( uint i = 0; i < mesh_size; ++i )
     {
         const uint ID = node->mMeshes[i];
@@ -492,7 +492,7 @@ void AssimpGeometryDataLoader::loadGeometryData(
             }
         }
     }
-    loadMeshFrame( scene->mRootNode, Core::Transform::Identity(), indexTable, data );
+    loadMeshFrame( scene->mRootNode, Core::Math::Transform::Identity(), indexTable, data );
 }
 
 } // namespace IO

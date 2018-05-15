@@ -562,7 +562,7 @@ void Gui::Viewer::processPicking() {
     }
 }
 
-void Gui::Viewer::fitCameraToScene( const Core::Aabb& aabb ) {
+void Gui::Viewer::fitCameraToScene( const Core::Math::Aabb& aabb ) {
     if ( !aabb.isEmpty() )
     {
         CORE_ASSERT( m_camera != nullptr, "No camera found." );

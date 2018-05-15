@@ -56,12 +56,12 @@ class RA_ENGINE_API ShaderProgram final {
     void setUniform( const char* name, const Core::Math::Vector4f& value ) const;
     void setUniform( const char* name, const Core::Math::Vector4d& value ) const;
 
-    void setUniform( const char* name, const Core::Matrix2f& value ) const;
-    void setUniform( const char* name, const Core::Matrix2d& value ) const;
-    void setUniform( const char* name, const Core::Matrix3f& value ) const;
-    void setUniform( const char* name, const Core::Matrix3d& value ) const;
-    void setUniform( const char* name, const Core::Matrix4f& value ) const;
-    void setUniform( const char* name, const Core::Matrix4d& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix2f& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix2d& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix3f& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix3d& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix4f& value ) const;
+    void setUniform( const char* name, const Core::Math::Matrix4d& value ) const;
 
     void setUniform( const char* name, Texture* tex, int texUnit ) const;
 

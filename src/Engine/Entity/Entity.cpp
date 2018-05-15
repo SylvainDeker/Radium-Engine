@@ -12,8 +12,8 @@ namespace Engine {
 
 Entity::Entity( const std::string& name ) :
     Core::Container::IndexedObject(),
-    m_transform( Core::Transform::Identity() ),
-    m_doubleBufferedTransform( Core::Transform::Identity() ),
+    m_transform( Core::Math::Transform::Identity() ),
+    m_doubleBufferedTransform( Core::Math::Transform::Identity() ),
     m_name( name ),
     m_transformChanged( false ) {}
 

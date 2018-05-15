@@ -58,7 +58,7 @@ class RA_IO_API AssimpGeometryDataLoader : public Core::Asset::DataLoader<Core::
     void loadMeshData( const aiMesh& mesh, Core::Asset::GeometryData& data,
                        std::set<std::string>& usedNames );
 
-    void loadMeshFrame( const aiNode* node, const Core::Transform& parentFrame,
+    void loadMeshFrame( const aiNode* node, const Core::Math::Transform& parentFrame,
                         const std::map<uint, uint>& indexTable,
                         std::vector<std::unique_ptr<Core::Asset::GeometryData>>& data ) const;
 

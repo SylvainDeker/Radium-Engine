@@ -83,7 +83,7 @@ RA_ENGINE_API MeshPtr Normal( const Core::Math::Vector3& point, const Core::Math
 /// (X,Y,Z = red, green blue)
 /// Remainder : the transform will be drawn relative
 /// to the component's entity transform.
-RA_ENGINE_API MeshPtr Frame( const Core::Transform& frameFromEntity, Scalar scale = 0.1f );
+RA_ENGINE_API MeshPtr Frame( const Core::Math::Transform& frameFromEntity, Scalar scale = 0.1f );
 
 /// Create a res*res square grid centered on center,
 /// in plane normal to normal.
@@ -92,7 +92,7 @@ RA_ENGINE_API MeshPtr Grid( const Core::Math::Vector3& center, const Core::Math:
                             uint res = 10 );
 
 /// Display a wireframe AABB
-RA_ENGINE_API MeshPtr AABB( const Core::Aabb& aabb, const Core::Math::Color& color );
+RA_ENGINE_API MeshPtr AABB( const Core::Math::Aabb& aabb, const Core::Math::Color& color );
 
 /// Display a wireframe OBB
 RA_ENGINE_API MeshPtr OBB( const Core::Obb& obb, const Core::Math::Color& color );

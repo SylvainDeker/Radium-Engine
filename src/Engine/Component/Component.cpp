@@ -66,7 +66,7 @@ void Component::rayCastQuery( const Core::Ray& ray ) const {
         const auto ro = getRoMgr()->getRenderObject( idx );
         if ( ro->isVisible() )
         {
-            const Ra::Core::Transform& t = ro->getLocalTransform();
+            const Ra::Core::Math::Transform& t = ro->getLocalTransform();
             Core::Ray transformedRay = Ra::Core::transformRay( ray, t.inverse() );
             auto result =
                 Ra::Core::Geometry::castRay( ro->getMesh()->getGeometry(), transformedRay );

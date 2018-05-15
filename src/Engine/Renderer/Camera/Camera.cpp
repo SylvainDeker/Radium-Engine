@@ -14,8 +14,8 @@ namespace Engine {
 /// CONSTRUCTOR
 /// -------------------- ///
 Camera::Camera( Scalar height, Scalar width ) :
-    m_frame( Core::Transform::Identity() ),
-    m_projMatrix( Core::Matrix4::Identity() ),
+    m_frame( Core::Math::Transform::Identity() ),
+    m_projMatrix( Core::Math::Matrix4::Identity() ),
     m_fov( PiDiv4 ),
     m_zNear( Scalar( 0.1f ) ),
     m_zFar( Scalar( 1000.0f ) ),
@@ -33,10 +33,10 @@ Camera::~Camera() {}
 /// -------------------- ///
 /// FRAME
 /// -------------------- ///
-void Camera::applyTransform( const Core::Transform& T ) {
+void Camera::applyTransform( const Core::Math::Transform& T ) {
 
-    Core::Transform t1 = Core::Transform::Identity();
-    Core::Transform t2 = Core::Transform::Identity();
+    Core::Math::Transform t1 = Core::Math::Transform::Identity();
+    Core::Math::Transform t2 = Core::Math::Transform::Identity();
     t1.translation() = -getPosition();
     t2.translation() = getPosition();
 

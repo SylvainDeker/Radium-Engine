@@ -54,7 +54,7 @@ class RA_ENGINE_API RenderObjectManager final {
     uint getNumVertices() const;
 
     /// Return the AABB of all visible render objects
-    Core::Aabb getSceneAabb() const;
+    Core::Math::Aabb getSceneAabb() const;
 
   private:
     Core::Container::IndexMap<std::shared_ptr<RenderObject>> m_renderObjects;

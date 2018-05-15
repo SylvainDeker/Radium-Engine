@@ -40,8 +40,8 @@ void MeshFeatureTrackingComponent::initialize() {
 }
 
 void MeshFeatureTrackingComponent::setPosition( Ra::Core::Math::Vector3 position ) {
-    Ra::Core::Translation aa( position );
-    Ra::Core::Transform rot( aa );
+    Ra::Core::Math::Translation aa( position );
+    Ra::Core::Math::Transform rot( aa );
     m_RO->setLocalTransform( rot );
 }
 

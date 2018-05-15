@@ -129,8 +129,8 @@ uint RenderObjectManager::getNumVertices() const {
     return result;
 }
 
-Core::Aabb RenderObjectManager::getSceneAabb() const {
-    Core::Aabb aabb;
+Core::Math::Aabb RenderObjectManager::getSceneAabb() const {
+    Core::Math::Aabb aabb;
 
     auto ui = Engine::SystemEntity::uiCmp();
     bool skipUi = m_renderObjects.size() != ui->m_renderObjects.size();
@@ -138,7 +138,7 @@ Core::Aabb RenderObjectManager::getSceneAabb() const {
     {
         if ( ro->isVisible() && ( !skipUi || ro->getComponent() != ui ) )
         {
-            Core::Transform t = ro->getComponent()->getEntity()->getTransform();
+            Core::Math::Transform t = ro->getComponent()->getEntity()->getTransform();
             auto mesh = ro->getMesh();
             auto pos = mesh->getGeometry().m_vertices;
 

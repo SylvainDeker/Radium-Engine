@@ -2,11 +2,11 @@
 namespace Ra {
 namespace Engine {
 
-inline Core::Transform Camera::getFrame() const {
+inline Core::Math::Transform Camera::getFrame() const {
     return m_frame;
 }
 
-inline void Camera::setFrame( const Core::Transform& frame ) {
+inline void Camera::setFrame( const Core::Math::Transform& frame ) {
     m_frame = frame;
 }
 
@@ -23,7 +23,7 @@ inline Core::Math::Vector3 Camera::getDirection() const {
 }
 
 inline void Camera::setDirection( const Core::Math::Vector3& direction ) {
-    Core::Transform T = Core::Transform::Identity();
+    Core::Math::Transform T = Core::Math::Transform::Identity();
 
     auto d0 = getDirection();
     auto d1 = direction.normalized();
@@ -35,9 +35,9 @@ inline void Camera::setDirection( const Core::Math::Vector3& direction ) {
     // to rotate around the up vector.
     if ( c.isApprox( Core::Math::Vector3::Zero() ) && d < 0.0 )
     {
-        T.rotate( Core::AngleAxis( Core::Math::PiDiv2, Core::Math::Vector3::UnitY() ) );
+        T.rotate( Core::Math::AngleAxis( Core::Math::PiDiv2, Core::Math::Vector3::UnitY() ) );
     } else
-    { T.rotate( Core::Quaternion::FromTwoVectors( d0, d1 ) ); }
+    { T.rotate( Core::Math::Quaternion::FromTwoVectors( d0, d1 ) ); }
     applyTransform( T );
 }
 
@@ -46,8 +46,8 @@ inline Core::Math::Vector3 Camera::getUpVector() const {
 }
 
 inline void Camera::setUpVector( const Core::Math::Vector3& upVector ) {
-    Core::Transform T = Core::Transform::Identity();
-    T.rotate( Core::Quaternion::FromTwoVectors( getUpVector(), upVector ) );
+    Core::Math::Transform T = Core::Math::Transform::Identity();
+    T.rotate( Core::Math::Quaternion::FromTwoVectors( getUpVector(), upVector ) );
     applyTransform( T );
 }
 
@@ -118,11 +118,11 @@ inline void Camera::setProjType( const ProjType& projectionType ) {
     m_projType = projectionType;
 }
 
-inline Core::Matrix4 Camera::getViewMatrix() const {
+inline Core::Math::Matrix4 Camera::getViewMatrix() const {
     return m_frame.inverse().matrix();
 }
 
-inline Core::Matrix4 Camera::getProjMatrix() const {
+inline Core::Math::Matrix4 Camera::getProjMatrix() const {
     return m_projMatrix;
 }
 
