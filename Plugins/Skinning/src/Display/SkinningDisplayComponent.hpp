@@ -21,7 +21,7 @@
 
 #include <Engine/Managers/ComponentMessenger/ComponentMessenger.hpp>
 
-using Ra::Core::TriangleMesh;
+using Ra::Core::Geometry::TriangleMesh;
 using Ra::Core::Animation::WeightMatrix;
 using Ra::Engine::ComponentMessenger;
 

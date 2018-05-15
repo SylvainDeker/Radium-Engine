@@ -364,12 +364,12 @@ bool vsTriangle( const Ray& ray, const Vector3 a, const Vector3& b, const Vector
     return ( t >= 0 );
 }
 
-bool vsTriangleMesh( const Ray& r, const TriangleMesh& mesh, std::vector<Scalar>& hitsOut,
-                     std::vector<Triangle>& trianglesIdxOut ) {
+bool vsTriangleMesh( const Ray& r, const Geometry::TriangleMesh& mesh, std::vector<Scalar>& hitsOut,
+                     std::vector<Geometry::Triangle>& trianglesIdxOut ) {
     bool hit = false;
     for ( size_t i = 0; i < mesh.m_triangles.size(); ++i )
     {
-        Triangle t = mesh.m_triangles[i];
+        Geometry::Triangle t = mesh.m_triangles[i];
         Vector3 a = mesh.m_vertices[t[0]];
         Vector3 b = mesh.m_vertices[t[1]];
         Vector3 c = mesh.m_vertices[t[2]];

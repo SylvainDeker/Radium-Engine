@@ -7,7 +7,7 @@ namespace Asset {
 /// ===============================================================================
 /// CONSTRUCTOR
 /// ===============================================================================
-OBJFileManager::OBJFileManager() : FileManager<TriangleMesh>() {}
+OBJFileManager::OBJFileManager() : FileManager<Geometry::TriangleMesh>() {}
 
 /// ===============================================================================
 /// DESTRUCTOR
@@ -21,8 +21,8 @@ std::string OBJFileManager::fileExtension() const {
     return "obj";
 }
 
-bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
-    data = TriangleMesh();
+bool OBJFileManager::importData( std::istream& file, Geometry::TriangleMesh& data ) {
+    data = Geometry::TriangleMesh();
     std::string line;
     while ( std::getline( file, line ) )
     {
@@ -56,7 +56,7 @@ bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
         }
         if ( token == "f" )
         {
-            Triangle f;
+            Geometry::Triangle f;
             iss >> f[0] >> f[1] >> f[2];
             f[0] -= 1;
             f[1] -= 1;
@@ -72,7 +72,7 @@ bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
     return true;
 }
 
-bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) {
+bool OBJFileManager::exportData( std::ostream& file, const Geometry::TriangleMesh& data ) {
     std::string content = "";
     if ( data.m_vertices.size() == 0 )
     {
@@ -96,7 +96,7 @@ bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) 
     // Triangle
     for ( uint i = 0; i < data.m_triangles.size(); ++i )
     {
-        const Triangle f = data.m_triangles.at( i );
+        const Geometry::Triangle f = data.m_triangles.at( i );
         content += "f " + std::to_string( f[0] + 1 ) + " " + std::to_string( f[1] + 1 ) + " " +
                    std::to_string( f[2] + 1 ) + "\n";
     }

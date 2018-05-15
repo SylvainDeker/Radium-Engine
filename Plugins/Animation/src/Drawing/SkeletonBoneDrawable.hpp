@@ -22,7 +22,7 @@ class SkeletonBoneRenderObject {
 
     void update(); // Update local transform of the associated render object
 
-    static Ra::Core::TriangleMesh makeBoneShape();
+    static Ra::Core::Geometry::TriangleMesh makeBoneShape();
 
     uint getBoneIndex() const { return m_id; }
 

@@ -28,7 +28,7 @@ void check( const AdjacencyList& adj ) {
 #endif
 }
 
-AdjacencyList extractAdjacencyList( const Container::VectorArray<Edge>& edgeList ) {
+AdjacencyList extractAdjacencyList( const Container::VectorArray<Geometry::Edge>& edgeList ) {
     AdjacencyList adj;
     for ( const auto& edge : edgeList )
     {
@@ -44,13 +44,13 @@ AdjacencyList extractAdjacencyList( const Container::VectorArray<Edge>& edgeList
     return adj;
 }
 
-Container::VectorArray<Edge> extractEdgeList( const AdjacencyList& adj, const bool include_leaf ) {
-    Container::VectorArray<Edge> edgeList;
+Container::VectorArray<Geometry::Edge> extractEdgeList( const AdjacencyList& adj, const bool include_leaf ) {
+    Container::VectorArray<Geometry::Edge> edgeList;
     for ( uint i = 0; i < adj.m_child.size(); ++i )
     {
         if ( include_leaf && adj.isLeaf( i ) )
         {
-            Edge e;
+            Geometry::Edge e;
             e( 0 ) = i;
             e( 1 ) = i;
             edgeList.push_back( e );
@@ -58,7 +58,7 @@ Container::VectorArray<Edge> extractEdgeList( const AdjacencyList& adj, const bo
         {
             for ( const auto& edge : adj.m_child[i] )
             {
-                Edge e;
+                Geometry::Edge e;
                 e( 0 ) = i;
                 e( 1 ) = edge;
                 edgeList.push_back( e );

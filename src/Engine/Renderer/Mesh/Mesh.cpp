@@ -47,7 +47,7 @@ void Mesh::render() {
     }
 }
 
-void Mesh::loadGeometry( const Core::TriangleMesh& mesh ) {
+void Mesh::loadGeometry( const Core::Geometry::TriangleMesh& mesh ) {
     m_mesh = mesh;
 
     if ( m_mesh.m_triangles.empty() )
@@ -193,7 +193,7 @@ void Mesh::updateGL() {
             } else
             {
                 GL_ASSERT( glBufferData( GL_ELEMENT_ARRAY_BUFFER,
-                                         m_mesh.m_triangles.size() * sizeof( Ra::Core::Triangle ),
+                                         m_mesh.m_triangles.size() * sizeof( Ra::Core::Geometry::Triangle ),
                                          m_mesh.m_triangles.data(), GL_DYNAMIC_DRAW ) );
             }
             m_dataDirty[INDEX] = false;

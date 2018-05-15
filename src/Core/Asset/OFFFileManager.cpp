@@ -7,7 +7,7 @@ namespace Asset {
 /// ===============================================================================
 /// CONSTRUCTOR
 /// ===============================================================================
-OFFFileManager::OFFFileManager() : FileManager<TriangleMesh>() {}
+OFFFileManager::OFFFileManager() : FileManager<Geometry::TriangleMesh>() {}
 
 /// ===============================================================================
 /// DESTRUCTOR
@@ -28,7 +28,7 @@ std::string OFFFileManager::fileExtension() const {
     return "off";
 }
 
-bool OFFFileManager::importData( std::istream& file, TriangleMesh& data ) {
+bool OFFFileManager::importData( std::istream& file, Geometry::TriangleMesh& data ) {
     std::string h;
     file >> h;
     if ( h != header() )
@@ -40,7 +40,7 @@ bool OFFFileManager::importData( std::istream& file, TriangleMesh& data ) {
     uint f_size;
     uint e_size;
     file >> v_size >> f_size >> e_size;
-    data = TriangleMesh();
+    data = Geometry::TriangleMesh();
     data.m_vertices.resize( v_size );
     data.m_triangles.resize( f_size );
 
@@ -62,7 +62,7 @@ bool OFFFileManager::importData( std::istream& file, TriangleMesh& data ) {
     for ( uint i = 0; i < f_size; ++i )
     {
         uint side;
-        Triangle f;
+        Geometry::Triangle f;
         file >> side;
         if ( side == 3 )
         {
@@ -74,7 +74,7 @@ bool OFFFileManager::importData( std::istream& file, TriangleMesh& data ) {
     return true;
 }
 
-bool OFFFileManager::exportData( std::ostream& file, const TriangleMesh& data ) {
+bool OFFFileManager::exportData( std::ostream& file, const Geometry::TriangleMesh& data ) {
     std::string content = "";
     const uint v_size = data.m_vertices.size();
     const uint f_size = data.m_triangles.size();
@@ -101,7 +101,7 @@ bool OFFFileManager::exportData( std::ostream& file, const TriangleMesh& data ) 
     // Triangle
     for ( uint i = 0; i < f_size; ++i )
     {
-        const Triangle f = data.m_triangles.at( i );
+        const Geometry::Triangle f = data.m_triangles.at( i );
         content += "3 " + std::to_string( f[0] ) + " " + std::to_string( f[1] ) + " " +
                    std::to_string( f[2] ) + "\n";
     }

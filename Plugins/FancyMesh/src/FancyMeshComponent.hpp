@@ -36,14 +36,14 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
 
     void initialize() override;
 
-    void addMeshRenderObject( const Ra::Core::TriangleMesh& mesh, const std::string& name );
+    void addMeshRenderObject( const Ra::Core::Geometry::TriangleMesh& mesh, const std::string& name );
     void handleMeshLoading( const Ra::Core::Asset::GeometryData* data );
 
     /// Returns the index of the associated RO (the display mesh)
     Ra::Core::Container::Index getRenderObjectIndex() const;
 
     /// Returns the current display geometry.
-    const Ra::Core::TriangleMesh& getMesh() const;
+    const Ra::Core::Geometry::TriangleMesh& getMesh() const;
 
   public:
     // Component communication management
@@ -56,13 +56,13 @@ class FM_PLUGIN_API FancyMeshComponent : public Ra::Engine::Component {
     Ra::Engine::Mesh& getDisplayMesh();
 
     // Fancy mesh accepts to give its mesh and (if deformable) to update it
-    const Ra::Core::TriangleMesh* getMeshOutput() const;
+    const Ra::Core::Geometry::TriangleMesh* getMeshOutput() const;
     const DuplicateTable* getDuplicateTableOutput() const;
-    Ra::Core::TriangleMesh* getMeshRw();
-    void setMeshInput( const Ra::Core::TriangleMesh* mesh );
+    Ra::Core::Geometry::TriangleMesh* getMeshRw();
+    void setMeshInput( const Ra::Core::Geometry::TriangleMesh* mesh );
     Ra::Core::Container::Vector3Array* getVerticesRw();
     Ra::Core::Container::Vector3Array* getNormalsRw();
-    Ra::Core::Container::VectorArray<Ra::Core::Triangle>* getTrianglesRw();
+    Ra::Core::Container::VectorArray<Ra::Core::Geometry::Triangle>* getTrianglesRw();
 
     const Ra::Core::Container::Index* roIndexRead() const;
 

@@ -30,7 +30,7 @@ inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
 }
 
 inline Aabb getAabb( const TriangleMesh& mesh ) {
-    return PointCloud::aabb( mesh.m_vertices );
+    return Geometry::aabb( mesh.m_vertices );
 }
 
 inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 ) {

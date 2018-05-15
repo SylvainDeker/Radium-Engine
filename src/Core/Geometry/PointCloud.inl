@@ -1,8 +1,8 @@
-#include "PointCloud.hpp"
+#include <Core/Geometry/PointCloud.hpp>
 
 namespace Ra {
 namespace Core {
-namespace PointCloud {
+namespace Geometry {
 
 inline Vector3 meanPoint( const Container::Vector3Array& pts ) {
     return pts.getMap().rowwise().mean();
@@ -53,6 +53,6 @@ Aabb aabb( const Container::Vector3Array& pts ) {
                : Aabb();
 }
 
-} // namespace PointCloud
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

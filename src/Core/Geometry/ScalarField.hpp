@@ -7,7 +7,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 // Defining a ScalarField over the mesh vertices
 using ScalarField = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
@@ -40,7 +40,7 @@ RA_CORE_API Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p,
 RA_CORE_API Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p,
                                            const Container::VectorArray<Triangle>& T, const Gradient& X );
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

@@ -32,7 +32,7 @@ void MeshPaintComponent::setDataId( const std::string& id ) {
 void MeshPaintComponent::initialize() {
     auto compMess = Ra::Engine::ComponentMessenger::getInstance();
     // Look for the data we need
-    bool geometryData = compMess->canGet<Ra::Core::TriangleMesh>( getEntity(), m_dataId );
+    bool geometryData = compMess->canGet<Ra::Core::Geometry::TriangleMesh>( getEntity(), m_dataId );
 
     if ( !geometryData )
     {

@@ -4,7 +4,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
                            const ScalarField& S ) {
@@ -61,6 +61,6 @@ Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p, const C
     return ( div * 0.5 );
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

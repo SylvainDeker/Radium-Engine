@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 inline HalfEdgeData::HalfEdgeData( const TriangleMesh& mesh ) {
     build( mesh );
 }
@@ -33,5 +34,6 @@ inline void HalfEdgeData::clear() {
     m_triangleToHalfEdge.clear();
 }
 
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

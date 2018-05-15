@@ -73,10 +73,10 @@ void SkeletonBoneRenderObject::updateLocalTransform() {
     m_roMgr->getRenderObject( m_roIdx )->setLocalTransform( drawTransform * scale );
 }
 
-Ra::Core::TriangleMesh SkeletonBoneRenderObject::makeBoneShape() {
+Ra::Core::Geometry::TriangleMesh SkeletonBoneRenderObject::makeBoneShape() {
     // Bone along Z axis.
 
-    Ra::Core::TriangleMesh mesh;
+    Ra::Core::Geometry::TriangleMesh mesh;
 
     const Scalar l = 0.1f;
     const Scalar w = 0.1f;
@@ -85,10 +85,10 @@ Ra::Core::TriangleMesh SkeletonBoneRenderObject::makeBoneShape() {
                        Ra::Core::Vector3( 0, w, l ),  Ra::Core::Vector3( w, 0, l ),
                        Ra::Core::Vector3( 0, -w, l ), Ra::Core::Vector3( -w, 0, l )};
 
-    mesh.m_triangles = {Ra::Core::Triangle( 0, 2, 3 ), Ra::Core::Triangle( 0, 5, 2 ),
-                        Ra::Core::Triangle( 0, 3, 4 ), Ra::Core::Triangle( 0, 4, 5 ),
-                        Ra::Core::Triangle( 1, 3, 2 ), Ra::Core::Triangle( 1, 2, 5 ),
-                        Ra::Core::Triangle( 1, 4, 3 ), Ra::Core::Triangle( 1, 5, 4 )};
+    mesh.m_triangles = {Ra::Core::Geometry::Triangle( 0, 2, 3 ), Ra::Core::Geometry::Triangle( 0, 5, 2 ),
+                        Ra::Core::Geometry::Triangle( 0, 3, 4 ), Ra::Core::Geometry::Triangle( 0, 4, 5 ),
+                        Ra::Core::Geometry::Triangle( 1, 3, 2 ), Ra::Core::Geometry::Triangle( 1, 2, 5 ),
+                        Ra::Core::Geometry::Triangle( 1, 4, 3 ), Ra::Core::Geometry::Triangle( 1, 5, 4 )};
     Ra::Core::Geometry::getAutoNormals( mesh, mesh.m_normals );
     return mesh;
 }

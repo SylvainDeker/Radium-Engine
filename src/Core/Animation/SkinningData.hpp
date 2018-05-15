@@ -17,7 +17,7 @@ struct RefData {
     Ra::Core::Animation::Skeleton m_skeleton;
 
     /// Mesh in reference position
-    Ra::Core::TriangleMesh m_referenceMesh;
+    Ra::Core::Geometry::TriangleMesh m_referenceMesh;
 
     /// Reference pose
     Ra::Core::Animation::Pose m_refPose;

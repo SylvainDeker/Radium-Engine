@@ -27,10 +27,10 @@
 #include <Engine/Renderer/RenderTechnique/ShaderProgram.hpp>
 #include <Engine/Renderer/RenderTechnique/ShaderProgramManager.hpp>
 
-using Ra::Core::TriangleMesh;
+using Ra::Core::Geometry::TriangleMesh;
 using Ra::Engine::ComponentMessenger;
 
-using TriangleArray = Ra::Core::Container::VectorArray<Ra::Core::Triangle>;
+using TriangleArray = Ra::Core::Container::VectorArray<Ra::Core::Geometry::Triangle>;
 
 namespace FancyMeshPlugin {
 FancyMeshComponent::FancyMeshComponent( const std::string& name, bool deformable,
@@ -42,7 +42,7 @@ FancyMeshComponent::~FancyMeshComponent() {}
 
 void FancyMeshComponent::initialize() {}
 
-void FancyMeshComponent::addMeshRenderObject( const Ra::Core::TriangleMesh& mesh,
+void FancyMeshComponent::addMeshRenderObject( const TriangleMesh& mesh,
                                               const std::string& name ) {
     setupIO( name );
 
@@ -74,7 +74,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
     auto displayMesh =
         Ra::Core::Container::make_shared<Ra::Engine::Mesh>( meshName /*, Ra::Engine::Mesh::RM_POINTS*/ );
 
-    Ra::Core::TriangleMesh mesh;
+    Ra::Core::Geometry::TriangleMesh mesh;
     Ra::Core::Transform T = data->getFrame();
     Ra::Core::Transform N;
     N.matrix() = ( T.matrix() ).inverse().transpose();
@@ -96,7 +96,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
         }
     }
 
-    mesh.m_triangles.resize( data->getFaces().size(), Ra::Core::Triangle::Zero() );
+    mesh.m_triangles.resize( data->getFaces().size(), Ra::Core::Geometry::Triangle::Zero() );
 #pragma omp parallel for
     for ( uint i = 0; i < data->getFaces().size(); ++i )
     {
@@ -184,7 +184,7 @@ Ra::Core::Container::Index FancyMeshComponent::getRenderObjectIndex() const {
     return m_meshIndex;
 }
 
-const Ra::Core::TriangleMesh& FancyMeshComponent::getMesh() const {
+const Ra::Core::Geometry::TriangleMesh& FancyMeshComponent::getMesh() const {
     return getDisplayMesh().getGeometry();
 }
 
@@ -248,7 +248,7 @@ Ra::Engine::Mesh& FancyMeshComponent::getDisplayMesh() {
     return *( getRoMgr()->getRenderObject( getRenderObjectIndex() )->getMesh() );
 }
 
-const Ra::Core::TriangleMesh* FancyMeshComponent::getMeshOutput() const {
+const Ra::Core::Geometry::TriangleMesh* FancyMeshComponent::getMeshOutput() const {
     return &( getMesh() );
 }
 
@@ -256,7 +256,7 @@ const FancyMeshComponent::DuplicateTable* FancyMeshComponent::getDuplicateTableO
     return &m_duplicateTable;
 }
 
-Ra::Core::TriangleMesh* FancyMeshComponent::getMeshRw() {
+Ra::Core::Geometry::TriangleMesh* FancyMeshComponent::getMeshRw() {
     getDisplayMesh().setDirty( Ra::Engine::Mesh::VERTEX_POSITION );
     getDisplayMesh().setDirty( Ra::Engine::Mesh::VERTEX_NORMAL );
     getDisplayMesh().setDirty( Ra::Engine::Mesh::INDEX );
@@ -281,7 +281,7 @@ Ra::Core::Container::Vector3Array* FancyMeshComponent::getNormalsRw() {
     return &( getDisplayMesh().getGeometry().m_normals );
 }
 
-Ra::Core::Container::VectorArray<Ra::Core::Triangle>* FancyMeshComponent::getTrianglesRw() {
+Ra::Core::Container::VectorArray<Ra::Core::Geometry::Triangle>* FancyMeshComponent::getTrianglesRw() {
     getDisplayMesh().setDirty( Ra::Engine::Mesh::INDEX );
     return &( getDisplayMesh().getGeometry().m_triangles );
 }

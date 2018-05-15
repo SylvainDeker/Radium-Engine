@@ -93,11 +93,11 @@ class RA_ENGINE_API Mesh final {
     MeshRenderMode getRenderMode() const { return m_renderMode; }
 
     /// Returns the underlying triangle mesh.
-    inline const Core::TriangleMesh& getGeometry() const;
-    inline Core::TriangleMesh& getGeometry();
+    inline const Core::Geometry::TriangleMesh& getGeometry() const;
+    inline Core::Geometry::TriangleMesh& getGeometry();
 
     /// Use the given geometry as base for a display mesh. Normals are optionnal.
-    void loadGeometry( const Core::TriangleMesh& mesh );
+    void loadGeometry( const Core::Geometry::TriangleMesh& mesh );
 
     void updateMeshGeometry( MeshData type, const Core::Container::Vector3Array& data );
 
@@ -140,7 +140,7 @@ class RA_ENGINE_API Mesh final {
     uint m_vao;                  /// Index of our openGL VAO
     MeshRenderMode m_renderMode; /// Render mode (GL_TRIANGLES or GL_LINES, etc.)
 
-    Core::TriangleMesh m_mesh; /// Base geometry : vertices, triangles and normals
+    Core::Geometry::TriangleMesh m_mesh; /// Base geometry : vertices, triangles and normals
 
     std::array<Core::Container::Vector3Array, MAX_VEC3> m_v3Data; /// Additionnal vertex vector 3 data
     std::array<Core::Container::Vector4Array, MAX_VEC4> m_v4Data; /// Additionnal vertex vector 4 data

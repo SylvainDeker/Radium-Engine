@@ -8,7 +8,7 @@ namespace Ra {
 namespace Core {
 namespace Asset {
 
-class RA_CORE_API OBJFileManager : public FileManager<TriangleMesh> {
+class RA_CORE_API OBJFileManager : public FileManager<Geometry::TriangleMesh> {
   public:
     /// CONSTRUCTOR
     OBJFileManager();
@@ -18,8 +18,8 @@ class RA_CORE_API OBJFileManager : public FileManager<TriangleMesh> {
 
     /// INTERFACE
     virtual std::string fileExtension() const override;
-    virtual bool importData( std::istream& file, TriangleMesh& data ) override;
-    virtual bool exportData( std::ostream& file, const TriangleMesh& data ) override;
+    virtual bool importData( std::istream& file, Geometry::TriangleMesh& data ) override;
+    virtual bool exportData( std::ostream& file, const Geometry::TriangleMesh& data ) override;
 };
 
 } // namespace Asset

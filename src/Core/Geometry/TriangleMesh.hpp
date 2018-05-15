@@ -8,6 +8,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 /// A very basic structure representing a triangle mesh which stores the bare minimum :
 /// vertices, faces and normals. See MeshUtils for geometric functions operating on a mesh.
 struct TriangleMesh {
@@ -30,6 +31,7 @@ struct TriangleMesh {
   public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 void MeshConverter::convert( TopologicalMesh& in, TriangleMesh& out ) {
 
@@ -120,5 +121,6 @@ void MeshConverter::convert( const TriangleMesh& in, TopologicalMesh& out ) {
     assert( out.n_faces() == num_halfedge / 3 );
 }
 
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

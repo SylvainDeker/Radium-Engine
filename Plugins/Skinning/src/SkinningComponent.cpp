@@ -9,7 +9,7 @@
 using Ra::Core::DualQuaternion;
 using Ra::Core::Quaternion;
 
-using Ra::Core::TriangleMesh;
+using Ra::Core::Geometry::TriangleMesh;
 using Ra::Core::Animation::Pose;
 using Ra::Core::Animation::RefPose;
 using Ra::Core::Animation::Skeleton;
@@ -58,7 +58,7 @@ void SkinningComponent::setupSkinning() {
         // Do some debug checks:  Attempt to write to the mesh and check the weights match skeleton
         // and mesh.
         ON_ASSERT( bool skinnable =
-                       compMsg->canSet<Ra::Core::TriangleMesh>( getEntity(), m_contentsName ) );
+                       compMsg->canSet<TriangleMesh>( getEntity(), m_contentsName ) );
         CORE_ASSERT(
             skinnable,
             "Mesh cannot be skinned. It could be because the mesh is set to nondeformable" );

@@ -21,7 +21,9 @@
 // number of neighbors
 #define KD_TRIANGLES_PER_CELL 64
 
-namespace Super4PCS {
+namespace Ra {
+namespace Core {
+namespace Geometry {
 
 template <typename _Index = int>
 class TriangleKdTree {
@@ -688,6 +690,8 @@ void TriangleKdTree<Index>::createTree(
     }
 }
 
-} // namespace Super4PCS
+} // namespace Geometry
+} // namespace Core
+} // namespace Ra
 
 #endif // TRIANGLEKDTREE_H

@@ -18,7 +18,7 @@ RA_CORE_API void check( const AdjacencyList& adj );
 /*
  * Return the adjacency list built from the given edge list.
  */
-RA_CORE_API AdjacencyList extractAdjacencyList( const Container::VectorArray<Edge>& edgeList );
+RA_CORE_API AdjacencyList extractAdjacencyList( const Container::VectorArray<Geometry::Edge>& edgeList );
 
 /*
  * Return the edge list built from the given adjacency list.
@@ -28,7 +28,7 @@ RA_CORE_API AdjacencyList extractAdjacencyList( const Container::VectorArray<Edg
  *       ...
  * where i is the index of a leaf node.
  */
-RA_CORE_API Container::VectorArray<Edge> extractEdgeList( const AdjacencyList& adj,
+RA_CORE_API Container::VectorArray<Geometry::Edge> extractEdgeList( const AdjacencyList& adj,
                                                const bool include_leaf = false );
 
 /*

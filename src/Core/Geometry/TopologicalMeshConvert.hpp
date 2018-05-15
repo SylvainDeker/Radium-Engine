@@ -6,6 +6,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 //! Adapter class to convert between Core::Mesh and Core::TopologicalMesh
 //! \todo take into account texture coordinates and normals more robustly.
@@ -14,6 +15,7 @@ class RA_CORE_API MeshConverter {
     static void convert( TopologicalMesh& in, TriangleMesh& out );
     static void convert( const TriangleMesh& in, TopologicalMesh& out );
 };
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

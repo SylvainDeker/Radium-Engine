@@ -7,6 +7,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 
 // todo : enclose this in a more specific namespace ?
@@ -16,6 +17,7 @@ using Triangle = Vector3ui;
 using TriangleIdx = Container::Index;
 using VertexIdx = Container::Index;
 using HalfEdgeIdx = Container::Index;
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

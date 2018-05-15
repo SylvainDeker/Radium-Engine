@@ -41,14 +41,14 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
 
     // First step : subdivide the original mesh until weights are sufficiently close enough.
     Scalar maxWeightDistance = 0.f;
-    TriangleMesh subdividedMesh = dataInOut.m_referenceMesh;
+    Geometry::TriangleMesh subdividedMesh = dataInOut.m_referenceMesh;
 
     // Store the weights as row major here because we are going to query the per-vertex weights.
     Eigen::SparseMatrix<Scalar, Eigen::RowMajor> subdividedWeights = dataInOut.m_weights;
 
     // Convert the mesh to DCEL for easy processing.
-    Dcel dcel;
-    convert(subdividedMesh, dcel );
+    Core::Dcel dcel;
+    Geometry::convert(subdividedMesh, dcel );
     // The mesh will be subdivided by repeated edge-split, so that adjacent vertices
     // weights are distant of at most `weightEpsilon`.
     // New vertices created by the edge splitting and their new weights are computed
@@ -136,7 +136,7 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
         // Sum the cor and weights over all triangles of the subdivided mesh.
         for ( uint t = 0; t < subdividedMesh.m_triangles.size(); ++t )
         {
-            const Triangle& tri = subdividedMesh.m_triangles[t];
+            const Geometry::Triangle& tri = subdividedMesh.m_triangles[t];
             std::array<Vector3, 3> triVerts;
             Geometry::getTriangleVertices( subdividedMesh, t, triVerts );
 
