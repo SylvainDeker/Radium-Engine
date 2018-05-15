@@ -25,6 +25,10 @@
 
 #include <Gui/MainWindow.hpp>
 
+#define SET_VALUE_NO_SIGNALS(obj,value) (obj)->blockSignals(true);\
+                                        (obj)->setValue(value);\
+                                        (obj)->blockSignals(false);
+
 namespace Ra{
 namespace Gui{
 
@@ -40,7 +44,7 @@ namespace Gui{
             m_TabButtonDirect[i]->setMinimum(-std::numeric_limits<float>::max());
             m_directLayout->addWidget(m_TabButtonDirect[i],(i/4)+1,(i%4),1,1);
         }
-
+        //TODO find limits of radium
         m_rotation_x->setMaximum(std::numeric_limits<float>::max());
         m_rotation_x->setMinimum(-std::numeric_limits<float>::max());
         m_rotation_y->setMaximum(std::numeric_limits<float>::max());
@@ -94,15 +98,23 @@ namespace Gui{
 
             if(doProperties)
             {
-                m_translation_x->setValue(m(0,3));
-                m_translation_y->setValue(m(1,3));
-                m_translation_z->setValue(m(2,3));
-                m_scale_x->setValue(m(0,0)/r(0,0));
-                m_scale_y->setValue(m(1,1)/r(1,1));
-                m_scale_z->setValue(m(2,2)/r(2,2));
-                m_rotation_x->setValue(Ra::Core::Math::toDegrees(angles(0)));
-                m_rotation_y->setValue(Ra::Core::Math::toDegrees(angles(1)));
-                m_rotation_z->setValue(Ra::Core::Math::toDegrees(angles(2)));
+                //TODO fix sign for scale
+                Ra::Core::Vector3 v(m(0,0), m(1,0), m(2,0));
+                float sign = 1;
+                sign = r(0,0)<0 || r(0,1)<0 || r(0,2)<0 ? -1 : 1;
+                SET_VALUE_NO_SIGNALS(m_scale_x, v.norm()*sign);
+                v = Ra::Core::Vector3(m(0,1), m(1,1), m(2,1));
+                sign = r(1,0)<0 || r(1,1)<0 || r(1,2)<0 ? -1 : 1;
+                SET_VALUE_NO_SIGNALS(m_scale_y, v.norm());
+                v = Ra::Core::Vector3(m(0,2), m(1,2), m(2,2));
+                sign = r(2,0)<0 || r(2,1)<0 || r(2,2)<0 ? -1 : 1;
+                SET_VALUE_NO_SIGNALS(m_scale_z, v.norm());
+                SET_VALUE_NO_SIGNALS(m_translation_x, m(0,3));
+                SET_VALUE_NO_SIGNALS(m_translation_y, m(1,3));
+                SET_VALUE_NO_SIGNALS(m_translation_z, m(2,3));
+                SET_VALUE_NO_SIGNALS(m_rotation_x, Ra::Core::Math::toDegrees(angles(0)));
+                SET_VALUE_NO_SIGNALS(m_rotation_y, Ra::Core::Math::toDegrees(angles(1)));
+                SET_VALUE_NO_SIGNALS(m_rotation_z, Ra::Core::Math::toDegrees(angles(2)));
             }
 
             std::ostringstream matrixText;
@@ -119,15 +131,15 @@ namespace Gui{
 
         } else {
             //nothing to display
-            m_translation_x->setValue(0);
-            m_translation_y->setValue(0);
-            m_translation_z->setValue(0);
-            m_scale_x->setValue(0);
-            m_scale_y->setValue(0);
-            m_scale_z->setValue(0);
-            m_rotation_x->setValue(0);
-            m_rotation_y->setValue(0);
-            m_rotation_z->setValue(0);
+            SET_VALUE_NO_SIGNALS(m_translation_x, 0);
+            SET_VALUE_NO_SIGNALS(m_translation_y, 0);
+            SET_VALUE_NO_SIGNALS(m_translation_z, 0);
+            SET_VALUE_NO_SIGNALS(m_scale_x, 0);
+            SET_VALUE_NO_SIGNALS(m_scale_y, 0);
+            SET_VALUE_NO_SIGNALS(m_scale_z, 0);
+            SET_VALUE_NO_SIGNALS(m_rotation_x, 0);
+            SET_VALUE_NO_SIGNALS(m_rotation_y, 0);
+            SET_VALUE_NO_SIGNALS(m_rotation_z, 0);
             m_wolframEdit->setText("");
             for(int i = 0; i < 16; ++i)
             {
@@ -234,6 +246,8 @@ namespace Gui{
                 //TODO ?
                 break;
             }
+       } else {
+           transformation();
        }
     }
     void EditionWidget::matriceSize3()
@@ -258,8 +272,8 @@ namespace Gui{
         m_scale_y->setEnabled(visible);
         m_scale_z->setEnabled(visible);
         tabWidget->setEnabled(!visible);
-        m_applyButton->setEnabled(!visible);
-        m_undoButton->setEnabled(!visible);
+        //m_applyButton->setEnabled(!visible);
+        //m_undoButton->setEnabled(!visible);
     }
 
     bool EditionWidget::transformation(){
