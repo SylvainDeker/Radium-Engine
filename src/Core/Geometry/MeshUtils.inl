@@ -8,20 +8,20 @@ namespace Ra {
 namespace Core {
 namespace MeshUtils {
 inline Scalar getTriangleArea( const TriangleMesh& mesh, TriangleIdx triIdx ) {
-    std::array<Vector3, 3> v;
+    std::array<Math::Vector3, 3> v;
     getTriangleVertices( mesh, triIdx, v );
 
     return Geometry::triangleArea( v[0], v[1], v[2] );
 }
 
-inline Vector3 getTriangleNormal( const TriangleMesh& mesh, TriangleIdx triIdx ) {
-    std::array<Vector3, 3> v;
+inline Math::Vector3 getTriangleNormal( const TriangleMesh& mesh, TriangleIdx triIdx ) {
+    std::array<Math::Vector3, 3> v;
     getTriangleVertices( mesh, triIdx, v );
     return Geometry::triangleNormal( v[0], v[1], v[2] );
 }
 
 inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
-                                 std::array<Vector3, 3>& verticesOut ) {
+                                 std::array<Math::Vector3, 3>& verticesOut ) {
     const Triangle& tri = mesh.m_triangles[triIdx];
     for ( uint i = 0; i < 3; ++i )
     {
@@ -29,7 +29,7 @@ inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
     }
 }
 
-inline Aabb getAabb( const TriangleMesh& mesh ) {
+inline Math::Aabb getAabb( const TriangleMesh& mesh ) {
     return PointCloud::aabb( mesh.m_vertices );
 }
 
@@ -48,8 +48,8 @@ inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 ) {
 }
 
 inline bool containsEdge( const Triangle& t1, uint v1, uint v2 ) {
-    const bool hasv1 = ( t1.array() == Ra::Core::Vector3ui{v1, v1, v1}.array() ).any();
-    const bool hasv2 = ( t1.array() == Ra::Core::Vector3ui{v2, v2, v2}.array() ).any();
+    const bool hasv1 = ( t1.array() == Ra::Core::Math::Vector3ui{v1, v1, v1}.array() ).any();
+    const bool hasv2 = ( t1.array() == Ra::Core::Math::Vector3ui{v2, v2, v2}.array() ).any();
     return hasv1 && hasv2;
 }
 
@@ -67,7 +67,7 @@ struct EdgeHash {
 
 using EdgeTable = std::unordered_set<std::pair<uint, uint>, EdgeHash, EdgeEqual>;
 
-std::vector<Ra::Core::Vector2ui> getEdges( const TriangleMesh& mesh ) {
+std::vector<Ra::Core::Math::Vector2ui> getEdges( const TriangleMesh& mesh ) {
     EdgeTable table;
     for ( const auto& t : mesh.m_triangles )
     {
@@ -76,7 +76,7 @@ std::vector<Ra::Core::Vector2ui> getEdges( const TriangleMesh& mesh ) {
             table.insert( {t[i], t[( i + 1 ) % 3]} );
         }
     }
-    std::vector<Ra::Core::Vector2ui> edges;
+    std::vector<Ra::Core::Math::Vector2ui> edges;
     for ( const auto& e : table )
     {
         edges.push_back( {e.first, e.second} );

@@ -10,18 +10,18 @@ Time t( const Scalar& m, const Scalar& h ) {
 
 void heat( const AreaMatrix& A, const Time& t, const LaplacianMatrix& L,
            Heat& u, const Delta& delta ) {
-    Eigen::SimplicialLLT<Sparse> llt;
+    Eigen::SimplicialLLT<Math::Sparse> llt;
     llt.compute( ( A + ( t * L ) ) );
-    VectorN b = delta;
+    Math::VectorN b = delta;
     u.getMap() = llt.solve( b );
 }
 
 Heat heat( const AreaMatrix& A, const Time& t, const LaplacianMatrix& L,
            const Delta& delta ) {
     Heat u( L.rows() );
-    Eigen::SimplicialLLT<Sparse> llt;
+    Eigen::SimplicialLLT<Math::Sparse> llt;
     llt.compute( ( A + ( t * L ) ) );
-    VectorN b = delta;
+    Math::VectorN b = delta;
     u.getMap() = llt.solve( b );
     return u;
 }

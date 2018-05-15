@@ -13,7 +13,7 @@ void addBone(
     const int parent,                                                       // index of parent bone
     const uint dataID,                                                      // index in map
     const Ra::Core::Container::AlignedStdVector<Ra::Core::Asset::HandleComponentData>& data, // handle bone data
-    const Ra::Core::Container::AlignedStdVector<Ra::Core::Vector2i>& edgeList,         // list of edges
+    const Ra::Core::Container::AlignedStdVector<Ra::Core::Math::Vector2i>& edgeList,         // list of edges
     std::vector<bool>& processed,       // which ids have been processed
     Core::Animation::Skeleton& skelOut, // skeleton being built
     std::map<uint, uint>& indexTable )  // correspondance between data idx and bone idx

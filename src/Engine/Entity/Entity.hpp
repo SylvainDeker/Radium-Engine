@@ -39,10 +39,10 @@ class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
     inline void rename( const std::string& name );
 
     // Transform
-    inline void setTransform( const Core::Transform& transform );
-    inline void setTransform( const Core::Matrix4& transform );
-    Core::Transform getTransform() const;
-    Core::Matrix4 getTransformAsMatrix() const;
+    inline void setTransform( const Core::Math::Transform& transform );
+    inline void setTransform( const Core::Math::Matrix4& transform );
+    Core::Math::Transform getTransform() const;
+    Core::Math::Matrix4 getTransformAsMatrix() const;
 
     void swapTransformBuffers();
 
@@ -68,8 +68,8 @@ class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
     virtual void rayCastQuery( const Core::Ray& r ) const;
 
   private:
-    Core::Transform m_transform;
-    Core::Transform m_doubleBufferedTransform;
+    Core::Math::Transform m_transform;
+    Core::Math::Transform m_doubleBufferedTransform;
 
     std::string m_name;
 

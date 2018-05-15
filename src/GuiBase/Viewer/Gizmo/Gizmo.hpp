@@ -71,11 +71,11 @@ class Gizmo {
 
     /// Called when the gizmo is first clicked, with the camera parameters and the initial pixel
     /// coordinates.
-    virtual void setInitialState( const Engine::Camera& cam, const Core::Vector2& initialXY ) = 0;
+    virtual void setInitialState( const Engine::Camera& cam, const Core::Math::Vector2& initialXY ) = 0;
 
     /// Called when the mose movement is recorder with the camera parameters and the current pixel
     /// coordinates.
-    virtual Core::Transform mouseMove( const Engine::Camera& cam, const Core::Vector2& nextXY,
+    virtual Core::Transform mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
                                        bool stepped = false ) = 0;
 
   protected:

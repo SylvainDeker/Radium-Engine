@@ -8,11 +8,11 @@ namespace Ra {
 namespace Core {
 namespace Asset {
 
-class KeyTranslation : public KeyFrame<Core::Vector3> {
+class KeyTranslation : public KeyFrame<Core::Math::Vector3> {
   public:
     /// CONSTRUCTOR
     KeyTranslation( const AnimationTime& time = AnimationTime() ) :
-        KeyFrame<Core::Vector3>( time ) {}
+        KeyFrame<Core::Math::Vector3>( time ) {}
     KeyTranslation( const KeyTranslation& keyframe ) = default;
 
     /// DESTRUCTOR
@@ -20,11 +20,11 @@ class KeyTranslation : public KeyFrame<Core::Vector3> {
 
   protected:
     /// TRANSFORMATION
-    inline Core::Vector3 defaultFrame() const override { return Core::Vector3( 0.0, 0.0, 0.0 ); }
+    inline Core::Math::Vector3 defaultFrame() const override { return Core::Math::Vector3( 0.0, 0.0, 0.0 ); }
 
-    inline Core::Vector3 interpolate( const Core::Vector3& F0, const Core::Vector3& F1,
+    inline Core::Math::Vector3 interpolate( const Core::Math::Vector3& F0, const Core::Math::Vector3& F1,
                                       const Scalar t ) const override {
-        Core::Vector3 result;
+        Core::Math::Vector3 result;
         Core::Asset::interpolate( F0, F1, t, result );
         return result;
     }

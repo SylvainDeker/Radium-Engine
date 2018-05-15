@@ -111,8 +111,8 @@ inline void BVH<T>::buildBottomUpSlow() {
     m_upToDate = true;
 }
 
-// Dummy function to transform Vector3 to Vector4
-inline Vector4 fromV3( Vector3 v, int x ) {
+// Dummy function to transform Math::Vector3 to Vector4
+inline Vector4 fromV3( Math::Vector3 v, int x ) {
     return Vector4( v( 0 ), v( 1 ), v( 2 ), x );
 }
 

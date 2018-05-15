@@ -74,9 +74,9 @@ void Component::rayCastQuery( const Core::Ray& ray ) const {
             if ( tidx >= 0 )
             {
 
-                const Ra::Core::Vector3 pLocal = transformedRay.pointAt( result.m_t );
-                const Ra::Core::Vector3 pEntity = t * pLocal;
-                const Ra::Core::Vector3 pWorld = getEntity()->getTransform() * pEntity;
+                const Ra::Core::Math::Vector3 pLocal = transformedRay.pointAt( result.m_t );
+                const Ra::Core::Math::Vector3 pEntity = t * pLocal;
+                const Ra::Core::Math::Vector3 pWorld = getEntity()->getTransform() * pEntity;
 
                 LOG( Core::Utils::logINFO ) << " Ray cast vs " << ro->getName();
                 LOG( Core::Utils::logINFO ) << " Hit triangle " << tidx;

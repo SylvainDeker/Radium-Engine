@@ -36,7 +36,7 @@ VertexSegment extractVertexSegment( const Animation::MeshWeight& weights, const 
 VertexSegment extractVertexSegment( const Animation::WeightMatrix& weights, const Index& id,
                                     const bool use_max ) {
     VertexSegment v;
-    const VectorN col = weights.col( id );
+    const Math::VectorN col = weights.col( id );
     const Scalar max = col.maxCoeff();
     for ( int i = 0; i < col.size(); ++i )
     {

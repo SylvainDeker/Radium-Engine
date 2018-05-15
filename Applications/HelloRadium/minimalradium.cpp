@@ -32,7 +32,7 @@ void MinimalComponent::initialize() {
 
 /// This function will spin our cube
 void MinimalComponent::spin() {
-    Ra::Core::AngleAxis aa( 0.01f, Ra::Core::Vector3::UnitY() );
+    Ra::Core::AngleAxis aa( 0.01f, Ra::Core::Math::Vector3::UnitY() );
     Ra::Core::Transform rot( aa );
 
     auto ro = Ra::Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(

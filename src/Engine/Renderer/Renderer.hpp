@@ -73,7 +73,7 @@ class RA_ENGINE_API Renderer {
     };
 
     struct PickingQuery {
-        Core::Vector2 m_screenCoords;
+        Core::Math::Vector2 m_screenCoords;
         Core::MouseButton::MouseButton m_button;
         PickingMode m_mode;
     };
@@ -160,7 +160,7 @@ class RA_ENGINE_API Renderer {
         return m_lastFramePickingQueries;
     }
 
-    inline virtual void setMousePosition( const Core::Vector2& pos ) final {
+    inline virtual void setMousePosition( const Core::Math::Vector2& pos ) final {
         m_mousePosition[0] = pos[0];
         m_mousePosition[1] = m_height - pos[1];
     }
@@ -333,7 +333,7 @@ class RA_ENGINE_API Renderer {
     std::mutex m_renderMutex;
 
     // PICKING STUFF
-    Ra::Core::Vector2 m_mousePosition;
+    Ra::Core::Math::Vector2 m_mousePosition;
     float m_brushRadius;
     std::unique_ptr<globjects::Framebuffer> m_pickingFbo;
     std::unique_ptr<Texture> m_pickingTexture;

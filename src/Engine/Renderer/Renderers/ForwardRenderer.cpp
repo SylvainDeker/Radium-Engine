@@ -143,9 +143,9 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
 
     GL_ASSERT( glDrawBuffers( 4, buffers ) );
 
-    const Core::Colorf clearColor = Core::Math::FromChars<Core::Colorf>( 42, 42, 42, 0 );
-    const Core::Colorf clearZeros = Core::Math::Black<Core::Colorf>();
-    const Core::Colorf clearOnes = Core::Math::FromChars<Core::Colorf>( 255, 255, 255, 255 );
+    const Core::Math::Colorf clearColor = Core::Math::FromChars<Core::Math::Colorf>( 42, 42, 42, 0 );
+    const Core::Math::Colorf clearZeros = Core::Math::Black<Core::Math::Colorf>();
+    const Core::Math::Colorf clearOnes = Core::Math::FromChars<Core::Math::Colorf>( 255, 255, 255, 255 );
     const float clearDepth( 1.0 );
 
     GL_ASSERT( glClearBufferfv( GL_COLOR, 0, clearColor.data() ) ); // Clear color
@@ -201,7 +201,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
         // Solution : use the LightManager or the fact that a light is always associated with the
         // camera so that the renderer could always access to at least the headlight
         DirectionalLight l;
-        // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+        // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
         RenderParameters params;
         l.getRenderParameters( params );
@@ -249,7 +249,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
         // Solution : use the LightManager or the fact that a light is always associated with the
         // camera so that the renderer could always access to at least the headlight
         DirectionalLight l;
-        // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+        // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
         RenderParameters params;
         l.getRenderParameters( params );
@@ -323,7 +323,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
             // Solution : use the LightManager or the fact that a light is always associated with
             // the camera so that the renderer could always access to at least the headlight
             DirectionalLight l;
-            // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+            // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
             RenderParameters params;
             l.getRenderParameters( params );
@@ -380,8 +380,8 @@ void ForwardRenderer::debugInternal( const RenderData& renderData ) {
                 m_postprocessFbo->unbind();
                 m_oitFbo->useAsTarget();
                 
-                Core::Colorf clearZeros(0.0, 0.0, 0.0, 0.0);
-                Core::Colorf clearOnes (1.0, 1.0, 1.0, 1.0);
+                Core::Math::Colorf clearZeros(0.0, 0.0, 0.0, 0.0);
+                Core::Math::Colorf clearOnes (1.0, 1.0, 1.0, 1.0);
                 
                 GL_ASSERT(glDrawBuffers(2, buffers));
                 GL_ASSERT(glClearBufferfv(GL_COLOR, 0, clearZeros.data()));
@@ -476,7 +476,7 @@ void ForwardRenderer::uiInternal( const RenderData& renderData ) {
 
             Core::Matrix4 M = ro->getTransformAsMatrix();
             Core::Matrix4 MV = renderData.viewMatrix * M;
-            Core::Vector3 V = MV.block<3, 1>( 0, 3 );
+            Core::Math::Vector3 V = MV.block<3, 1>( 0, 3 );
             Scalar d = V.norm();
 
             Core::Matrix4 S = Core::Matrix4::Identity();

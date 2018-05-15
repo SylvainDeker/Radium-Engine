@@ -6,7 +6,7 @@ namespace Geometry {
 
 /// CONSTRUCTOR
 Mapping::Mapping( const Scalar alpha, const Scalar beta, const Scalar delta, Container::Index id ) :
-    m_coord( Vector2( alpha, beta ) ),
+    m_coord( Math::Vector2( alpha, beta ) ),
     m_delta( delta ),
     m_id( id ) {}
 
@@ -34,8 +34,8 @@ inline void Mapping::setBeta( const Scalar beta ) {
     m_coord[1] = beta;
 }
 
-inline Vector3 Mapping::getCoord() const {
-    return Vector3( getAlpha(), getBeta(), getGamma() );
+inline Math::Vector3 Mapping::getCoord() const {
+    return Math::Vector3( getAlpha(), getBeta(), getGamma() );
 }
 
 /// DELTA
@@ -57,8 +57,8 @@ inline void Mapping::setID( const Container::Index& id ) {
 }
 
 /// POINT
-inline Vector3 Mapping::getPoint( const Vector3& p0, const Vector3& p1, const Vector3& p2,
-                                  const Vector3& n ) const {
+inline Math::Vector3 Mapping::getPoint( const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& p2,
+                                  const Math::Vector3& n ) const {
     return ( ( ( getAlpha() * p0 ) + ( getBeta() * p1 ) + ( getGamma() * p2 ) ) +
              ( getDelta() * n ) );
 }

@@ -14,7 +14,7 @@ Skeleton::Skeleton( const uint n ) : PointCloud( n ), m_graph( n ), m_modelSpace
 Skeleton::~Skeleton() {}
 
 /// BONE NODE
-int Skeleton::addBone( const int parent, const Transform& T, const SpaceType MODE,
+int Skeleton::addBone( const int parent, const Math::Transform& T, const SpaceType MODE,
                        const Label label ) {
     switch ( MODE )
     {
@@ -113,7 +113,7 @@ void Skeleton::setPose( const Pose& pose, const SpaceType MODE ) {
     { CORE_ASSERT( false, "Should not get here" ); }
     }
 }
-const Transform& Skeleton::getTransform( const uint i, const SpaceType MODE ) const {
+const Math::Transform& Skeleton::getTransform( const uint i, const SpaceType MODE ) const {
     CORE_ASSERT( ( i < size() ), "Index i out of bounds" );
     switch ( MODE )
     {
@@ -131,7 +131,7 @@ const Transform& Skeleton::getTransform( const uint i, const SpaceType MODE ) co
     }
 }
 
-void Skeleton::setTransform( const uint i, const Transform& T, const SpaceType MODE ) {
+void Skeleton::setTransform( const uint i, const Math::Transform& T, const SpaceType MODE ) {
     CORE_ASSERT( ( i < size() ), "Index i out of bounds" );
     switch ( MODE )
     {
@@ -192,7 +192,7 @@ void Skeleton::setTransform( const uint i, const Transform& T, const SpaceType M
     }
 }
 
-void Skeleton::getBonePoints( const uint i, Vector3& startOut, Vector3& endOut ) const {
+void Skeleton::getBonePoints( const uint i, Math::Vector3& startOut, Math::Vector3& endOut ) const {
     // Check bone index is valid
     CORE_ASSERT( i < m_modelSpace.size(), "invalid bone index" );
 
@@ -206,7 +206,7 @@ void Skeleton::getBonePoints( const uint i, Vector3& startOut, Vector3& endOut )
         const auto& children = m_graph.m_child[i];
         CORE_ASSERT( children.size() > 0, "non-leaf bone has no children." );
         // End point is the average of chidren start points.
-        endOut = Vector3::Zero();
+        endOut = Math::Vector3::Zero();
         for ( auto child : children )
         {
             endOut += m_modelSpace[child].translation();

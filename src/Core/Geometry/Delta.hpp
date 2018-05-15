@@ -18,7 +18,7 @@ using BitSet = std::vector<bool>;
 using Source = std::vector<uint8_t>;
 
 // Defining the vector containing the value of the sources
-using Delta = Ra::Core::Sparse;
+using Delta = Ra::Core::Math::Sparse;
 
 /*
  * Return the Delta vector.

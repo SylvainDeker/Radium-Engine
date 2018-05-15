@@ -275,32 +275,32 @@ void ShaderProgram::setUniform( const char* name, std::vector<float> values ) co
 
 //!
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector2f& value ) const {
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector2f& value ) const {
     m_program->setUniform( name, Core::Math::toGlm( value ) );
 }
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector2d& value ) const {
-    Core::Vector2f v = value.cast<float>();
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector2d& value ) const {
+    Core::Math::Vector2f v = value.cast<float>();
 
     m_program->setUniform( name, Core::Math::toGlm( v ) );
 }
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector3f& value ) const {
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector3f& value ) const {
     m_program->setUniform( name, Core::Math::toGlm( value ) );
 }
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector3d& value ) const {
-    Core::Vector3f v = value.cast<float>();
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector3d& value ) const {
+    Core::Math::Vector3f v = value.cast<float>();
 
     m_program->setUniform( name, Core::Math::toGlm( v ) );
 }
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector4f& value ) const {
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector4f& value ) const {
     m_program->setUniform( name, Core::Math::toGlm( value ) );
 }
 
-void ShaderProgram::setUniform( const char* name, const Core::Vector4d& value ) const {
-    Core::Vector4f v = value.cast<float>();
+void ShaderProgram::setUniform( const char* name, const Core::Math::Vector4d& value ) const {
+    Core::Math::Vector4f v = value.cast<float>();
 
     m_program->setUniform( name, Core::Math::toGlm( v ) );
 }

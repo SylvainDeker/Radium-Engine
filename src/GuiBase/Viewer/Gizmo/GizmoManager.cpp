@@ -101,7 +101,7 @@ bool GizmoManager::handleMousePressEvent( QMouseEvent* event ) {
     // *static_cast<Viewer*>(parent())->getCameraInterface()->getCamera();
     const Engine::Camera& cam = CameraInterface::getCameraFromViewer( parent() );
     currentGizmo()->setInitialState( cam,
-                                     Core::Vector2( Scalar( event->x() ), Scalar( event->y() ) ) );
+                                     Core::Math::Vector2( Scalar( event->x() ), Scalar( event->y() ) ) );
 
     return true;
 }
@@ -121,7 +121,7 @@ bool GizmoManager::handleMouseMoveEvent( QMouseEvent* event ) {
                                 Gui::KeyMappingManager::GIZMOMANAGER_MANIPULATION ) &&
          currentGizmo() )
     {
-        Core::Vector2 currentXY( event->x(), event->y() );
+        Core::Math::Vector2 currentXY( event->x(), event->y() );
         // const Engine::Camera& cam =
         // *static_cast<Viewer*>(parent())->getCameraInterface()->getCamera();
         const Engine::Camera& cam = CameraInterface::getCameraFromViewer( parent() );

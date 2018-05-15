@@ -4,7 +4,7 @@
 #include <Core/Geometry/DistanceQueries.hpp>
 #include <Core/Math/PolyLine.hpp>
 
-using Ra::Core::Vector3;
+using Ra::Core::Math::Vector3;
 using Ra::Core::Geometry::FlagsInternal;
 using Ra::Core::Geometry::pointToLineSq;
 using Ra::Core::Geometry::pointToSegmentSq;
@@ -14,21 +14,21 @@ using Ra::Core::Math::areApproxEqual;
 namespace RaTests {
 class GeometryTests : public Test {
     void run() override {
-        Vector3 a( 1., 2.3, 4.5 );
-        Vector3 b( -6., 7., 8.9 );
-        Vector3 c( -3., 12.3, -42.1 );
+        Math::Vector3 a( 1., 2.3, 4.5 );
+        Math::Vector3 b( -6., 7., 8.9 );
+        Math::Vector3 c( -3., 12.3, -42.1 );
 
         // Midpoint.
-        Vector3 m = 0.5 * ( a + b );
+        Math::Vector3 m = 0.5 * ( a + b );
 
         // Point on the line, before A
-        Vector3 na = a - 12. * ( b - a );
+        Math::Vector3 na = a - 12. * ( b - a );
 
         // Point on the line after B
-        Vector3 nb = a + 42. * ( b - a );
+        Math::Vector3 nb = a + 42. * ( b - a );
 
-        Vector3 y, z;
-        Ra::Core::Vector::getOrthogonalVectors( b - a, y, z );
+        Math::Vector3 y, z;
+        Ra::Core::Math::Vector::getOrthogonalVectors( b - a, y, z );
 
         // Test line queries.
         RA_UNIT_TEST( areApproxEqual( pointToLineSq( a, a, b - a ), Scalar( 0. ) ),
@@ -74,9 +74,9 @@ class GeometryTests : public Test {
         RA_UNIT_TEST( dc.flags == FlagsInternal::HIT_C, "distance from C to ABC" );
 
         // Test midpoints of edges
-        Vector3 mab = 0.5f * ( a + b );
-        Vector3 mac = 0.5f * ( a + c );
-        Vector3 mbc = 0.5f * ( b + c );
+        Math::Vector3 mab = 0.5f * ( a + b );
+        Math::Vector3 mac = 0.5f * ( a + c );
+        Math::Vector3 mbc = 0.5f * ( b + c );
 
         auto dmab = pointToTriSq( mab, a, b, c );
         RA_UNIT_TEST( areApproxEqual( dmab.distanceSquared, Scalar( 0. ) ),
@@ -97,7 +97,7 @@ class GeometryTests : public Test {
         RA_UNIT_TEST( dmbc.flags == FlagsInternal::HIT_BC, "Distance from BC midpoint to ACC" );
 
         // Point inside the triangle
-        Vector3 g = ( 1.f / 3.f ) * ( a + b + c );
+        Math::Vector3 g = ( 1.f / 3.f ) * ( a + b + c );
 
         auto dg = pointToTriSq( g, a, b, c );
         RA_UNIT_TEST( areApproxEqual( dg.distanceSquared, Scalar( 0. ) ),
@@ -116,7 +116,7 @@ class PolylineTests : public Test {
             Ra::Core::Container::Vector3Array v2{{1, 2, 3}, {4, 5, 6}};
             Ra::Core::PolyLine p( v2 );
 
-            Ra::Core::Vector3 m = 0.5f * ( v2[0] + v2[1] );
+            Ra::Core::Math::Vector3 m = 0.5f * ( v2[0] + v2[1] );
 
             RA_UNIT_TEST( p.f( 0 ) == v2[0], "Parametrization fail" );
             RA_UNIT_TEST( p.f( 1 ) == v2[1], "Parametrization fail" );

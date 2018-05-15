@@ -95,7 +95,7 @@ void AssimpHandleDataLoader::loadHandleData(
             for ( auto& component : handle->getComponentData() )
             {
                 Core::Transform& frame = component.m_frame;
-                Core::Vector3 t = frame.translation();
+                Core::Math::Vector3 t = frame.translation();
                 Core::Matrix3 R = frame.rotation();
                 frame.setIdentity();
                 frame.translation() = t;
@@ -208,11 +208,11 @@ void AssimpHandleDataLoader::loadHandleTopologyData( const aiScene* scene,
             }
         }
     }
-    Core::Container::AlignedStdVector<Core::Vector2i> edge;
+    Core::Container::AlignedStdVector<Core::Math::Vector2i> edge;
     edge.reserve( edgeList.size() );
     for ( const auto& it : edgeList )
     {
-        Core::Vector2i e;
+        Core::Math::Vector2i e;
         e[0] = data->getIndexOf( it.first );
         e[1] = data->getIndexOf( it.second );
         edge.push_back( e );

@@ -15,7 +15,7 @@ namespace Asset {
 /// CONSTRUCTOR
 LightData::LightData( const std::string& name, const LightType& type ) :
     AssetData( name ),
-    m_frame( Core::Matrix4::Identity() ),
+    m_frame( Core::Math::Matrix4::Identity() ),
     m_type( type ) {}
 
 /// DESTRUCTOR

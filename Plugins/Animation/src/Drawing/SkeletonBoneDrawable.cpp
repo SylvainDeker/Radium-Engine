@@ -28,8 +28,8 @@ SkeletonBoneRenderObject::SkeletonBoneRenderObject( const std::string& name,
         Ra::Engine::ShaderConfigurationFactory::getConfiguration( "BlinnPhong" );
     auto bpMaterial = new Ra::Engine::BlinnPhongMaterial( "Bone Material" );
     m_material.reset( bpMaterial );
-    bpMaterial->m_kd = Ra::Core::Color( 0.4f, 0.4f, 0.4f, 0.5f );
-    bpMaterial->m_ks = Ra::Core::Color( 0.0f, 0.0f, 0.0f, 1.0f );
+    bpMaterial->m_kd = Ra::Core::Math::Color( 0.4f, 0.4f, 0.4f, 0.5f );
+    bpMaterial->m_ks = Ra::Core::Math::Color( 0.0f, 0.0f, 0.0f, 1.0f );
     m_material->setMaterialType( Ra::Engine::Material::MaterialType::MAT_OPAQUE );
 
     m_renderParams.reset( new Ra::Engine::RenderTechnique() );
@@ -53,15 +53,15 @@ void SkeletonBoneRenderObject::update() {
 }
 
 void SkeletonBoneRenderObject::updateLocalTransform() {
-    Ra::Core::Vector3 start;
-    Ra::Core::Vector3 end;
+    Ra::Core::Math::Vector3 start;
+    Ra::Core::Math::Vector3 end;
     Ra::Core::Animation::getBonePoints( m_skel, m_id, start, end );
 
     Ra::Core::Transform scale = Ra::Core::Transform::Identity();
     scale.scale( ( end - start ).norm() );
 
     Ra::Core::Quaternion rot =
-        Ra::Core::Quaternion::FromTwoVectors( Ra::Core::Vector3::UnitZ(), end - start );
+        Ra::Core::Quaternion::FromTwoVectors( Ra::Core::Math::Vector3::UnitZ(), end - start );
 
     Ra::Core::Transform boneTransform =
         m_skel.getTransform( m_id, Ra::Core::Animation::Handle::SpaceType::MODEL );
@@ -81,9 +81,9 @@ Ra::Core::TriangleMesh SkeletonBoneRenderObject::makeBoneShape() {
     const Scalar l = 0.1f;
     const Scalar w = 0.1f;
 
-    mesh.m_vertices = {Ra::Core::Vector3( 0, 0, 0 ),  Ra::Core::Vector3( 0, 0, 1 ),
-                       Ra::Core::Vector3( 0, w, l ),  Ra::Core::Vector3( w, 0, l ),
-                       Ra::Core::Vector3( 0, -w, l ), Ra::Core::Vector3( -w, 0, l )};
+    mesh.m_vertices = {Ra::Core::Math::Vector3( 0, 0, 0 ),  Ra::Core::Math::Vector3( 0, 0, 1 ),
+                       Ra::Core::Math::Vector3( 0, w, l ),  Ra::Core::Math::Vector3( w, 0, l ),
+                       Ra::Core::Math::Vector3( 0, -w, l ), Ra::Core::Math::Vector3( -w, 0, l )};
 
     mesh.m_triangles = {Ra::Core::Triangle( 0, 2, 3 ), Ra::Core::Triangle( 0, 5, 2 ),
                         Ra::Core::Triangle( 0, 3, 4 ), Ra::Core::Triangle( 0, 4, 5 ),

@@ -224,7 +224,7 @@ void SkinningComponent::setupSkinningType( SkinningType type ) {
             /*
                        for ( const auto& v :m_refData.m_CoR )
                        {
-                           RA_DISPLAY_POINT( v, Ra::Core::Colors::Red(), 0.1f );
+                           RA_DISPLAY_POINT( v, Ra::Core::Math::Colors::Red(), 0.1f );
                        }
             */
         }

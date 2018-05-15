@@ -21,13 +21,13 @@ class MaterialData;
 class RA_CORE_API GeometryData : public AssetData {
 
   public:
-    using Vector3Array = Core::Container::VectorArray<Vector3>;
-    using Vector2iArray = Core::Container::VectorArray<Vector2i>;
-    using Vector2uArray = Core::Container::VectorArray<Vector2ui>;
-    using VectorNiArray = Core::Container::VectorArray<VectorNi>;
-    using VectorNuArray = Core::Container::VectorArray<VectorNui>;
-    using Vector4Array = Core::Container::VectorArray<Vector4>;
-    using ColorArray = Core::Container::VectorArray<Core::Color>;
+    using Vector3Array = Core::Container::VectorArray<Math::Vector3>;
+    using Vector2iArray = Core::Container::VectorArray<Math::Vector2i>;
+    using Vector2uArray = Core::Container::VectorArray<Math::Vector2ui>;
+    using VectorNiArray = Core::Container::VectorArray<Math::VectorNi>;
+    using VectorNuArray = Core::Container::VectorArray<Math::VectorNui>;
+    using Vector4Array = Core::Container::VectorArray<Math::Vector4>;
+    using ColorArray = Core::Container::VectorArray<Core::Math::Color>;
 
     using Weight = std::pair<Scalar, uint>;
     using VertexWeights = std::vector<Weight>;
@@ -66,8 +66,8 @@ class RA_CORE_API GeometryData : public AssetData {
     inline void setType( const GeometryType& type );
 
     /// FRAME
-    inline Core::Transform getFrame() const;
-    inline void setFrame( const Core::Transform& frame );
+    inline Core::Math::Transform getFrame() const;
+    inline void setFrame( const Core::Math::Transform& frame );
 
     /// DATA
     inline uint getVerticesSize() const;
@@ -166,7 +166,7 @@ class RA_CORE_API GeometryData : public AssetData {
 
   protected:
     /// VARIABLE
-    Core::Transform m_frame;
+    Core::Math::Transform m_frame;
     GeometryType m_type;
 
     Vector3Array m_vertex;

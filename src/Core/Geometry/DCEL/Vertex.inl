@@ -6,28 +6,28 @@ namespace Ra {
 namespace Core {
 
 /// POINT
-inline Vector3 Vertex::P() const {
+inline Math::Vector3 Vertex::P() const {
     return m_p;
 }
 
-inline Vector3& Vertex::P() {
+inline Math::Vector3& Vertex::P() {
     return m_p;
 }
 
-inline void Vertex::setP( const Vector3& p ) {
+inline void Vertex::setP( const Math::Vector3& p ) {
     m_p = p;
 }
 
 /// NORMAL
-inline Vector3 Vertex::N() const {
+inline Math::Vector3 Vertex::N() const {
     return m_n;
 }
 
-inline Vector3& Vertex::N() {
+inline Math::Vector3& Vertex::N() {
     return m_n;
 }
 
-inline void Vertex::setN( const Vector3& n ) {
+inline void Vertex::setN( const Math::Vector3& n ) {
     m_n = n;
 }
 

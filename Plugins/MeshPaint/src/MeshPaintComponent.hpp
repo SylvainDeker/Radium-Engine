@@ -35,7 +35,7 @@ class MESH_PAINT_PLUGIN_API MeshPaintComponent : public Ra::Engine::Component {
 
     void startPaint( bool on );
     void paintMesh( const Ra::Engine::Renderer::PickingResult& picking,
-                    const Ra::Core::Color& color );
+                    const Ra::Core::Math::Color& color );
 
   protected:
     // Geometry data

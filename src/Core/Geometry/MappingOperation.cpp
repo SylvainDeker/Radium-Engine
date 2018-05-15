@@ -66,18 +66,18 @@ void findParametrization( const TriangleMesh& source, const TriangleMesh& target
 #endif
     for ( uint i = 0; i < size; ++i )
     {
-        const Vector3& v = source.m_vertices[i];
+        const Math::Vector3& v = source.m_vertices[i];
         Mapping map;
         for ( uint t = 0; t < target.m_triangles.size(); ++t )
         {
-            const Vector3& t0 = target.m_vertices[target.m_triangles[t][0]];
-            const Vector3& t1 = target.m_vertices[target.m_triangles[t][1]];
-            const Vector3& t2 = target.m_vertices[target.m_triangles[t][2]];
-            const Vector3 n = triangleNormal( t0, t1, t2 );
-            const Plane3 plane( n, t0 );
-            const Vector3 p = plane.projection( v );
+            const Math::Vector3& t0 = target.m_vertices[target.m_triangles[t][0]];
+            const Math::Vector3& t1 = target.m_vertices[target.m_triangles[t][1]];
+            const Math::Vector3& t2 = target.m_vertices[target.m_triangles[t][2]];
+            const Math::Vector3 n = triangleNormal( t0, t1, t2 );
+            const Math::Plane3 plane( n, t0 );
+            const Math::Vector3 p = plane.projection( v );
             const Scalar d = plane.signedDistance( v );
-            const Vector3 b = barycentricCoordinate( p, t0, t1, t2 );
+            const Math::Vector3 b = barycentricCoordinate( p, t0, t1, t2 );
             // if( ( b[0] >= 0.0 ) && ( b[1] >= 0.0 ) && ( b[2] >= 0.0 ) ) {
             if ( map.isBoundToElement() )
             {
@@ -104,7 +104,7 @@ void findParametrization( const TriangleMesh& source, const TriangleMesh& target
 void applyParametrization( const TriangleMesh& inMesh, const Parametrization& param,
                            Container::Vector3Array& outPoint, const bool FORCE_DISPLACEMENT_TO_ZERO ) {
     const uint size = param.size();
-    outPoint.resize( size, Vector3::Zero() );
+    outPoint.resize( size, Math::Vector3::Zero() );
 #if defined( CORE_USE_OMP )
 #    pragma omp parallel for
 #endif
@@ -118,15 +118,15 @@ void applyParametrization( const TriangleMesh& inMesh, const Parametrization& pa
         const uint i = inMesh.m_triangles[t][0];
         const uint j = inMesh.m_triangles[t][1];
         const uint k = inMesh.m_triangles[t][2];
-        const Vector3 p0 = inMesh.m_vertices[i];
-        const Vector3 p1 = inMesh.m_vertices[j];
-        const Vector3 p2 = inMesh.m_vertices[k];
-        // const Vector3 n0    = inMesh.m_normals[i];
-        // const Vector3 n1    = inMesh.m_normals[j];
-        // const Vector3 n2    = inMesh.m_normals[k];
-        const Vector3 n =
+        const Math::Vector3 p0 = inMesh.m_vertices[i];
+        const Math::Vector3 p1 = inMesh.m_vertices[j];
+        const Math::Vector3 p2 = inMesh.m_vertices[k];
+        // const Math::Vector3 n0    = inMesh.m_normals[i];
+        // const Math::Vector3 n1    = inMesh.m_normals[j];
+        // const Math::Vector3 n2    = inMesh.m_normals[k];
+        const Math::Vector3 n =
             triangleNormal( p0, p1, p2 ); //( alpha * n0 ) + ( beta * n1 ) + ( gamma * n2 );
-        const Vector3 N = ( FORCE_DISPLACEMENT_TO_ZERO ) ? Vector3::Zero() : n;
+        const Math::Vector3 N = ( FORCE_DISPLACEMENT_TO_ZERO ) ? Math::Vector3::Zero() : n;
         outPoint[v] = map.getPoint( p0, p1, p2, N );
     }
 }

@@ -50,12 +50,12 @@ class ConvertTests : public Test {
             return false;
 
         // Check triangles
-        std::vector<Ra::Core::Vector3> stackVertices;
+        std::vector<Ra::Core::Math::Vector3> stackVertices;
 
         i = 0;
         while ( result && i < meshOne.m_triangles.size() )
         {
-            std::vector<Ra::Core::Vector3>::iterator it;
+            std::vector<Ra::Core::Math::Vector3>::iterator it;
             stackVertices.clear();
             stackVertices.push_back( meshOne.m_vertices[meshOne.m_triangles[i][0]] );
             stackVertices.push_back( meshOne.m_vertices[meshOne.m_triangles[i][1]] );

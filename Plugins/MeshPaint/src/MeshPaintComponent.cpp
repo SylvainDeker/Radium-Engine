@@ -66,7 +66,7 @@ void MeshPaintComponent::startPaint( bool on ) {
 }
 
 void MeshPaintComponent::paintMesh( const Ra::Engine::Renderer::PickingResult& picking,
-                                    const Ra::Core::Color& color ) {
+                                    const Ra::Core::Math::Color& color ) {
     // check it's for us
     if ( *m_renderObjectReader() != picking.m_roIdx || picking.m_mode == Ra::Engine::Renderer::RO )
     {

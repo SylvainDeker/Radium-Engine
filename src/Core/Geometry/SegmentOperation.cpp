@@ -4,9 +4,9 @@ namespace Ra {
 namespace Core {
 namespace Geometry {
 
-Vector3 projectPointOnSegment( const Vector3& p, const Vector3& A, const Vector3& B ) {
-    const Vector3 Ap = p - A;
-    const Vector3 dir = B - A;
+Math::Vector3 projectPointOnSegment( const Math::Vector3& p, const Math::Vector3& A, const Math::Vector3& B ) {
+    const Math::Vector3 Ap = p - A;
+    const Math::Vector3 dir = B - A;
     // Square length of segment
     const Scalar length_sq = dir.squaredNorm();
     CORE_ASSERT( ( length_sq != 0.0 ), "The segment is a point" );

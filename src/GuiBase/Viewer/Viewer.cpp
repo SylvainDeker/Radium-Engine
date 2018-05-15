@@ -278,7 +278,7 @@ void Gui::Viewer::mousePressEvent( QMouseEvent* event ) {
     {
         LOG( Core::Utils::logINFO ) << "Raycast query launched";
         Core::Ray r =
-            m_camera->getCamera()->getRayFromScreen( Core::Vector2( event->x(), event->y() ) );
+            m_camera->getCamera()->getRayFromScreen( Core::Math::Vector2( event->x(), event->y() ) );
         RA_DISPLAY_POINT( r.origin(), Core::Math::Cyan(), 0.1f );
         RA_DISPLAY_RAY( r, Core::Math::Yellow() );
         auto ents = Engine::RadiumEngine::getInstance()->getEntityManager()->getEntities();
@@ -293,7 +293,7 @@ void Gui::Viewer::mousePressEvent( QMouseEvent* event ) {
     } else if ( keyMap->actionTriggered( event,
                                          Gui::KeyMappingManager::GIZMOMANAGER_MANIPULATION ) )
     {
-        m_currentRenderer->addPickingRequest( {Core::Vector2( event->x(), height() - event->y() ),
+        m_currentRenderer->addPickingRequest( {Core::Math::Vector2( event->x(), height() - event->y() ),
                                                Core::MouseButton::RA_MOUSE_LEFT_BUTTON,
                                                Engine::Renderer::RO} );
         if ( m_gizmoManager != nullptr )
@@ -304,7 +304,7 @@ void Gui::Viewer::mousePressEvent( QMouseEvent* event ) {
                                          Gui::KeyMappingManager::VIEWER_BUTTON_PICKING_QUERY ) )
     {
         // Check picking
-        Engine::Renderer::PickingQuery query = {Core::Vector2( event->x(), height() - event->y() ),
+        Engine::Renderer::PickingQuery query = {Core::Math::Vector2( event->x(), height() - event->y() ),
                                                 Core::MouseButton::RA_MOUSE_RIGHT_BUTTON,
                                                 getPickingMode()};
         m_currentRenderer->addPickingRequest( query );
@@ -327,14 +327,14 @@ void Gui::Viewer::mouseMoveEvent( QMouseEvent* event ) {
         {
             m_gizmoManager->handleMouseMoveEvent( event );
         }
-        m_currentRenderer->setMousePosition( Ra::Core::Vector2( event->x(), event->y() ) );
+        m_currentRenderer->setMousePosition( Ra::Core::Math::Vector2( event->x(), event->y() ) );
         if ( ( int( event->buttons() ) | int( event->modifiers() ) ) ==
              Gui::KeyMappingManager::getInstance()->getKeyFromAction(
                  Gui::KeyMappingManager::VIEWER_BUTTON_PICKING_QUERY ) )
         {
             // Check picking
             Engine::Renderer::PickingQuery query = {
-                Core::Vector2( event->x(), ( height() - event->y() ) ),
+                Core::Math::Vector2( event->x(), ( height() - event->y() ) ),
                 Core::MouseButton::RA_MOUSE_RIGHT_BUTTON, getPickingMode()};
             m_currentRenderer->addPickingRequest( query );
         }

@@ -13,29 +13,29 @@ namespace MeshUtils {
 
 /// Create a 2D grid mesh with given number of row and columns
 RA_CORE_API TriangleMesh makePlaneGrid( const uint rows = 1, const uint cols = 1,
-                                        const Vector2& halfExts = Vector2( 0.5, 0.5 ),
-                                        const Transform& T = Transform::Identity() );
+                                        const Math::Vector2& halfExts = Math::Vector2( 0.5, 0.5 ),
+                                        const Math::Transform& T = Math::Transform::Identity() );
 
 /// Create a 2D quad mesh given half extents, centered on the origin with x axis as normal
-RA_CORE_API TriangleMesh makeXNormalQuad( const Vector2& halfExts = Vector2( 0.5, 0.5 ) );
+RA_CORE_API TriangleMesh makeXNormalQuad( const Math::Vector2& halfExts = Math::Vector2( 0.5, 0.5 ) );
 
 /// Create a 2D quad mesh given half extents, centered on the origin with y axis as normal
-RA_CORE_API TriangleMesh makeYNormalQuad( const Vector2& halfExts = Vector2( 0.5, 0.5 ) );
+RA_CORE_API TriangleMesh makeYNormalQuad( const Math::Vector2& halfExts = Math::Vector2( 0.5, 0.5 ) );
 
 /// Create a 2D quad mesh given half extents, centered on the origin with z axis as normal
-RA_CORE_API TriangleMesh makeZNormalQuad( const Vector2& halfExts = Vector2( 0.5, 0.5 ) );
+RA_CORE_API TriangleMesh makeZNormalQuad( const Math::Vector2& halfExts = Math::Vector2( 0.5, 0.5 ) );
 
 /// Create an axis-aligned cubic mesh with the given half extents, centered on the origin.
-RA_CORE_API TriangleMesh makeBox( const Vector3& halfExts = Vector3( 0.5, 0.5, 0.5 ) );
+RA_CORE_API TriangleMesh makeBox( const Math::Vector3& halfExts = Math::Vector3( 0.5, 0.5, 0.5 ) );
 
 /// Create an axis-aligned cubic mesh
-RA_CORE_API TriangleMesh makeBox( const Aabb& aabb );
+RA_CORE_API TriangleMesh makeBox( const Math::Aabb& aabb );
 
 /// Create an axis-aligned cubic mesh with the given half extents, centered on the origin.
-RA_CORE_API TriangleMesh makeSharpBox( const Vector3& halfExts = Vector3( 0.5, 0.5, 0.5 ) );
+RA_CORE_API TriangleMesh makeSharpBox( const Math::Vector3& halfExts = Math::Vector3( 0.5, 0.5, 0.5 ) );
 
 /// Create an axis-aligned cubic mesh
-RA_CORE_API TriangleMesh makeSharpBox( const Aabb& aabb );
+RA_CORE_API TriangleMesh makeSharpBox( const Math::Aabb& aabb );
 
 /// Create a parametric spherical mesh of given radius. Template parameters set the resolution.
 template <uint U = 16, uint V = U>
@@ -52,7 +52,7 @@ RA_CORE_API TriangleMesh makeGeodesicSphere( Scalar radius = 1.f, uint numSubdiv
 
 /// Create a cylinder approximation (n-faced prism) with base faces centered on A and B
 /// with given radius.
-RA_CORE_API TriangleMesh makeCylinder( const Vector3& a, const Vector3& b, Scalar radius,
+RA_CORE_API TriangleMesh makeCylinder( const Math::Vector3& a, const Math::Vector3& b, Scalar radius,
                                        uint nFaces = 32 );
 
 /// Create a capsule with given cylinder length and radius.
@@ -62,12 +62,12 @@ RA_CORE_API TriangleMesh makeCapsule( Scalar length, Scalar radius, uint nFaces 
 
 /// Create a tube (empty cylinder) delimited by two radii, with bases centered on A and B.
 /// Outer radius must be larger than inner radius.
-RA_CORE_API TriangleMesh makeTube( const Vector3& a, const Vector3& b, Scalar outerRadius,
+RA_CORE_API TriangleMesh makeTube( const Math::Vector3& a, const Math::Vector3& b, Scalar outerRadius,
                                    Scalar InnerRadius, uint nFaces = 32 );
 
 /// Create a cone approximation (n-faced pyramid) with base face centered on base, pointing
 /// towards tip with given base radius.
-RA_CORE_API TriangleMesh makeCone( const Vector3& base, const Vector3& tip, Scalar radius,
+RA_CORE_API TriangleMesh makeCone( const Math::Vector3& base, const Math::Vector3& tip, Scalar radius,
                                    uint nFaces = 32 );
 
 } // namespace MeshUtils

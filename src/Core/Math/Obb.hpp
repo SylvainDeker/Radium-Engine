@@ -12,10 +12,10 @@ class Obb {
     /// Constructors and destructor.
 
     /// Initializes an empty bounding box.
-    Obb() : m_aabb(), m_transform( Transform::Identity() ) {}
+    Obb() : m_aabb(), m_transform( Math::Transform::Identity() ) {}
 
     /// Initialize an OBB from an AABB and a transform.
-    Obb( const Aabb& aabb, const Transform& tr ) : m_aabb( aabb ), m_transform( tr ) {}
+    Obb( const Math::Aabb& aabb, const Math::Transform& tr ) : m_aabb( aabb ), m_transform( tr ) {}
 
     /// Default copy constructor and assignment operator.
     Obb( const Obb& other ) = default;
@@ -24,22 +24,22 @@ class Obb {
     ~Obb() {}
 
     /// Return the AABB enclosing this
-    Aabb toAabb() const;
+    Math::Aabb toAabb() const;
 
     /// Extends the OBB with an new point.
-    void addPoint( const Vector3& p );
+    void addPoint( const Math::Vector3& p );
 
     /// Returns the position of the i^th corner of AABB (model space)
-    Vector3 corner( int i ) const;
+    Math::Vector3 corner( int i ) const;
 
     /// Returns the position of the ith corner of the OBB ( world space )
-    Vector3 worldCorner( int i ) const;
+    Math::Vector3 worldCorner( int i ) const;
 
   public:
     /// The untransformed AABB
-    Aabb m_aabb;
+    Math::Aabb m_aabb;
     /// Orientation of the box.
-    Transform m_transform;
+    Math::Transform m_transform;
 };
 } // namespace Core
 } // namespace Ra

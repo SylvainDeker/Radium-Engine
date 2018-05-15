@@ -3,16 +3,16 @@
 
 #include <Core/Geometry/DistanceQueries.hpp>
 
-using Ra::Core::Vector3;
+using Ra::Core::Math::Vector3;
 namespace RaTests {
 class DistanceTests : public Test {
     void run() override {
-        Vector3 a( -2.f, 0.f, 0.f );
-        Vector3 b( 2.f, 0.f, 0.f );
-        Vector3 c( 0.f, 3.f, 0.f );
-        Vector3 d( 0.f, -3.f, 0.f );
-        Vector3 e( -4.f, -3.f, 0.f );
-        Vector3 f( 4.f, 3.f, 0.f );
+        Math::Vector3 a( -2.f, 0.f, 0.f );
+        Math::Vector3 b( 2.f, 0.f, 0.f );
+        Math::Vector3 c( 0.f, 3.f, 0.f );
+        Math::Vector3 d( 0.f, -3.f, 0.f );
+        Math::Vector3 e( -4.f, -3.f, 0.f );
+        Math::Vector3 f( 4.f, 3.f, 0.f );
 
         // Test point to triangle query
         Scalar distPointToTri =
@@ -21,10 +21,10 @@ class DistanceTests : public Test {
                       "Distance point to triangle not ok." );
 
         // Test line to segment distance query
-        const Vector3& lineOrigin = a;
-        Vector3 lineDirection = d - a;
-        const Vector3& segCenter = (Scalar)0.5 * ( c + b );
-        Vector3 segDirection = b - c;
+        const Math::Vector3& lineOrigin = a;
+        Math::Vector3 lineDirection = d - a;
+        const Math::Vector3& segCenter = (Scalar)0.5 * ( c + b );
+        Math::Vector3 segDirection = b - c;
         Scalar segExtent = (Scalar)0.5 * std::sqrt( ( b - c ).dot( b - c ) );
         Scalar distLineToSeg = Ra::Core::Geometry::lineToSegSq(
                                    lineOrigin, lineDirection, segCenter, segDirection, segExtent )
@@ -33,7 +33,7 @@ class DistanceTests : public Test {
                       "Distance line to segment not ok." );
 
         // Test line to triangle distance query
-        Vector3 v[3] = {a, d, e};
+        Math::Vector3 v[3] = {a, d, e};
         Scalar distLineToTri =
             Ra::Core::Geometry::lineToTriSq( segCenter, segDirection, v ).sqrDistance;
         RA_UNIT_TEST( distLineToTri == Ra::Core::Geometry::pointToSegmentSq( a, c, b - c ),
@@ -47,7 +47,7 @@ class DistanceTests : public Test {
                       "Distance segment to triangle not ok." );
 
         // Test triangle to triangle distance query
-        Vector3 v2[3] = {c, f, b};
+        Math::Vector3 v2[3] = {c, f, b};
         Scalar distTriToTri = Ra::Core::Geometry::triangleToTriSq( v, v2 ).sqrDistance;
         RA_UNIT_TEST( distTriToTri == Ra::Core::Geometry::pointToSegmentSq( a, c, b - c ),
                       "Distance triangle to triangle not ok." );

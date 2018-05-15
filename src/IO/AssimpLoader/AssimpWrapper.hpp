@@ -12,11 +12,11 @@
 namespace Ra {
 namespace IO {
 
-inline Core::Vector3 assimpToCore( const aiVector3D& v ) {
-    return Core::Vector3( v.x, v.y, v.z );
+inline Core::Math::Vector3 assimpToCore( const aiVector3D& v ) {
+    return Core::Math::Vector3( v.x, v.y, v.z );
 }
 
-inline aiVector3D coreToAssimp( const Core::Vector3& v ) {
+inline aiVector3D coreToAssimp( const Core::Math::Vector3& v ) {
     return aiVector3D( v.x(), v.y(), v.z() );
 }
 
@@ -38,16 +38,16 @@ inline Core::Transform assimpToCore( const aiMatrix4x4& M ) {
 
 inline Core::Transform assimpToCore( const aiVector3D& T, const aiQuaternion& R,
                                      const aiVector3D& S ) {
-    Core::Vector3 t = assimpToCore( T );
+    Core::Math::Vector3 t = assimpToCore( T );
     Core::Quaternion r = assimpToCore( R );
-    Core::Vector3 s = assimpToCore( S );
+    Core::Math::Vector3 s = assimpToCore( S );
     Core::Transform M;
     M.fromPositionOrientationScale( t, r, s );
     return M;
 }
 
-inline Core::Color assimpToCore( const aiColor4D& c ) {
-    return Core::Color( c.r, c.g, c.b, c.a );
+inline Core::Math::Color assimpToCore( const aiColor4D& c ) {
+    return Core::Math::Color( c.r, c.g, c.b, c.a );
 }
 
 inline std::string assimpToCore( const aiString& string ) {
@@ -60,8 +60,8 @@ inline std::string assimpToCore( const aiString& string ) {
     return result.empty() ? "default" : result;
 }
 
-inline Core::VectorNi assimpToCore( uint* index, const uint size ) {
-    Core::VectorNi v( size );
+inline Core::Math::VectorNi assimpToCore( uint* index, const uint size ) {
+    Core::Math::VectorNi v( size );
     for ( uint i = 0; i < size; ++i )
     {
         v[i] = index[i];

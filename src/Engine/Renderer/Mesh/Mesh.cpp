@@ -121,7 +121,7 @@ void Mesh::addData( const Vec4Data& type, const Core::Container::Vector4Array& d
     m_isDirty = true;
 }
 
-// Template parameter must be a Core::VectorNArray
+// Template parameter must be a Core::Math::VectorNArray
 template <typename VecArray>
 void Mesh::sendGLData( const VecArray& arr, const uint vboIdx ) {
 

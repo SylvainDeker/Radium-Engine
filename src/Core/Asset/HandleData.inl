@@ -21,11 +21,11 @@ inline void HandleData::setType( const HandleType& type ) {
 }
 
 /// FRAME
-inline Core::Transform HandleData::getFrame() const {
+inline Core::Math::Transform HandleData::getFrame() const {
     return m_frame;
 }
 
-inline void HandleData::setFrame( const Core::Transform& frame ) {
+inline void HandleData::setFrame( const Core::Math::Transform& frame ) {
     m_frame = frame;
 }
 
@@ -74,15 +74,15 @@ inline HandleComponentData& HandleData::getComponent( const uint i ) {
     return m_component.at( i );
 }
 
-inline const Core::Container::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() const {
+inline const Core::Container::AlignedStdVector<Core::Math::Vector2i>& HandleData::getEdgeData() const {
     return m_edge;
 }
 
-inline Core::Container::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() {
+inline Core::Container::AlignedStdVector<Core::Math::Vector2i>& HandleData::getEdgeData() {
     return m_edge;
 }
 
-inline void HandleData::setEdges( const Core::Container::AlignedStdVector<Core::Vector2i>& edgeList ) {
+inline void HandleData::setEdges( const Core::Container::AlignedStdVector<Core::Math::Vector2i>& edgeList ) {
     const uint size = edgeList.size();
     m_edge.resize( size );
 #pragma omp parallel for
@@ -92,15 +92,15 @@ inline void HandleData::setEdges( const Core::Container::AlignedStdVector<Core::
     }
 }
 
-inline const Core::Container::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() const {
+inline const Core::Container::AlignedStdVector<Core::Math::VectorNi>& HandleData::getFaceData() const {
     return m_face;
 }
 
-inline Core::Container::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() {
+inline Core::Container::AlignedStdVector<Core::Math::VectorNi>& HandleData::getFaceData() {
     return m_face;
 }
 
-inline void HandleData::setFaces( const Core::Container::AlignedStdVector<Core::VectorNi>& faceList ) {
+inline void HandleData::setFaces( const Core::Container::AlignedStdVector<Core::Math::VectorNi>& faceList ) {
     const uint size = faceList.size();
     m_face.resize( size );
 #pragma omp parallel for

@@ -26,7 +26,7 @@ AdjacencyMatrix uniformAdjacency( const uint point_size, const Container::Vector
     return A;
 }
 
-AdjacencyMatrix uniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+AdjacencyMatrix uniformAdjacency( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AdjacencyMatrix A( p.size(), p.size() );
     for ( const auto& t : T )
     {
@@ -40,7 +40,7 @@ AdjacencyMatrix uniformAdjacency( const Container::VectorArray<Vector3>& p, cons
     return A;
 }
 
-void uniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+void uniformAdjacency( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                        AdjacencyMatrix& Adj ) {
     Adj.resize( p.size(), p.size() );
 #pragma omp parallel for
@@ -59,7 +59,7 @@ void uniformAdjacency( const Container::VectorArray<Vector3>& p, const Container
     }
 }
 
-TVAdj triangleUniformAdjacency( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+TVAdj triangleUniformAdjacency( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     const uint p_size = p.size();
     const uint t_size = T.size();
     TVAdj A( t_size, p_size );
@@ -75,7 +75,7 @@ TVAdj triangleUniformAdjacency( const Container::VectorArray<Vector3>& p, const 
     return A;
 }
 
-AdjacencyMatrix cotangentWeightAdjacency( const Container::VectorArray<Vector3>& p,
+AdjacencyMatrix cotangentWeightAdjacency( const Container::VectorArray<Math::Vector3>& p,
                                           const Container::VectorArray<Triangle>& T ) {
     AdjacencyMatrix A( p.size(), p.size() );
     for ( const auto& t : T )
@@ -83,12 +83,12 @@ AdjacencyMatrix cotangentWeightAdjacency( const Container::VectorArray<Vector3>&
         uint i = t( 0 );
         uint j = t( 1 );
         uint k = t( 2 );
-        Vector3 IJ = p[j] - p[i];
-        Vector3 JK = p[k] - p[j];
-        Vector3 KI = p[i] - p[k];
-        Scalar cotI = Vector::cotan( IJ, ( -KI ).eval() );
-        Scalar cotJ = Vector::cotan( JK, ( -IJ ).eval() );
-        Scalar cotK = Vector::cotan( KI, ( -JK ).eval() );
+        Math::Vector3 IJ = p[j] - p[i];
+        Math::Vector3 JK = p[k] - p[j];
+        Math::Vector3 KI = p[i] - p[k];
+        Scalar cotI = Math::Vector::cotan( IJ, ( -KI ).eval() );
+        Scalar cotJ = Math::Vector::cotan( JK, ( -IJ ).eval() );
+        Scalar cotK = Math::Vector::cotan( KI, ( -JK ).eval() );
         A.coeffRef( i, j ) += cotK;
         A.coeffRef( j, i ) += cotK;
         A.coeffRef( j, k ) += cotI;

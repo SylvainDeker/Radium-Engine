@@ -61,8 +61,8 @@ class RA_CORE_API LightData : public AssetData {
     inline void setType( const LightType& type );
 
     /// FRAME
-    inline Core::Matrix4 getFrame() const;
-    inline void setFrame( const Core::Matrix4& frame );
+    inline Core::Math::Matrix4 getFrame() const;
+    inline void setFrame( const Core::Math::Matrix4& frame );
 
     /// DATA
     /*
@@ -76,14 +76,14 @@ class RA_CORE_API LightData : public AssetData {
 #endif
 
     /// construct a directional light
-    inline void setLight( Core::Color color, Core::Vector3 direction );
+    inline void setLight( Core::Math::Color color, Core::Math::Vector3 direction );
     /// construct a point light
-    inline void setLight( Core::Color color, Core::Vector3 position, LightAttenuation attenuation );
+    inline void setLight( Core::Math::Color color, Core::Math::Vector3 position, LightAttenuation attenuation );
     /// construct a spot light
-    inline void setLight( Core::Color color, Core::Vector3 position, Core::Vector3 direction,
+    inline void setLight( Core::Math::Color color, Core::Math::Vector3 position, Core::Math::Vector3 direction,
                           Scalar inangle, Scalar outAngle, LightAttenuation attenuation );
     /// construct an area light
-    inline void setLight( Core::Color color, LightAttenuation attenuation );
+    inline void setLight( Core::Math::Color color, LightAttenuation attenuation );
 
     /// QUERY
     inline bool isPointLight() const;
@@ -97,25 +97,25 @@ class RA_CORE_API LightData : public AssetData {
   protected:
     /// VARIABLE
 
-    Core::Matrix4 m_frame;
+    Core::Math::Matrix4 m_frame;
     LightType m_type;
 
     // This part is public so that systems handling lights could acces to the data.
     // TODO (Mathias) : make these protected with getters ? Define independant types ?
   public:
-    Core::Color m_color;
+    Core::Math::Color m_color;
 
     union {
         struct {
-            Core::Vector3 direction;
+            Core::Math::Vector3 direction;
         } m_dirlight;
         struct {
-            Core::Vector3 position;
+            Core::Math::Vector3 position;
             LightAttenuation attenuation;
         } m_pointlight;
         struct {
-            Core::Vector3 position;
-            Core::Vector3 direction;
+            Core::Math::Vector3 position;
+            Core::Math::Vector3 direction;
             Scalar innerAngle;
             Scalar outerAngle;
             LightAttenuation attenuation;

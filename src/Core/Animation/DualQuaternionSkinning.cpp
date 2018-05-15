@@ -7,7 +7,7 @@ void computeDQ( const Pose& pose, const WeightMatrix& weight, DQList& DQ ) {
     CORE_ASSERT( ( pose.size() == weight.cols() ), "pose/weight size mismatch." );
     DQ.clear();
     DQ.resize( weight.rows(),
-               Math::DualQuaternion( Quaternion( 0, 0, 0, 0 ), Quaternion( 0, 0, 0, 0 ) ) );
+               Math::DualQuaternion( Math::Quaternion( 0, 0, 0, 0 ), Math::Quaternion( 0, 0, 0, 0 ) ) );
 
     // Stores the first non-zero quaternion for each vertex.
     std::vector<uint> firstNonZero( weight.rows(), std::numeric_limits<uint>::max() );
@@ -73,7 +73,7 @@ void computeDQ_naive( const Pose& pose, const WeightMatrix& weight, DQList& DQ )
     CORE_ASSERT( ( pose.size() == weight.cols() ), "pose/weight size mismatch." );
     DQ.clear();
     DQ.resize( weight.rows(),
-               Math::DualQuaternion( Quaternion( 0, 0, 0, 0 ), Quaternion( 0, 0, 0, 0 ) ) );
+               Math::DualQuaternion( Math::Quaternion( 0, 0, 0, 0 ), Math::Quaternion( 0, 0, 0, 0 ) ) );
 
     std::vector<Math::DualQuaternion> poseDQ;
     poseDQ.reserve( pose.size() );

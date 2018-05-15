@@ -9,13 +9,13 @@ namespace Core {
 namespace Geometry {
 
 // get distance between two sets of vertices.
-void vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1,
+void vertexDistance( const Container::VectorArray<Math::Vector3>& v0, const Container::VectorArray<Math::Vector3>& v1,
                      std::vector<Scalar>& sqrDist, Scalar& sqrMin, Scalar& sqrMax, Scalar& sqrAvg );
 
-void vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1, Scalar& sqrMin,
+void vertexDistance( const Container::VectorArray<Math::Vector3>& v0, const Container::VectorArray<Math::Vector3>& v1, Scalar& sqrMin,
                      Scalar& sqrMax, Scalar& sqrAvg );
 
-Scalar vertexDistance( const Container::VectorArray<Vector3>& v0, const Container::VectorArray<Vector3>& v1 );
+Scalar vertexDistance( const Container::VectorArray<Math::Vector3>& v0, const Container::VectorArray<Math::Vector3>& v1 );
 
 } // namespace Geometry
 } // namespace Core

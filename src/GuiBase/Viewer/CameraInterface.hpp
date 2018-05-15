@@ -83,14 +83,14 @@ class CameraInterface : public QObject {
 
     virtual void fitScene( const Core::Aabb& aabb ) = 0;
 
-    virtual void setCameraPosition( const Core::Vector3& position ) = 0;
-    virtual void setCameraTarget( const Core::Vector3& target ) = 0;
+    virtual void setCameraPosition( const Core::Math::Vector3& position ) = 0;
+    virtual void setCameraTarget( const Core::Math::Vector3& target ) = 0;
 
     virtual void resetCamera() = 0;
 
   signals:
-    void cameraPositionChanged( const Core::Vector3& );
-    void cameraTargetChanged( const Core::Vector3& );
+    void cameraPositionChanged( const Core::Math::Vector3& );
+    void cameraTargetChanged( const Core::Math::Vector3& );
 
   protected:
     Core::Aabb m_targetedAabb;

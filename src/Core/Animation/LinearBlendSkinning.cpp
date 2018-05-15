@@ -7,7 +7,7 @@ namespace Animation {
 void linearBlendSkinning( const Container::Vector3Array& inMesh, const Pose& pose, const WeightMatrix& weight,
                           Container::Vector3Array& outMesh ) {
     outMesh.clear();
-    outMesh.resize( inMesh.size(), Vector3::Zero() );
+    outMesh.resize( inMesh.size(), Math::Vector3::Zero() );
     for ( int k = 0; k < weight.outerSize(); ++k )
     {
         const int nonZero = weight.col( k ).nonZeros();

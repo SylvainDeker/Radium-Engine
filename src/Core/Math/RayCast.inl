@@ -5,7 +5,7 @@ namespace Core {
 // useful : http://www.realtimerendering.com/intersections.html
 namespace RayCast {
 /// Intersect a ray with an axis-aligned bounding box.
-inline bool vsAabb( const Ray& r, const Core::Aabb& aabb, Scalar& hitOut, Vector3& normalOut ) {
+inline bool vsAabb( const Ray& r, const Core::Math::Aabb& aabb, Scalar& hitOut, Math::Vector3& normalOut ) {
     // Based on optimized Woo version (ray vs 3 slabs)
     // Ref : Graphics Gems p.395
     // http://www.codercorner.com/RayAABB.cpp
@@ -14,7 +14,7 @@ inline bool vsAabb( const Ray& r, const Core::Aabb& aabb, Scalar& hitOut, Vector
     CORE_ASSERT( !aabb.isEmpty(), "Empty AABB" ); // Or return false ?
 
     // Vector of bool telling which components of the direction are not 0;
-    auto nEqualZero = r.direction().array() != Core::Vector3::Zero().array();
+    auto nEqualZero = r.direction().array() != Core::Math::Vector3::Zero().array();
 
     // Vector of bool telling which components of the ray origin are respectively
     // smaller than the aabb min or higher than aabb max.
@@ -30,9 +30,9 @@ inline bool vsAabb( const Ray& r, const Core::Aabb& aabb, Scalar& hitOut, Vector
     }
 
     // Precompute the t values for each plane.
-    const Core::Vector3 invDir = r.direction().cwiseInverse();
-    const Core::Vector3 minOrig = ( aabb.min() - r.origin() ).cwiseProduct( invDir );
-    const Core::Vector3 maxOrig = ( aabb.max() - r.origin() ).cwiseProduct( invDir );
+    const Core::Math::Vector3 invDir = r.direction().cwiseInverse();
+    const Core::Math::Vector3 minOrig = ( aabb.min() - r.origin() ).cwiseProduct( invDir );
+    const Core::Math::Vector3 maxOrig = ( aabb.max() - r.origin() ).cwiseProduct( invDir );
 
     // The following Eigen dark magic should be equivalent to this pseudo code
     // For  i = 1..3
@@ -50,8 +50,8 @@ inline bool vsAabb( const Ray& r, const Core::Aabb& aabb, Scalar& hitOut, Vector
     const Scalar t = maxT.maxCoeff( &i );
 
     // Check if the point is actually in the box's face.
-    const Vector3 p = r.pointAt( t );
-    const Vector3 s = Vector3::Unit( i );
+    const Math::Vector3 p = r.pointAt( t );
+    const Math::Vector3 s = Math::Vector3::Unit( i );
 
     auto inFace =
         s.select( 0, ( p.array() < aabb.min().array() || p.array() > aabb.max().array() ) );
@@ -66,7 +66,7 @@ inline bool vsAabb( const Ray& r, const Core::Aabb& aabb, Scalar& hitOut, Vector
     return false;
 }
 
-bool vsSphere( const Ray& r, const Core::Vector3& center, Scalar radius,
+bool vsSphere( const Ray& r, const Core::Math::Vector3& center, Scalar radius,
                std::vector<Scalar>& hitsOut ) {
 
     CORE_ASSERT( r.direction().squaredNorm() > 0.f, "Invalid Ray" );
@@ -76,7 +76,7 @@ bool vsSphere( const Ray& r, const Core::Vector3& center, Scalar radius,
     // X = ray.origin + t* ray.direction
     // ||X - center|| = radius.
 
-    const Core::Vector3 co = r.origin() - center;
+    const Core::Math::Vector3 co = r.origin() - center;
     const Scalar co2 = co.squaredNorm();
     const Scalar dirDotCO = r.direction().dot( co );
 
@@ -120,7 +120,7 @@ bool vsSphere( const Ray& r, const Core::Vector3& center, Scalar radius,
     return false;
 }
 
-bool vsPlane( const Ray& r, const Core::Vector3 a, const Core::Vector3& normal,
+bool vsPlane( const Ray& r, const Core::Math::Vector3 a, const Core::Math::Vector3& normal,
               std::vector<Scalar>& hitsOut ) {
     CORE_ASSERT( r.direction().squaredNorm() > 0.f, "Invalid Ray" );
     CORE_ASSERT( normal.squaredNorm() > 0.f, "Invalid plane normal" );
@@ -152,14 +152,14 @@ bool vsPlane( const Ray& r, const Core::Vector3 a, const Core::Vector3& normal,
 }
 
 // TODO : this needs serious optimizing if we want it fast :p
-bool vsCylinder( const Ray& r, const Core::Vector3& a, const Core::Vector3& b, Scalar radius,
+bool vsCylinder( const Ray& r, const Core::Math::Vector3& a, const Core::Math::Vector3& b, Scalar radius,
                  std::vector<Scalar>& hitsOut ) {
     /// Ref : Graphics Gem IV.
     /// http://www.realtimerendering.com/resources/GraphicsGems//gemsiv/ray_cyl.c
     const Scalar radiusSquared = radius * radius;
 
-    const Core::Vector3 cylAxis = b - a;
-    const Core::Vector3 ao = r.origin() - a;
+    const Core::Math::Vector3 cylAxis = b - a;
+    const Core::Math::Vector3 ao = r.origin() - a;
 
     // Intersect the ray against plane A and B.
     std::vector<Scalar> hitsA;
@@ -306,25 +306,25 @@ bool vsCylinder( const Ray& r, const Core::Vector3& a, const Core::Vector3& b, S
     return false;
 }
 
-bool vsTriangle( const Ray& ray, const Vector3 a, const Vector3& b, const Vector3& c,
+bool vsTriangle( const Ray& ray, const Math::Vector3 a, const Math::Vector3& b, const Math::Vector3& c,
                  std::vector<Scalar>& hitsOut ) {
-    const Vector3 ab = b - a;
-    const Vector3 ac = c - a;
+    const Math::Vector3 ab = b - a;
+    const Math::Vector3 ac = c - a;
 
-    ON_ASSERT( const Vector3 n = ab.cross( ac ) );
+    ON_ASSERT( const Math::Vector3 n = ab.cross( ac ) );
     CORE_ASSERT( n.squaredNorm() > 0, "Degenerate triangle" );
 
     Scalar u = 0.0;
     Scalar v = 0.0;
 
     // Compute determinant
-    const Vector3 pvec = ray.direction().cross( ac );
+    const Math::Vector3 pvec = ray.direction().cross( ac );
     const Scalar det = ab.dot( pvec );
 
-    const Vector3 tvec = ray.origin() - a;
+    const Math::Vector3 tvec = ray.origin() - a;
     const Scalar inv_det = 1.f / det;
 
-    const Vector3 qvec = tvec.cross( ab );
+    const Math::Vector3 qvec = tvec.cross( ab );
 
     if ( det > 0 )
     {
@@ -370,9 +370,9 @@ bool vsTriangleMesh( const Ray& r, const TriangleMesh& mesh, std::vector<Scalar>
     for ( size_t i = 0; i < mesh.m_triangles.size(); ++i )
     {
         Triangle t = mesh.m_triangles[i];
-        Vector3 a = mesh.m_vertices[t[0]];
-        Vector3 b = mesh.m_vertices[t[1]];
-        Vector3 c = mesh.m_vertices[t[2]];
+        Math::Vector3 a = mesh.m_vertices[t[0]];
+        Math::Vector3 b = mesh.m_vertices[t[1]];
+        Math::Vector3 c = mesh.m_vertices[t[2]];
         if ( vsTriangle( r, a, b, c, hitsOut ) )
         {
             trianglesIdxOut.push_back( t );

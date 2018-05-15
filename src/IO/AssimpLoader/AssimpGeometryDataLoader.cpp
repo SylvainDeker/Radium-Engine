@@ -11,7 +11,7 @@
 namespace Ra {
 namespace IO {
 
-Triplet::Triplet( const Core::Vector3& v ) : m_v( v ) {}
+Triplet::Triplet( const Core::Math::Vector3& v ) : m_v( v ) {}
 
 bool Triplet::operator==( const Triplet& t ) const {
     return ( m_v.isApprox( t.m_v ) );
@@ -219,7 +219,7 @@ void AssimpGeometryDataLoader::fetchVertices( const aiMesh& mesh, Core::Asset::G
     std::map<Triplet, uint> uniqueTable;
     for ( uint i = 0; i < size; ++i )
     {
-        const Core::Vector3 v = assimpToCore( mesh.mVertices[i] );
+        const Core::Math::Vector3 v = assimpToCore( mesh.mVertices[i] );
         const Triplet t( v );
         auto it = uniqueTable.find( t );
         if ( it == uniqueTable.end() || data.isLoadingDuplicates() )
@@ -277,7 +277,7 @@ void AssimpGeometryDataLoader::fetchPolyhedron( const aiMesh& mesh,
 
 void AssimpGeometryDataLoader::fetchNormals( const aiMesh& mesh, Core::Asset::GeometryData& data ) const {
     auto& normal = data.getNormals();
-    normal.resize( data.getVerticesSize(), Core::Vector3::Zero() );
+    normal.resize( data.getVerticesSize(), Core::Math::Vector3::Zero() );
 
 #pragma omp parallel for if ( data.isLoadingDuplicates() )
     for ( uint i = 0; i < mesh.mNumVertices; ++i )
@@ -297,7 +297,7 @@ void AssimpGeometryDataLoader::fetchTangents( const aiMesh& mesh,
 #if defined( RADIUM_WITH_TEXTURES )
     const uint size = mesh.mNumVertices;
     auto& tangent = data.getTangents();
-    tangent.resize( size, Core::Vector3::Zero() );
+    tangent.resize( size, Core::Math::Vector3::Zero() );
 #    pragma omp parallel for
     for ( uint i = 0; i < size; ++i )
     {

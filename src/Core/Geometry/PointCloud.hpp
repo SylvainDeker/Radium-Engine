@@ -17,18 +17,18 @@ namespace Core {
 /// of points is empty.
 namespace PointCloud {
 /// Compute the mean point of a set of points, i.e. the barycenter.
-RA_CORE_API inline Vector3 meanPoint( const Container::Vector3Array& pts );
+RA_CORE_API inline Math::Vector3 meanPoint( const Container::Vector3Array& pts );
 
 /// Returns a transform computed by PCA of the given set of points.
 /// The rotation gives you the principal directions in increasing
 /// order of importance (Z = principal direction)
 /// The translation is the barycenter of the point set.
-RA_CORE_API inline Transform principalAxis( const Container::Vector3Array& pts );
+RA_CORE_API inline Math::Transform principalAxis( const Container::Vector3Array& pts );
 
 /// Returns the axis-aligned bounding box of a set of points.
 /// This function returns an empty AABB if the set of points is
 /// empty.
-RA_CORE_API inline Aabb aabb( const Container::Vector3Array& pts );
+RA_CORE_API inline Math::Aabb aabb( const Container::Vector3Array& pts );
 
 /// Computes an oriented bounding box based on PCA of the points coordinates.
 RA_CORE_API inline Obb pcaObb( const Container::Vector3Array& pts );

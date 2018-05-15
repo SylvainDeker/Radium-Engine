@@ -10,8 +10,8 @@ namespace Core {
 
 
 // todo : enclose this in a more specific namespace ?
-using Edge = Vector2ui;
-using Triangle = Vector3ui;
+using Edge = Math::Vector2ui;
+using Triangle = Math::Vector3ui;
 
 using TriangleIdx = Container::Index;
 using VertexIdx = Container::Index;

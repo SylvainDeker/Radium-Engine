@@ -47,25 +47,25 @@ inline void DualQuaternion::normalize() {
     m_qe = m_qe / norm;
 }
 
-inline Vector3 DualQuaternion::transform( const Vector3& p ) const {
+inline Math::Vector3 DualQuaternion::transform( const Math::Vector3& p ) const {
     CORE_ASSERT( Ra::Core::Math::areApproxEqual( m_q0.norm(), 1.f ),
                  "Dual quaternion not normalized" );
     return translate( rotate( p ) );
 }
 
-inline Vector3 DualQuaternion::rotate( const Vector3& p ) const {
+inline Math::Vector3 DualQuaternion::rotate( const Math::Vector3& p ) const {
     CORE_ASSERT( Ra::Core::Math::areApproxEqual( m_q0.norm(), 1.f ),
                  "Dual quaternion not normalized" );
     return m_q0.toRotationMatrix() * p;
 }
 
-inline Vector3 DualQuaternion::translate( const Vector3& p ) const {
-    Vector3 v0 = m_q0.vec();
-    Vector3 ve = m_qe.vec();
+inline Math::Vector3 DualQuaternion::translate( const Math::Vector3& p ) const {
+    Math::Vector3 v0 = m_q0.vec();
+    Math::Vector3 ve = m_qe.vec();
     return p + ( ( ve * m_q0.w() - v0 * m_qe.w() + v0.cross( ve ) ) * 2.f );
 }
 
-inline DualQuaternion::DualQuaternion( const Core::Transform& tr ) {
+inline DualQuaternion::DualQuaternion( const Transform& tr ) {
     setFromTransform( tr );
 }
 
@@ -82,7 +82,7 @@ inline Transform DualQuaternion::getTransform() const {
 
 inline void DualQuaternion::setFromTransform( const Transform& t ) {
     m_q0 = Quaternion( t.rotation() );
-    Core::Vector4 trans = Core::Vector4::Zero();
+    Vector4 trans = Vector4::Zero();
     trans.head<3>() = t.translation();
     m_qe = 0.5f * Quaternion( trans ) * m_q0;
 }

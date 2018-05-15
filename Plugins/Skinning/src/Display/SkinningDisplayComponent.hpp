@@ -67,7 +67,7 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
             for ( int i = 0; i < int( size ); ++i )
             {
                 uint ID;
-                Ra::Core::VectorN row = weights.row( i );
+                Ra::Core::Math::VectorN row = weights.row( i );
                 row.maxCoeff( &ID );
                 partition[i] = ID;
             }
@@ -116,7 +116,7 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
                 assignedColor[k] = *it;
             }
 
-            Ra::Core::Container::Vector4Array color( size, Ra::Core::Vector4::Zero() );
+            Ra::Core::Container::Vector4Array color( size, Ra::Core::Math::Vector4::Zero() );
 #pragma omp parallel for
             for ( int i = 0; i < int( size ); ++i )
             {
@@ -128,8 +128,8 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
 
             Ra::Engine::BlinnPhongMaterial* nm =
                 new Ra::Engine::BlinnPhongMaterial( std::string( "Partition" ) + m_name );
-            nm->m_kd = Ra::Core::Vector4::Zero();
-            nm->m_ks = Ra::Core::Vector4::Zero();
+            nm->m_kd = Ra::Core::Math::Vector4::Zero();
+            nm->m_ks = Ra::Core::Math::Vector4::Zero();
             nm->m_ns = 100;
             technique->resetMaterial( nm );
 

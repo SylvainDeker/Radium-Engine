@@ -40,8 +40,8 @@ Gui::TrackballCamera::~TrackballCamera() {}
 
 void Gui::TrackballCamera::resetCamera() {
     m_camera->setFrame( Core::Transform::Identity() );
-    m_camera->setPosition( Core::Vector3( 0, 0, 1 ) );
-    m_trackballCenter = Core::Vector3::Zero();
+    m_camera->setPosition( Core::Math::Vector3( 0, 0, 1 ) );
+    m_trackballCenter = Core::Math::Vector3::Zero();
     updatePhiTheta();
 
     emit cameraPositionChanged( m_camera->getPosition() );
@@ -161,7 +161,7 @@ bool Gui::TrackballCamera::handleKeyReleaseEvent( QKeyEvent* e ) {
     return false;
 }
 
-void Gui::TrackballCamera::setCameraPosition( const Core::Vector3& position ) {
+void Gui::TrackballCamera::setCameraPosition( const Core::Math::Vector3& position ) {
     if ( position == m_trackballCenter )
     {
         QMessageBox::warning( nullptr, "Error", "Position cannot be set to target point" );
@@ -176,7 +176,7 @@ void Gui::TrackballCamera::setCameraPosition( const Core::Vector3& position ) {
     emit cameraTargetChanged( m_trackballCenter );
 }
 
-void Gui::TrackballCamera::setCameraTarget( const Core::Vector3& target ) {
+void Gui::TrackballCamera::setCameraTarget( const Core::Math::Vector3& target ) {
     if ( m_camera->getPosition() == m_trackballCenter )
     {
         QMessageBox::warning( nullptr, "Error", "Target cannot be set to current camera position" );
@@ -202,8 +202,8 @@ void Gui::TrackballCamera::fitScene( const Core::Aabb& aabb ) {
     const Scalar y = r / std::sin( f * a / 2.0 );
     Scalar d = std::max( std::max( x, y ), Scalar( 0.001 ) );
 
-    m_camera->setPosition( Core::Vector3( aabb.center().x(), aabb.center().y(), d ) );
-    m_camera->setDirection( Core::Vector3( 0, 0, -1 ) );
+    m_camera->setPosition( Core::Math::Vector3( aabb.center().x(), aabb.center().y(), d ) );
+    m_camera->setDirection( Core::Math::Vector3( 0, 0, -1 ) );
     m_trackballCenter = aabb.center();
 
     updatePhiTheta();
@@ -235,8 +235,8 @@ void Gui::TrackballCamera::handleCameraRotate( Scalar dx, Scalar dy ) {
     Scalar dphi = phi - m_phi;
     Scalar dtheta = theta - m_theta;
 
-    const Core::Vector3 C = m_trackballCenter;
-    const Core::Vector3 P0 = m_camera->getPosition();
+    const Core::Math::Vector3 C = m_trackballCenter;
+    const Core::Math::Vector3 P0 = m_camera->getPosition();
     const Scalar r = ( C - P0 ).norm();
     // Compute new camera position, on the sphere of radius r centered on C
     Scalar px = C.x() + r * std::cos( phi ) * std::sin( theta );
@@ -244,8 +244,8 @@ void Gui::TrackballCamera::handleCameraRotate( Scalar dx, Scalar dy ) {
     Scalar pz = C.z() + r * std::sin( phi ) * std::sin( theta );
 
     // Compute the translation from old pos to new pos
-    Core::Vector3 P( px, py, pz );
-    Core::Vector3 t( P - P0 );
+    Core::Math::Vector3 P( px, py, pz );
+    Core::Math::Vector3 t( P - P0 );
 
     // Translate the camera given this translation
     Core::Transform T( Core::Transform::Identity() );
@@ -255,8 +255,8 @@ void Gui::TrackballCamera::handleCameraRotate( Scalar dx, Scalar dy ) {
     Core::Transform R1( Core::Transform::Identity() );
     Core::Transform R2( Core::Transform::Identity() );
 
-    Core::Vector3 U = Core::Vector3( 0, 1, 0 );
-    Core::Vector3 R = -m_camera->getRightVector().normalized();
+    Core::Math::Vector3 U = Core::Math::Vector3( 0, 1, 0 );
+    Core::Math::Vector3 R = -m_camera->getRightVector().normalized();
 
     R1 = Core::AngleAxis( -dphi, U );
     R2 = Core::AngleAxis( -dtheta, R );
@@ -271,11 +271,11 @@ void Gui::TrackballCamera::handleCameraPan( Scalar dx, Scalar dy ) {
     Scalar x = dx * m_cameraSensitivity * m_quickCameraModifier * m_distFromCenter * 0.1;
     Scalar y = dy * m_cameraSensitivity * m_quickCameraModifier * m_distFromCenter * 0.1;
     // Move camera and trackball center, keep the distance to the center
-    Core::Vector3 R = -m_camera->getRightVector();
-    Core::Vector3 U = m_camera->getUpVector();
+    Core::Math::Vector3 R = -m_camera->getRightVector();
+    Core::Math::Vector3 U = m_camera->getUpVector();
 
     Core::Transform T( Core::Transform::Identity() );
-    Core::Vector3 t = x * R + y * U;
+    Core::Math::Vector3 t = x * R + y * U;
     T.translate( t );
 
     m_camera->applyTransform( T );
@@ -288,7 +288,7 @@ void Gui::TrackballCamera::handleCameraZoom( Scalar dx, Scalar dy ) {
 
 void Gui::TrackballCamera::handleCameraZoom( Scalar z ) {
     Scalar y = m_cameraRadius * z * m_cameraSensitivity * m_quickCameraModifier;
-    Core::Vector3 F = m_camera->getDirection();
+    Core::Math::Vector3 F = m_camera->getDirection();
 
     Scalar dist = ( m_trackballCenter - m_camera->getPosition() ).norm();
 
@@ -298,7 +298,7 @@ void Gui::TrackballCamera::handleCameraZoom( Scalar z ) {
     }
 
     Core::Transform T( Core::Transform::Identity() );
-    Core::Vector3 t = y * F;
+    Core::Math::Vector3 t = y * F;
     T.translate( t );
 
     m_camera->applyTransform( T );
@@ -311,9 +311,9 @@ void Gui::TrackballCamera::handleCameraZoom( Scalar z ) {
 }
 
 void Gui::TrackballCamera::updatePhiTheta() {
-    const Core::Vector3& P = m_camera->getPosition();
-    const Core::Vector3& C = m_trackballCenter;
-    const Core::Vector3& R = P - C;
+    const Core::Math::Vector3& P = m_camera->getPosition();
+    const Core::Math::Vector3& C = m_trackballCenter;
+    const Core::Math::Vector3& R = P - C;
     const Scalar r = R.norm();
 
     m_theta = std::acos( R.y() / r );
