@@ -279,8 +279,8 @@ void Gui::Viewer::mousePressEvent( QMouseEvent* event ) {
         LOG( Core::Utils::logINFO ) << "Raycast query launched";
         Core::Ray r =
             m_camera->getCamera()->getRayFromScreen( Core::Vector2( event->x(), event->y() ) );
-        RA_DISPLAY_POINT( r.origin(), Core::Colors::Cyan(), 0.1f );
-        RA_DISPLAY_RAY( r, Core::Colors::Yellow() );
+        RA_DISPLAY_POINT( r.origin(), Core::Math::Cyan(), 0.1f );
+        RA_DISPLAY_RAY( r, Core::Math::Yellow() );
         auto ents = Engine::RadiumEngine::getInstance()->getEntityManager()->getEntities();
         for ( auto e : ents )
         {

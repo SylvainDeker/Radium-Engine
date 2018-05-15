@@ -353,8 +353,8 @@ MeshPtr Frame( const Core::Transform& frameFromEntity, Scalar scale ) {
     std::vector<uint> indices = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
 
     Core::Container::Vector4Array colors = {
-        Core::Colors::Red(),   Core::Colors::Red(),  Core::Colors::Green(),
-        Core::Colors::Green(), Core::Colors::Blue(), Core::Colors::Blue(),
+        Core::Math::Red(),   Core::Math::Red(),  Core::Math::Green(),
+        Core::Math::Green(), Core::Math::Blue(), Core::Math::Blue(),
     };
 
     MeshPtr mesh( new Mesh( "Frame Primitive", Mesh::RM_LINES_ADJACENCY ) );

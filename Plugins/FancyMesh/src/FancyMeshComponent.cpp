@@ -165,8 +165,8 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
     {
         auto mat = Ra::Core::Container::make_shared<Ra::Engine::BlinnPhongMaterial>( data->getName() +
                                                                           "_DefaulBPMaterial" );
-        mat->m_kd = Ra::Core::Colors::Grey();
-        mat->m_ks = Ra::Core::Colors::White();
+        mat->m_kd = Ra::Core::Math::Grey();
+        mat->m_ks = Ra::Core::Math::White();
         rt.setMaterial( mat );
         auto builder = Ra::Engine::EngineRenderTechniques::getDefaultTechnique( "BlinnPhong" );
         builder.second( rt, isTransparent );

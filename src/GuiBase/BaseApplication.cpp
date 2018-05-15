@@ -256,7 +256,7 @@ void BaseApplication::setupScene() {
 
     auto grid = Primitive( Engine::SystemEntity::uiCmp(),
                            Grid( Core::Vector3::Zero(), Core::Vector3::UnitX(),
-                                 Core::Vector3::UnitZ(), Core::Colors::Grey( 0.6f ) ) );
+                                 Core::Vector3::UnitZ(), Core::Math::Grey( 0.6f ) ) );
     grid->setPickable( false );
     Engine::SystemEntity::uiCmp()->addRenderObject( grid );
 

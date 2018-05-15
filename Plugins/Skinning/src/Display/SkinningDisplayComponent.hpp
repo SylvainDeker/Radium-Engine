@@ -59,7 +59,7 @@ class SKIN_PLUGIN_API SkinningDisplayComponent : public Ra::Engine::Component {
             for ( uint i = 0; i < fiveColor; ++i )
             {
                 Scalar hue = ( Scalar( i ) / Scalar( fiveColor - 1 ) ) * magenta;
-                palette[i] = Ra::Core::Colors::fromHSV( hue, 1.0, 0.5 );
+                palette[i] = Ra::Core::Math::fromHSV( hue, 1.0, 0.5 );
             }
 
             std::vector<uint> partition( size );
