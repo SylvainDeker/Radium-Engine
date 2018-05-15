@@ -41,7 +41,7 @@ class SKIN_PLUGIN_API SkinningComponent : public Ra::Engine::Component {
 
     const Ra::Core::Animation::RefData* getRefData() const { return &m_refData; }
     const Ra::Core::Animation::FrameData* getFrameData() const { return &m_frameData; }
-    const Ra::Core::Container::AlignedStdVector<Ra::Core::DualQuaternion>* getDQ() const { return &m_DQ; }
+    const Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion>* getDQ() const { return &m_DQ; }
 
   public:
     void setupIO( const std::string& id );
@@ -65,7 +65,7 @@ class SKIN_PLUGIN_API SkinningComponent : public Ra::Engine::Component {
     Ra::Engine::ComponentMessenger::CallbackTypes<Ra::Core::Container::Vector3Array>::ReadWrite
         m_normalsWriter;
 
-    Ra::Core::Container::AlignedStdVector<Ra::Core::DualQuaternion> m_DQ;
+    Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion> m_DQ;
 
     SkinningType m_skinningType;
     bool m_isReady;

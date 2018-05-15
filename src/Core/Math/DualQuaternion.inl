@@ -2,6 +2,9 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
+
+
 
 inline const Quaternion& DualQuaternion::getQ0() const {
     return m_q0;
@@ -88,5 +91,6 @@ inline DualQuaternion operator*( Scalar scalar, const DualQuaternion& dq ) {
     return dq * scalar;
 }
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra

@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Math {
 
 /*--------------------------------------------------*/
 
@@ -117,5 +118,6 @@ Curve2D::Vector QuadraSpline::fdf( Scalar u, Vector& grad ) const {
     return spline.f( u );
 }
 
+} // namespace Math
 } // namespace Core
 } // namespace Ra
