@@ -234,6 +234,7 @@ void Gui::Viewer::intializeRenderer( Engine::Renderer* renderer ) {
     {
         renderer->addLight( m_camera->getLight() );
     }
+  
     renderer->lockRendering();
 }
 

@@ -76,12 +76,12 @@
          </item>
          <item>
           <property name="text">
-           <string>Spot</string>
+           <string>Point</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Point</string>
+           <string>Spot</string>
           </property>
          </item>
         </widget>
@@ -324,19 +324,19 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="m_layout_outter_angle">
+          <layout class="QHBoxLayout" name="m_layout_outer_angle">
            <item>
-            <widget class="QLabel" name="m_outter_angle_lab">
+            <widget class="QLabel" name="m_outer_angle_lab">
              <property name="text">
               <string>Outter</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="m_outter_angle_spinbox"/>
+            <widget class="QDoubleSpinBox" name="m_outer_angle_spinbox"/>
            </item>
            <item>
-            <widget class="QSlider" name="m_outter_angle_slider">
+            <widget class="QSlider" name="m_outer_angle_slider">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>

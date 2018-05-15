@@ -15,6 +15,7 @@
 
 #include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/Renderer.hpp>
+#include <Engine/Renderer/Light/Light.hpp>
 
 // Forward declarations
 class QOpenGLContext;

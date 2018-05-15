@@ -34,7 +34,7 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     m_name = new QString("");
     m_intensity_val = new double(0);
     m_inner_angle_val = new double(0);
-    m_outter_angle_val = new double(0);
+    m_outer_angle_val = new double(0);
     m_falloff_val_constant = new double(0);
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
@@ -48,9 +48,9 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
     m_inner_angle_slider->setMaximum(MAX_ANGLE);
 
-    m_outter_angle_spinbox-> setDecimals (NB_DECIMAL);
-    m_outter_angle_spinbox->setMaximum(MAX_ANGLE);
-    m_outter_angle_slider->setMaximum(MAX_ANGLE);
+    m_outer_angle_spinbox-> setDecimals (NB_DECIMAL);
+    m_outer_angle_spinbox->setMaximum(MAX_ANGLE);
+    m_outer_angle_slider->setMaximum(MAX_ANGLE);
 
     m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
@@ -126,11 +126,11 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     connect(m_inner_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_inner_angle_spin_to_slide );
     connect(this,&LightEditor::sig_inner_angle_spin_to_slide,m_inner_angle_slider,&QSlider::setValue);
 
-    connect(m_outter_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_outter_angle_slide_to_spin );
-    connect(this,&LightEditor::sig_outter_angle_slide_to_spin,m_outter_angle_spinbox,&QDoubleSpinBox::setValue);
+    connect(m_outer_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_outer_angle_slide_to_spin );
+    connect(this,&LightEditor::sig_outer_angle_slide_to_spin,m_outer_angle_spinbox,&QDoubleSpinBox::setValue);
 
-    connect(m_outter_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_outter_angle_spin_to_slide );
-    connect(this,&LightEditor::sig_outter_angle_spin_to_slide,m_outter_angle_slider,&QSlider::setValue);
+    connect(m_outer_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_outer_angle_spin_to_slide );
+    connect(this,&LightEditor::sig_outer_angle_spin_to_slide,m_outer_angle_slider,&QSlider::setValue);
 
     // Falloff
 
@@ -159,7 +159,7 @@ LightEditor::~LightEditor(){
   delete m_color;
   delete m_intensity_val;
   delete m_inner_angle_val;
-  delete m_outter_angle_val;
+  delete m_outer_angle_val;
   delete m_falloff_val_constant;
   delete m_falloff_val_linear;
   delete m_falloff_val_quadratic;
@@ -215,16 +215,16 @@ void LightEditor::slot_inner_angle_spin_to_slide(double val){
   emit sig_inner_angle_spin_to_slide(tmp);
 }
 
-void LightEditor::slot_outter_angle_slide_to_spin(int val){
+void LightEditor::slot_outer_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_outter_angle_val = tmp;
-  emit sig_outter_angle_slide_to_spin(tmp);
+  *m_outer_angle_val = tmp;
+  emit sig_outer_angle_slide_to_spin(tmp);
 }
 
-void LightEditor::slot_outter_angle_spin_to_slide(double val){
-  *m_outter_angle_val = val;
+void LightEditor::slot_outer_angle_spin_to_slide(double val){
+  *m_outer_angle_val = val;
   int tmp = (int) val;
-  emit sig_outter_angle_spin_to_slide(tmp);
+  emit sig_outer_angle_spin_to_slide(tmp);
 }
 
 
