@@ -44,7 +44,7 @@ WeightMatrix partitionOfUnity( Eigen::Ref<const WeightMatrix> weights ) {
 
 uint getMaxWeightIndex( Eigen::Ref<const WeightMatrix> weights, const uint vertexID ) {
     uint maxId = uint( -1 );
-    VectorN row = weights.row( vertexID );
+    Math::VectorN row = weights.row( vertexID );
     row.maxCoeff( &maxId );
     return maxId;
 }
@@ -59,7 +59,7 @@ void getMaxWeightIndex( Eigen::Ref<const WeightMatrix> weights, std::vector<uint
 
 bool checkWeightMatrix( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_ON_ASSERT,
                         const bool MT ) {
-    bool ok = MatrixUtils::checkInvalidNumbers( matrix, FAIL_ON_ASSERT ) &&
+    bool ok = Math::MatrixUtils::checkInvalidNumbers( matrix, FAIL_ON_ASSERT ) &&
               checkNoWeightVertex( matrix, FAIL_ON_ASSERT, MT );
 
     if ( !ok )
@@ -79,7 +79,7 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
 #pragma omp parallel for
         for ( int i = 0; i < matrix.rows(); ++i )
         {
-            Sparse row = matrix.row( i );
+            Math::Sparse row = matrix.row( i );
             const int check = ( row.nonZeros() > 0 ) ? 1 : 0;
 #pragma omp atomic
             status &= check;
@@ -96,7 +96,7 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
     {
         for ( int i = 0; i < matrix.rows(); ++i )
         {
-            Sparse row = matrix.row( i );
+            Math::Sparse row = matrix.row( i );
             if ( row.nonZeros() == 0 )
             {
                 status = 0;

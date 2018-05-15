@@ -24,8 +24,8 @@ struct TriangleMesh {
     /// Appends another mesh to this one.
     inline void append( const TriangleMesh& other );
 
-    Container::VectorArray<Vector3> m_vertices;
-    Container::VectorArray<Vector3> m_normals;
+    Container::VectorArray<Math::Vector3> m_vertices;
+    Container::VectorArray<Math::Vector3> m_normals;
     Container::VectorArray<Triangle> m_triangles;
 
   public:

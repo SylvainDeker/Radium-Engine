@@ -24,9 +24,9 @@ namespace Ra {
 namespace IO {
 
 struct RA_IO_API Triplet {
-    Triplet( const Core::Vector3& v = Core::Vector3::Zero() );
+    Triplet( const Core::Math::Vector3& v = Core::Math::Vector3::Zero() );
 
-    Core::Vector3 m_v;
+    Core::Math::Vector3 m_v;
 
     bool operator==( const Triplet& t ) const;
 

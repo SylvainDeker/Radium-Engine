@@ -27,7 +27,7 @@ void PolyLine::setPoints( const Container::Vector3Array& pts ) {
     update();
 }
 
-Scalar PolyLine::squaredDistance( const Vector3& p ) const {
+Scalar PolyLine::squaredDistance( const Math::Vector3& p ) const {
     CORE_ASSERT( m_pts.size() > 1, "Line must have at least two points" );
     Scalar sqDist = std::numeric_limits<Scalar>::max();
     for ( uint i = 0; i < m_ptsDiff.size(); ++i )
@@ -37,18 +37,18 @@ Scalar PolyLine::squaredDistance( const Vector3& p ) const {
     return sqDist;
 }
 
-Scalar PolyLine::distance( const Vector3& p ) const {
+Scalar PolyLine::distance( const Math::Vector3& p ) const {
     return std::sqrt( squaredDistance( p ) );
 }
 
-Scalar PolyLine::projectOnSegment( const Vector3& p, uint segment ) const {
+Scalar PolyLine::projectOnSegment( const Math::Vector3& p, uint segment ) const {
     CORE_ASSERT( segment < m_ptsDiff.size(), "invalid segment index" );
     const Scalar tSegment =
         Geometry::projectOnSegment( p, m_pts[segment], m_ptsDiff[segment] );
     return getLineParameter( segment, tSegment );
 }
 
-Scalar PolyLine::project( const Vector3& p ) const {
+Scalar PolyLine::project( const Math::Vector3& p ) const {
     CORE_ASSERT( m_pts.size() > 1, "Line must have at least two points" );
     Scalar sqDist = std::numeric_limits<Scalar>::max();
     uint segment = 0;
@@ -83,11 +83,11 @@ Scalar PolyLine::project( const Vector3& p ) const {
                 prev = ds[segment - 1] < ds[segment + 1];
             }
             uint i = prev ? segment - 1 : segment;
-            Ra::Core::Vector3 ba = -m_ptsDiff[i];
-            Ra::Core::Vector3 bc = m_ptsDiff[i + 1];
-            Ra::Core::Vector3 bp = p - m_pts[i + 1];
-            Scalar c1 = Ra::Core::Vector::cotan( ba, bp );
-            Scalar c2 = Ra::Core::Vector::cotan( bp, bc );
+            Ra::Core::Math::Vector3 ba = -m_ptsDiff[i];
+            Ra::Core::Math::Vector3 bc = m_ptsDiff[i + 1];
+            Ra::Core::Math::Vector3 bp = p - m_pts[i + 1];
+            Scalar c1 = Ra::Core::Math::Vector::cotan( ba, bp );
+            Scalar c2 = Ra::Core::Math::Vector::cotan( bp, bc );
 
             Scalar t1 = getLineParameter( i, ts[i] );
             Scalar t2 = getLineParameter( i + 1, ts[i + 1] );
@@ -97,7 +97,7 @@ Scalar PolyLine::project( const Vector3& p ) const {
     return getLineParameter( segment, t );
 }
 
-Ra::Core::Vector3 PolyLine::f( Scalar t ) const {
+Ra::Core::Math::Vector3 PolyLine::f( Scalar t ) const {
     // Clamp the parameter between 0 and 1 and scale it.
     const Scalar param = length() * Ra::Core::Math::saturate( t );
 
@@ -116,7 +116,7 @@ Ra::Core::Vector3 PolyLine::f( Scalar t ) const {
     return m_pts[i] + ( ( param - lprev ) / ( m_lengths[i] - lprev ) ) * m_ptsDiff[i];
 }
 
-uint PolyLine::getNearestSegment( const Vector3& p ) const {
+uint PolyLine::getNearestSegment( const Math::Vector3& p ) const {
     CORE_ASSERT( m_pts.size() > 1, "Line must have at least two points" );
     Scalar sqDist = std::numeric_limits<Scalar>::max();
     uint segment = 0;

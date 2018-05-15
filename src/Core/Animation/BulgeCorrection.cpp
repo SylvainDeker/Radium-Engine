@@ -24,7 +24,7 @@ void bulgeCorrection( const Container::Vector3Array& restMesh, const BulgeCorrec
     {
         if ( restData.m_dv[i] < currData.m_dv[i] )
         {
-            const Vector3 dir = currMesh[i] - currData.m_prj[i];
+            const Math::Vector3 dir = currMesh[i] - currData.m_prj[i];
             const Scalar factor = std::sqrt( restData.m_dv[i] / currData.m_dv[i] );
             currMesh[i] = currData.m_prj[i] + ( factor * dir );
         }
@@ -39,8 +39,8 @@ void findCorrectionData( const Container::Vector3Array& mesh, const MaxWeightID&
 #pragma omp parallel for
     for ( int i = 0; i < int( n ); ++i )
     {
-        Vector3 start;
-        Vector3 end;
+        Math::Vector3 start;
+        Math::Vector3 end;
         const auto& child = graph.m_child[wID[i]];
         start = pose[wID[i]].translation();
         end.setZero();

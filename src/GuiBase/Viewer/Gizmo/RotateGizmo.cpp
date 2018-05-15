@@ -22,7 +22,7 @@ namespace Gui {
 RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
                           const Core::Transform& t, Mode mode ) :
     Gizmo( c, worldTo, t, mode ),
-    m_initialPix( Core::Vector2::Zero() ),
+    m_initialPix( Core::Math::Vector2::Zero() ),
     m_selectedAxis( -1 ) {
     constexpr Scalar torusOutRadius = 0.1f;
     constexpr Scalar torusAspectRatio = 0.1f;
@@ -41,7 +41,7 @@ RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Transform& worldTo,
             }
         }
 
-        Core::Color torusColor = Core::Color::Zero();
+        Core::Math::Color torusColor = Core::Math::Color::Zero();
         torusColor[i] = 1.f;
         Core::Container::Vector4Array colors( torus.m_vertices.size(), torusColor );
 
@@ -104,13 +104,13 @@ void RotateGizmo::selectConstraint( int drawableIdx ) {
     }
 }
 
-Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::Vector2& nextXY,
+Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::Math::Vector2& nextXY,
                                         bool stepped ) {
     static const float step = Ra::Core::Math::Pi / 10.f;
     if ( m_selectedAxis >= 0 )
     {
-        const Core::Vector3 origin = m_transform.translation();
-        Core::Vector3 rotationAxis = Core::Vector3::Unit( m_selectedAxis );
+        const Core::Math::Vector3 origin = m_transform.translation();
+        Core::Math::Vector3 rotationAxis = Core::Math::Vector3::Unit( m_selectedAxis );
 
         // Decompose the current transform's linear part into rotation and scale
         Core::Matrix3 rotationMat;
@@ -139,13 +139,13 @@ Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::V
         bool hit2 = Core::RayCast::vsPlane( rayToCurrentClick, m_worldTo * origin,
                                             m_worldTo * rotationAxis, hits2 );
 
-        Core::Vector2 nextXY_ = nextXY;
+        Core::Math::Vector2 nextXY_ = nextXY;
         if ( hit1 && hit2 )
         {
             // Do the calculations relative to the circle center.
-            const Core::Vector3 originalHit =
+            const Core::Math::Vector3 originalHit =
                 rayToFirstClick.pointAt( hits1[0] ) - m_worldTo * origin;
-            const Core::Vector3 currentHit =
+            const Core::Math::Vector3 currentHit =
                 rayToCurrentClick.pointAt( hits2[0] ) - m_worldTo * origin;
 
             // Get the angle between the two vectors with the correct sign
@@ -183,7 +183,7 @@ Core::Transform RotateGizmo::mouseMove( const Engine::Camera& cam, const Core::V
     return m_transform;
 }
 
-void RotateGizmo::setInitialState( const Engine::Camera& cam, const Core::Vector2& initialXY ) {
+void RotateGizmo::setInitialState( const Engine::Camera& cam, const Core::Math::Vector2& initialXY ) {
     m_initialPix = initialXY;
 }
 } // namespace Gui

@@ -74,9 +74,9 @@ class RA_ENGINE_API RenderParameters final {
     //! globjects seems to not handle vector of double
     typedef TParameter<std::vector<float>> ScalarsParameter;
 
-    using Vec2Parameter = TParameter<Core::Vector2>;
-    using Vec3Parameter = TParameter<Core::Vector3>;
-    using Vec4Parameter = TParameter<Core::Vector4>;
+    using Vec2Parameter = TParameter<Core::Math::Vector2>;
+    using Vec3Parameter = TParameter<Core::Math::Vector3>;
+    using Vec4Parameter = TParameter<Core::Math::Vector4>;
 
     using Mat2Parameter = TParameter<Core::Matrix2>;
     using Mat3Parameter = TParameter<Core::Matrix3>;
@@ -91,9 +91,9 @@ class RA_ENGINE_API RenderParameters final {
     void addParameter( const char* name, std::vector<uint> values );
     void addParameter( const char* name, std::vector<Scalar> values );
 
-    void addParameter( const char* name, const Core::Vector2& value );
-    void addParameter( const char* name, const Core::Vector3& value );
-    void addParameter( const char* name, const Core::Vector4& value );
+    void addParameter( const char* name, const Core::Math::Vector2& value );
+    void addParameter( const char* name, const Core::Math::Vector3& value );
+    void addParameter( const char* name, const Core::Math::Vector4& value );
 
     void addParameter( const char* name, const Core::Matrix2& value );
     void addParameter( const char* name, const Core::Matrix3& value );
@@ -105,9 +105,9 @@ class RA_ENGINE_API RenderParameters final {
     void updateParameter( const char* name, uint value );
     void updateParameter( const char* name, Scalar value );
 
-    void updateParameter( const char* name, const Core::Vector2& value );
-    void updateParameter( const char* name, const Core::Vector3& value );
-    void updateParameter( const char* name, const Core::Vector4& value );
+    void updateParameter( const char* name, const Core::Math::Vector2& value );
+    void updateParameter( const char* name, const Core::Math::Vector3& value );
+    void updateParameter( const char* name, const Core::Math::Vector4& value );
 
     void updateParameter( const char* name, const Core::Matrix2& value );
     void updateParameter( const char* name, const Core::Matrix3& value );

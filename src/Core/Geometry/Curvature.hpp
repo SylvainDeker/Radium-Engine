@@ -27,8 +27,8 @@ using MinimumCurvature = Scalar;
  * Visualization and Mathematics III 2003
  * Chapter 4, Paragraph 4.2, Page 12
  */
-Scalar gaussianCurvature( const Vector3& v, const Container::VectorArray<Vector3>& p, const Scalar& area );
-void gaussianCurvature( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+Scalar gaussianCurvature( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p, const Scalar& area );
+void gaussianCurvature( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                         const AreaMatrix& A, Container::VectorArray<Scalar>& K );
 
 /*
@@ -53,9 +53,9 @@ void gaussianCurvature( const Container::VectorArray<MaximumCurvature>& k1,
  * Visualization and Mathematics III 2003
  * Chapter 3, Paragraph 3.5, Page 10
  */
-Vector3 meanCurvatureNormal( const Vector3& laplacian, const Scalar& area );
-void meanCurvatureNormal( const Container::VectorArray<Vector3>& laplacian, const AreaMatrix& A,
-                          Container::VectorArray<Vector3>& Hn );
+Math::Vector3 meanCurvatureNormal( const Math::Vector3& laplacian, const Scalar& area );
+void meanCurvatureNormal( const Container::VectorArray<Math::Vector3>& laplacian, const AreaMatrix& A,
+                          Container::VectorArray<Math::Vector3>& Hn );
 
 /*
  * Return the Mean Curvature value from the given Mean Curvature Normal.
@@ -68,8 +68,8 @@ void meanCurvatureNormal( const Container::VectorArray<Vector3>& laplacian, cons
  * Visualization and Mathematics III 2003
  * Chapter 3, Paragraph 3.5, Page 10
  */
-Scalar meanCurvature( const Vector3& mean_curvature_normal );
-void meanCurvature( const Container::VectorArray<Vector3>& mean_curvature_normal, Container::VectorArray<Scalar>& H );
+Scalar meanCurvature( const Math::Vector3& mean_curvature_normal );
+void meanCurvature( const Container::VectorArray<Math::Vector3>& mean_curvature_normal, Container::VectorArray<Scalar>& H );
 
 /*
  * Return the Mean Curvature from the maximum curvature k1 and the minimum curvature k2.

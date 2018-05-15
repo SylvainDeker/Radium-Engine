@@ -6,7 +6,7 @@ namespace Ra {
 namespace Core {
 namespace Geometry {
 
-Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+Gradient gradientOfFieldS( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                            const ScalarField& S ) {
     Gradient g;
     for ( const auto& t : T )
@@ -19,11 +19,11 @@ Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p, const Conta
         Scalar u1 = S( v1 );
         Scalar u2 = S( v2 );
 
-        Vector3 e01 = p[v1] - p[v0];
-        Vector3 e12 = p[v2] - p[v1];
-        Vector3 e20 = p[v0] - p[v2];
+        Math::Vector3 e01 = p[v1] - p[v0];
+        Math::Vector3 e12 = p[v2] - p[v1];
+        Math::Vector3 e20 = p[v0] - p[v2];
 
-        Vector3 N = Geometry::triangleNormal( p[v0], p[v1], p[v2] );
+        Math::Vector3 N = Geometry::triangleNormal( p[v0], p[v1], p[v2] );
         Scalar area = Geometry::triangleArea( p[v0], p[v1], p[v2] );
 
         g.push_back(
@@ -34,7 +34,7 @@ Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p, const Conta
     return g;
 }
 
-Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+Divergence divergenceOfFieldX( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                                const Gradient& X ) {
     Divergence div( p.size() );
     div.setZero();
@@ -45,13 +45,13 @@ Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p, const C
         uint v1 = T[i]( 1 );
         uint v2 = T[i]( 2 );
 
-        Vector3 e01 = p[v1] - p[v0];
-        Vector3 e12 = p[v2] - p[v1];
-        Vector3 e20 = p[v0] - p[v2];
+        Math::Vector3 e01 = p[v1] - p[v0];
+        Math::Vector3 e12 = p[v2] - p[v1];
+        Math::Vector3 e20 = p[v0] - p[v2];
 
-        Scalar cotV0 = Vector::cotan( e01, ( -e20 ).eval() );
-        Scalar cotV1 = Vector::cotan( e12, ( -e01 ).eval() );
-        Scalar cotV2 = Vector::cotan( e20, ( -e12 ).eval() );
+        Scalar cotV0 = Math::Vector::cotan( e01, ( -e20 ).eval() );
+        Scalar cotV1 = Math::Vector::cotan( e12, ( -e01 ).eval() );
+        Scalar cotV2 = Math::Vector::cotan( e20, ( -e12 ).eval() );
 
         div( v0 ) += ( cotV2 * ( e01.dot( X[i] ) ) ) + ( cotV1 * ( ( -e20 ).dot( X[i] ) ) );
         div( v1 ) += ( cotV0 * ( e12.dot( X[i] ) ) ) + ( cotV2 * ( ( -e01 ).dot( X[i] ) ) );

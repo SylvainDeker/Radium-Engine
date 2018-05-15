@@ -40,7 +40,7 @@ class MESH_PAINT_PLUGIN_API MeshPaintSystem : public Ra::Engine::System {
     void startPaintMesh( bool start );
 
     void paintMesh( const Ra::Engine::Renderer::PickingResult& picking,
-                    const Ra::Core::Color& color );
+                    const Ra::Core::Math::Color& color );
 };
 
 } // namespace MeshPaintPlugin

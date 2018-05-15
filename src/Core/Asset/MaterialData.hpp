@@ -90,8 +90,8 @@ class RA_CORE_API BlinnPhongMaterialData : public MaterialData {
     inline bool hasOpacityTexture() const;
 
     /// DATA MEMBERS
-    Core::Color m_diffuse;
-    Core::Color m_specular;
+    Core::Math::Color m_diffuse;
+    Core::Math::Color m_specular;
     Scalar m_shininess;
     Scalar m_opacity;
     std::string m_texDiffuse;

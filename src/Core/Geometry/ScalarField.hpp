@@ -13,7 +13,7 @@ namespace Geometry {
 using ScalarField = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
 // Defining the Gradient, over the faces of a mesh, of a ScalarField
-using Gradient = Container::VectorArray<Vector3>;
+using Gradient = Container::VectorArray<Math::Vector3>;
 
 // Defining the Divergence, expressend on the vertices, of a Gradient field, expressed on the faces
 using Divergence = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
@@ -26,7 +26,7 @@ using Divergence = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
  * [Keenan Crane, Clarisse Weischedel, Max Wardetzky ]
  * TOG 2013
  */
-RA_CORE_API Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p,
+RA_CORE_API Gradient gradientOfFieldS( const Container::VectorArray<Math::Vector3>& p,
                                        const Container::VectorArray<Triangle>& T, const ScalarField& S );
 
 /*
@@ -37,7 +37,7 @@ RA_CORE_API Gradient gradientOfFieldS( const Container::VectorArray<Vector3>& p,
  * [Keenan Crane, Clarisse Weischedel, Max Wardetzky ]
  * TOG 2013
  */
-RA_CORE_API Divergence divergenceOfFieldX( const Container::VectorArray<Vector3>& p,
+RA_CORE_API Divergence divergenceOfFieldX( const Container::VectorArray<Math::Vector3>& p,
                                            const Container::VectorArray<Triangle>& T, const Gradient& X );
 
 } // namespace Geometry

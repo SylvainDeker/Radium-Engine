@@ -64,7 +64,7 @@ void Gui::CameraInterface::unmapCameraBehaviourToAabb() {
 void Gui::CameraInterface::attachLight( Engine::Light* light ) {
     m_light = light;
     m_hasLightAttached = true;
-    m_light->setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+    m_light->setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 }
 
 const Engine::Camera& Gui::CameraInterface::getCameraFromViewer( QObject* v ) {

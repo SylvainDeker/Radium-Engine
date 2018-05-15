@@ -27,7 +27,7 @@ using MeshWeight = Container::AlignedStdVector<VertexWeight>;
 // If w is a generic weight ( a.k.a. a scalar value ), then the WeightMatrix M is defined as:
 //      M( i, j ) = w   , if vertex i is influenced by transform j
 //      M( i, j ) = 0   , otherwise
-using WeightMatrix = Ra::Core::Sparse;
+using WeightMatrix = Ra::Core::Math::Sparse;
 
 } // namespace Animation
 } // Namespace Core

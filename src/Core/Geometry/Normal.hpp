@@ -20,8 +20,8 @@ namespace Geometry {
  *
  * where normal( face_j ) is the normalized normal of face_j belonging to v_i one-ring.
  */
-void RA_CORE_API uniformNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
-                                Container::VectorArray<Vector3>& normal );
+void RA_CORE_API uniformNormal( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
+                                Container::VectorArray<Math::Vector3>& normal );
 
 /*
  * Return the normalized normal of vertex v_i, expressed as:
@@ -29,9 +29,9 @@ void RA_CORE_API uniformNormal( const Container::VectorArray<Vector3>& p, const 
  *
  * where normal( face_j ) is the normalized normal of face_j belonging to v_i one-ring.
  */
-void RA_CORE_API uniformNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+void RA_CORE_API uniformNormal( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                                 const std::vector<Container::Index>& duplicateTable,
-                                Container::VectorArray<Vector3>& normal );
+                                Container::VectorArray<Math::Vector3>& normal );
 
 /*
  * Return the normalized normal of vertex v_i, expressed as:
@@ -39,7 +39,7 @@ void RA_CORE_API uniformNormal( const Container::VectorArray<Vector3>& p, const 
  *
  * where normal( face_j ) is the normalized normal of face_j belonging to v_i one-ring.
  */
-Vector3 RA_CORE_API localUniformNormal( const uint i, const Container::VectorArray<Vector3>& p,
+Math::Vector3 RA_CORE_API localUniformNormal( const uint i, const Container::VectorArray<Math::Vector3>& p,
                                         const Container::VectorArray<Triangle>& T, const TVAdj& adj );
 
 /*
@@ -54,8 +54,8 @@ Vector3 RA_CORE_API localUniformNormal( const uint i, const Container::VectorArr
  * [ J. Andreas Baerentzen, Jens Gravesen, Francois Anton, Henrik Aanaes ]
  * Chapter 8
  */
-void RA_CORE_API angleWeightedNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
-                                      Container::VectorArray<Vector3>& normal );
+void RA_CORE_API angleWeightedNormal( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
+                                      Container::VectorArray<Math::Vector3>& normal );
 
 /*
  * Return the normalized normal of vertex v_i, expressed as:
@@ -64,8 +64,8 @@ void RA_CORE_API angleWeightedNormal( const Container::VectorArray<Vector3>& p, 
  * where normal( face_j ) is the normalized normal of face_j belonging to v_i one-ring,
  * and area_j is the area of face_j.
  */
-void RA_CORE_API areaWeightedNormal( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
-                                     Container::VectorArray<Vector3>& normal );
+void RA_CORE_API areaWeightedNormal( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
+                                     Container::VectorArray<Math::Vector3>& normal );
 
 ////////////////
 /// ONE RING ///
@@ -77,7 +77,7 @@ void RA_CORE_API areaWeightedNormal( const Container::VectorArray<Vector3>& p, c
  *
  * where normal( face_i ) is the normalized normal of face_i belonging to v one-ring.
  */
-Vector3 RA_CORE_API uniformNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring );
+Math::Vector3 RA_CORE_API uniformNormal( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& one_ring );
 
 /*
  * Return the normalized normal of vertex v, expressed as:
@@ -91,7 +91,7 @@ Vector3 RA_CORE_API uniformNormal( const Vector3& v, const Container::VectorArra
  * [ J. Andreas Baerentzen, Jens Gravesen, Francois Anton, Henrik Aanaes ]
  * Chapter 8
  */
-Vector3 RA_CORE_API angleWeightedNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring );
+Math::Vector3 RA_CORE_API angleWeightedNormal( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& one_ring );
 
 /*
  * Return the normalized normal of vertex v, expressed as:
@@ -100,7 +100,7 @@ Vector3 RA_CORE_API angleWeightedNormal( const Vector3& v, const Container::Vect
  * where normal( face_i ) is the normalized normal of face_i belonging to v one-ring,
  * and area_i is the area of face_i.
  */
-Vector3 RA_CORE_API areaWeightedNormal( const Vector3& v, const Container::VectorArray<Vector3>& one_ring );
+Math::Vector3 RA_CORE_API areaWeightedNormal( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& one_ring );
 
 } // namespace Geometry
 } // namespace Core

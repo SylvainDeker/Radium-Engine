@@ -19,15 +19,15 @@ namespace Geometry {
 
 /// Fills the given array with the vertices of a given triangle.
 inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
-                                 std::array<Vector3, 3>& verticesOut );
+                                 std::array<Math::Vector3, 3>& verticesOut );
 
 /// Returns the area of a given triangle.
 inline Scalar getTriangleArea( const TriangleMesh& mesh, TriangleIdx triIdx );
 
 /// Computes the normal of a given triangle.
-inline Vector3 getTriangleNormal( const TriangleMesh& mesh, TriangleIdx triIdx );
+inline Math::Vector3 getTriangleNormal( const TriangleMesh& mesh, TriangleIdx triIdx );
 
-inline Aabb getAabb( const TriangleMesh& mesh );
+inline Math::Aabb getAabb( const TriangleMesh& mesh );
 
 /// If t1 is triangle (v1,v2,v3), returns v3.
 inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 );
@@ -36,7 +36,7 @@ inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 );
 inline bool containsEdge( const Triangle& t1, uint v1, uint v2 );
 
 /// Automatically compute normals for each vertex by averaging connected triangle normals.
-RA_CORE_API void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Vector3>& normalsOut );
+RA_CORE_API void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Math::Vector3>& normalsOut );
 
 /// Finds the duplicate vertices in a mesh, returning an array indicating for each vertex where to
 /// find the first occurrence.
@@ -45,7 +45,7 @@ RA_CORE_API bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx
 RA_CORE_API void removeDuplicates( TriangleMesh& mesh, std::vector<VertexIdx>& vertexMap );
 
 /// Returns a list of edges from a given triangle mesh
-RA_CORE_API inline std::vector<Ra::Core::Vector2ui> getEdges( const TriangleMesh& mesh );
+RA_CORE_API inline std::vector<Ra::Core::Math::Vector2ui> getEdges( const TriangleMesh& mesh );
 
 /// Results of a raycast vs a mesh
 struct RayCastResult {

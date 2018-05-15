@@ -511,7 +511,7 @@ void Renderer::drawScreenInternal() {
         shader->bind();
         shader->setUniform( "mousePosition", m_mousePosition );
         shader->setUniform( "brushRadius", m_brushRadius );
-        shader->setUniform( "dim", Core::Vector2( m_width, m_height ) );
+        shader->setUniform( "dim", Core::Math::Vector2( m_width, m_height ) );
         m_quadMesh->render();
         GL_ASSERT( glEnable( GL_DEPTH_TEST ) );
         GL_ASSERT( glEnable( GL_BLEND ) );

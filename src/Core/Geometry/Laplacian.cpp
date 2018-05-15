@@ -20,7 +20,7 @@ LaplacianMatrix standardLaplacian( const DegreeMatrix& D, const AdjacencyMatrix&
 }
 
 LaplacianMatrix symmetricNormalizedLaplacian( const DegreeMatrix& D, const AdjacencyMatrix& A ) {
-    Sparse I( D.rows(), D.cols() );
+    Math::Sparse I( D.rows(), D.cols() );
     I.setIdentity();
     DegreeMatrix sqrt_inv_D = D.cwiseInverse().cwiseSqrt();
     return ( I - ( sqrt_inv_D * A * sqrt_inv_D ) );
@@ -40,7 +40,7 @@ LaplacianMatrix powerLaplacian( const LaplacianMatrix& L, const uint k ) {
     return lap;
 }
 
-LaplacianMatrix cotangentWeightLaplacian( const Container::VectorArray<Vector3>& p,
+LaplacianMatrix cotangentWeightLaplacian( const Container::VectorArray<Math::Vector3>& p,
                                           const Container::VectorArray<Triangle>& T ) {
     LaplacianMatrix L( p.size(), p.size() );
     for ( const auto& t : T )
@@ -48,12 +48,12 @@ LaplacianMatrix cotangentWeightLaplacian( const Container::VectorArray<Vector3>&
         uint i = t( 0 );
         uint j = t( 1 );
         uint k = t( 2 );
-        Vector3 IJ = p[j] - p[i];
-        Vector3 JK = p[k] - p[j];
-        Vector3 KI = p[i] - p[k];
-        Scalar cotI = Vector::cotan( IJ, ( -KI ).eval() );
-        Scalar cotJ = Vector::cotan( JK, ( -IJ ).eval() );
-        Scalar cotK = Vector::cotan( KI, ( -JK ).eval() );
+        Math::Vector3 IJ = p[j] - p[i];
+        Math::Vector3 JK = p[k] - p[j];
+        Math::Vector3 KI = p[i] - p[k];
+        Scalar cotI = Math::Vector::cotan( IJ, ( -KI ).eval() );
+        Scalar cotJ = Math::Vector::cotan( JK, ( -IJ ).eval() );
+        Scalar cotK = Math::Vector::cotan( KI, ( -JK ).eval() );
         L.coeffRef( i, j ) -= cotK;
         L.coeffRef( j, i ) -= cotK;
         L.coeffRef( j, k ) -= cotI;
@@ -71,8 +71,8 @@ LaplacianMatrix cotangentWeightLaplacian( const Container::VectorArray<Vector3>&
 /// ONE RING ///
 ////////////////
 
-Vector3 uniformLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
-    Vector3 L;
+Math::Vector3 uniformLaplacian( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
+    Math::Vector3 L;
     L.setZero();
     for ( const auto& pi : p )
     {
@@ -81,8 +81,8 @@ Vector3 uniformLaplacian( const Vector3& v, const Container::VectorArray<Vector3
     return L;
 }
 
-Vector3 cotangentWeightLaplacian( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
-    Vector3 L;
+Math::Vector3 cotangentWeightLaplacian( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
+    Math::Vector3 L;
     L.setZero();
     uint N = p.size();
     Container::CircularIndex i;
@@ -90,8 +90,8 @@ Vector3 cotangentWeightLaplacian( const Vector3& v, const Container::VectorArray
     for ( uint j = 0; j < N; ++j )
     {
         i.setValue( j );
-        Scalar cot_a = Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
-        Scalar cot_b = Vector::cotan( ( v - p[i + 1] ), ( p[i] - p[i + 1] ) );
+        Scalar cot_a = Math::Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
+        Scalar cot_b = Math::Vector::cotan( ( v - p[i + 1] ), ( p[i] - p[i + 1] ) );
         L += ( cot_a + cot_b ) * ( v - p[i] );
     }
     return ( 0.5 * L );

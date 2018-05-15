@@ -12,7 +12,7 @@ namespace Geometry {
 /// GLOBAL MATRIX ///
 /////////////////////
 
-AreaMatrix oneRingArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+AreaMatrix oneRingArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -28,7 +28,7 @@ AreaMatrix oneRingArea( const Container::VectorArray<Vector3>& p, const Containe
     return A;
 }
 
-void oneRingArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T, AreaMatrix& A ) {
+void oneRingArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T, AreaMatrix& A ) {
     A.resize( p.size(), p.size() );
     A.reserve( p.size() );
 #pragma omp parallel for
@@ -48,11 +48,11 @@ void oneRingArea( const Container::VectorArray<Vector3>& p, const Container::Vec
     }
 }
 
-AreaMatrix barycentricArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+AreaMatrix barycentricArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     return ( ( 1.0f / 3.0f ) * oneRingArea( p, T ) );
 }
 
-void barycentricArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T,
+void barycentricArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                       AreaMatrix& A ) {
     oneRingArea( p, T, A );
     const uint size = p.size();
@@ -63,7 +63,7 @@ void barycentricArea( const Container::VectorArray<Vector3>& p, const Container:
     }
 }
 
-AreaMatrix voronoiArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+AreaMatrix voronoiArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -72,16 +72,16 @@ AreaMatrix voronoiArea( const Container::VectorArray<Vector3>& p, const Containe
         uint j = t( 1 );
         uint k = t( 2 );
         A.coeffRef( i, i ) +=
-            Vector::cotan( ( p[i] - p[k] ), ( p[j] - p[k] ) ) * ( p[i] - p[j] ).squaredNorm();
+            Math::Vector::cotan( ( p[i] - p[k] ), ( p[j] - p[k] ) ) * ( p[i] - p[j] ).squaredNorm();
         A.coeffRef( j, j ) +=
-            Vector::cotan( ( p[j] - p[i] ), ( p[k] - p[i] ) ) * ( p[j] - p[k] ).squaredNorm();
+            Math::Vector::cotan( ( p[j] - p[i] ), ( p[k] - p[i] ) ) * ( p[j] - p[k] ).squaredNorm();
         A.coeffRef( k, k ) +=
-            Vector::cotan( ( p[k] - p[j] ), ( p[i] - p[j] ) ) * ( p[k] - p[i] ).squaredNorm();
+           Math:: Vector::cotan( ( p[k] - p[j] ), ( p[i] - p[j] ) ) * ( p[k] - p[i] ).squaredNorm();
     }
     return ( ( 1.0 / 8.0 ) * A );
 }
 
-AreaMatrix mixedArea( const Container::VectorArray<Vector3>& p, const Container::VectorArray<Triangle>& T ) {
+AreaMatrix mixedArea( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T ) {
     AreaMatrix A( p.size(), p.size() );
     A.reserve( p.size() );
     for ( const auto& t : T )
@@ -91,15 +91,15 @@ AreaMatrix mixedArea( const Container::VectorArray<Vector3>& p, const Container:
         uint k = t( 2 );
         if ( !isTriangleObtuse( p[i], p[j], p[k] ) )
         {
-            Vector3 ij = p[j] - p[i];
-            Vector3 jk = p[k] - p[j];
-            Vector3 ki = p[i] - p[k];
+            Math::Vector3 ij = p[j] - p[i];
+            Math::Vector3 jk = p[k] - p[j];
+            Math::Vector3 ki = p[i] - p[k];
             Scalar IJ = ( ij ).squaredNorm();
             Scalar JK = ( jk ).squaredNorm();
             Scalar KI = ( ki ).squaredNorm();
-            Scalar cotI = Vector::cotan( ij, ( -ki ).eval() );
-            Scalar cotJ = Vector::cotan( jk, ( -ij ).eval() );
-            Scalar cotK = Vector::cotan( ki, ( -jk ).eval() );
+            Scalar cotI = Math::Vector::cotan( ij, ( -ki ).eval() );
+            Scalar cotJ = Math::Vector::cotan( jk, ( -ij ).eval() );
+            Scalar cotK = Math::Vector::cotan( ki, ( -jk ).eval() );
             A.coeffRef( i, i ) += ( 1.0 / 8.0 ) * ( ( KI * cotJ ) + ( IJ * cotK ) );
             A.coeffRef( j, j ) += ( 1.0 / 8.0 ) * ( ( IJ * cotK ) + ( JK * cotI ) );
             A.coeffRef( k, k ) += ( 1.0 / 8.0 ) * ( ( JK * cotI ) + ( KI * cotJ ) );
@@ -139,7 +139,7 @@ AreaMatrix mixedArea( const Container::VectorArray<Vector3>& p, const Container:
 /// ONE RING ///
 ////////////////
 
-Scalar oneRingArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
+Scalar oneRingArea( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
     Container::CircularIndex i;
@@ -152,11 +152,11 @@ Scalar oneRingArea( const Vector3& v, const Container::VectorArray<Vector3>& p )
     return area;
 }
 
-Scalar barycentricArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
+Scalar barycentricArea( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
     return ( oneRingArea( v, p ) / 3.0 );
 }
 
-Scalar voronoiArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
+Scalar voronoiArea( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
     Container::CircularIndex i;
@@ -164,14 +164,14 @@ Scalar voronoiArea( const Vector3& v, const Container::VectorArray<Vector3>& p )
     for ( uint j = 0; j < N; ++j )
     {
         i.setValue( j );
-        Scalar cot_a = Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
-        Scalar cot_b = Vector::cotan( ( v - p[i + 1] ), ( p[i] - p[i + 1] ) );
+        Scalar cot_a = Math::Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
+        Scalar cot_b = Math::Vector::cotan( ( v - p[i + 1] ), ( p[i] - p[i + 1] ) );
         area += ( cot_a + cot_b ) * ( v - p[i] ).squaredNorm();
     }
     return ( ( 1.0 / 8.0 ) * area );
 }
 
-Scalar mixedArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
+Scalar mixedArea( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p ) {
     Scalar area = 0.0;
     uint N = p.size();
     Container::CircularIndex i;
@@ -184,8 +184,8 @@ Scalar mixedArea( const Vector3& v, const Container::VectorArray<Vector3>& p ) {
             // For the triangle PQR ( a.k.a. v, p[i], p[i-1] ), the area for P ( a.k.a. v ) is :
             Scalar PQ = ( p[i] - v ).squaredNorm();
             Scalar PR = ( p[i - 1] - v ).squaredNorm();
-            Scalar cotQ = Vector::cotan( ( p[i - 1] - p[i] ), ( v - p[i] ) );
-            Scalar cotR = Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
+            Scalar cotQ = Math::Vector::cotan( ( p[i - 1] - p[i] ), ( v - p[i] ) );
+            Scalar cotR = Math::Vector::cotan( ( v - p[i - 1] ), ( p[i] - p[i - 1] ) );
             area += ( 1.0 / 8.0 ) * ( ( PR * cotQ ) + ( PQ * cotR ) );
         } else
         {

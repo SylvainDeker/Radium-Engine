@@ -10,7 +10,7 @@ namespace Core {
 namespace Geometry {
 
 // Defining the vector of scalar values over the vertices
-using ScalarValue = Sparse;
+using ScalarValue = Math::Sparse;
 
 /*
  * Return the scalar value over a mesh after diffusion.

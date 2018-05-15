@@ -255,7 +255,7 @@ void DebugRender::renderPoints( const Core::Matrix4f& viewMatrix,
     glBindVertexArray( vao );
     glGenBuffers( 1, &vbo );
     glBindBuffer( GL_ARRAY_BUFFER, vbo );
-    glBufferData( GL_ARRAY_BUFFER, size * 2 * sizeof( Core::Vector3 ), m_points.data(),
+    glBufferData( GL_ARRAY_BUFFER, size * 2 * sizeof( Core::Math::Vector3 ), m_points.data(),
                   GL_DYNAMIC_DRAW );
 
 #ifdef CORE_USE_DOUBLE
@@ -327,17 +327,17 @@ void DebugRender::renderMeshes( const Core::Matrix4f& view, const Core::Matrix4f
     m_meshes.clear();
 }
 
-void DebugRender::addLine( const Core::Vector3& from, const Core::Vector3& to,
-                           const Core::Color& color ) {
+void DebugRender::addLine( const Core::Math::Vector3& from, const Core::Math::Vector3& to,
+                           const Core::Math::Color& color ) {
     Line l( from, to, color );
     m_lines.push_back( l );
 }
 
-void DebugRender::addPoint( const Core::Vector3& p, const Core::Color& c ) {
+void DebugRender::addPoint( const Core::Math::Vector3& p, const Core::Math::Color& c ) {
     m_points.push_back( {p, c.head<3>()} );
 }
 
-void DebugRender::addPoints( const Core::Container::Vector3Array& p, const Core::Color& c ) {
+void DebugRender::addPoints( const Core::Container::Vector3Array& p, const Core::Math::Color& c ) {
     for ( uint i = 0; i < p.size(); ++i )
     {
         m_points.push_back( {p[i], c.head<3>()} );
@@ -356,27 +356,27 @@ void DebugRender::addMesh( const std::shared_ptr<Mesh>& mesh, const Core::Transf
     m_meshes.push_back( {mesh, transform} );
 }
 
-void DebugRender::addCross( const Core::Vector3& position, Scalar size, const Core::Color& color ) {
+void DebugRender::addCross( const Core::Math::Vector3& position, Scalar size, const Core::Math::Color& color ) {
     const Scalar hz = size / 2.0;
     for ( int i = 0; i < 3; ++i )
     {
-        Core::Vector3 offset = Core::Vector3::Zero();
+        Core::Math::Vector3 offset = Core::Math::Vector3::Zero();
         offset[i] = hz;
 
-        const Core::Vector3 from = position - offset;
-        const Core::Vector3 to = position + offset;
+        const Core::Math::Vector3 from = position - offset;
+        const Core::Math::Vector3 to = position + offset;
 
         addLine( from, to, color );
     }
 }
 
-void DebugRender::addSphere( const Core::Vector3& center, Scalar radius,
-                             const Core::Color& color ) {
+void DebugRender::addSphere( const Core::Math::Vector3& center, Scalar radius,
+                             const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::Sphere( center, radius, color ) );
 }
 
-void DebugRender::addCircle( const Core::Vector3& center, const Core::Vector3& normal,
-                             Scalar radius, const Core::Color& color ) {
+void DebugRender::addCircle( const Core::Math::Vector3& center, const Core::Math::Vector3& normal,
+                             Scalar radius, const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::Circle( center, normal, radius, 64, color ) );
 }
 
@@ -384,17 +384,17 @@ void DebugRender::addFrame( const Core::Transform& transform, Scalar size ) {
     addMesh( DrawPrimitives::Frame( transform, size ) );
 }
 
-void DebugRender::addTriangle( const Core::Vector3& p0, const Core::Vector3& p1,
-                               const Core::Vector3& p2, const Core::Color& color ) {
+void DebugRender::addTriangle( const Core::Math::Vector3& p0, const Core::Math::Vector3& p1,
+                               const Core::Math::Vector3& p2, const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::Triangle( p0, p1, p2, color ) );
 }
 
-void DebugRender::addAABB( const Core::Aabb& box, const Core::Color& color ) {
+void DebugRender::addAABB( const Core::Aabb& box, const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::AABB( box, color ) );
 }
 
 void DebugRender::addOBB( const Core::Aabb& box, const Core::Transform& transform,
-                          const Core::Color& color ) {
+                          const Core::Math::Color& color ) {
     addMesh( DrawPrimitives::AABB( box, color ), transform );
 }
 

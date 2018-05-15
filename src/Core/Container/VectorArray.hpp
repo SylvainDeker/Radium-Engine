@@ -10,7 +10,7 @@ namespace Ra {
 namespace Core {
 namespace Container {
 
-/// This class is a wrapper around a std::vector of Core::Vectors.
+/// This class is a wrapper around a std::vector of Core::Math::Vectors.
 /// which allow to use the stdlib's dynamic array implementation, yet pass it as
 /// a matrix when Eigen needs it with the getMap() method.
 template <typename V>
@@ -68,10 +68,10 @@ class VectorArray<Scalar> : public AlignedStdVector<Scalar> {
 
 // Convenience aliases
 using Vector1Array = VectorArray<Scalar>;
-using Vector2Array = VectorArray<Vector2>;
-using Vector3Array = VectorArray<Vector3>;
-using Vector3uiArray = VectorArray<Vector3ui>;
-using Vector4Array = VectorArray<Vector4>;
+using Vector2Array = VectorArray<Math::Vector2>;
+using Vector3Array = VectorArray<Math::Vector3>;
+using Vector3uiArray = VectorArray<Math::Vector3ui>;
+using Vector4Array = VectorArray<Math::Vector4>;
 
 // Notes :
 // Using a map for eigen integration was recommended by [1].

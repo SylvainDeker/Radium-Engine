@@ -28,11 +28,11 @@ inline void GeometryData::setType( const GeometryType& type ) {
 }
 
 /// FRAME
-inline Core::Transform GeometryData::getFrame() const {
+inline Core::Math::Transform GeometryData::getFrame() const {
     return m_frame;
 }
 
-inline void GeometryData::setFrame( const Core::Transform& frame ) {
+inline void GeometryData::setFrame( const Core::Math::Transform& frame ) {
     m_frame = frame;
 }
 
@@ -57,7 +57,7 @@ inline void GeometryData::setVertices( const Container& vertexList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_vertex[i] = Core::Vector3( vertexList[i].template cast<Core::Vector3::Scalar>() );
+        m_vertex[i] = Core::Math::Vector3( vertexList[i].template cast<Core::Math::Vector3::Scalar>() );
     }
 }
 
@@ -77,7 +77,7 @@ inline void GeometryData::setEdges( const Container& edgeList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_edge[i] = Core::Vector2ui( edgeList[i].template cast<Core::Vector2ui::Scalar>() );
+        m_edge[i] = Core::Math::Vector2ui( edgeList[i].template cast<Core::Math::Vector2ui::Scalar>() );
     }
 }
 
@@ -97,7 +97,7 @@ inline void GeometryData::setFaces( const Container& faceList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_faces[i] = Core::VectorNui( faceList[i].template cast<Core::VectorNui::Scalar>() );
+        m_faces[i] = Core::Math::VectorNui( faceList[i].template cast<Core::Math::VectorNui::Scalar>() );
     }
 }
 
@@ -117,7 +117,7 @@ inline void GeometryData::setPolyhedron( const Container& polyList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_polyhedron[i] = Core::VectorNui( polyList[i].template cast<Core::VectorNui::Scalar>() );
+        m_polyhedron[i] = Core::Math::VectorNui( polyList[i].template cast<Core::Math::VectorNui::Scalar>() );
     }
 }
 
@@ -137,7 +137,7 @@ inline void GeometryData::setNormals( const Container& normalList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_normal[i] = Core::Vector3( normalList[i].template cast<Core::Vector3::Scalar>() );
+        m_normal[i] = Core::Math::Vector3( normalList[i].template cast<Core::Math::Vector3::Scalar>() );
     }
 }
 
@@ -157,7 +157,7 @@ inline void GeometryData::setTangents( const Container& tangentList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_tangent[i] = Core::Vector3( tangentList[i].template cast<Core::Vector3::Scalar>() );
+        m_tangent[i] = Core::Math::Vector3( tangentList[i].template cast<Core::Math::Vector3::Scalar>() );
     }
 }
 
@@ -177,7 +177,7 @@ inline void GeometryData::setBitangents( const Container& bitangentList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_bitangent[i] = Core::Vector3( bitangentList[i].template cast<Core::Vector3::Scalar>() );
+        m_bitangent[i] = Core::Math::Vector3( bitangentList[i].template cast<Core::Math::Vector3::Scalar>() );
     }
 }
 
@@ -197,7 +197,7 @@ inline void GeometryData::setTextureCoordinates( const Container& texCoordList )
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_texCoord[i] = Core::Vector3( texCoordList[i].template cast<Core::Vector3::Scalar>() );
+        m_texCoord[i] = Core::Math::Vector3( texCoordList[i].template cast<Core::Math::Vector3::Scalar>() );
     }
 }
 
@@ -217,7 +217,7 @@ inline void GeometryData::setColors( const Container& colorList ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // unnecessary call to copy constructor and cast are removed at compile time
-        m_color[i] = Core::Color( colorList[i].template cast<Core::Color::Scalar>() );
+        m_color[i] = Core::Math::Color( colorList[i].template cast<Core::Math::Color::Scalar>() );
     }
 }
 

@@ -49,7 +49,7 @@ void MeshPaintSystem::startPaintMesh( bool start ) {
 }
 
 void MeshPaintSystem::paintMesh( const Ra::Engine::Renderer::PickingResult& picking,
-                                 const Ra::Core::Color& color ) {
+                                 const Ra::Core::Math::Color& color ) {
     for ( auto& compEntry : this->m_components )
     {
         auto MPcomp = static_cast<MeshPaintComponent*>( compEntry.second );

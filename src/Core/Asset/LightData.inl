@@ -26,11 +26,11 @@ inline void LightData::setType( const LightType& type ) {
 }
 
 /// FRAME
-inline Core::Matrix4 LightData::getFrame() const {
+inline Core::Math::Matrix4 LightData::getFrame() const {
     return m_frame;
 }
 
-inline void LightData::setFrame( const Core::Matrix4& frame ) {
+inline void LightData::setFrame( const Core::Math::Matrix4& frame ) {
     m_frame = frame;
 }
 
@@ -46,14 +46,14 @@ inline void LightData::setLight( std::shared_ptr<Ra::Engine::Light> light ) {
 */
 
 /// construct a directional light
-inline void LightData::setLight( Core::Color color, Core::Vector3 direction ) {
+inline void LightData::setLight( Core::Math::Color color, Core::Math::Vector3 direction ) {
     m_type = DIRECTIONAL_LIGHT;
     m_color = color;
     m_dirlight.direction = direction;
 }
 
 /// construct a point light
-inline void LightData::setLight( Core::Color color, Core::Vector3 position,
+inline void LightData::setLight( Core::Math::Color color, Core::Math::Vector3 position,
                                  LightAttenuation attenuation ) {
     m_type = POINT_LIGHT;
     m_color = color;
@@ -62,7 +62,7 @@ inline void LightData::setLight( Core::Color color, Core::Vector3 position,
 }
 
 /// construct a spot light
-inline void LightData::setLight( Core::Color color, Core::Vector3 position, Core::Vector3 direction,
+inline void LightData::setLight( Core::Math::Color color, Core::Math::Vector3 position, Core::Math::Vector3 direction,
                                  Scalar inangle, Scalar outAngle, LightAttenuation attenuation ) {
     m_type = SPOT_LIGHT;
     m_color = color;
@@ -73,7 +73,7 @@ inline void LightData::setLight( Core::Color color, Core::Vector3 position, Core
     m_spotlight.attenuation = attenuation;
 }
 /// construct an area light
-inline void LightData::setLight( Core::Color color, LightAttenuation attenuation ) {
+inline void LightData::setLight( Core::Math::Color color, LightAttenuation attenuation ) {
     m_type = AREA_LIGHT;
     m_color = color;
     m_arealight.attenuation = attenuation;

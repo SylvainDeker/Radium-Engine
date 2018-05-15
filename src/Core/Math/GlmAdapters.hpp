@@ -101,7 +101,7 @@ inline glm::mat4x3 toGlm( const Eigen::Matrix<float, 4, 3>& m ) {
 // It may be useful because globjects's getUniform() method returns a glm structure and Radium
 // only deals with Eigen's structures.
 
-inline void fromGlm( const glm::vec2& v, Vector2& out ) {
+inline void fromGlm( const glm::vec2& v, Math::Vector2& out ) {
     out << v[0], v[1];
 }
 
@@ -109,11 +109,11 @@ inline Vector2 fromGlm( const glm::vec2& v ) {
     return Vector2( v[0], v[1] );
 }
 
-inline void fromGlm( const glm::vec3& v, Vector3& out ) {
+inline void fromGlm( const glm::vec3& v, Math::Vector3& out ) {
     out << v[0], v[1], v[2];
 }
 
-inline Vector3 fromGlm( const glm::vec3& v ) {
+inline Math::Vector3 fromGlm( const glm::vec3& v ) {
     return Vector3( v[0], v[1], v[2] );
 }
 

@@ -61,7 +61,7 @@ void Camera::updateProjMatrix() {
         const Scalar t = dy;  // top
         const Scalar b = -dy; // bottom
 
-        Core::Vector3 tr;
+        Core::Math::Vector3 tr;
         tr( 0 ) = -( r + l ) / ( r - l );
         tr( 1 ) = -( t + b ) / ( t - b );
         tr( 2 ) = -( ( m_zFar + m_zNear ) / ( m_zFar - m_zNear ) );
@@ -97,7 +97,7 @@ void Camera::updateProjMatrix() {
     }
 }
 
-Core::Ray Camera::getRayFromScreen( const Core::Vector2& pix ) const {
+Core::Ray Camera::getRayFromScreen( const Core::Math::Vector2& pix ) const {
     // Ray starts from the camera's current position.
     return Core::Ray::Through( getPosition(), unProject( pix ) );
 }

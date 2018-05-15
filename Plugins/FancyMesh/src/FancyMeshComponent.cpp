@@ -79,7 +79,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
     Ra::Core::Transform N;
     N.matrix() = ( T.matrix() ).inverse().transpose();
 
-    mesh.m_vertices.resize( data->getVerticesSize(), Ra::Core::Vector3::Zero() );
+    mesh.m_vertices.resize( data->getVerticesSize(), Ra::Core::Math::Vector3::Zero() );
 #pragma omp parallel for
     for ( uint i = 0; i < data->getVerticesSize(); ++i )
     {
@@ -88,7 +88,7 @@ void FancyMeshComponent::handleMeshLoading( const Ra::Core::Asset::GeometryData*
 
     if ( data->hasNormals() )
     {
-        mesh.m_normals.resize( data->getVerticesSize(), Ra::Core::Vector3::Zero() );
+        mesh.m_normals.resize( data->getVerticesSize(), Ra::Core::Math::Vector3::Zero() );
 #pragma omp parallel for
         for ( uint i = 0; i < data->getVerticesSize(); ++i )
         {

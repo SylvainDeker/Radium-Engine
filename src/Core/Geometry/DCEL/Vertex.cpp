@@ -8,17 +8,17 @@ namespace Core {
 /// CONSTRUCTOR
 Vertex::Vertex( const Container::Index& index ) :
     IndexedObject( index ),
-    m_p( Vector3::Zero() ),
-    m_n( Vector3::Zero() ),
+    m_p( Math::Vector3::Zero() ),
+    m_n( Math::Vector3::Zero() ),
     m_he( nullptr ) {}
 
 Vertex::Vertex( const HalfEdge_ptr& he ) :
     IndexedObject(),
-    m_p( Vector3::Zero() ),
-    m_n( Vector3::Zero() ),
+    m_p( Math::Vector3::Zero() ),
+    m_n( Math::Vector3::Zero() ),
     m_he( he ) {}
 
-Vertex::Vertex( const Vector3& p, const Vector3& n, const HalfEdge_ptr& he, const Container::Index& index ) :
+Vertex::Vertex( const Math::Vector3& p, const Math::Vector3& n, const HalfEdge_ptr& he, const Container::Index& index ) :
     IndexedObject( index ),
     m_p( p ),
     m_n( n ),

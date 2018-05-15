@@ -20,7 +20,7 @@ struct RA_CORE_API HandleComponentData {
 
     HandleComponentData();
 
-    Core::Transform m_frame;
+    Core::Math::Transform m_frame;
     std::string m_name;
     std::vector<std::pair<uint, Scalar>> m_weight;
 };
@@ -48,8 +48,8 @@ class RA_CORE_API HandleData : public AssetData {
     inline void setType( const HandleType& type );
 
     /// FRAME
-    inline Core::Transform getFrame() const;
-    inline void setFrame( const Core::Transform& frame );
+    inline Core::Math::Transform getFrame() const;
+    inline void setFrame( const Core::Math::Transform& frame );
 
     /// VERTEX SIZE
     inline uint getVertexSize() const;
@@ -65,12 +65,12 @@ class RA_CORE_API HandleData : public AssetData {
     inline const HandleComponentData& getComponent( const uint i ) const;
     inline HandleComponentData& getComponent( const uint i );
     inline void setComponents( const Core::Container::AlignedStdVector<HandleComponentData>& components );
-    inline const Core::Container::AlignedStdVector<Core::Vector2i>& getEdgeData() const;
-    inline Core::Container::AlignedStdVector<Core::Vector2i>& getEdgeData();
-    inline void setEdges( const Core::Container::AlignedStdVector<Core::Vector2i>& edgeList );
-    inline const Core::Container::AlignedStdVector<Core::VectorNi>& getFaceData() const;
-    inline Core::Container::AlignedStdVector<Core::VectorNi>& getFaceData();
-    inline void setFaces( const Core::Container::AlignedStdVector<Core::VectorNi>& faceList );
+    inline const Core::Container::AlignedStdVector<Core::Math::Vector2i>& getEdgeData() const;
+    inline Core::Container::AlignedStdVector<Core::Math::Vector2i>& getEdgeData();
+    inline void setEdges( const Core::Container::AlignedStdVector<Core::Math::Vector2i>& edgeList );
+    inline const Core::Container::AlignedStdVector<Core::Math::VectorNi>& getFaceData() const;
+    inline Core::Container::AlignedStdVector<Core::Math::VectorNi>& getFaceData();
+    inline void setFaces( const Core::Container::AlignedStdVector<Core::Math::VectorNi>& faceList );
     inline void recomputeAllIndices();
 
     /// QUERY
@@ -90,7 +90,7 @@ class RA_CORE_API HandleData : public AssetData {
 
   protected:
     /// VARIABLE
-    Core::Transform m_frame;
+    Core::Math::Transform m_frame;
     HandleType m_type;
 
     bool m_endNode;
@@ -98,8 +98,8 @@ class RA_CORE_API HandleData : public AssetData {
     std::map<std::string, uint> m_nameTable;
 
     Core::Container::AlignedStdVector<HandleComponentData> m_component;
-    Core::Container::AlignedStdVector<Core::Vector2i> m_edge;
-    Core::Container::AlignedStdVector<Core::VectorNi> m_face;
+    Core::Container::AlignedStdVector<Core::Math::Vector2i> m_edge;
+    Core::Container::AlignedStdVector<Core::Math::VectorNi> m_face;
 };
 
 } // namespace Asset

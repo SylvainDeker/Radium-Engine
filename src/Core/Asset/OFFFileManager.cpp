@@ -47,7 +47,7 @@ bool OFFFileManager::importData( std::istream& file, Geometry::TriangleMesh& dat
     // Vertices
     for ( uint i = 0; i < v_size; ++i )
     {
-        Vector3 v;
+        Math::Vector3 v;
         file >> v[0] >> v[1] >> v[2];
         data.m_vertices[i] = v;
     }
@@ -93,7 +93,7 @@ bool OFFFileManager::exportData( std::ostream& file, const Geometry::TriangleMes
     // Vertices
     for ( uint i = 0; i < v_size; ++i )
     {
-        const Vector3 v = data.m_vertices.at( i );
+        const Math::Vector3 v = data.m_vertices.at( i );
         content += std::to_string( v[0] ) + " " + std::to_string( v[1] ) + " " +
                    std::to_string( v[2] ) + "\n";
     }

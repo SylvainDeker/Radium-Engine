@@ -71,16 +71,16 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
     rootMatrix = Core::Matrix4::Identity();
     Core::Matrix4 frame = loadLightFrame( scene, rootMatrix, data );
     setFrame( frame );
-    Core::Color color( light.mColorDiffuse.r, light.mColorDiffuse.g, light.mColorDiffuse.b, 1.0 );
+    Core::Math::Color color( light.mColorDiffuse.r, light.mColorDiffuse.g, light.mColorDiffuse.b, 1.0 );
 
     switch ( data.getType() )
     {
     case Core::Asset::LightData::DIRECTIONAL_LIGHT:
     {
-        Core::Vector4 dir( light.mDirection[0], light.mDirection[1], light.mDirection[2], 0.0 );
+        Core::Math::Vector4 dir( light.mDirection[0], light.mDirection[1], light.mDirection[2], 0.0 );
         dir = frame.transpose().inverse() * dir;
 
-        Core::Vector3 finalDir( dir.x(), dir.y(), dir.z() );
+        Core::Math::Vector3 finalDir( dir.x(), dir.y(), dir.z() );
         finalDir = -finalDir;
 
         data.setLight( color, finalDir );
@@ -89,11 +89,11 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
 
     case Core::Asset::LightData::POINT_LIGHT:
     {
-        Core::Vector4 pos( light.mPosition[0], light.mPosition[1], light.mPosition[2], 1.0 );
+        Core::Math::Vector4 pos( light.mPosition[0], light.mPosition[1], light.mPosition[2], 1.0 );
         pos = frame * pos;
         pos /= pos.w();
 
-        data.setLight( color, Core::Vector3( pos.x(), pos.y(), pos.z() ),
+        data.setLight( color, Core::Math::Vector3( pos.x(), pos.y(), pos.z() ),
                        Core::Asset::LightData::LightAttenuation( light.mAttenuationConstant,
                                                            light.mAttenuationLinear,
                                                            light.mAttenuationQuadratic ) );
@@ -102,17 +102,17 @@ void AssimpLightDataLoader::loadLightData( const aiScene* scene, const aiLight& 
 
     case Core::Asset::LightData::SPOT_LIGHT:
     {
-        Core::Vector4 pos( light.mPosition[0], light.mPosition[1], light.mPosition[2], 1.0 );
+        Core::Math::Vector4 pos( light.mPosition[0], light.mPosition[1], light.mPosition[2], 1.0 );
         pos = frame * pos;
         pos /= pos.w();
 
-        Core::Vector4 dir( light.mDirection[0], light.mDirection[1], light.mDirection[2], 0.0 );
+        Core::Math::Vector4 dir( light.mDirection[0], light.mDirection[1], light.mDirection[2], 0.0 );
         dir = frame.transpose().inverse() * dir;
 
-        Core::Vector3 finalDir( dir.x(), dir.y(), dir.z() );
+        Core::Math::Vector3 finalDir( dir.x(), dir.y(), dir.z() );
         finalDir = -finalDir;
 
-        data.setLight( color, Core::Vector3( pos.x(), pos.y(), pos.z() ), finalDir,
+        data.setLight( color, Core::Math::Vector3( pos.x(), pos.y(), pos.z() ), finalDir,
                        light.mAngleInnerCone, light.mAngleOuterCone,
                        Core::Asset::LightData::LightAttenuation( light.mAttenuationConstant,
                                                            light.mAttenuationLinear,

@@ -4,14 +4,14 @@ namespace Ra {
 namespace Core {
 namespace Geometry {
 
-inline Vector3 meanPoint( const Container::Vector3Array& pts ) {
+inline Math::Vector3 meanPoint( const Container::Vector3Array& pts ) {
     return pts.getMap().rowwise().mean();
 }
 
-inline Transform principalAxis( const Container::Vector3Array& pts ) {
-    Transform result;
+inline Math::Transform principalAxis( const Container::Vector3Array& pts ) {
+    Math::Transform result;
 
-    Vector3 meanPt = meanPoint( pts );
+    Math::Vector3 meanPt = meanPoint( pts );
     result.translation() = meanPt;
 
     // Subtract points from their average.
@@ -20,18 +20,18 @@ inline Transform principalAxis( const Container::Vector3Array& pts ) {
     CORE_ASSERT( Math::areApproxEqual( meanPoint( ptsAvg ).squaredNorm(), 0.f ), "oops" );
 
     // Compute variance-covariance matrix
-    Ra::Core::MatrixN vCov =
+    Ra::Core::Math::MatrixN vCov =
         ( 1.f / ( pts.size() - 1 ) ) * ( ptsAvg.getMap() * ptsAvg.getMap().transpose() );
 
     // Solve eigen vectors
-    Eigen::SelfAdjointEigenSolver<Matrix3> solver( vCov );
+    Eigen::SelfAdjointEigenSolver<Math::Matrix3> solver( vCov );
     result.linear() = solver.eigenvectors();
     return result;
 }
 
 Obb pcaObb( const Container::Vector3Array& pts ) {
-    Transform pca = principalAxis( pts );
-    Transform pcaInv = pca.inverse();
+    Math::Transform pca = principalAxis( pts );
+    Math::Transform pcaInv = pca.inverse();
 
     // Compute the AABB in principal axis space.
     Container::Vector3Array alignedPts;
@@ -43,14 +43,14 @@ Obb pcaObb( const Container::Vector3Array& pts ) {
         alignedPts.push_back( pcaInv * v );
     }
 
-    Aabb aligned = aabb( alignedPts );
+    Math::Aabb aligned = aabb( alignedPts );
     return Obb( aligned, pca );
 }
 
-Aabb aabb( const Container::Vector3Array& pts ) {
+Math::Aabb aabb( const Container::Vector3Array& pts ) {
     return pts.size() > 0
-               ? Aabb( pts.getMap().rowwise().minCoeff(), pts.getMap().rowwise().maxCoeff() )
-               : Aabb();
+               ? Math::Aabb( pts.getMap().rowwise().minCoeff(), pts.getMap().rowwise().maxCoeff() )
+               : Math::Aabb();
 }
 
 } // namespace Geometry

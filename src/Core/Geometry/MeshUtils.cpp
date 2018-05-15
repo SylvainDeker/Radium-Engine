@@ -15,7 +15,7 @@
 namespace Ra {
 namespace Core {
 namespace Geometry {
-void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Vector3>& normalsOut ) {
+void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Math::Vector3>& normalsOut ) {
     const uint numVertices = mesh.m_vertices.size();
     const uint numTriangles = mesh.m_triangles.size();
 
@@ -25,7 +25,7 @@ void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Vector3>& normal
     for ( uint t = 0; t < numTriangles; t++ )
     {
         const Triangle& tri = mesh.m_triangles[t];
-        Vector3 n = getTriangleNormal( mesh, t );
+        Math::Vector3 n = getTriangleNormal( mesh, t );
 
         for ( uint i = 0; i < 3; ++i )
         {
@@ -42,8 +42,8 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
     const uint numVerts = mesh.m_vertices.size();
     duplicatesMap.resize( numVerts, VertexIdx( -1 ) );
 
-    Container::VectorArray<Vector3>::const_iterator vertPos;
-    Container::VectorArray<Vector3>::const_iterator duplicatePos;
+    Container::VectorArray<Math::Vector3>::const_iterator vertPos;
+    Container::VectorArray<Math::Vector3>::const_iterator duplicatePos;
     std::vector<std::pair<Vector3, VertexIdx>> vertices;
 
     for ( uint i = 0; i < numVerts; ++i )
@@ -160,7 +160,7 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
             std::array<Vector3, 3> V;
             getTriangleVertices( mesh, result.m_hitTriangle, V );
             const Triangle& T = mesh.m_triangles[result.m_hitTriangle];
-            const Vector3 I = ray.pointAt( minT );
+            const Math::Vector3 I = ray.pointAt( minT );
             // find closest vertex
             for ( uint i = 0; i < 3; ++i )
             {

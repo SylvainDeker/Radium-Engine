@@ -18,7 +18,7 @@ TriangleMesh makeParametricSphere( Scalar radius ) {
         {
             // Regular vertices on the sphere.
             const Scalar phi = Scalar( v ) * Core::Math::Pi / Scalar( stacks );
-            result.m_vertices.push_back( Vector3( radius * std::cos( theta ) * std::sin( phi ),
+            result.m_vertices.push_back( Math::Vector3( radius * std::cos( theta ) * std::sin( phi ),
                                                   radius * std::sin( theta ) * std::sin( phi ),
                                                   radius * std::cos( phi ) ) );
             // Regular triangles
@@ -36,9 +36,9 @@ TriangleMesh makeParametricSphere( Scalar radius ) {
 
     // Add the pole vertices.
     uint northPoleIdx = result.m_vertices.size();
-    result.m_vertices.push_back( Vector3( 0, 0, radius ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, radius ) );
     uint southPoleIdx = result.m_vertices.size();
-    result.m_vertices.push_back( Vector3( 0, 0, -radius ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, -radius ) );
 
     // Add the polar caps triangles.
     for ( uint u = 0; u < slices; ++u )
@@ -53,7 +53,7 @@ TriangleMesh makeParametricSphere( Scalar radius ) {
     // Compute normals.
     for ( const auto v : result.m_vertices )
     {
-        const Vector3 n = v.normalized();
+        const Math::Vector3 n = v.normalized();
         result.m_normals.push_back( n );
     }
     checkConsistency( result );
@@ -67,13 +67,13 @@ TriangleMesh makeParametricTorus( Scalar majorRadius, Scalar minorRadius ) {
     for ( uint iu = 0; iu < U; ++iu )
     {
         Scalar u = Scalar( iu ) * Core::Math::PiMul2 / Scalar( U );
-        Core::Vector3 circleCenter( majorRadius * std::cos( u ), majorRadius * std::sin( u ), 0.f );
+        Core::Math::Vector3 circleCenter( majorRadius * std::cos( u ), majorRadius * std::sin( u ), 0.f );
 
         for ( uint iv = 0; iv < V; ++iv )
         {
             Scalar v = Scalar( iv ) * Core::Math::PiMul2 / Scalar( V );
 
-            Core::Vector3 vertex( ( majorRadius + minorRadius * std::cos( v ) ) * std::cos( u ),
+            Core::Math::Vector3 vertex( ( majorRadius + minorRadius * std::cos( v ) ) * std::cos( u ),
                                   ( majorRadius + minorRadius * std::cos( v ) ) * std::sin( u ),
                                   minorRadius * std::sin( v ) );
 

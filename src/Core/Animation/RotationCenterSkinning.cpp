@@ -126,10 +126,10 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
     {
 
         // Check that the first vertices of the subdivided mesh have not changed.
-        ON_ASSERT( const Vector3& p = dataInOut.m_referenceMesh.m_vertices[i] );
+        ON_ASSERT( const Math::Vector3& p = dataInOut.m_referenceMesh.m_vertices[i] );
         CORE_ASSERT( subdividedMesh.m_vertices[i] == p, "Inconsistency in the meshes" );
 
-        Vector3 cor( 0, 0, 0 );
+        Math::Vector3 cor( 0, 0, 0 );
         Scalar sumweight = 0;
         const Eigen::SparseVector<Scalar> Wi = subdividedWeights.row( i );
 
@@ -137,14 +137,14 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
         for ( uint t = 0; t < subdividedMesh.m_triangles.size(); ++t )
         {
             const Geometry::Triangle& tri = subdividedMesh.m_triangles[t];
-            std::array<Vector3, 3> triVerts;
+            std::array<Math::Vector3, 3> triVerts;
             Geometry::getTriangleVertices( subdividedMesh, t, triVerts );
 
             const Scalar area = Geometry::getTriangleArea( subdividedMesh, t );
             const Eigen::SparseVector<Scalar> triWeight =
                 ( 1 / 3.f ) * ( subdividedWeights.row( tri[0] ) + subdividedWeights.row( tri[1] ) +
                                 subdividedWeights.row( tri[2] ) );
-            const Vector3 centroid = ( triVerts[0] + triVerts[1] + triVerts[2] ) / 3.f;
+            const Math::Vector3 centroid = ( triVerts[0] + triVerts[1] + triVerts[2] ) / 3.f;
 
             const Scalar s = weightSimilarity( Wi, triWeight, sigma );
 
@@ -157,7 +157,7 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
         {
             dataInOut.m_CoR.push_back( ( 1.f / sumweight ) * cor );
         } else
-        { dataInOut.m_CoR.push_back( Vector3::Zero() ); }
+        { dataInOut.m_CoR.push_back( Math::Vector3::Zero() ); }
 
 #if defined CORE_DEBUG
         if ( i % 100 == 0 )
