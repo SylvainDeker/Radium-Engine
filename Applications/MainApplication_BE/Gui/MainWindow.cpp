@@ -461,8 +461,8 @@ void Gui::MainWindow::openMaterialEditor() {
 }
 
 void Gui::MainWindow::editLight(){
-    //ItemEntry item = m_selectionManager->currentItem();
-    m_lightEditor->show();
+    ItemEntry item = m_selectionManager->currentItem();
+    m_lightEditor->init(item);
 }
 
 void Gui::MainWindow::openLightEditor(){

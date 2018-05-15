@@ -112,6 +112,17 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_constant,&QSlider::hide);
     connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_quadratic,&QSlider::hide);
 
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_lab_quadratic,&QLabel::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_lab_constant,&QLabel::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_lab_linear,&QLabel::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_spinbox_linear,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_spinbox_constant,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_spinbox_quadratic,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_slider_linear,&QSlider::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_slider_constant,&QSlider::show);
+    connect(this,&LightCreator::sig_show_falloff,m_falloff_slider_quadratic,&QSlider::show);
+
 
     //Selecter Position
 
@@ -309,7 +320,6 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     m_result_color->setPalette(p);
 
 
-
     m_intensity_spinbox->setValue(MAX_INTENSITY);
     m_intensity_slider->setValue(MAX_INTENSITY);
 }
@@ -345,7 +355,7 @@ void LightCreator::open_dialogueConfirm(){
   else if( entity->getComponent( m_name->toStdString()) != nullptr) {
     QMessageBox::critical(this, "Watch out !","The name is already used !");
   }
-  else if ( *m_lightType <= 1 && m_dir_x_spin->value()*m_dir_y_spin->value()*m_dir_z_spin->value() == 0 ){
+  else if ( *m_lightType <= 1 && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
     QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
   }
   else {
