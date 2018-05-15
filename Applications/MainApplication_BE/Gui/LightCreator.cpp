@@ -39,8 +39,9 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     setWindowIcon(parent->windowIcon());
     m_color = new QColor(255,255,255);
     m_name = new QString("");
-    m_intensity_val = new double(0);
-    m_angle_val = new double(0);
+    m_intensity_val = new double(100);
+    m_inner_angle_val = new double(0);
+    m_outter_angle_val = new double(0);
     m_falloff_val_constant = new double(0);
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
@@ -48,10 +49,152 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     m_position = new Core::Vector3(0,0,0);
     m_direction = new Core::Vector3(0,0,1);
 
+
+
+
+
+
+    connect(m_button_color, &QPushButton::clicked,this,&LightCreator::open_dialogColor);
+
+    // Selecter
+    connect(m_kind_of_light,static_cast<void (QComboBox::*) (int)>(&QComboBox::currentIndexChanged),this,&LightCreator::slot_select_light);
+    // Selecter Angle
+connect(this,&LightCreator::sig_show_angle,m_angle_lab,&QLabel::show);
+connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_show_angle,m_inner_angle_slider,&QSlider::show);
+    connect(this,&LightCreator::sig_show_angle,m_inner_angle_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_angle,m_inner_angle_spinbox,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_angle,m_inner_angle_lab,&QLabel::show);
+
+    connect(this,&LightCreator::sig_hide_angle,m_inner_angle_slider,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_inner_angle_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_inner_angle_spinbox,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_inner_angle_lab,&QLabel::hide);
+
+    connect(this,&LightCreator::sig_show_angle,m_outter_angle_slider,&QSlider::show);
+    connect(this,&LightCreator::sig_show_angle,m_outter_angle_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_angle,m_outter_angle_spinbox,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_angle,m_outter_angle_lab,&QLabel::show);
+
+    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_slider,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_spinbox,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_angle,m_outter_angle_lab,&QLabel::hide);
+
+
+    // Selecter dir
+    connect(this,&LightCreator::sig_hide_dir,m_dir_x_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_dir,m_dir_y_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_dir,m_dir_z_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_dir,m_dir_x_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_dir,m_dir_y_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_dir,m_dir_z_lab,&QLabel::hide);
+
+    connect(this,&LightCreator::sig_show_dir,m_dir_x_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_dir,m_dir_y_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_dir,m_dir_z_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_dir,m_dir_x_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_dir,m_dir_y_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_dir,m_dir_z_lab,&QLabel::show);
+
+    connect(this,&LightCreator::sig_hide_dir,m_direction_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_show_dir,m_direction_lab,&QLabel::show);
+
+    // Selecter Falloff
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_quadratic,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_constant,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_linear,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_linear,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_constant,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_quadratic,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_linear,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_constant,&QSlider::hide);
+    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_quadratic,&QSlider::hide);
+
+
+    //Selecter Position
+
+    connect(this,&LightCreator::sig_hide_pos,m_pos_x_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_pos,m_pos_y_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_pos,m_pos_z_spin,&QDoubleSpinBox::hide);
+    connect(this,&LightCreator::sig_hide_pos,m_pos_x_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_pos,m_pos_y_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_hide_pos,m_pos_z_lab,&QLabel::hide);
+
+    connect(this,&LightCreator::sig_show_pos,m_pos_x_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_pos,m_pos_y_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_pos,m_pos_z_spin,&QDoubleSpinBox::show);
+    connect(this,&LightCreator::sig_show_pos,m_pos_x_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_pos,m_pos_y_lab,&QLabel::show);
+    connect(this,&LightCreator::sig_show_pos,m_pos_z_lab,&QLabel::show);
+
+    connect(this,&LightCreator::sig_hide_pos,m_coord_lab,&QLabel::hide);
+    connect(this,&LightCreator::sig_show_pos,m_coord_lab,&QLabel::show);
+
+
+
+    // Intensity
+    connect(m_intensity_slider, &QSlider::valueChanged, this , &LightCreator::slot_intensity_slide_to_spin );
+    connect(this,&LightCreator::sig_intensity_slide_to_spin,m_intensity_spinbox,&QDoubleSpinBox::setValue);
+
+    connect(m_intensity_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_intensity_spin_to_slide );
+    connect(this,&LightCreator::sig_intensity_spin_to_slide,m_intensity_slider,&QSlider::setValue);
+
+    // Angle
+    connect(m_inner_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_inner_angle_slide_to_spin );
+    connect(this,&LightCreator::sig_inner_angle_slide_to_spin,m_inner_angle_spinbox,&QDoubleSpinBox::setValue);
+
+    connect(m_inner_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_inner_angle_spin_to_slide );
+    connect(this,&LightCreator::sig_inner_angle_spin_to_slide,m_inner_angle_slider,&QSlider::setValue);
+
+    connect(m_outter_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_outter_angle_slide_to_spin );
+    connect(this,&LightCreator::sig_outter_angle_slide_to_spin,m_outter_angle_spinbox,&QDoubleSpinBox::setValue);
+
+    connect(m_outter_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_outter_angle_spin_to_slide );
+    connect(this,&LightCreator::sig_outter_angle_spin_to_slide,m_outter_angle_slider,&QSlider::setValue);
+
+
+    // Falloff
+
+    connect(m_falloff_slider_constant, &QSlider::valueChanged, this , &LightCreator::slot_falloff_constant_slide_to_spin );
+    connect(this,&LightCreator::sig_falloff_constant_slide_to_spin,m_falloff_spinbox_constant,&QDoubleSpinBox::setValue);
+
+    connect(m_falloff_spinbox_constant, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_constant_spin_to_slide );
+    connect(this,&LightCreator::sig_falloff_constant_spin_to_slide,m_falloff_slider_constant,&QSlider::setValue);
+
+    connect(m_falloff_slider_linear, &QSlider::valueChanged, this , &LightCreator::slot_falloff_linear_slide_to_spin );
+    connect(this,&LightCreator::sig_falloff_linear_slide_to_spin,m_falloff_spinbox_linear,&QDoubleSpinBox::setValue);
+
+    connect(m_falloff_spinbox_linear, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_linear_spin_to_slide );
+    connect(this,&LightCreator::sig_falloff_linear_spin_to_slide,m_falloff_slider_linear,&QSlider::setValue);
+
+    connect(m_falloff_slider_quadratic, &QSlider::valueChanged, this , &LightCreator::slot_falloff_quadratic_slide_to_spin );
+    connect(this,&LightCreator::sig_falloff_quadratic_slide_to_spin,m_falloff_spinbox_quadratic,&QDoubleSpinBox::setValue);
+
+    connect(m_falloff_spinbox_quadratic, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_quadratic_spin_to_slide );
+    connect(this,&LightCreator::sig_falloff_quadratic_spin_to_slide,m_falloff_slider_quadratic,&QSlider::setValue);
+
+
+    // OK Button
+    connect(m_button_create,&QPushButton::clicked,this,&LightCreator::open_dialogueConfirm);
+    connect(this,&LightCreator::sig_close_windows,this,&QWidget::close);
+
+
+
+
+
     // Init with Directionnal selected by default
     m_angle_lab->setVisible(false);
-    m_angle_spinbox->setVisible(false);
-    m_angle_slider->setVisible(false);
+    m_angle_lab->setVisible(false);
+    m_inner_angle_spinbox->setVisible(false);
+    m_inner_angle_slider->setVisible(false);
+    m_inner_angle_lab->setVisible(false);
+    m_outter_angle_spinbox->setVisible(false);
+    m_outter_angle_slider->setVisible(false);
+    m_outter_angle_lab->setVisible(false);
+
+
     m_pos_x_lab->setVisible(false);
     m_pos_y_lab->setVisible(false);
     m_pos_z_lab->setVisible(false);
@@ -84,13 +227,19 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
 
 
 
+
+
     m_intensity_spinbox-> setDecimals (NB_DECIMAL);
     m_intensity_spinbox->setMaximum(MAX_INTENSITY);
     m_intensity_slider->setMaximum(MAX_INTENSITY);
 
-    m_angle_spinbox-> setDecimals (NB_DECIMAL);
-    m_angle_spinbox->setMaximum(MAX_ANGLE);
-    m_angle_slider->setMaximum(MAX_ANGLE);
+    m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
+    m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
+    m_inner_angle_slider->setMaximum(MAX_ANGLE);
+
+    m_outter_angle_spinbox-> setDecimals (NB_DECIMAL);
+    m_outter_angle_spinbox->setMaximum(MAX_ANGLE);
+    m_outter_angle_slider->setMaximum(MAX_ANGLE);
 
     m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
@@ -158,117 +307,17 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     p.setColor(QPalette::Background,*m_color);
     m_result_color->setAutoFillBackground(true);
     m_result_color->setPalette(p);
-    connect(m_button_color, &QPushButton::clicked,this,&LightCreator::open_dialogColor);
-
-    // Selecter
-    connect(m_kind_of_light,static_cast<void (QComboBox::*) (int)>(&QComboBox::currentIndexChanged),this,&LightCreator::slot_select_light);
-    // Selecter Angle
-
-    connect(this,&LightCreator::sig_show_angle,m_angle_slider,&QSlider::show);
-    connect(this,&LightCreator::sig_show_angle,m_angle_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_angle,m_angle_spinbox,&QDoubleSpinBox::show);
-
-    connect(this,&LightCreator::sig_hide_angle,m_angle_slider,&QSlider::hide);
-    connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_angle,m_angle_spinbox,&QDoubleSpinBox::hide);
-
-    // Selecter dir
-    connect(this,&LightCreator::sig_hide_dir,m_dir_x_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_dir,m_dir_y_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_dir,m_dir_z_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_dir,m_dir_x_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_dir,m_dir_y_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_dir,m_dir_z_lab,&QLabel::hide);
-
-    connect(this,&LightCreator::sig_show_dir,m_dir_x_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_dir,m_dir_y_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_dir,m_dir_z_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_dir,m_dir_x_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_dir,m_dir_y_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_dir,m_dir_z_lab,&QLabel::show);
-
-    connect(this,&LightCreator::sig_hide_dir,m_direction_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_show_dir,m_direction_lab,&QLabel::show);
-
-    // Selecter Falloff
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_quadratic,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_constant,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_lab_linear,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_linear,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_constant,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_spinbox_quadratic,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_linear,&QSlider::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_constant,&QSlider::hide);
-    connect(this,&LightCreator::sig_hide_falloff,m_falloff_slider_quadratic,&QSlider::hide);
-
-
-    //Selecter Position
-
-    connect(this,&LightCreator::sig_hide_pos,m_pos_x_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_pos,m_pos_y_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_pos,m_pos_z_spin,&QDoubleSpinBox::hide);
-    connect(this,&LightCreator::sig_hide_pos,m_pos_x_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_pos,m_pos_y_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_hide_pos,m_pos_z_lab,&QLabel::hide);
-
-    connect(this,&LightCreator::sig_show_pos,m_pos_x_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_pos,m_pos_y_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_pos,m_pos_z_spin,&QDoubleSpinBox::show);
-    connect(this,&LightCreator::sig_show_pos,m_pos_x_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_pos,m_pos_y_lab,&QLabel::show);
-    connect(this,&LightCreator::sig_show_pos,m_pos_z_lab,&QLabel::show);
-
-    connect(this,&LightCreator::sig_hide_pos,m_coord_lab,&QLabel::hide);
-    connect(this,&LightCreator::sig_show_pos,m_coord_lab,&QLabel::show);
 
 
 
-    // Intensity
-    connect(m_intensity_slider, &QSlider::valueChanged, this , &LightCreator::slot_intensity_slide_to_spin );
-    connect(this,&LightCreator::sig_intensity_slide_to_spin,m_intensity_spinbox,&QDoubleSpinBox::setValue);
-
-    connect(m_intensity_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_intensity_spin_to_slide );
-    connect(this,&LightCreator::sig_intensity_spin_to_slide,m_intensity_slider,&QSlider::setValue);
-
-    // Angle
-    connect(m_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_angle_slide_to_spin );
-    connect(this,&LightCreator::sig_angle_slide_to_spin,m_angle_spinbox,&QDoubleSpinBox::setValue);
-
-    connect(m_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_angle_spin_to_slide );
-    connect(this,&LightCreator::sig_angle_spin_to_slide,m_angle_slider,&QSlider::setValue);
-
-    // Falloff
-
-    connect(m_falloff_slider_constant, &QSlider::valueChanged, this , &LightCreator::slot_falloff_constant_slide_to_spin );
-    connect(this,&LightCreator::sig_falloff_constant_slide_to_spin,m_falloff_spinbox_constant,&QDoubleSpinBox::setValue);
-
-    connect(m_falloff_spinbox_constant, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_constant_spin_to_slide );
-    connect(this,&LightCreator::sig_falloff_constant_spin_to_slide,m_falloff_slider_constant,&QSlider::setValue);
-
-    connect(m_falloff_slider_linear, &QSlider::valueChanged, this , &LightCreator::slot_falloff_linear_slide_to_spin );
-    connect(this,&LightCreator::sig_falloff_linear_slide_to_spin,m_falloff_spinbox_linear,&QDoubleSpinBox::setValue);
-
-    connect(m_falloff_spinbox_linear, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_linear_spin_to_slide );
-    connect(this,&LightCreator::sig_falloff_linear_spin_to_slide,m_falloff_slider_linear,&QSlider::setValue);
-
-    connect(m_falloff_slider_quadratic, &QSlider::valueChanged, this , &LightCreator::slot_falloff_quadratic_slide_to_spin );
-    connect(this,&LightCreator::sig_falloff_quadratic_slide_to_spin,m_falloff_spinbox_quadratic,&QDoubleSpinBox::setValue);
-
-    connect(m_falloff_spinbox_quadratic, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_falloff_quadratic_spin_to_slide );
-    connect(this,&LightCreator::sig_falloff_quadratic_spin_to_slide,m_falloff_slider_quadratic,&QSlider::setValue);
-
-
-    // OK Button
-    connect(m_button_create,&QPushButton::clicked,this,&LightCreator::open_dialogueConfirm);
-    connect(this,&LightCreator::sig_close_windows,this,&QWidget::close);
-
+    m_intensity_spinbox->setValue(MAX_INTENSITY);
+    m_intensity_slider->setValue(MAX_INTENSITY);
 }
 
 LightCreator::~LightCreator(){
   delete m_color;
   delete m_intensity_val;
-  delete m_angle_val;
+  delete m_inner_angle_val;
   delete m_falloff_val_constant;
   delete m_falloff_val_linear;
   delete m_falloff_val_quadratic;
@@ -309,12 +358,25 @@ void LightCreator::open_dialogueConfirm(){
 
 void LightCreator::save_light(Ra::Engine::Entity *entity){
   Ra::Engine::Light * light;
+  double dr,dg,db;
+  int ir,ig,ib;
+  m_color->getRgb(&ir,&ig,&ib);
+  dr=(double)ir;
+  dg=(double)ig;
+  db=(double)ib;
+  dr/=255;
+  dg/=255;
+  db/=255;
+  Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
+
 
   switch (*m_lightType) {
     case 0:
       light = new Ra::Engine::DirectionalLight( entity,m_name->toStdString() );
-      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
-      light->setPosition(*m_position);
+      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      light->setDirection(*m_direction);
+      light->setColor(c);
+      // End
 
       break;
     case 1:
@@ -323,13 +385,14 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       light->setPosition(*m_position);
       m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       light->setDirection(*m_direction);
+      // TODO a finir
 
         break;
     case 2:
       light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
       m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
       light->setPosition(*m_position);
-
+      // TODO à finir
         break;
     default:
       assert(false);
@@ -403,16 +466,28 @@ void LightCreator::slot_intensity_spin_to_slide(double val){
 
 /// Angle
 
-void LightCreator::slot_angle_slide_to_spin(int val){
+void LightCreator::slot_inner_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_angle_val = tmp;
-  emit sig_angle_slide_to_spin(tmp);
+  *m_inner_angle_val = tmp;
+  emit sig_inner_angle_slide_to_spin(tmp);
 }
 
-void LightCreator::slot_angle_spin_to_slide(double val){
-  *m_angle_val = val;
+void LightCreator::slot_inner_angle_spin_to_slide(double val){
+  *m_inner_angle_val = val;
   int tmp = (int) val;
-  emit sig_angle_spin_to_slide(tmp);
+  emit sig_inner_angle_spin_to_slide(tmp);
+}
+
+void LightCreator::slot_outter_angle_slide_to_spin(int val){
+  double tmp =  (double) val;
+  *m_outter_angle_val = tmp;
+  emit sig_outter_angle_slide_to_spin(tmp);
+}
+
+void LightCreator::slot_outter_angle_spin_to_slide(double val){
+  *m_outter_angle_val = val;
+  int tmp = (int) val;
+  emit sig_outter_angle_spin_to_slide(tmp);
 }
 
 

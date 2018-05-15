@@ -39,8 +39,10 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     /// Used to change value of the QDoubleSpinBox when you move the QSlider (and conversaly)
     void slot_intensity_slide_to_spin(int val);
     void slot_intensity_spin_to_slide(double val);
-    void slot_angle_slide_to_spin(int val);
-    void slot_angle_spin_to_slide(double val);
+    void slot_inner_angle_slide_to_spin(int val);
+    void slot_inner_angle_spin_to_slide(double val);
+    void slot_outter_angle_slide_to_spin(int val);
+    void slot_outter_angle_spin_to_slide(double val);
 
     void slot_falloff_constant_slide_to_spin(int val);
     void slot_falloff_constant_spin_to_slide(double val);
@@ -55,8 +57,11 @@ class LightCreator : public QWidget, private Ui::LightCreator {
   signals:
     void sig_intensity_slide_to_spin(double);
     void sig_intensity_spin_to_slide(int);
-    void sig_angle_slide_to_spin(double);
-    void sig_angle_spin_to_slide(int);
+    void sig_inner_angle_slide_to_spin(double);
+    void sig_inner_angle_spin_to_slide(int);
+    void sig_outter_angle_slide_to_spin(double);
+    void sig_outter_angle_spin_to_slide(int);
+
     void sig_falloff_constant_slide_to_spin(double);
     void sig_falloff_constant_spin_to_slide(int);
     void sig_falloff_linear_slide_to_spin(double);
@@ -88,7 +93,8 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     int * m_lightType;
     QColor *m_color;
     double *m_intensity_val;
-    double *m_angle_val;
+    double *m_inner_angle_val;
+    double *m_outter_angle_val;
     double *m_falloff_val_constant;
     double *m_falloff_val_linear;
     double *m_falloff_val_quadratic;
