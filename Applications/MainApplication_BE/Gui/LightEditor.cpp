@@ -1,6 +1,8 @@
 #include <Gui/LightEditor.hpp>
 #include <Gui/MainWindow.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
+#include <Engine/Component/Component.hpp>
+#include <Engine/Renderer/Light/Light.hpp>
 
 #include <QPushButton>
 #include <QColorDialog>
@@ -263,8 +265,12 @@ void LightEditor::slot_falloff_quadratic_spin_to_slide(double val){
 }
 
 void LightEditor::init(Ra::Engine::ItemEntry item){
-    m_lineEdit->setText("Blblbl");
+    Ra::Engine::Light *m_light = (Ra::Engine::Light *) item.m_component;
+    m_lineEdit->setText(QString::fromStdString(m_light->getName()));
     m_lineEdit->setDisabled(true);
+    Ra::Engine::Light::LightType type = m_light->getType();
+    m_kind_of_light->setDisabled(true);
+    m_kind_of_light->setCurrentIndex(type);
     show();
 }
 
