@@ -34,7 +34,7 @@
         <x>0</x>
         <y>30</y>
         <width>811</width>
-        <height>441</height>
+        <height>464</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="m_formLayout">
@@ -144,28 +144,14 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <layout class="QHBoxLayout" name="m_angle_layout">
-         <item alignment="Qt::AlignLeft">
-          <widget class="QDoubleSpinBox" name="m_angle_spinbox"/>
-         </item>
-         <item>
-          <widget class="QSlider" name="m_angle_slider">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="m_falloff_lab">
          <property name="text">
           <string>Falloff :</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="6" column="1">
         <layout class="QVBoxLayout" name="m_falloff_layout_main">
          <item>
           <layout class="QHBoxLayout" name="m_falloff_layout_constant">
@@ -232,14 +218,14 @@
          </item>
         </layout>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="m_coord_lab">
          <property name="text">
           <string>Position : </string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <layout class="QHBoxLayout" name="m_pos_layout">
          <item>
           <widget class="QLabel" name="m_pos_x_lab">
@@ -273,14 +259,14 @@
          </item>
         </layout>
        </item>
-       <item row="8" column="0">
+       <item row="9" column="0">
         <widget class="QLabel" name="m_direction_lab">
          <property name="text">
           <string>Direction : </string>
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
+       <item row="9" column="1">
         <layout class="QHBoxLayout" name="m_dir_layout">
          <item>
           <widget class="QLabel" name="m_dir_x_lab">
@@ -311,6 +297,52 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="m_dir_z_spin"/>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="m_layout_inner_angle">
+           <item>
+            <widget class="QLabel" name="m_inner_angle_lab">
+             <property name="text">
+              <string>Inner :</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="m_inner_angle_spinbox"/>
+           </item>
+           <item>
+            <widget class="QSlider" name="m_inner_angle_slider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="m_layout_outter_angle">
+           <item>
+            <widget class="QLabel" name="m_outter_angle_lab">
+             <property name="text">
+              <string>Outter</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="m_outter_angle_spinbox"/>
+           </item>
+           <item>
+            <widget class="QSlider" name="m_outter_angle_slider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
