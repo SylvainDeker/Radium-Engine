@@ -2,7 +2,7 @@
 #define DIFFUSION_DEFINITION
 
 #include <Core/Geometry/Delta.hpp>        // Delta
-#include <Core/Geometry/Adjacency.hpp> //Geometry::AdjacencyMatrix
+#include <Core/Geometry/Adjacency.hpp> //AdjacencyMatrix
 #include <Core/Math/LinearAlgebra.hpp>           // Sparse
 
 namespace Ra {

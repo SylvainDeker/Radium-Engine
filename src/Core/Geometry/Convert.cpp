@@ -35,7 +35,7 @@ bool Twin::operator<( const Twin& twin ) const {
              ( ( m_id[0] == twin.m_id[0] ) && ( m_id[1] < twin.m_id[1] ) ) );
 }
 
-void convert( const Geometry::TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
+void convert( const TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
     dcel.clear();
     // Create vertices
     for ( unsigned int i = 0; i < mesh.m_vertices.size(); ++i )

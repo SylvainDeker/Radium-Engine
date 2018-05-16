@@ -43,7 +43,7 @@ void diffuseDelta( const AdjacencyMatrix& A, const Delta& delta,
         //            const Scalar uv = u_it.value();
         //            Scalar oneRingMeanValue = 0.0;
         //            uint nonZero = 0;
-        //            for( Geometry::AdjacencyMatrix::InnerIterator A_it( A, j ); A_it; ++A_it) {
+        //            for( AdjacencyMatrix::InnerIterator A_it( A, j ); A_it; ++A_it) {
         //                uint i = A_it.row();
         //                oneRingMeanValue += u.coeff( i, 0 );
         //                ++nonZero;

@@ -477,7 +477,7 @@ Index TriangleKdTree<Index>::doQueryRestrictedClosestIndexTriangle( const Vector
                 else
                 {
                     new_off = 0;
-                    const VectorType& v = Ra::Core::Geometry::triangleBarycenter( a, b, c );
+                    const VectorType& v = triangleBarycenter( a, b, c );
                     const Scalar d = v[node.dim] - node.splitValue;
                     if ( d < 0. )
                     {

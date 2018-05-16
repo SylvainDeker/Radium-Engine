@@ -11,13 +11,13 @@ inline Scalar getTriangleArea( const TriangleMesh& mesh, TriangleIdx triIdx ) {
     std::array<Math::Vector3, 3> v;
     getTriangleVertices( mesh, triIdx, v );
 
-    return Geometry::triangleArea( v[0], v[1], v[2] );
+    return triangleArea( v[0], v[1], v[2] );
 }
 
 inline Math::Vector3 getTriangleNormal( const TriangleMesh& mesh, TriangleIdx triIdx ) {
     std::array<Math::Vector3, 3> v;
     getTriangleVertices( mesh, triIdx, v );
-    return Geometry::triangleNormal( v[0], v[1], v[2] );
+    return triangleNormal( v[0], v[1], v[2] );
 }
 
 inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
@@ -30,7 +30,7 @@ inline void getTriangleVertices( const TriangleMesh& mesh, TriangleIdx triIdx,
 }
 
 inline Math::Aabb getAabb( const TriangleMesh& mesh ) {
-    return Geometry::aabb( mesh.m_vertices );
+    return aabb( mesh.m_vertices );
 }
 
 inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 ) {

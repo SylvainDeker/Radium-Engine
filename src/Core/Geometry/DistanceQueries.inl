@@ -442,6 +442,6 @@ inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Math::Vector3
     return output;
 }
 
-} // namespace Geometry::
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

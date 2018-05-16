@@ -38,7 +38,7 @@ void smartClamp( const BitSet& bit, const ScalarValue& value, ScalarValue& clamp
 }
 
 Container::VectorArray<Math::Vector3> laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
-                                         const Ra::Core::Geometry::LaplacianMatrix& L,
+                                         const LaplacianMatrix& L,
                                          const ScalarValue& weight, const uint iteration ) {
     Container::VectorArray<Math::Vector3> p( v );
     auto pM = p.getMap();
@@ -58,7 +58,7 @@ Container::VectorArray<Math::Vector3> laplacianSmoothing( const Container::Vecto
 }
 
 void laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
-                         const Ra::Core::Geometry::LaplacianMatrix& L, const ScalarValue& weight,
+                         const LaplacianMatrix& L, const ScalarValue& weight,
                          const uint iteration, Container::VectorArray<Math::Vector3>& p ) {
     p = v;
     auto pM = p.getMap();

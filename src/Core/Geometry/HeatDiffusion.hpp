@@ -3,8 +3,8 @@
 
 #include <Core/Geometry/Delta.hpp>        // Delta
 #include <Core/Container/VectorArray.hpp>       // VectorArray
-#include <Core/Geometry/Area.hpp>           // Geometry::AreaMatrix
-#include <Core/Geometry/Laplacian.hpp> // Geometry::LaplacianMatrix
+#include <Core/Geometry/Area.hpp>           // AreaMatrix
+#include <Core/Geometry/Laplacian.hpp> // LaplacianMatrix
 #include <Core/RaCore.hpp>
 
 namespace Ra {

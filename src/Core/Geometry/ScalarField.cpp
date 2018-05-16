@@ -23,8 +23,8 @@ Gradient gradientOfFieldS( const Container::VectorArray<Math::Vector3>& p, const
         Math::Vector3 e12 = p[v2] - p[v1];
         Math::Vector3 e20 = p[v0] - p[v2];
 
-        Math::Vector3 N = Geometry::triangleNormal( p[v0], p[v1], p[v2] );
-        Scalar area = Geometry::triangleArea( p[v0], p[v1], p[v2] );
+        Math::Vector3 N = triangleNormal( p[v0], p[v1], p[v2] );
+        Scalar area = triangleArea( p[v0], p[v1], p[v2] );
 
         g.push_back(
             -( ( ( u0 * N.cross( e12 ) ) + ( u1 * N.cross( e20 ) ) + ( u2 * N.cross( e01 ) ) ) /

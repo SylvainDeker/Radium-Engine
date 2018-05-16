@@ -33,7 +33,7 @@ RA_CORE_API void smartClamp( const BitSet& bit, const ScalarValue& value, Scalar
  * weighted sum of the iteration i and iteration i-1.
  */
 RA_CORE_API Container::VectorArray<Math::Vector3> laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
-                                                     const Ra::Core::Geometry::LaplacianMatrix& L,
+                                                     const LaplacianMatrix& L,
                                                      const ScalarValue& weight,
                                                      const uint iteration );
 
@@ -43,7 +43,7 @@ RA_CORE_API Container::VectorArray<Math::Vector3> laplacianSmoothing( const Cont
  * weighted sum of the iteration i and iteration i-1.
  */
 RA_CORE_API void laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
-                                     const Ra::Core::Geometry::LaplacianMatrix& L,
+                                     const LaplacianMatrix& L,
                                      const ScalarValue& weight, const uint iteration,
                                      Container::VectorArray<Math::Vector3>& p );
 
