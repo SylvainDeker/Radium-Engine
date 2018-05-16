@@ -7,6 +7,7 @@
 
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Core/Container/Index.hpp>
+#include <Engine/Renderer/Light/Light.hpp>
 
 #include <ui_LightCreator.h>
 
@@ -49,8 +50,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
     void slot_falloff_linear_spin_to_slide(double val);
     void slot_falloff_quadratic_slide_to_spin(int val);
     void slot_falloff_quadratic_spin_to_slide(double val);
-    /// Used to check if the name is not empty
-    void open_dialogueConfirm();
+    /// Applies changes to light
+    void edit_light();
 
   signals:
     void sig_intensity_slide_to_spin(double);
@@ -65,18 +66,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
     void sig_falloff_linear_spin_to_slide(int);
     void sig_falloff_quadratic_slide_to_spin(double);
     void sig_falloff_quadratic_spin_to_slide(int);
-
-
-
     void sig_onItemAdded( const Engine::ItemEntry& ent );
-
-
-    void sig_close_windows();
-    protected:
-
-
-    private:
-
+    void sig_close_window();
 
     private:
         QColor *m_color;
@@ -87,7 +78,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
         double *m_falloff_val_linear;
         double *m_falloff_val_quadratic;
         QString *m_name;
-
+        Ra::Engine::Light *m_light;
+        Ra::Engine::Light::LightType m_type;
 };
 } // namespace Gui
 } // namespace Ra
