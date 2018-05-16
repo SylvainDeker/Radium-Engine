@@ -271,6 +271,87 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     Ra::Engine::Light::LightType type = m_light->getType();
     m_kind_of_light->setDisabled(true);
     m_kind_of_light->setCurrentIndex(type);
+    
+    m_angle_lab->setVisible(false);
+    m_angle_lab->setVisible(false);
+    m_inner_angle_spinbox->setVisible(false);
+    m_inner_angle_slider->setVisible(false);
+    m_inner_angle_lab->setVisible(false);
+    m_outer_angle_spinbox->setVisible(false);
+    m_outer_angle_slider->setVisible(false);
+    m_outer_angle_lab->setVisible(false);
+
+    m_pos_x_lab->setVisible(true);
+    m_pos_y_lab->setVisible(true);
+    m_pos_z_lab->setVisible(true);
+    m_pos_x_spin->setVisible(true);
+    m_pos_y_spin->setVisible(true);
+    m_pos_z_spin->setVisible(true);
+    m_coord_lab->setVisible(true);
+
+    m_falloff_lab->setVisible(true);
+    m_falloff_spinbox_linear->setVisible(true);
+    m_falloff_spinbox_constant->setVisible(true);
+    m_falloff_spinbox_quadratic->setVisible(true);
+    m_falloff_slider_linear->setVisible(true);
+    m_falloff_slider_constant->setVisible(true);
+    m_falloff_slider_quadratic->setVisible(true);
+    m_falloff_lab_linear->setVisible(true);
+    m_falloff_lab_constant->setVisible(true);
+    m_falloff_lab_quadratic->setVisible(true);
+
+     m_dir_x_spin->setVisible(true);
+     m_dir_y_spin->setVisible(true);
+     m_dir_z_spin->setVisible(true);
+     m_dir_x_lab->setVisible(true);
+     m_dir_y_lab->setVisible(true);
+     m_dir_z_lab->setVisible(true);
+     m_direction_lab->setVisible(true);
+
+    switch (type) {
+        case 0 : // Directional
+            m_pos_x_lab->setVisible(false);
+            m_pos_y_lab->setVisible(false);
+            m_pos_z_lab->setVisible(false);
+            m_pos_x_spin->setVisible(false);
+            m_pos_y_spin->setVisible(false);
+            m_pos_z_spin->setVisible(false);
+            m_coord_lab->setVisible(false);
+
+            m_falloff_lab->setVisible(false);
+            m_falloff_spinbox_linear->setVisible(false);
+            m_falloff_spinbox_constant->setVisible(false);
+            m_falloff_spinbox_quadratic->setVisible(false);
+            m_falloff_slider_linear->setVisible(false);
+            m_falloff_slider_constant->setVisible(false);
+            m_falloff_slider_quadratic->setVisible(false);
+            m_falloff_lab_linear->setVisible(false);
+            m_falloff_lab_constant->setVisible(false);
+            m_falloff_lab_quadratic->setVisible(false);
+            break;
+        case 1 : // Point
+            m_dir_x_spin->setVisible(false);
+            m_dir_y_spin->setVisible(false);
+            m_dir_z_spin->setVisible(false);
+            m_dir_x_lab->setVisible(false);
+            m_dir_y_lab->setVisible(false);
+            m_dir_z_lab->setVisible(false);
+            m_direction_lab->setVisible(false);
+            break;
+        case 2 : // Spot
+            m_angle_lab->setVisible(true);
+            m_angle_lab->setVisible(true);
+            m_inner_angle_spinbox->setVisible(true);
+            m_inner_angle_slider->setVisible(true);
+            m_inner_angle_lab->setVisible(true);
+            m_outer_angle_spinbox->setVisible(true);
+            m_outer_angle_slider->setVisible(true);
+            m_outer_angle_lab->setVisible(true);
+            break;
+        default :
+            return;
+    }
+
     show();
 }
 
