@@ -63,7 +63,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
     m_edition = new EditionWidget(nullptr, m_selectionManager);
     this->layoutForEdition->addWidget(m_edition);
-    m_lightCreator = new Gui::LightCreator(this);
+    m_lightCreator = new Gui::LightCreator(this,m_viewer);
     m_lightEditor = new Gui::LightEditor();
 
     createConnections();
@@ -80,7 +80,7 @@ void MainWindow::cleanup() {
 }
 
 void MainWindow::createConnections() {
-    
+
     connect( actionOpenMesh, &QAction::triggered, this, &MainWindow::loadFile );
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,

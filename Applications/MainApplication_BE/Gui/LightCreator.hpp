@@ -9,6 +9,7 @@
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Core/Math/Math.hpp>
 #include <Engine/Renderer/Light/Light.hpp>
+#include <GuiBase/Viewer/Viewer.hpp>
 
 #include <ui_LightCreator.h>
 
@@ -32,7 +33,8 @@ class LightCreator : public QWidget, private Ui::LightCreator {
   Q_OBJECT
 
   public:
-    LightCreator( QWidget* parent = nullptr );
+    LightCreator( QWidget* parent ,Ra::Gui::Viewer *viewer );
+    ~LightCreator();
 
   private slots:
     /// Dialog to select a color
@@ -102,6 +104,8 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     QString *m_name;
     Core::Vector3 *m_position;
     Core::Vector3 *m_direction;
+    Gui::Viewer * m_viewer;
+
 
     void save_light(Ra::Engine::Entity *entity);
 };
