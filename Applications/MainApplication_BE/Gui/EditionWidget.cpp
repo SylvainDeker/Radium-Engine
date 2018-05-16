@@ -98,7 +98,7 @@ namespace Gui{
 
             if(doProperties)
             {
-                //TODO fix sign for scale
+                //let's hope there's no negative scaling
                 Ra::Core::Vector3 v(m(0,0), m(1,0), m(2,0));
                 SET_VALUE_NO_SIGNALS(m_scale_x, v.norm());
                 v = Ra::Core::Vector3(m(0,1), m(1,1), m(2,1));
