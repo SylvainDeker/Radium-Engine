@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>829</width>
-    <height>566</height>
+    <width>836</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,7 +34,7 @@
         <x>0</x>
         <y>30</y>
         <width>811</width>
-        <height>464</height>
+        <height>488</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="m_formLayout">
@@ -216,6 +216,13 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QLabel" name="m_falloff_tip">
+           <property name="text">
+            <string>No Falloff : Constant = 1,0 , Linear = 0 , Quadratic = 0</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item row="8" column="0">
@@ -298,6 +305,13 @@
          <item>
           <widget class="QDoubleSpinBox" name="m_dir_z_spin"/>
          </item>
+         <item>
+          <widget class="QLabel" name="m_dir_tip">
+           <property name="text">
+            <string>&lt;- This vector will be normalized</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item row="4" column="1">
@@ -348,13 +362,19 @@
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="m_button_create">
-     <property name="text">
-      <string>OK</string>
-     </property>
+     <widget class="QPushButton" name="m_button_create">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>550</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>OK</string>
+      </property>
+     </widget>
     </widget>
    </item>
   </layout>

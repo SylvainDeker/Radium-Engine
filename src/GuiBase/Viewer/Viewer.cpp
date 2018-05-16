@@ -240,8 +240,7 @@ void Gui::Viewer::intializeRenderer( Engine::Renderer* renderer ) {
 }
 
 void Gui::Viewer::addLight(Ra::Engine::Light*l){
-  // Gui::Viewer::m_lights.push_back(l);
-  // TODO (Sylvain)
+  // sldkrcheckpoint
   LOG( logINFO ) << "Add new light \n";
   for ( auto& rend : m_renderers )
     rend->addLight( l );
