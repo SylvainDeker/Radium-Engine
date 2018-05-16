@@ -33,8 +33,8 @@ class RA_CORE_API TaskQueue {
 
     /// Record of a task's start and end time.
     struct TimerData {
-        Utils::TimePoint start;
-        Utils::TimePoint end;
+        TimePoint start;
+        TimePoint end;
         uint threadId;
         std::string taskName;
     };
@@ -53,7 +53,7 @@ class RA_CORE_API TaskQueue {
     /// Registers a task to be executed.
     /// Task must have been created with new and be initialized with its parameter.
     /// The task queue assumes ownership of the task.
-    TaskId registerTask( Utils::Task* task );
+    TaskId registerTask( Task* task );
 
     /// Add dependency between two tasks. The successor task will be executed only when all
     /// its predecessor completed.
