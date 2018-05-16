@@ -48,8 +48,8 @@ inline uint getLastVertex( const Triangle& t1, uint v1, uint v2 ) {
 }
 
 inline bool containsEdge( const Triangle& t1, uint v1, uint v2 ) {
-    const bool hasv1 = ( t1.array() == Ra::Core::Math::Vector3ui{v1, v1, v1}.array() ).any();
-    const bool hasv2 = ( t1.array() == Ra::Core::Math::Vector3ui{v2, v2, v2}.array() ).any();
+    const bool hasv1 = ( t1.array() == Math::Vector3ui{v1, v1, v1}.array() ).any();
+    const bool hasv2 = ( t1.array() == Math::Vector3ui{v2, v2, v2}.array() ).any();
     return hasv1 && hasv2;
 }
 
@@ -67,7 +67,7 @@ struct EdgeHash {
 
 using EdgeTable = std::unordered_set<std::pair<uint, uint>, EdgeHash, EdgeEqual>;
 
-std::vector<Ra::Core::Math::Vector2ui> getEdges( const TriangleMesh& mesh ) {
+std::vector<Math::Vector2ui> getEdges( const TriangleMesh& mesh ) {
     EdgeTable table;
     for ( const auto& t : mesh.m_triangles )
     {
@@ -76,7 +76,7 @@ std::vector<Ra::Core::Math::Vector2ui> getEdges( const TriangleMesh& mesh ) {
             table.insert( {t[i], t[( i + 1 ) % 3]} );
         }
     }
-    std::vector<Ra::Core::Math::Vector2ui> edges;
+    std::vector<Math::Vector2ui> edges;
     for ( const auto& e : table )
     {
         edges.push_back( {e.first, e.second} );

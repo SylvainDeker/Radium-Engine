@@ -122,9 +122,9 @@ bool normalizeWeights( Eigen::Ref<WeightMatrix> matrix, const bool MT ) {
     for ( int k = 0; k < matrix.innerSize(); ++k )
     {
         const Scalar sum = matrix.row( k ).sum();
-        if ( !Ra::Core::Math::areApproxEqual( sum, Scalar( 0 ) ) )
+        if ( !Math::areApproxEqual( sum, Scalar( 0 ) ) )
         {
-            if ( !Ra::Core::Math::areApproxEqual( sum, Scalar( 1 ) ) )
+            if ( !Math::areApproxEqual( sum, Scalar( 1 ) ) )
             {
                 skinningWeightOk = false;
                 matrix.row( k ) /= sum;

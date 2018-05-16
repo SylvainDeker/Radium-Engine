@@ -64,17 +64,17 @@ Pose interpolatePoses( const Pose& a, const Pose& b, const Scalar t ) {
     for ( int i = 0; i < int( size ); ++i )
     {
         // interpolate between the transforms
-        Ra::Core::Math::Transform aTransform = a[i];
-        Ra::Core::Math::Transform bTransform = b[i];
+        Math::Transform aTransform = a[i];
+        Math::Transform bTransform = b[i];
 
-        Ra::Core::Math::Quaternion aRot = Ra::Core::Math::Quaternion( aTransform.rotation() );
-        Ra::Core::Math::Quaternion bRot = Ra::Core::Math::Quaternion( bTransform.rotation() );
-        Ra::Core::Math::Quaternion interpRot = aRot.slerp( t, bRot );
+        Math::Quaternion aRot = Math::Quaternion( aTransform.rotation() );
+        Math::Quaternion bRot = Math::Quaternion( bTransform.rotation() );
+        Math::Quaternion interpRot = aRot.slerp( t, bRot );
 
-        Ra::Core::Math::Vector3 interpTranslation =
+        Math::Vector3 interpTranslation =
             ( 1.0 - t ) * aTransform.translation() + t * bTransform.translation();
 
-        Ra::Core::Math::Transform interpolatedTransform;
+        Math::Transform interpolatedTransform;
         interpolatedTransform.linear() = interpRot.toRotationMatrix();
         interpolatedTransform.translation() = interpTranslation;
 
@@ -84,13 +84,13 @@ Pose interpolatePoses( const Pose& a, const Pose& b, const Scalar t ) {
     return interpolatedPose;
 }
 
-void interpolateTransforms( const Ra::Core::Math::Transform& a, const Ra::Core::Math::Transform& b,
-                            const Scalar t, Ra::Core::Math::Transform& interpolated ) {
-    Ra::Core::Math::Quaternion aRot = Ra::Core::Math::Quaternion( a.rotation() );
-    Ra::Core::Math::Quaternion bRot = Ra::Core::Math::Quaternion( b.rotation() );
-    Ra::Core::Math::Quaternion interpRot = aRot.slerp( t, bRot );
+void interpolateTransforms( const Math::Transform& a, const Math::Transform& b,
+                            const Scalar t, Math::Transform& interpolated ) {
+    Math::Quaternion aRot = Math::Quaternion( a.rotation() );
+    Math::Quaternion bRot = Math::Quaternion( b.rotation() );
+    Math::Quaternion interpRot = aRot.slerp( t, bRot );
 
-    Ra::Core::Math::Vector3 interpTranslation = ( 1.0 - t ) * a.translation() + t * b.translation();
+    Math::Vector3 interpTranslation = ( 1.0 - t ) * a.translation() + t * b.translation();
 
     interpolated.linear() = interpRot.toRotationMatrix();
     interpolated.translation() = interpTranslation;

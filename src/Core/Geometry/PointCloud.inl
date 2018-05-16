@@ -20,7 +20,7 @@ inline Math::Transform principalAxis( const Container::Vector3Array& pts ) {
     CORE_ASSERT( Math::areApproxEqual( meanPoint( ptsAvg ).squaredNorm(), 0.f ), "oops" );
 
     // Compute variance-covariance matrix
-    Ra::Core::Math::MatrixN vCov =
+    Math::MatrixN vCov =
         ( 1.f / ( pts.size() - 1 ) ) * ( ptsAvg.getMap() * ptsAvg.getMap().transpose() );
 
     // Solve eigen vectors

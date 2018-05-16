@@ -35,7 +35,7 @@ bool Twin::operator<( const Twin& twin ) const {
              ( ( m_id[0] == twin.m_id[0] ) && ( m_id[1] < twin.m_id[1] ) ) );
 }
 
-void convert( const TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
+void convert( const TriangleMesh& mesh, Dcel& dcel ) {
     dcel.clear();
     // Create vertices
     for ( unsigned int i = 0; i < mesh.m_vertices.size(); ++i )
@@ -61,7 +61,7 @@ void convert( const TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
             CORE_ASSERT( ( he[i] != nullptr ), "HalfEdge_ptr == nullptr" );
         }
         // Create the face
-        Face_ptr f = Ra::Core::Container::make_shared<Face>( he[0] );
+        Face_ptr f = Container::make_shared<Face>( he[0] );
         CORE_ASSERT( ( f != nullptr ), "Face_ptr == nullptr" );
         f->idx = dcel.m_face.insert( f );
         CORE_ASSERT( f->idx.isValid(), "Face not inserted" );
@@ -110,7 +110,7 @@ void convert( const TriangleMesh& mesh, Ra::Core::Dcel& dcel ) {
     }
 }
 
-void convert( const Ra::Core::Dcel& dcel, TriangleMesh& mesh ) {
+void convert( const Dcel& dcel, TriangleMesh& mesh ) {
     const uint v_size = dcel.m_vertex.size();
     const uint f_size = dcel.m_face.size();
     mesh.m_vertices.resize( v_size );

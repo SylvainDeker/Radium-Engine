@@ -22,7 +22,7 @@ void addBone(
     {
         processed[dataID] = true;
         uint index = skelOut.addBone( parent, data.at( dataID ).m_frame,
-                                      Ra::Core::Animation::Handle::SpaceType::MODEL,
+                                      Animation::Handle::SpaceType::MODEL,
                                       data.at( dataID ).m_name );
         indexTable[dataID] = index;
         for ( const auto& edge : edgeList )

@@ -18,7 +18,7 @@ inline RA_CORE_API Scalar projectOnSegment( const Math::Vector3& q, const Math::
     {
         return 0;
     }
-    return Ra::Core::Math::clamp<Scalar>( ( q - a ).dot( ab ) / ( ab.squaredNorm() ), 0, 1 );
+    return Math::clamp<Scalar>( ( q - a ).dot( ab ) / ( ab.squaredNorm() ), 0, 1 );
 }
 
 inline RA_CORE_API Scalar pointToSegmentSq( const Math::Vector3& q, const Math::Vector3& a,
