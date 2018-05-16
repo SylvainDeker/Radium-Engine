@@ -34,10 +34,10 @@ class KeyPose : public KeyFrame<Core::Animation::Pose> {
         CORE_ASSERT( ( F0.size() == F1.size() ),
                      "Pose size mismatch: why did you put bad poses inside the keyframes?" );
         const uint pose_size = F0.size();
-        Core::Animation::Pose result( pose_size );
+        Animation::Pose result( pose_size );
         for ( uint i = 0; i < pose_size; ++i )
         {
-            Core::Asset::interpolate( F0[i], F1[i], t, result[i] );
+            Asset::interpolate( F0[i], F1[i], t, result[i] );
         }
         return result;
     }

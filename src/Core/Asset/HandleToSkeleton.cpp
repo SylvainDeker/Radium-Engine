@@ -12,7 +12,7 @@ namespace {
 void addBone(
     const int parent,                                                       // index of parent bone
     const uint dataID,                                                      // index in map
-    const Ra::Core::Container::AlignedStdVector<Ra::Core::Asset::HandleComponentData>& data, // handle bone data
+    const Ra::Core::Container::AlignedStdVector<HandleComponentData>& data, // handle bone data
     const Ra::Core::Container::AlignedStdVector<Ra::Core::Math::Vector2i>& edgeList,         // list of edges
     std::vector<bool>& processed,       // which ids have been processed
     Core::Animation::Skeleton& skelOut, // skeleton being built
@@ -36,7 +36,7 @@ void addBone(
 }
 } // namespace
 
-void createSkeleton( const Ra::Core::Asset::HandleData& data, Core::Animation::Skeleton& skelOut,
+void createSkeleton( const HandleData& data, Core::Animation::Skeleton& skelOut,
                      std::map<uint, uint>& indexTableOut ) {
     const uint size = data.getComponentDataSize();
     auto component = data.getComponentData();
