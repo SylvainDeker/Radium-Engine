@@ -389,7 +389,8 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
 
   // printf("===============================%lf;%lf;%lf\n",dr,dg,db );
 
-  Core::Color c = Core::Color( dr, dg, db,/* *m_intensity_val/MAX_INTENSITY */ 1 );
+  Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
+  // TODO (Sylvain) check m_intensity_val/MAX_INTENSITY
 
 
 
