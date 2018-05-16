@@ -2,7 +2,6 @@
 #include <Gui/MainWindow.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Engine/Component/Component.hpp>
-#include <Engine/Renderer/Light/Light.hpp>
 
 #include <QPushButton>
 #include <QColorDialog>
@@ -152,6 +151,9 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     connect(m_falloff_spinbox_quadratic, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_falloff_quadratic_spin_to_slide );
     connect(this,&LightEditor::sig_falloff_quadratic_spin_to_slide,m_falloff_slider_quadratic,&QSlider::setValue);
 
+// OK Button
+    connect(m_button_create,&QPushButton::clicked,this,&LightEditor::edit_light);
+    connect(this,&LightEditor::sig_close_window,this,&QWidget::close);
 
 }
 
@@ -173,19 +175,6 @@ void LightEditor::open_dialogColor(){
   p.setColor(QPalette::Background,*m_color);
   m_result_color->setPalette(p);
 
-}
-
-void LightEditor::open_dialogueConfirm(){
-  *m_name = m_lineEdit->text();
-  if( m_name->isEmpty())
-    QMessageBox::critical(this, "Watch out !","A new light must have a name !");
-  else {
-    // Ra::Engine::Entity *e=new Ra::Engine::Entity("Entity_Test");
-    // Ra::Engine::PointLight *p = new Ra::Engine::PointLight(e,"PointLight_Test");
-    // Ra::Engine::ItemEntry *m = new Ra::Engine::ItemEntry(e, p);
-    // emit sig_onItemAdded(*m);
-    emit sig_close_windows() ;
-  }
 }
 
 /// Intensity
@@ -265,12 +254,12 @@ void LightEditor::slot_falloff_quadratic_spin_to_slide(double val){
 }
 
 void LightEditor::init(Ra::Engine::ItemEntry item){
-    Ra::Engine::Light *m_light = (Ra::Engine::Light *) item.m_component;
+    m_light = (Ra::Engine::Light *) item.m_component;
     m_lineEdit->setText(QString::fromStdString(m_light->getName()));
     m_lineEdit->setDisabled(true);
-    Ra::Engine::Light::LightType type = m_light->getType();
+    m_type = m_light->getType();
     m_kind_of_light->setDisabled(true);
-    m_kind_of_light->setCurrentIndex(type);
+    m_kind_of_light->setCurrentIndex(m_type);
     
     m_angle_lab->setVisible(false);
     m_angle_lab->setVisible(false);
@@ -308,7 +297,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
      m_dir_z_lab->setVisible(true);
      m_direction_lab->setVisible(true);
 
-    switch (type) {
+    switch (m_type) {
         case 0 : // Directional
             m_pos_x_lab->setVisible(false);
             m_pos_y_lab->setVisible(false);
@@ -353,6 +342,10 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     }
 
     show();
+}
+
+void LightEditor::edit_light(){
+    emit sig_close_window();
 }
 
 } // namespace Gui
