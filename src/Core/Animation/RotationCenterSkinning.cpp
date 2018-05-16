@@ -36,7 +36,7 @@ Scalar weightSimilarity( const Eigen::SparseVector<Scalar>& v1w,
     return result;
 }
 
-void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
+void computeCoR( RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
     LOG( Utils::logDEBUG ) << "Precomputing CoRs";
 
     // First step : subdivide the original mesh until weights are sufficiently close enough.
@@ -168,8 +168,8 @@ void computeCoR( Animation::RefData& dataInOut, Scalar sigma, Scalar weightEpsil
     }
 }
 
-void corSkinning( const Container::Vector3Array& input, const Animation::Pose& pose,
-                  const Animation::WeightMatrix& weight, const Container::Vector3Array& CoR,
+void corSkinning( const Container::Vector3Array& input, const Pose& pose,
+                  const WeightMatrix& weight, const Container::Vector3Array& CoR,
                   Container::Vector3Array& output ) {
     const uint size = input.size();
     output.resize( size );
@@ -178,11 +178,11 @@ void corSkinning( const Container::Vector3Array& input, const Animation::Pose& p
 
     // Compute the dual quaternions
     Container::AlignedStdVector<Math::DualQuaternion> DQ;
-    Animation::computeDQ( pose, weight, DQ );
+    computeDQ( pose, weight, DQ );
 
     // Do LBS on the COR with weights of their associated vertices
     Container::Vector3Array transformedCoR;
-    Animation::linearBlendSkinning( CoR, pose, weight, transformedCoR );
+    linearBlendSkinning( CoR, pose, weight, transformedCoR );
 #pragma omp parallel for
     for ( int i = 0; i < int( size ); ++i )
     {
