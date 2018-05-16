@@ -115,7 +115,7 @@ void Renderer::initialize( uint width, uint height ) {
     m_secondaryTextures["Picking Texture"] = m_pickingTexture.get();
 
     // Quad mesh
-    Core::TriangleMesh mesh = Core::MeshUtils::makeZNormalQuad( Core::Math::Vector2( -1.f, 1.f ) );
+    Core::Geometry::TriangleMesh mesh = Core::Geometry::makeZNormalQuad( Core::Math::Vector2( -1.f, 1.f ) );
 
     m_quadMesh.reset( new Mesh( "quad" ) );
     m_quadMesh->loadGeometry( mesh );

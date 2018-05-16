@@ -15,7 +15,7 @@ Scalar PolyLine::length() const {
 }
 
 Aabb PolyLine::aabb() const {
-    return PointCloud::aabb( m_pts );
+    return Geometry::aabb( m_pts );
 }
 
 Scalar PolyLine::getLineParameter( uint segment, Scalar tSegment ) const {

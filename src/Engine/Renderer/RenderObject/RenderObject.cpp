@@ -182,7 +182,7 @@ Core::Math::Matrix4 RenderObject::getTransformAsMatrix() const {
 }
 
 Core::Math::Aabb RenderObject::getAabb() const {
-    Core::Math::Aabb aabb = Core::MeshUtils::getAabb( m_mesh->getGeometry() );
+    Core::Math::Aabb aabb = Core::Geometry::getAabb( m_mesh->getGeometry() );
     Core::Math::Aabb result;
 
     for ( int i = 0; i < 8; ++i )
