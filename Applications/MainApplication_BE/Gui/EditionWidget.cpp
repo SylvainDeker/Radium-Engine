@@ -58,11 +58,11 @@ namespace Gui{
         m_translation_z->setMaximum(std::numeric_limits<float>::max());
         m_translation_z->setMinimum(-std::numeric_limits<float>::max());
         m_scale_x->setMaximum(std::numeric_limits<float>::max());
-        m_scale_x->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_x->setMinimum(std::numeric_limits<float>::min());
         m_scale_y->setMaximum(std::numeric_limits<float>::max());
-        m_scale_y->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_y->setMinimum(std::numeric_limits<float>::min());
         m_scale_z->setMaximum(std::numeric_limits<float>::max());
-        m_scale_z->setMinimum(-std::numeric_limits<float>::max());
+        m_scale_z->setMinimum(std::numeric_limits<float>::min());
         QObject::connect(m_rotation_x, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
         QObject::connect(m_rotation_y, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
         QObject::connect(m_rotation_z, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
@@ -100,14 +100,10 @@ namespace Gui{
             {
                 //TODO fix sign for scale
                 Ra::Core::Vector3 v(m(0,0), m(1,0), m(2,0));
-                float sign = 1;
-                sign = r(0,0)<0 || r(0,1)<0 || r(0,2)<0 ? -1 : 1;
-                SET_VALUE_NO_SIGNALS(m_scale_x, v.norm()*sign);
+                SET_VALUE_NO_SIGNALS(m_scale_x, v.norm());
                 v = Ra::Core::Vector3(m(0,1), m(1,1), m(2,1));
-                sign = r(1,0)<0 || r(1,1)<0 || r(1,2)<0 ? -1 : 1;
                 SET_VALUE_NO_SIGNALS(m_scale_y, v.norm());
                 v = Ra::Core::Vector3(m(0,2), m(1,2), m(2,2));
-                sign = r(2,0)<0 || r(2,1)<0 || r(2,2)<0 ? -1 : 1;
                 SET_VALUE_NO_SIGNALS(m_scale_z, v.norm());
                 SET_VALUE_NO_SIGNALS(m_translation_x, m(0,3));
                 SET_VALUE_NO_SIGNALS(m_translation_y, m(1,3));
