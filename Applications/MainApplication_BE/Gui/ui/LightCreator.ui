@@ -276,7 +276,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="m_dir_y_spin"/>
+          <widget class="QDoubleSpinBox" name="m_dir_x_spin"/>
          </item>
          <item>
           <widget class="QLabel" name="m_dir_y_lab">
@@ -286,7 +286,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="m_dir_x_spin"/>
+          <widget class="QDoubleSpinBox" name="m_dir_y_spin"/>
          </item>
          <item>
           <widget class="QLabel" name="m_dir_z_lab">
