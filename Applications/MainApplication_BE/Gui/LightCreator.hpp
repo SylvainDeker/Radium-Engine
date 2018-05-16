@@ -1,3 +1,9 @@
+/*!
+   \file LightCreator.hpp
+   \brief The Class LightCreator is associated with its ./ui/LightCreator.ui and ./LightCreator.cpp to design GUI to add Lights in RadiumEngine
+   \author Sylvain
+   \date 16/05/2018
+*/
 #ifndef RADIUMENGINE_LIGHTCREATOR_HPP
 #define RADIUMENGINE_LIGHTCREATOR_HPP
 
@@ -12,6 +18,9 @@
 #include <GuiBase/Viewer/Viewer.hpp>
 
 #include <ui_LightCreator.h>
+#define _DIR_LIGHT 0
+#define _POINT_LIGHT 1
+#define _SPOT_LIGHT 2
 
 class QCloseEvent;
 class QShowEvent;
@@ -33,29 +42,102 @@ class LightCreator : public QWidget, private Ui::LightCreator {
   Q_OBJECT
 
   public:
+    /*!
+       \brief Constructor (call only once)
+       \param QWidget* parent only used for the icon
+       \param Ra::Gui::Viewer *viewer to add new Lights to the Viewer
+    */
     LightCreator( QWidget* parent ,Ra::Gui::Viewer *viewer );
+    /*!
+       \brief Destructor
+    */
     ~LightCreator();
 
   private slots:
-    /// Dialog to select a color
+    /*!
+       \brief Select a color
+    */
     void open_dialogColor();
-    /// Used to change value of the QDoubleSpinBox when you move the QSlider (and conversaly)
+
+    /*!
+       \brief Slot that check data and save
+    */
+    void open_dialogueConfirm();
+
+    /*!
+       \brief Slot that hides elements that are not required
+       \param _DIR_LIGHT or _POINT_LIGHT or _SPOT_LIGHT define in LightCreator.hpp
+       \return void
+    */
+    void slot_select_light(int type);
+
+
+    /////////////////////////////////////////   INTENSITY  SLOTS///////////////////
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of Intensity options
+    */
     void slot_intensity_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox  of Intensity options
+    */
     void slot_intensity_spin_to_slide(double val);
+
+    /////////////////////////////////////////   ANGLES  SLOTS///////////////////
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of Inner Angles options
+    */
     void slot_inner_angle_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox of Inner Angles options
+    */
     void slot_inner_angle_spin_to_slide(double val);
+
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of Outer Angles options
+    */
     void slot_outer_angle_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox of Outer Angles options
+    */
     void slot_outer_angle_spin_to_slide(double val);
 
+    /////////////////////////////////////////   FALLOFF  SLOTS///////////////////
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
+    */
     void slot_falloff_constant_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox  of falloff options
+    */
     void slot_falloff_constant_spin_to_slide(double val);
+
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
+    */
     void slot_falloff_linear_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
+    */
     void slot_falloff_linear_spin_to_slide(double val);
+
+    /*!
+       \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
+    */
     void slot_falloff_quadratic_slide_to_spin(int val);
+
+    /*!
+       \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
+    */
     void slot_falloff_quadratic_spin_to_slide(double val);
-    void slot_select_light(int val);
-    /// Used to check if the name is not empty
-    void open_dialogueConfirm();
+
+
+
+
 
   signals:
     void sig_intensity_slide_to_spin(double);
@@ -106,7 +188,11 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     Core::Vector3 *m_direction;
     Gui::Viewer * m_viewer;
 
-
+    /*!
+       \brief Private function that save config light parameters
+       \param Ra::Engine::Entity *entity because Lights are components and need to be attached to an entity
+       \return void
+    */
     void save_light(Ra::Engine::Entity *entity);
 };
 } // namespace Gui
