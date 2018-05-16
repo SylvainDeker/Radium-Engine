@@ -387,11 +387,11 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
   dg/=255;
   db/=255;
 
-  // printf("===============================%lf;%lf;%lf\n",dr,dg,db );
 
   Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
   // TODO (Sylvain) check m_intensity_val/MAX_INTENSITY
 
+  // printf("===============================%lf;%lf;%lf;%lf\n",dr,dg,db,c.w() );
 
 
   switch (*m_lightType) {
@@ -410,6 +410,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       point_light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
       m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
       point_light->setPosition(*m_position);
+      point_light->setColor(c);
       point_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
       emit sig_addLight(point_light);
         break;
@@ -420,7 +421,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       spot_light->setPosition(*m_position);
       m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       spot_light->setDirection(*m_direction);
-
+      spot_light->setColor(c);
       spot_light->setInnerAngleInDegrees((Scalar) *m_inner_angle_val );
       spot_light->setOuterAngleInDegrees((Scalar) *m_outer_angle_val );
       spot_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
