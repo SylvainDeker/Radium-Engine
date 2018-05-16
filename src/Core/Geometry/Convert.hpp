@@ -6,10 +6,15 @@
 namespace Ra {
 namespace Core {
 
-// Forward declaration
-class Index;
-struct TriangleMesh;
 class Dcel;
+// Forward declaration
+namespace Container {
+class Index;
+} // namespace Container
+
+namespace Geometry {
+
+struct TriangleMesh;
 
 struct Twin {
     Twin();
@@ -21,9 +26,10 @@ struct Twin {
     uint m_id[2];
 };
 
-RA_CORE_API void convert( const TriangleMesh& mesh, Dcel& dcel );
-RA_CORE_API void convert( const Dcel& dcel, TriangleMesh& mesh );
+RA_CORE_API void convert( const TriangleMesh& mesh, Core::Dcel& dcel );
+RA_CORE_API void convert( const Core::Dcel& dcel, TriangleMesh& mesh );
 
+} //namespace Geometry
 } // namespace Core
 } // namespace Ra
 

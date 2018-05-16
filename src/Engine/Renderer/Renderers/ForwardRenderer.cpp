@@ -143,9 +143,9 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
 
     GL_ASSERT( glDrawBuffers( 4, buffers ) );
 
-    const Core::Colorf clearColor = Core::Colors::FromChars<Core::Colorf>( 42, 42, 42, 0 );
-    const Core::Colorf clearZeros = Core::Colors::Black<Core::Colorf>();
-    const Core::Colorf clearOnes = Core::Colors::FromChars<Core::Colorf>( 255, 255, 255, 255 );
+    const Core::Math::Colorf clearColor = Core::Math::FromChars<Core::Math::Colorf>( 42, 42, 42, 0 );
+    const Core::Math::Colorf clearZeros = Core::Math::Black<Core::Math::Colorf>();
+    const Core::Math::Colorf clearOnes = Core::Math::FromChars<Core::Math::Colorf>( 255, 255, 255, 255 );
     const float clearDepth( 1.0 );
 
     GL_ASSERT( glClearBufferfv( GL_COLOR, 0, clearColor.data() ) ); // Clear color
@@ -178,7 +178,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
 
     GL_ASSERT( glDrawBuffers( 1, buffers ) ); // Draw color texture
 
-    // LOG(logDEBUG) << "Forward renderer has " << m_lightmanagers[0]->count() << " lights.";
+    // LOG(Core::Utils::logDEBUG) << "Forward renderer has " << m_lightmanagers[0]->count() << " lights.";
     // forward renderer only use one light manager
     if ( m_lightmanagers[0]->count() > 0 )
     {
@@ -201,7 +201,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
         // Solution : use the LightManager or the fact that a light is always associated with the
         // camera so that the renderer could always access to at least the headlight
         DirectionalLight l;
-        // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+        // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
         RenderParameters params;
         l.getRenderParameters( params );
@@ -249,7 +249,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
         // Solution : use the LightManager or the fact that a light is always associated with the
         // camera so that the renderer could always access to at least the headlight
         DirectionalLight l;
-        // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+        // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
         RenderParameters params;
         l.getRenderParameters( params );
@@ -323,7 +323,7 @@ void ForwardRenderer::renderInternal( const RenderData& renderData ) {
             // Solution : use the LightManager or the fact that a light is always associated with
             // the camera so that the renderer could always access to at least the headlight
             DirectionalLight l;
-            // l.setDirection( Core::Vector3( 0.3f, -1.0f, 0.0f ) );
+            // l.setDirection( Core::Math::Vector3( 0.3f, -1.0f, 0.0f ) );
 
             RenderParameters params;
             l.getRenderParameters( params );
@@ -380,8 +380,8 @@ void ForwardRenderer::debugInternal( const RenderData& renderData ) {
                 m_postprocessFbo->unbind();
                 m_oitFbo->useAsTarget();
                 
-                Core::Colorf clearZeros(0.0, 0.0, 0.0, 0.0);
-                Core::Colorf clearOnes (1.0, 1.0, 1.0, 1.0);
+                Core::Math::Colorf clearZeros(0.0, 0.0, 0.0, 0.0);
+                Core::Math::Colorf clearOnes (1.0, 1.0, 1.0, 1.0);
                 
                 GL_ASSERT(glDrawBuffers(2, buffers));
                 GL_ASSERT(glClearBufferfv(GL_COLOR, 0, clearZeros.data()));
@@ -435,7 +435,7 @@ void ForwardRenderer::debugInternal( const RenderData& renderData ) {
                 // bind data
                 shader->bind();
 
-                Core::Matrix4 M = ro->getTransformAsMatrix();
+                Core::Math::Matrix4 M = ro->getTransformAsMatrix();
                 shader->setUniform( "transform.proj", renderData.projMatrix );
                 shader->setUniform( "transform.view", renderData.viewMatrix );
                 shader->setUniform( "transform.model", M );
@@ -474,12 +474,12 @@ void ForwardRenderer::uiInternal( const RenderData& renderData ) {
             // bind data
             shader->bind();
 
-            Core::Matrix4 M = ro->getTransformAsMatrix();
-            Core::Matrix4 MV = renderData.viewMatrix * M;
-            Core::Vector3 V = MV.block<3, 1>( 0, 3 );
+            Core::Math::Matrix4 M = ro->getTransformAsMatrix();
+            Core::Math::Matrix4 MV = renderData.viewMatrix * M;
+            Core::Math::Vector3 V = MV.block<3, 1>( 0, 3 );
             Scalar d = V.norm();
 
-            Core::Matrix4 S = Core::Matrix4::Identity();
+            Core::Math::Matrix4 S = Core::Math::Matrix4::Identity();
             S( 0, 0 ) = S( 1, 1 ) = S( 2, 2 ) = d;
 
             M = M * S;
@@ -542,7 +542,7 @@ void ForwardRenderer::resizeInternal() {
                           m_textures[RendererTextures_Specular].get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 
@@ -556,7 +556,7 @@ void ForwardRenderer::resizeInternal() {
                              m_textures[RendererTextures_OITRevealage].get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 #endif
@@ -567,7 +567,7 @@ void ForwardRenderer::resizeInternal() {
     m_postprocessFbo->attachTexture( GL_COLOR_ATTACHMENT0, m_fancyTexture.get()->texture() );
     if ( m_fbo->checkStatus() != GL_FRAMEBUFFER_COMPLETE )
     {
-        LOG( logERROR ) << "FBO Error : " << m_fbo->checkStatus();
+        LOG( Core::Utils::logERROR ) << "FBO Error : " << m_fbo->checkStatus();
     }
     GL_CHECK_ERROR;
 

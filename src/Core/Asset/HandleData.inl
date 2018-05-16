@@ -3,6 +3,7 @@
 #include <Core/Utils/Log.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// NAME
@@ -20,11 +21,11 @@ inline void HandleData::setType( const HandleType& type ) {
 }
 
 /// FRAME
-inline Core::Transform HandleData::getFrame() const {
+inline Core::Math::Transform HandleData::getFrame() const {
     return m_frame;
 }
 
-inline void HandleData::setFrame( const Core::Transform& frame ) {
+inline void HandleData::setFrame( const Core::Math::Transform& frame ) {
     m_frame = frame;
 }
 
@@ -46,16 +47,16 @@ inline uint HandleData::getComponentDataSize() const {
     return m_component.size();
 }
 
-inline const Core::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() const {
+inline const Core::Container::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() const {
     return m_component;
 }
 
-inline Core::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() {
+inline Core::Container::AlignedStdVector<HandleComponentData>& HandleData::getComponentData() {
     return m_component;
 }
 
 inline void
-HandleData::setComponents( const Core::AlignedStdVector<HandleComponentData>& components ) {
+HandleData::setComponents( const Core::Container::AlignedStdVector<HandleComponentData>& components ) {
     const uint size = components.size();
     m_component.resize( size );
 #pragma omp parallel for
@@ -73,15 +74,15 @@ inline HandleComponentData& HandleData::getComponent( const uint i ) {
     return m_component.at( i );
 }
 
-inline const Core::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() const {
+inline const Core::Container::AlignedStdVector<Core::Math::Vector2i>& HandleData::getEdgeData() const {
     return m_edge;
 }
 
-inline Core::AlignedStdVector<Core::Vector2i>& HandleData::getEdgeData() {
+inline Core::Container::AlignedStdVector<Core::Math::Vector2i>& HandleData::getEdgeData() {
     return m_edge;
 }
 
-inline void HandleData::setEdges( const Core::AlignedStdVector<Core::Vector2i>& edgeList ) {
+inline void HandleData::setEdges( const Core::Container::AlignedStdVector<Core::Math::Vector2i>& edgeList ) {
     const uint size = edgeList.size();
     m_edge.resize( size );
 #pragma omp parallel for
@@ -91,15 +92,15 @@ inline void HandleData::setEdges( const Core::AlignedStdVector<Core::Vector2i>& 
     }
 }
 
-inline const Core::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() const {
+inline const Core::Container::AlignedStdVector<Core::Math::VectorNi>& HandleData::getFaceData() const {
     return m_face;
 }
 
-inline Core::AlignedStdVector<Core::VectorNi>& HandleData::getFaceData() {
+inline Core::Container::AlignedStdVector<Core::Math::VectorNi>& HandleData::getFaceData() {
     return m_face;
 }
 
-inline void HandleData::setFaces( const Core::AlignedStdVector<Core::VectorNi>& faceList ) {
+inline void HandleData::setFaces( const Core::Container::AlignedStdVector<Core::Math::VectorNi>& faceList ) {
     const uint size = faceList.size();
     m_face.resize( size );
 #pragma omp parallel for
@@ -178,14 +179,15 @@ inline void HandleData::displayInfo() const {
         type = "CAGE";
         break;
     }
-    LOG( logDEBUG ) << "======== HANDLE INFO ========";
-    LOG( logDEBUG ) << " Name            : " << m_name;
-    LOG( logDEBUG ) << " Type            : " << type;
-    LOG( logDEBUG ) << " Element #       : " << m_component.size();
-    LOG( logDEBUG ) << " Edge #          : " << m_edge.size();
-    LOG( logDEBUG ) << " Face #          : " << m_face.size();
-    LOG( logDEBUG ) << " Need EndNodes ? : " << ( ( m_endNode ) ? "YES" : "NO" );
+    LOG( Utils::logDEBUG ) << "======== HANDLE INFO ========";
+    LOG( Utils::logDEBUG ) << " Name            : " << m_name;
+    LOG( Utils::logDEBUG ) << " Type            : " << type;
+    LOG( Utils::logDEBUG ) << " Element #       : " << m_component.size();
+    LOG( Utils::logDEBUG ) << " Edge #          : " << m_edge.size();
+    LOG( Utils::logDEBUG ) << " Face #          : " << m_face.size();
+    LOG( Utils::logDEBUG ) << " Need EndNodes ? : " << ( ( m_endNode ) ? "YES" : "NO" );
 }
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

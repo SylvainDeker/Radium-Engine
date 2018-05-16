@@ -2,7 +2,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 Delta delta( const BitSet& bit, const Scalar& default_value ) {
     Delta u( bit.size(), 1 );
@@ -60,6 +60,6 @@ void bitset( const Delta& u, BitSet& bit ) {
     }
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

@@ -4,7 +4,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry{
 
 ScalarValue smartClamp( const BitSet& bit, const ScalarValue& value, const bool flag ) {
     ScalarValue s( value );
@@ -37,12 +37,12 @@ void smartClamp( const BitSet& bit, const ScalarValue& value, ScalarValue& clamp
     s.swap( clamped );
 }
 
-VectorArray<Vector3> laplacianSmoothing( const VectorArray<Vector3>& v,
-                                         const Ra::Core::Geometry::LaplacianMatrix& L,
+Container::VectorArray<Math::Vector3> laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
+                                         const LaplacianMatrix& L,
                                          const ScalarValue& weight, const uint iteration ) {
-    VectorArray<Vector3> p( v );
+    Container::VectorArray<Math::Vector3> p( v );
     auto pM = p.getMap();
-    VectorArray<Vector3> tmp( v );
+    Container::VectorArray<Math::Vector3> tmp( v );
     auto tmpM = tmp.getMap();
     for ( uint i = 0; i < iteration; ++i )
     {
@@ -57,12 +57,12 @@ VectorArray<Vector3> laplacianSmoothing( const VectorArray<Vector3>& v,
     return tmp;
 }
 
-void laplacianSmoothing( const VectorArray<Vector3>& v,
-                         const Ra::Core::Geometry::LaplacianMatrix& L, const ScalarValue& weight,
-                         const uint iteration, VectorArray<Vector3>& p ) {
+void laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
+                         const LaplacianMatrix& L, const ScalarValue& weight,
+                         const uint iteration, Container::VectorArray<Math::Vector3>& p ) {
     p = v;
     auto pM = p.getMap();
-    VectorArray<Vector3> tmp( v );
+    Container::VectorArray<Math::Vector3> tmp( v );
     auto tmpM = tmp.getMap();
     for ( uint i = 0; i < iteration; ++i )
     {
@@ -77,6 +77,6 @@ void laplacianSmoothing( const VectorArray<Vector3>& v,
     std::swap( p, tmp );
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

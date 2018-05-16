@@ -7,6 +7,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 /// Shortcut for the ubiquitous aligned std::vector
 /// Uses Eigen's aligned allocator, as stated in
@@ -15,6 +16,7 @@ template <typename T>
 class AlignedStdVector : public std::vector<T, Eigen::aligned_allocator<T>> {
     using std::vector<T, Eigen::aligned_allocator<T>>::vector;
 };
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 #endif // RADIUMENGINE_CORE_ALIGNED_STD_VECTOR_HPP_

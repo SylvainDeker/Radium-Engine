@@ -24,7 +24,7 @@ namespace Geometry {
 //      A( i, j ) = f( i, j ) , if exist the edge from i to j
 //      A( i, j ) = 0         , otherwise
 // where f( i, j ) is a generic function defined over an edge
-using AdjacencyMatrix = Ra::Core::Sparse;
+using AdjacencyMatrix = Ra::Core::Math::Sparse;
 using VVAdj = AdjacencyMatrix;
 using VTAdj = AdjacencyMatrix;
 using TVAdj = AdjacencyMatrix;
@@ -36,7 +36,7 @@ using TVAdj = AdjacencyMatrix;
  *       f( i, j ) = 0 , otherwise
  */
 RA_CORE_API AdjacencyMatrix uniformAdjacency( const uint point_size,
-                                              const VectorArray<Triangle>& T );
+                                              const Container::VectorArray<Triangle>& T );
 
 /*
  * Return the AdjacencyMatrix for the given set of points and triangles.
@@ -44,8 +44,8 @@ RA_CORE_API AdjacencyMatrix uniformAdjacency( const uint point_size,
  *       f( i, j ) = 1 , if exist the edge from i to j
  *       f( i, j ) = 0 , otherwise
  */
-RA_CORE_API AdjacencyMatrix uniformAdjacency( const VectorArray<Vector3>& p,
-                                              const VectorArray<Triangle>& T );
+RA_CORE_API AdjacencyMatrix uniformAdjacency( const Container::VectorArray<Math::Vector3>& p,
+                                              const Container::VectorArray<Triangle>& T );
 
 /*
  * Return the AdjacencyMatrix for the given set of points and triangles.
@@ -53,8 +53,8 @@ RA_CORE_API AdjacencyMatrix uniformAdjacency( const VectorArray<Vector3>& p,
  *       f( i, j ) = 1 , if triangle i contains to vertex j
  *       f( i, j ) = 0 , otherwise
  */
-RA_CORE_API TVAdj triangleUniformAdjacency( const VectorArray<Vector3>& p,
-                                            const VectorArray<Triangle>& T );
+RA_CORE_API TVAdj triangleUniformAdjacency( const Container::VectorArray<Math::Vector3>& p,
+                                            const Container::VectorArray<Triangle>& T );
 
 /*
  * Return the AdjacencyMatrix Adj for the given set of points and triangles.
@@ -62,7 +62,7 @@ RA_CORE_API TVAdj triangleUniformAdjacency( const VectorArray<Vector3>& p,
  *       f( i, j ) = 1 , if exist the edge from i to j
  *       f( i, j ) = 0 , otherwise
  */
-void uniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
+void uniformAdjacency( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
                        AdjacencyMatrix& Adj );
 
 /*
@@ -72,8 +72,8 @@ void uniformAdjacency( const VectorArray<Vector3>& p, const VectorArray<Triangle
  *       f( i, j ) = 0                                          , otherwise
  * where alpha_ij and beta_ij are the angles opposite the edge
  */
-RA_CORE_API AdjacencyMatrix cotangentWeightAdjacency( const VectorArray<Vector3>& p,
-                                                      const VectorArray<Triangle>& T );
+RA_CORE_API AdjacencyMatrix cotangentWeightAdjacency( const Container::VectorArray<Math::Vector3>& p,
+                                                      const Container::VectorArray<Triangle>& T );
 
 // ///////////// //
 // DEGREE MATRIX //
@@ -83,7 +83,7 @@ RA_CORE_API AdjacencyMatrix cotangentWeightAdjacency( const VectorArray<Vector3>
 //      D( i, j ) = sum( A( i ) ) , if i == j
 //      D( i, j ) = 0             , if i != j
 // where A( i ) is the i-th row of a AdjacencyMatrix
-using DegreeMatrix = Diagonal;
+using DegreeMatrix = Math::Diagonal;
 
 /*
  * Return the DegreeMatrix of the given AdjacencyMatrix A.
@@ -94,11 +94,11 @@ RA_CORE_API DegreeMatrix adjacencyDegree( const AdjacencyMatrix& A );
 /// ONE RING ///
 ////////////////
 
-// using OneRing = Graph::ChildrenList;
+// using OneRing = Utils::ChildrenList;
 
-// OneRing vertexOneRing( const uint v, const VectorArray< Triangle >& T );
+// OneRing vertexOneRing( const uint v, const Container::VectorArray< Triangle >& T );
 
-// Graph::Adjacency meshOneRing( const VectorArray< Vector3 >& p, const VectorArray< Triangle >& T
+// Utils::Adjacency meshOneRing( const Container::VectorArray< Math::Vector3 >& p, const Container::VectorArray< Triangle >& T
 // );
 
 } // namespace Geometry

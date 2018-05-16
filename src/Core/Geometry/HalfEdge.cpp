@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 namespace {
 // Allow to store the edges in a pair of half edges.
 struct EdgeKey {
@@ -91,7 +92,7 @@ void HalfEdgeData::build( const TriangleMesh& mesh ) {
 
         // This arrays contains the indices of all three half edges of
         // the current triangle in halfEdgeList.
-        Index triangleHalfEdges[3];
+        Container::Index triangleHalfEdges[3];
 
         // for all edges in triangle.
         for ( uint i = 0; i < 3; ++i )
@@ -166,7 +167,7 @@ void HalfEdgeData::build( const TriangleMesh& mesh ) {
     checkConsistency();
 }
 
-void AdjacencyQueries::getVertexFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void getVertexFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                        VertexIdx vertex, std::vector<TriangleIdx>& facesOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
     for ( HalfEdgeIdx idx : heData.getVertexHalfEdges( vertex ) )
@@ -178,7 +179,7 @@ void AdjacencyQueries::getVertexFaces( const TriangleMesh& mesh, const HalfEdgeD
         }
     }
 }
-void AdjacencyQueries::getVertexNeighbors( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void getVertexNeighbors( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                            VertexIdx vertex,
                                            std::vector<VertexIdx>& neighborsOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
@@ -188,7 +189,7 @@ void AdjacencyQueries::getVertexNeighbors( const TriangleMesh& mesh, const HalfE
     }
 }
 
-void AdjacencyQueries::getAdjacentFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void getAdjacentFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                          TriangleIdx triangle,
                                          std::array<TriangleIdx, 3>& adjOut ) {
     HalfEdgeIdx currentHe = heData.getFirstTriangleHalfEdge( triangle );
@@ -202,7 +203,7 @@ void AdjacencyQueries::getAdjacentFaces( const TriangleMesh& mesh, const HalfEdg
 
 // This function is a good example on how to process the neighbors of a vertex
 // in order. We could have an iterator-like interface(TODO).
-void AdjacencyQueries::getVertexFirstRing( const TriangleMesh& mesh, const HalfEdgeData& heData,
+void getVertexFirstRing( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                            VertexIdx vertex, std::vector<VertexIdx>& ringOut ) {
     CORE_ASSERT( vertex < mesh.m_vertices.size(), "Invalid vertex index" );
     CORE_ASSERT( heData.getVertexHalfEdges( vertex ).size() > 0, "Vertex has no neighbors" );
@@ -258,5 +259,6 @@ void AdjacencyQueries::getVertexFirstRing( const TriangleMesh& mesh, const HalfE
         ringOut.size() == heData.getVertexHalfEdges( vertex ).size(),
         " Missing some neighbors (the first ring might be broken in more than one place)" );
 }
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

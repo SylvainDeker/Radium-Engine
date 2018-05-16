@@ -25,7 +25,7 @@ class RA_CORE_API Skeleton : public PointCloud {
     ~Skeleton();
 
     /// BONE NODE
-    int addBone( const int parent = -1, const Transform& T = Transform::Identity(),
+    int addBone( const int parent = -1, const Math::Transform& T = Math::Transform::Identity(),
                  const SpaceType MODE = SpaceType::LOCAL, const Label label = "" );
 
     /// SIZE
@@ -37,16 +37,16 @@ class RA_CORE_API Skeleton : public PointCloud {
     getPose( const SpaceType MODE ) const override; // Return the pose in MODE space
     virtual void setPose( const Pose& pose,
                           const SpaceType MODE ) override; // Set the MODE space pose
-    virtual const Transform& getTransform( const uint i, const SpaceType MODE )
+    virtual const Math::Transform& getTransform( const uint i, const SpaceType MODE )
         const override; // Return the i-th transform matrix of the pose in MODE space
     virtual void
-    setTransform( const uint i, const Transform& T,
+    setTransform( const uint i, const Math::Transform& T,
                   const SpaceType MODE ) override; // Set the i-th transform of the MODE space pose
 
-    void getBonePoints( uint i, Vector3& startOut, Vector3& endOut ) const;
+    void getBonePoints( uint i, Math::Vector3& startOut, Math::Vector3& endOut ) const;
 
     /// VARIABLE
-    Ra::Core::Graph::AdjacencyList m_graph; // The adjacency list.
+    Ra::Core::Utils::AdjacencyList m_graph; // The adjacency list.
 
   protected:
     /// VARIABLE

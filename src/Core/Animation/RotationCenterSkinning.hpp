@@ -32,13 +32,13 @@ Scalar weightSimilarity( const Eigen::SparseVector<Scalar>& v1w,
                          const Eigen::SparseVector<Scalar>& v2w, Scalar sigma = 0.1f );
 
 /// Compute the optimal center of rotations (1 per vertex) based on weight similarity.
-void RA_CORE_API computeCoR( Skinning::RefData& dataInOut, Scalar sigma = 0.1f,
+void RA_CORE_API computeCoR( RefData& dataInOut, Scalar sigma = 0.1f,
                              Scalar weightEpsilon = 0.1f );
 
 /// Skin the vertices with the optimal centers of rotation.
-void RA_CORE_API corSkinning( const Vector3Array& input, const Animation::Pose& pose,
-                              const Animation::WeightMatrix& weight, const Vector3Array& CoR,
-                              Vector3Array& output );
+void RA_CORE_API corSkinning( const Container::Vector3Array& input, const Pose& pose,
+                              const WeightMatrix& weight, const Container::Vector3Array& CoR,
+                              Container::Vector3Array& output );
 
 } // namespace Animation
 } // namespace Core

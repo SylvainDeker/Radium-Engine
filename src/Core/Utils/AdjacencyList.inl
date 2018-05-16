@@ -4,7 +4,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 /// NODE
 inline uint AdjacencyList::addNode( const int parent ) {
@@ -119,6 +119,6 @@ inline bool AdjacencyList::isEdge( const uint i, const uint j ) const {
     return false;
 }
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

@@ -5,6 +5,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 class CircularIndex {
   public:
@@ -42,6 +43,7 @@ class CircularIndex {
     uint N;
 };
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

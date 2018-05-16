@@ -10,6 +10,7 @@
 #include <Core/RaCore.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 struct RA_CORE_API HandleAnimation {
@@ -51,6 +52,7 @@ class RA_CORE_API AnimationData : public AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/AnimationData.inl>

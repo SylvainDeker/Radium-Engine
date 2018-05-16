@@ -13,6 +13,7 @@
 #include <Core/Asset/MaterialData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class MaterialData;
@@ -20,19 +21,19 @@ class MaterialData;
 class RA_CORE_API GeometryData : public AssetData {
 
   public:
-    using Vector3Array = Core::VectorArray<Core::Vector3>;
-    using Vector2iArray = Core::VectorArray<Core::Vector2i>;
-    using Vector2uArray = Core::VectorArray<Core::Vector2ui>;
-    using VectorNiArray = Core::VectorArray<Core::VectorNi>;
-    using VectorNuArray = Core::VectorArray<Core::VectorNui>;
-    using Vector4Array = Core::VectorArray<Core::Vector4>;
-    using ColorArray = Core::VectorArray<Core::Color>;
+    using Vector3Array = Core::Container::VectorArray<Math::Vector3>;
+    using Vector2iArray = Core::Container::VectorArray<Math::Vector2i>;
+    using Vector2uArray = Core::Container::VectorArray<Math::Vector2ui>;
+    using VectorNiArray = Core::Container::VectorArray<Math::VectorNi>;
+    using VectorNuArray = Core::Container::VectorArray<Math::VectorNui>;
+    using Vector4Array = Core::Container::VectorArray<Math::Vector4>;
+    using ColorArray = Core::Container::VectorArray<Core::Math::Color>;
 
     using Weight = std::pair<Scalar, uint>;
     using VertexWeights = std::vector<Weight>;
     using WeightArray = std::vector<VertexWeights>;
 
-    using DuplicateTable = std::vector<Ra::Core::Index>;
+    using DuplicateTable = std::vector<Ra::Core::Container::Index>;
 
   public:
     RA_CORE_ALIGNED_NEW
@@ -65,8 +66,8 @@ class RA_CORE_API GeometryData : public AssetData {
     inline void setType( const GeometryType& type );
 
     /// FRAME
-    inline Core::Transform getFrame() const;
-    inline void setFrame( const Core::Transform& frame );
+    inline Core::Math::Transform getFrame() const;
+    inline void setFrame( const Core::Math::Transform& frame );
 
     /// DATA
     inline uint getVerticesSize() const;
@@ -95,8 +96,8 @@ class RA_CORE_API GeometryData : public AssetData {
     template <typename Container>
     inline void setPolyhedron( const Container& polyList );
 
-    inline Vector3Array& getNormals();
-    inline const Vector3Array& getNormals() const;
+    inline Container::Vector3Array& getNormals();
+    inline const Container::Vector3Array& getNormals() const;
     // Copy data from normalList. In-place setting with getNormals is preferred.
     template <typename Container>
     inline void setNormals( const Container& normalList );
@@ -165,7 +166,7 @@ class RA_CORE_API GeometryData : public AssetData {
 
   protected:
     /// VARIABLE
-    Core::Transform m_frame;
+    Core::Math::Transform m_frame;
     GeometryType m_type;
 
     Vector3Array m_vertex;
@@ -191,6 +192,7 @@ class RA_CORE_API GeometryData : public AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #include <Core/Asset/GeometryData.inl>

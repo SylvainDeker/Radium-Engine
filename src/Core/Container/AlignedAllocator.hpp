@@ -13,6 +13,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 /**
  * Allocator for aligned data.
  * Adapted from https://gist.github.com/donny-dont/1471329
@@ -120,6 +121,7 @@ class AlignedAllocator {
     AlignedAllocator& operator=( const AlignedAllocator& ) = delete;
 };
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

@@ -7,7 +7,7 @@ namespace Ra {
 namespace Core {
 namespace DcelOperations {
 
-void splitEdge( Dcel& dcel, Index edgeIndex, Scalar fraction ) {
+void splitEdge( Dcel& dcel, Container::Index edgeIndex, Scalar fraction ) {
 
     // Global schema of operation
     /*

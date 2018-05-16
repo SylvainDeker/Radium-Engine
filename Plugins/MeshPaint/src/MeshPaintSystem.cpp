@@ -20,7 +20,7 @@ MeshPaintSystem::MeshPaintSystem() : Ra::Engine::System() {}
 MeshPaintSystem::~MeshPaintSystem() {}
 
 void MeshPaintSystem::handleAssetLoading( Ra::Engine::Entity* entity,
-                                          const Ra::Asset::FileData* fileData ) {
+                                          const Ra::Core::Asset::FileData* fileData ) {
     auto geomData = fileData->getGeometryData();
 
     uint id = 0;
@@ -34,7 +34,7 @@ void MeshPaintSystem::handleAssetLoading( Ra::Engine::Entity* entity,
     }
 }
 
-void MeshPaintSystem::generateTasks( Ra::Core::TaskQueue* taskQueue,
+void MeshPaintSystem::generateTasks( Ra::Core::Utils::TaskQueue* taskQueue,
                                      const Ra::Engine::FrameInfo& frameInfo ) {
     // Do nothing, as this system only displays painted meshes.
 }
@@ -49,7 +49,7 @@ void MeshPaintSystem::startPaintMesh( bool start ) {
 }
 
 void MeshPaintSystem::paintMesh( const Ra::Engine::Renderer::PickingResult& picking,
-                                 const Ra::Core::Color& color ) {
+                                 const Ra::Core::Math::Color& color ) {
     for ( auto& compEntry : this->m_components )
     {
         auto MPcomp = static_cast<MeshPaintComponent*>( compEntry.second );

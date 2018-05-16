@@ -9,22 +9,22 @@ namespace Geometry {
 // ========================================================
 // ================== GAUSSIAN CURVATURE ==================
 // ========================================================
-Scalar gaussianCurvature( const Vector3& v, const VectorArray<Vector3>& p, const Scalar& area ) {
+Scalar gaussianCurvature( const Math::Vector3& v, const Container::VectorArray<Math::Vector3>& p, const Scalar& area ) {
     CORE_ASSERT( ( area > 0.0 ), "The area has an invalid value" );
     Scalar theta = 0.0;
     uint N = p.size();
-    CircularIndex i;
+    Container::CircularIndex i;
     i.setSize( N );
     for ( uint j = 0; j < N; ++j )
     {
         i.setValue( j );
-        theta += Vector::angle( ( p[i] - v ), ( p[i - 1] - v ) );
+        theta += Math::Vector::angle( ( p[i] - v ), ( p[i - 1] - v ) );
     }
     return ( ( Math::PiMul2 - theta ) / area );
 }
 
-void gaussianCurvature( const VectorArray<Vector3>& p, const VectorArray<Triangle>& T,
-                        const AreaMatrix& A, VectorArray<Scalar>& K ) {
+void gaussianCurvature( const Container::VectorArray<Math::Vector3>& p, const Container::VectorArray<Triangle>& T,
+                        const AreaMatrix& A, Container::VectorArray<Scalar>& K ) {
     const uint size = p.size();
     K.clear();
     K.resize( size, 0.0 );
@@ -36,15 +36,15 @@ void gaussianCurvature( const VectorArray<Vector3>& p, const VectorArray<Triangl
         const uint j = t[1];
         const uint k = t[2];
 
-        const Vector3 ij = ( p[j] - p[i] ).normalized();
-        const Vector3 jk = ( p[k] - p[j] ).normalized();
-        const Vector3 ki = ( p[i] - p[k] ).normalized();
+        const Math::Vector3 ij = ( p[j] - p[i] ).normalized();
+        const Math::Vector3 jk = ( p[k] - p[j] ).normalized();
+        const Math::Vector3 ki = ( p[i] - p[k] ).normalized();
 
 #pragma omp critical
         {
-            K[i] += Vector::angle<Vector3>( ij, -ki );
-            K[j] += Vector::angle<Vector3>( jk, -ij );
-            K[k] += Vector::angle<Vector3>( ki, -jk );
+            K[i] += Math::Vector::angle<Math::Vector3>( ij, -ki );
+            K[j] += Math::Vector::angle<Math::Vector3>( jk, -ij );
+            K[k] += Math::Vector::angle<Math::Vector3>( ki, -jk );
         }
     }
 
@@ -59,8 +59,8 @@ Scalar gaussianCurvature( const MaximumCurvature& k1, const MinimumCurvature& k2
     return ( k1 * k2 );
 }
 
-void gaussianCurvature( const VectorArray<MaximumCurvature>& k1,
-                        const VectorArray<MinimumCurvature>& k2, VectorArray<Scalar>& K ) {
+void gaussianCurvature( const Container::VectorArray<MaximumCurvature>& k1,
+                        const Container::VectorArray<MinimumCurvature>& k2, Container::VectorArray<Scalar>& K ) {
     const uint size = k1.size();
     K.resize( size );
 #pragma omp parallel for
@@ -73,22 +73,22 @@ void gaussianCurvature( const VectorArray<MaximumCurvature>& k1,
 // ========================================================
 // ==================== MEAN CURVATURE ====================
 // ========================================================
-Vector3 meanCurvatureNormal( const Vector3& laplacian, const Scalar& area ) {
+Math::Vector3 meanCurvatureNormal( const Math::Vector3& laplacian, const Scalar& area ) {
     CORE_ASSERT( ( area > 0.0 ), "The area has an invalid value" );
     return ( laplacian / area );
 }
 
-void meanCurvatureNormal( const VectorArray<Vector3>& laplacian, const AreaMatrix& A,
-                          VectorArray<Vector3>& Hn ) {
+void meanCurvatureNormal( const Container::VectorArray<Math::Vector3>& laplacian, const AreaMatrix& A,
+                          Container::VectorArray<Math::Vector3>& Hn ) {
     Hn.resize( laplacian.size() );
     Hn.getMap() = laplacian.getMap() * A.cwiseInverse();
 }
 
-Scalar meanCurvature( const Vector3& mean_curvature_normal ) {
+Scalar meanCurvature( const Math::Vector3& mean_curvature_normal ) {
     return ( 0.5 * mean_curvature_normal.norm() );
 }
 
-void meanCurvature( const VectorArray<Vector3>& mean_curvature_normal, VectorArray<Scalar>& H ) {
+void meanCurvature( const Container::VectorArray<Math::Vector3>& mean_curvature_normal, Container::VectorArray<Scalar>& H ) {
     const uint size = mean_curvature_normal.size();
     H.resize( size );
     H.getMap() = 0.5 * mean_curvature_normal.getMap().colwise().norm();
@@ -98,8 +98,8 @@ Scalar meanCurvature( const MaximumCurvature& k1, const MinimumCurvature& k2 ) {
     return ( 0.5 * ( k1 + k2 ) );
 }
 
-void meanCurvature( const VectorArray<MaximumCurvature>& k1,
-                    const VectorArray<MinimumCurvature>& k2, VectorArray<Scalar>& H ) {
+void meanCurvature( const Container::VectorArray<MaximumCurvature>& k1,
+                    const Container::VectorArray<MinimumCurvature>& k2, Container::VectorArray<Scalar>& H ) {
     const uint size = k1.size();
     H.resize( size );
 #pragma omp parallel for
@@ -121,8 +121,8 @@ Scalar maxCurvature( const MeanCurvature& H, const GaussianCurvature& K ) {
     return ( H + std::sqrt( ( H * H ) - K ) );
 }
 
-void maxCurvature( const VectorArray<MeanCurvature>& H, const VectorArray<GaussianCurvature>& K,
-                   VectorArray<Scalar>& k1 ) {
+void maxCurvature( const Container::VectorArray<MeanCurvature>& H, const Container::VectorArray<GaussianCurvature>& K,
+                   Container::VectorArray<Scalar>& k1 ) {
     const uint size = H.size();
     k1.resize( size );
 #pragma omp parallel for
@@ -141,8 +141,8 @@ Scalar minCurvature( const MeanCurvature& H, const GaussianCurvature& K ) {
     return ( H - std::sqrt( ( H * H ) - K ) );
 }
 
-void minCurvature( const VectorArray<MeanCurvature>& H, const VectorArray<GaussianCurvature>& K,
-                   VectorArray<Scalar>& k2 ) {
+void minCurvature( const Container::VectorArray<MeanCurvature>& H, const Container::VectorArray<GaussianCurvature>& K,
+                   Container::VectorArray<Scalar>& k2 ) {
     const uint size = H.size();
     k2.resize( size );
 #pragma omp parallel for

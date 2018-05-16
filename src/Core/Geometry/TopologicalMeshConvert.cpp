@@ -5,12 +5,13 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 void MeshConverter::convert( TopologicalMesh& in, TriangleMesh& out ) {
 
     struct vertexData {
-        Vector3 _vertex;
-        Vector3 _normal;
+        Math::Vector3 _vertex;
+        Math::Vector3 _normal;
     };
 
     struct comp_vec {
@@ -55,8 +56,8 @@ void MeshConverter::convert( TopologicalMesh& in, TriangleMesh& out ) {
             assert( i < 3 );
             TopologicalMesh::Point p = in.point( in.to_vertex_handle( *fv_it ) );
             TopologicalMesh::Normal n = in.normal( in.to_vertex_handle( *fv_it ) );
-            v._vertex = Core::Vector3( p[0], p[1], p[2] );
-            v._normal = Core::Vector3( n[0], n[1], n[2] );
+            v._vertex = Core::Math::Vector3( p[0], p[1], p[2] );
+            v._normal = Core::Math::Vector3( n[0], n[1], n[2] );
 
             int vi;
             vMap::iterator vtr = vertexHandles.find( v );
@@ -79,7 +80,7 @@ void MeshConverter::convert( TopologicalMesh& in, TriangleMesh& out ) {
 void MeshConverter::convert( const TriangleMesh& in, TopologicalMesh& out ) {
 
     struct hash_vec {
-        size_t operator()( const Vector3& lvalue ) const {
+        size_t operator()( const Math::Vector3& lvalue ) const {
             return lvalue[0] + lvalue[1] + lvalue[2] + floor( lvalue[0] ) * 1000.f +
                    floor( lvalue[1] ) * 1000.f + floor( lvalue[2] ) * 1000.f;
         }
@@ -89,7 +90,7 @@ void MeshConverter::convert( const TriangleMesh& in, TopologicalMesh& out ) {
     out = TopologicalMesh();
     out.garbage_collection();
     out.request_vertex_normals();
-    using vMap = std::unordered_map<Vector3, TopologicalMesh::VertexHandle, hash_vec>;
+    using vMap = std::unordered_map<Math::Vector3, TopologicalMesh::VertexHandle, hash_vec>;
     vMap vertexHandles;
 
     std::vector<TopologicalMesh::VertexHandle> face_vhandles;
@@ -97,8 +98,8 @@ void MeshConverter::convert( const TriangleMesh& in, TopologicalMesh& out ) {
     uint num_halfedge = in.m_triangles.size() * 3;
     for ( unsigned int i = 0; i < num_halfedge; i++ )
     {
-        Vector3 p = in.m_vertices[in.m_triangles[i / 3][i % 3]];
-        Vector3 n = in.m_normals[in.m_triangles[i / 3][i % 3]];
+        Math::Vector3 p = in.m_vertices[in.m_triangles[i / 3][i % 3]];
+        Math::Vector3 n = in.m_normals[in.m_triangles[i / 3][i % 3]];
 
         vMap::iterator vtr = vertexHandles.find( p );
         TopologicalMesh::VertexHandle vh;
@@ -120,5 +121,6 @@ void MeshConverter::convert( const TriangleMesh& in, TopologicalMesh& out ) {
     assert( out.n_faces() == num_halfedge / 3 );
 }
 
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

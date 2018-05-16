@@ -53,13 +53,13 @@ inline void VariationalShapeApproximationBase<K_Region>::exec( const uint iterat
         CORE_WARN_IF( false, "V.S.A. NOT INITIALIZED" );
         return;
     }
-    LOG( logDEBUG ) << "Computing V.S.A. ...";
+    LOG( Utils::logDEBUG ) << "Computing V.S.A. ...";
     for ( uint i = 0; i < iteration; ++i )
     {
         this->proxy_fitting();
         this->geometry_partitioning();
     }
-    LOG( logDEBUG ) << "V.S.A. completed.";
+    LOG( Utils::logDEBUG ) << "V.S.A. completed.";
 }
 
 template <uint K_Region>
@@ -70,13 +70,13 @@ inline void VariationalShapeApproximationBase<K_Region>::exec() {
         CORE_WARN_IF( false, "V.S.A. NOT INITIALIZED" );
         return;
     }
-    LOG( logDEBUG ) << "Computing V.S.A. ...";
+    LOG( Utils::logDEBUG ) << "Computing V.S.A. ...";
     for ( uint i = 0; i < Iteration; ++i )
     {
         this->proxy_fitting();
         this->geometry_partitioning();
     }
-    LOG( logDEBUG ) << "V.S.A. completed.";
+    LOG( Utils::logDEBUG ) << "V.S.A. completed.";
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -172,7 +172,7 @@ inline void VariationalShapeApproximationBase<K_Region>::compute_data() {
         const uint i = T[0];
         const uint j = T[1];
         const uint k = T[2];
-        const Vector3 v[3] = {this->m_mesh.m_vertices[i], this->m_mesh.m_vertices[j],
+        const Math::Vector3 v[3] = {this->m_mesh.m_vertices[i], this->m_mesh.m_vertices[j],
                               this->m_mesh.m_vertices[k]};
         this->m_fbary[t] = triangleBarycenter( v[0], v[1], v[2] );
         this->m_fnormal[t] = triangleNormal( v[0], v[1], v[2] );
@@ -309,10 +309,10 @@ inline void VariationalShapeApproximation<K_Region, Type>::proxy_fitting() {
 
         for ( const auto& T : this->m_region[i] )
         {
-            const Vector3 v[3] = {this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][0]],
+            const Math::Vector3 v[3] = {this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][0]],
                                   this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][1]],
                                   this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][2]]};
-            const Vector3& g = this->m_fbary[T];
+            const Math::Vector3& g = this->m_fbary[T];
 
             Matrix3 M;
             M.row( 0 ) = v[1] - v[0];
@@ -339,11 +339,11 @@ template <uint K_Region, MetricType Type>
 inline Scalar VariationalShapeApproximation<K_Region, Type>::E( const TriangleIdx& T,
                                                                 const Proxy& P ) const {
     static const Scalar c = 1.0 / 6.0;
-    const Vector3 v[3] = {this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][0]],
+    const Math::Vector3 v[3] = {this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][0]],
                           this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][1]],
                           this->m_mesh.m_vertices[this->m_mesh.m_triangles[T][2]]};
-    const Vector3 p = P.first;
-    const Vector3 n = P.second;
+    const Math::Vector3 p = P.first;
+    const Math::Vector3 n = P.second;
     Scalar d[3];
     d[0] = std::abs( n.dot( p - v[0] ) );
     d[1] = std::abs( n.dot( p - v[1] ) );
@@ -392,8 +392,8 @@ template <uint K_Region>
 inline Scalar VariationalShapeApproximation<K_Region, MetricType::L21>::E( const TriangleIdx& T,
                                                                            const Proxy& P ) const {
     const Scalar a = this->m_farea[T];
-    const Vector3 n = this->m_fnormal[T];
-    const Vector3 d = n - P.second;
+    const Math::Vector3 n = this->m_fnormal[T];
+    const Math::Vector3 d = n - P.second;
     const Scalar result = a * d.squaredNorm();
     return result;
 }
@@ -434,7 +434,7 @@ template <uint K_Region>
 inline Scalar
 VariationalShapeApproximation<K_Region, MetricType::LLOYD>::E( const TriangleIdx& T,
                                                                const Proxy& P ) const {
-    const Vector3& b = this->m_fbary[T];
+    const Math::Vector3& b = this->m_fbary[T];
     const Scalar result = ( b - P.first ).norm();
     return result;
 }

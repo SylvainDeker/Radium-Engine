@@ -3,26 +3,26 @@
 
 namespace Ra {
 namespace Core {
-namespace DistanceQueries {
+namespace Geometry {
 // Line funcs
 
-inline RA_CORE_API Scalar pointToLineSq( const Vector3& q, const Vector3& a, const Vector3& dir ) {
+inline RA_CORE_API Scalar pointToLineSq( const Math::Vector3& q, const Math::Vector3& a, const Math::Vector3& dir ) {
     // http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
     return ( dir.cross( q - a ) ).squaredNorm() / dir.squaredNorm();
 }
 
-inline RA_CORE_API Scalar projectOnSegment( const Vector3& q, const Vector3& a,
-                                            const Vector3& ab ) {
+inline RA_CORE_API Scalar projectOnSegment( const Math::Vector3& q, const Math::Vector3& a,
+                                            const Math::Vector3& ab ) {
     // Edge case : segment has length 0
     if ( UNLIKELY( ab.squaredNorm() == 0 ) )
     {
         return 0;
     }
-    return Ra::Core::Math::clamp<Scalar>( ( q - a ).dot( ab ) / ( ab.squaredNorm() ), 0, 1 );
+    return Math::clamp<Scalar>( ( q - a ).dot( ab ) / ( ab.squaredNorm() ), 0, 1 );
 }
 
-inline RA_CORE_API Scalar pointToSegmentSq( const Vector3& q, const Vector3& a,
-                                            const Vector3& ab ) {
+inline RA_CORE_API Scalar pointToSegmentSq( const Math::Vector3& q, const Math::Vector3& a,
+                                            const Math::Vector3& ab ) {
     const Scalar t = projectOnSegment( q, a, ab );
     return ( q - ( a + t * ( ab ) ) ).squaredNorm();
 }
@@ -40,8 +40,8 @@ enum FlagsInternal {
     HIT_CA = 0x8 | PointToTriangleOutput::HIT_EDGE,
 };
 
-inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Vector3& q, const Vector3& a,
-                                                       const Vector3& b, const Vector3& c ) {
+inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Math::Vector3& q, const Math::Vector3& a,
+                                                       const Math::Vector3& b, const Math::Vector3& c ) {
     /*
      *  This function projects the query point Q on the triangle plane to solve the
      *  planar problem described by the following schema  of Voronoi zones :
@@ -66,9 +66,9 @@ inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Vector3& q, const V
 
     PointToTriangleOutput output;
 
-    const Vector3 ab = b - a;
-    const Vector3 ac = c - a;
-    const Vector3 aq = q - a;
+    const Math::Vector3 ab = b - a;
+    const Math::Vector3 ac = c - a;
+    const Math::Vector3 aq = q - a;
 
     CORE_ASSERT( ab.cross( ac ).squaredNorm() > 0, "Triangle ABC is degenerate" );
 
@@ -85,7 +85,7 @@ inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Vector3& q, const V
         return output;
     }
 
-    const Vector3 bq = q - b;
+    const Math::Vector3 bq = q - b;
     const Scalar d3 = ab.dot( bq );
     const Scalar d4 = ac.dot( bq );
 
@@ -99,7 +99,7 @@ inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Vector3& q, const V
         return output;
     }
 
-    const Vector3 cq = q - c;
+    const Math::Vector3 cq = q - c;
     const Scalar d5 = ab.dot( cq );
     const Scalar d6 = ac.dot( cq );
 
@@ -163,9 +163,9 @@ inline RA_CORE_API PointToTriangleOutput pointToTriSq( const Vector3& q, const V
     return output;
 }
 
-inline RA_CORE_API LineToSegmentOutput lineToSegSq( const Vector3& lineOrigin,
-                                                    Vector3 lineDirection, const Vector3& segCenter,
-                                                    Vector3 segDirection, const Scalar segExtent ) {
+inline RA_CORE_API LineToSegmentOutput lineToSegSq( const Math::Vector3& lineOrigin,
+                                                    Math::Vector3 lineDirection, const Math::Vector3& segCenter,
+                                                    Math::Vector3 segDirection, const Scalar segExtent ) {
     // Reference : Geometric Tools,
     // https://github.com/pmjoniak/GeometricTools/blob/master/GTEngine/Include/GteDistLineSegment.h
 
@@ -174,7 +174,7 @@ inline RA_CORE_API LineToSegmentOutput lineToSegSq( const Vector3& lineOrigin,
     segDirection.normalize();
     lineDirection.normalize();
 
-    Vector3 diff = lineOrigin - segCenter;
+    Math::Vector3 diff = lineOrigin - segCenter;
     Scalar a01 = -lineDirection.dot( segDirection );
     Scalar b0 = diff.dot( lineDirection );
     Scalar s0, s1;
@@ -224,8 +224,8 @@ inline RA_CORE_API LineToSegmentOutput lineToSegSq( const Vector3& lineOrigin,
     return output;
 }
 
-inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Vector3& lineOrigin,
-                                                     Vector3 lineDirection, const Vector3 v[3] ) {
+inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Math::Vector3& lineOrigin,
+                                                     Math::Vector3 lineDirection, const Math::Vector3 v[3] ) {
     // Reference : GeometricTools,
     // https://github.com/pmjoniak/GeometricTools/blob/master/GTEngine/Include/GteDistLine3Triangle3.h
 
@@ -233,9 +233,9 @@ inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Vector3& lineOrigin,
 
     lineDirection.normalize();
 
-    Vector3 edge0 = v[1] - v[0];
-    Vector3 edge1 = v[2] - v[0];
-    Vector3 normal = edge0.cross( edge1 );
+    Math::Vector3 edge0 = v[1] - v[0];
+    Math::Vector3 edge1 = v[2] - v[0];
+    Math::Vector3 normal = edge0.cross( edge1 );
     normal.normalize();
     Scalar nd = normal.dot( lineDirection );
     if ( std::abs( nd ) > (Scalar)0 )
@@ -243,8 +243,8 @@ inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Vector3& lineOrigin,
         // The line intersects the plane of the triangle or the triangle itself
         // (if the intersection point isn't needed, it possible to use the boolean function
         // vsTriangle of RayCast.hpp)
-        Vector3 diff = lineOrigin - v[0];
-        Vector3 basis[3]; // {D, U, V}
+        Math::Vector3 diff = lineOrigin - v[0];
+        Math::Vector3 basis[3]; // {D, U, V}
         basis[0] = lineDirection;
         if ( std::abs( basis[0][0] ) > std::abs( basis[0][1] ) )
         {
@@ -307,8 +307,8 @@ inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Vector3& lineOrigin,
     output.sqrDistance = std::numeric_limits<Scalar>::max();
     for ( int i0 = 2, i1 = 0; i1 < 3; i0 = i1++ )
     {
-        Vector3 segCenter = ( (Scalar)0.5 ) * ( v[i0] + v[i1] );
-        Vector3 segDirection = v[i1] - v[i0];
+        Math::Vector3 segCenter = ( (Scalar)0.5 ) * ( v[i0] + v[i1] );
+        Math::Vector3 segDirection = v[i1] - v[i0];
         Scalar segExtent = ( (Scalar)0.5 ) * std::sqrt( segDirection.dot( segDirection ) );
 
         // Distance line-segment is computed
@@ -330,9 +330,9 @@ inline RA_CORE_API LineToTriangleOutput lineToTriSq( const Vector3& lineOrigin,
     return output;
 }
 
-inline RA_CORE_API SegmentToTriangleOutput segmentToTriSq( const Vector3& segCenter,
-                                                           Vector3 segDirection, Scalar segExtent,
-                                                           const Vector3 v[3] ) {
+inline RA_CORE_API SegmentToTriangleOutput segmentToTriSq( const Math::Vector3& segCenter,
+                                                           Math::Vector3 segDirection, Scalar segExtent,
+                                                           const Math::Vector3 v[3] ) {
     // Reference : Geometric Tools,
     // https://github.com/pmjoniak/GeometricTools/blob/master/GTEngine/Include/GteDistSegment3Triangle3.h
 
@@ -362,7 +362,7 @@ inline RA_CORE_API SegmentToTriangleOutput segmentToTriSq( const Vector3& segCen
         {
             // The closest point on the line is at the segment's right
             // We compute the distance between the right endpoint of the segment and the triangle
-            Vector3 point = segCenter + segExtent * segDirection;
+            Math::Vector3 point = segCenter + segExtent * segDirection;
             PointToTriangleOutput ptOutput = pointToTriSq( point, v[0], v[1], v[2] );
             output.sqrDistance = ptOutput.distanceSquared;
             output.distance = std::sqrt( output.sqrDistance );
@@ -374,7 +374,7 @@ inline RA_CORE_API SegmentToTriangleOutput segmentToTriSq( const Vector3& segCen
     {
         // The closest point on the line is at the segment's left
         // We compute the distance between the left endpoint of the segment and the triangle
-        Vector3 point = segCenter - segExtent * segDirection;
+        Math::Vector3 point = segCenter - segExtent * segDirection;
         PointToTriangleOutput ptOutput = pointToTriSq( point, v[0], v[1], v[2] );
         output.sqrDistance = ptOutput.distanceSquared;
         output.distance = std::sqrt( output.sqrDistance );
@@ -385,8 +385,8 @@ inline RA_CORE_API SegmentToTriangleOutput segmentToTriSq( const Vector3& segCen
     return output;
 }
 
-inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Vector3 v1[3],
-                                                             const Vector3 v2[3] ) {
+inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Math::Vector3 v1[3],
+                                                             const Math::Vector3 v2[3] ) {
     TriangleToTriangleOutput output;
 
     SegmentToTriangleOutput stOutput;
@@ -395,8 +395,8 @@ inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Vector3 v1[3]
     // We compute the closest distance between v1's edges and v2.
     for ( int i0 = 2, i1 = 0; i1 < 3; i0 = i1++ )
     {
-        Vector3 segCenter = ( (Scalar)0.5 ) * ( v1[i0] + v1[i1] );
-        Vector3 segDirection = v1[i1] - v1[i0];
+        Math::Vector3 segCenter = ( (Scalar)0.5 ) * ( v1[i0] + v1[i1] );
+        Math::Vector3 segDirection = v1[i1] - v1[i0];
         Scalar segExtent = ( (Scalar)0.5 ) * std::sqrt( segDirection.dot( segDirection ) );
 
         stOutput = segmentToTriSq( segCenter, segDirection, segExtent, v2 );
@@ -419,8 +419,8 @@ inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Vector3 v1[3]
     // We compute the closest distance between v2's edges and v1.
     for ( int i0 = 2, i1 = 0; i1 < 3; i0 = i1++ )
     {
-        Vector3 segCenter = ( (Scalar)0.5 ) * ( v2[i0] + v2[i1] );
-        Vector3 segDirection = v2[i1] - v2[i0];
+        Math::Vector3 segCenter = ( (Scalar)0.5 ) * ( v2[i0] + v2[i1] );
+        Math::Vector3 segDirection = v2[i1] - v2[i0];
         Scalar segExtent = ( (Scalar)0.5 ) * std::sqrt( segDirection.dot( segDirection ) );
 
         stOutput = segmentToTriSq( segCenter, segDirection, segExtent, v1 );
@@ -442,6 +442,6 @@ inline RA_CORE_API TriangleToTriangleOutput triangleToTriSq( const Vector3 v1[3]
     return output;
 }
 
-} // namespace DistanceQueries
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

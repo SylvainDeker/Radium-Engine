@@ -5,12 +5,12 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
-using ParentList = AlignedStdVector<int>;
-using LevelList = AlignedStdVector<uint8_t>;
-using ChildrenList = AlignedStdVector<uint8_t>;
-using Adjacency = AlignedStdVector<ChildrenList>;
+using ParentList = Container::AlignedStdVector<int>;
+using LevelList = Container::AlignedStdVector<uint8_t>;
+using ChildrenList = Container::AlignedStdVector<uint8_t>;
+using Adjacency = Container::AlignedStdVector<ChildrenList>;
 
 /**
  * The AdjacencyList contains the adjacency matrix expressed as a vector of indices and
@@ -67,7 +67,7 @@ class /*RA_CORE_API*/ AdjacencyList {
     LevelList m_level;
 };
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

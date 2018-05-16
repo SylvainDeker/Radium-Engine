@@ -8,7 +8,7 @@
 namespace Ra {
 namespace Core {
 /// A collection of utilities for std::string.
-namespace StringUtils {
+namespace Utils {
 //
 // File names and paths.
 // Todo : support backward slashes in windows paths.
@@ -49,7 +49,7 @@ RA_CORE_API int appendPrintf( std::string& str, const char* fmt, ... );
 /// { "Hello", " World", " and Universe !" }.
 /// @return a vector containing n substrings given a split token.
 RA_CORE_API std::vector<std::string> splitString( const std::string& str, char token );
-} // namespace StringUtils
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

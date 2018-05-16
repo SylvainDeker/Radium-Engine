@@ -17,17 +17,17 @@ using Weights = std::vector<SkinningWeights>;
 using SingleWeight = std::pair<uint, Scalar>;
 
 // Defining the vector of the skinning weights for a vertex
-using VertexWeight = AlignedStdVector<SingleWeight>;
+using VertexWeight = Container::AlignedStdVector<SingleWeight>;
 
 // Defining the vector of the skinning weights for the entire mesh
-using MeshWeight = AlignedStdVector<VertexWeight>;
+using MeshWeight = Container::AlignedStdVector<VertexWeight>;
 
 // Defining the weight matrix as the nxm matrix, where n are the vertices and m the handles
 // It is like an adjacency matrix between vertices and handle transforms.
 // If w is a generic weight ( a.k.a. a scalar value ), then the WeightMatrix M is defined as:
 //      M( i, j ) = w   , if vertex i is influenced by transform j
 //      M( i, j ) = 0   , otherwise
-using WeightMatrix = Ra::Core::Sparse;
+using WeightMatrix = Ra::Core::Math::Sparse;
 
 } // namespace Animation
 } // Namespace Core

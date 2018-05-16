@@ -29,7 +29,7 @@ RA_CORE_API Pose relativePose( const Pose& modelPose, const RestPose& restPose )
  *           pose[i] = transform[i] * pose[i];
  */
 RA_CORE_API Pose applyTransformation( const Pose& pose,
-                                      const AlignedStdVector<Transform>& transform );
+                                      const Container::AlignedStdVector<Math::Transform>& transform );
 
 /*
  * Return the pose resulting in applying the transform to the pose transforms.
@@ -37,14 +37,14 @@ RA_CORE_API Pose applyTransformation( const Pose& pose,
  * The operation is equal to:
  *           pose[i] = transform * pose[i];
  */
-RA_CORE_API Pose applyTransformation( const Pose& pose, const Transform& transform );
+RA_CORE_API Pose applyTransformation( const Pose& pose, const Math::Transform& transform );
 
 RA_CORE_API bool areEqual( const Pose& p0, const Pose& p1 );
 
 RA_CORE_API Pose interpolatePoses( const Pose& a, const Pose& b, const Scalar t );
 
-RA_CORE_API void interpolateTransforms( const Ra::Core::Transform& a, const Ra::Core::Transform& b,
-                                        Scalar t, Ra::Core::Transform& interpolated );
+RA_CORE_API void interpolateTransforms( const Ra::Core::Math::Transform& a, const Ra::Core::Math::Transform& b,
+                                        Scalar t, Ra::Core::Math::Transform& interpolated );
 
 } // namespace Animation
 } // namespace Core

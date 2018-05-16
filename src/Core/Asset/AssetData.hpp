@@ -5,6 +5,7 @@
 #include <string>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 class RA_CORE_API AssetData {
@@ -20,6 +21,7 @@ class RA_CORE_API AssetData {
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_GEOMETRY_DATA_HPP

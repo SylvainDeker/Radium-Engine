@@ -8,6 +8,10 @@
 
 #include <Core/Utils/StringUtils.hpp>
 
+namespace Ra {
+namespace Core {
+namespace Utils {
+
 inline std::string NowTime();
 
 enum TLogLevel {
@@ -134,21 +138,22 @@ inline void Output2FILE::Output( const std::string& msg ) {
 class FILELog : public Log<Output2FILE> {};
 // using FILELog = Log<Output2FILE>;
 
+
 #ifndef FILELOG_MAX_LEVEL
 #    ifdef CORE_DEBUG
-#        define FILELOG_MAX_LEVEL logDEBUG4
+#        define FILELOG_MAX_LEVEL Ra::Core::Utils::logDEBUG4
 #    else
-#        define FILELOG_MAX_LEVEL logINFO
+#        define FILELOG_MAX_LEVEL Ra::Core::Utils::logINFO
 #    endif
 #endif
 
 #define FILE_LOG( level )                                                   \
     if ( level > FILELOG_MAX_LEVEL )                                        \
         ;                                                                   \
-    else if ( level > FILELog::ReportingLevel() || !Output2FILE::Stream() ) \
+    else if ( level > Ra::Core::Utils::FILELog::ReportingLevel() || !Ra::Core::Utils::Output2FILE::Stream() ) \
         ;                                                                   \
     else                                                                    \
-        FILELog().Get( level )
+        Ra::Core::Utils::FILELog().Get( level )
 
 #define LOG( level ) FILE_LOG( level )
 
@@ -161,8 +166,12 @@ inline std::string NowTime() {
     CORE_ASSERT( ok, "Increase buffer size." );
     std::string result( buffer );
     // This doesn't work with minGW. Maybe indicates a serious issue ?
-    // Ra::Core::StringUtils::stringPrintf( result, "%s", buffer );
+    // Ra::Core::Utils::stringPrintf( result, "%s", buffer );
     return result;
 }
+
+} // namespace Ra
+} // namespace Core
+} // namespace Utils
 
 #endif // RADIUMENGINE_LOG_HPP

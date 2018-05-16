@@ -8,7 +8,7 @@ namespace Ra {
 namespace Core {
 // Convenience functions for timing.
 // Wrapping the highest resolution time measuring.
-namespace Timer {
+namespace Utils {
 using MicroSeconds = long;
 using Seconds = Scalar;
 using Clock = std::chrono::high_resolution_clock;
@@ -23,7 +23,7 @@ inline Seconds getIntervalSeconds( const TimePoint& start, const TimePoint& end 
                  std::chrono::duration<Scalar, std::chrono::seconds::period>>( end - start ) )
         .count();
 }
-} // namespace Timer
+} // namespace Utils
 
 } // namespace Core
 } // namespace Ra

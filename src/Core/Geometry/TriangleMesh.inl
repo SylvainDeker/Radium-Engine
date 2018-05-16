@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 inline void TriangleMesh::clear() {
     m_vertices.clear();
     m_normals.clear();
@@ -25,5 +26,6 @@ inline void TriangleMesh::append( const TriangleMesh& other ) {
         }
     }
 }
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

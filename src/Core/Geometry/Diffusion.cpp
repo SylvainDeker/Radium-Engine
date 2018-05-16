@@ -3,9 +3,9 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
-ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& delta,
+ScalarValue diffuseDelta( const AdjacencyMatrix& A, const Delta& delta,
                           const Scalar lambda, const uint iteration ) {
     ScalarValue u( delta );
     ScalarValue tmp( delta );
@@ -16,7 +16,7 @@ ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const De
         for ( Delta::InnerIterator u_it( u, 0 ); u_it; ++u_it )
         {
             Scalar oneRingMeanValue = 0.0;
-            for ( Geometry::AdjacencyMatrix::InnerIterator A_it( A, u_it.row() ); A_it; ++A_it )
+            for ( AdjacencyMatrix::InnerIterator A_it( A, u_it.row() ); A_it; ++A_it )
             {
                 oneRingMeanValue += u.coeff( A_it.row(), 0 );
             }
@@ -29,7 +29,7 @@ ScalarValue diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const De
     return u;
 }
 
-void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& delta,
+void diffuseDelta( const AdjacencyMatrix& A, const Delta& delta,
                    const Scalar lambda, const uint iteration, ScalarValue& value ) {
     ScalarValue u = delta;
     ScalarValue tmp = delta;
@@ -43,7 +43,7 @@ void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& de
         //            const Scalar uv = u_it.value();
         //            Scalar oneRingMeanValue = 0.0;
         //            uint nonZero = 0;
-        //            for( Geometry::AdjacencyMatrix::InnerIterator A_it( A, j ); A_it; ++A_it) {
+        //            for( AdjacencyMatrix::InnerIterator A_it( A, j ); A_it; ++A_it) {
         //                uint i = A_it.row();
         //                oneRingMeanValue += u.coeff( i, 0 );
         //                ++nonZero;
@@ -60,7 +60,7 @@ void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& de
         {
             uint nonZero = 0;
             Scalar oneRingMeanValue = 0.0;
-            for ( Geometry::AdjacencyMatrix::InnerIterator it( A, k ); it; ++it )
+            for ( AdjacencyMatrix::InnerIterator it( A, k ); it; ++it )
             {
                 const uint i = it.row();
                 ++nonZero;
@@ -81,6 +81,6 @@ void diffuseDelta( const Ra::Core::Geometry::AdjacencyMatrix& A, const Delta& de
     std::swap( u, value ); // u.swap( value );
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

@@ -2,30 +2,30 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 Time t( const Scalar& m, const Scalar& h ) {
     return ( m * h * h );
 }
 
-void heat( const Geometry::AreaMatrix& A, const Time& t, const Geometry::LaplacianMatrix& L,
+void heat( const AreaMatrix& A, const Time& t, const LaplacianMatrix& L,
            Heat& u, const Delta& delta ) {
-    Eigen::SimplicialLLT<Sparse> llt;
+    Eigen::SimplicialLLT<Math::Sparse> llt;
     llt.compute( ( A + ( t * L ) ) );
-    VectorN b = delta;
+    Math::VectorN b = delta;
     u.getMap() = llt.solve( b );
 }
 
-Heat heat( const Geometry::AreaMatrix& A, const Time& t, const Geometry::LaplacianMatrix& L,
+Heat heat( const AreaMatrix& A, const Time& t, const LaplacianMatrix& L,
            const Delta& delta ) {
     Heat u( L.rows() );
-    Eigen::SimplicialLLT<Sparse> llt;
+    Eigen::SimplicialLLT<Math::Sparse> llt;
     llt.compute( ( A + ( t * L ) ) );
-    VectorN b = delta;
+    Math::VectorN b = delta;
     u.getMap() = llt.solve( b );
     return u;
 }
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

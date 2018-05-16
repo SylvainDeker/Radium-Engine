@@ -3,12 +3,12 @@
 
 #include <Core/Geometry/Diffusion.hpp> // ScalarValue
 #include <Core/Container/VectorArray.hpp>        // VectorArray
-#include <Core/Geometry/Laplacian.hpp>  // Geometry::LaplacianMatrix
+#include <Core/Geometry/Laplacian.hpp>  // LaplacianMatrix
 #include <Core/RaCore.hpp>
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 /*
  * Return the clamped version of the value vector given in input.
@@ -32,8 +32,8 @@ RA_CORE_API void smartClamp( const BitSet& bit, const ScalarValue& value, Scalar
  * a user-defined number of iterations. Within each iteration, the new position is evaluated as the
  * weighted sum of the iteration i and iteration i-1.
  */
-RA_CORE_API VectorArray<Vector3> laplacianSmoothing( const VectorArray<Vector3>& v,
-                                                     const Ra::Core::Geometry::LaplacianMatrix& L,
+RA_CORE_API Container::VectorArray<Math::Vector3> laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
+                                                     const LaplacianMatrix& L,
                                                      const ScalarValue& weight,
                                                      const uint iteration );
 
@@ -42,12 +42,12 @@ RA_CORE_API VectorArray<Vector3> laplacianSmoothing( const VectorArray<Vector3>&
  * a user-defined number of iterations. Within each iteration, the new position is evaluated as the
  * weighted sum of the iteration i and iteration i-1.
  */
-RA_CORE_API void laplacianSmoothing( const VectorArray<Vector3>& v,
-                                     const Ra::Core::Geometry::LaplacianMatrix& L,
+RA_CORE_API void laplacianSmoothing( const Container::VectorArray<Math::Vector3>& v,
+                                     const LaplacianMatrix& L,
                                      const ScalarValue& weight, const uint iteration,
-                                     VectorArray<Vector3>& p );
+                                     Container::VectorArray<Math::Vector3>& p );
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

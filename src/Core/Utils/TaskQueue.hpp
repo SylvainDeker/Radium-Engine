@@ -14,12 +14,10 @@
 
 namespace Ra {
 namespace Core {
-class Task;
-}
-} // namespace Ra
+namespace Utils {
 
-namespace Ra {
-namespace Core {
+class Task;
+
 /// This class allows tasks to be registered and then executed in parallel on separate threads.
 /// it maintains an internal pool of threads. When instructed, it dispatches the tasks to the
 /// pooled threads.
@@ -35,8 +33,8 @@ class RA_CORE_API TaskQueue {
 
     /// Record of a task's start and end time.
     struct TimerData {
-        Timer::TimePoint start;
-        Timer::TimePoint end;
+        TimePoint start;
+        TimePoint end;
         uint threadId;
         std::string taskName;
     };
@@ -140,6 +138,8 @@ class RA_CORE_API TaskQueue {
     std::mutex m_taskQueueMutex;
 };
 
+
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

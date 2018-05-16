@@ -1,6 +1,7 @@
 #include <Core/Asset/MaterialData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// CONSTRUCTOR
@@ -12,7 +13,7 @@ MaterialData::~MaterialData() {}
 
 /// DEBUG
 void MaterialData::displayInfo() const {
-    LOG( logERROR ) << "MaterialData : unkonwn material type : " << m_type;
+    LOG( Core::Utils::logERROR ) << "MaterialData : unkonwn material type : " << m_type;
 }
 
 ///////////////////
@@ -42,4 +43,5 @@ BlinnPhongMaterialData::BlinnPhongMaterialData( const std::string& name ) :
 BlinnPhongMaterialData::~BlinnPhongMaterialData() {}
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

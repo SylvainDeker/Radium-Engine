@@ -6,12 +6,13 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 /*
  * The class OFFFileManager handles the loading and storing of TriangleMesh in the standard OFF
  * format.
  */
-class OFFFileManager : public FileManager<TriangleMesh> {
+class OFFFileManager : public FileManager<Geometry::TriangleMesh> {
   public:
     /// CONSTRUCTOR
     OFFFileManager();
@@ -25,10 +26,11 @@ class OFFFileManager : public FileManager<TriangleMesh> {
 
     /// INTERFACE
     virtual std::string fileExtension() const override;
-    virtual bool importData( std::istream& file, TriangleMesh& data ) override;
-    virtual bool exportData( std::ostream& file, const TriangleMesh& data ) override;
+    virtual bool importData( std::istream& file, Geometry::TriangleMesh& data ) override;
+    virtual bool exportData( std::ostream& file, const Geometry::TriangleMesh& data ) override;
 };
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra
 

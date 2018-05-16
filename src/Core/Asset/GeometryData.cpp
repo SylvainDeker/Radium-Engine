@@ -1,12 +1,13 @@
 #include <Core/Asset/GeometryData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 /// CONSTRUCTOR
 GeometryData::GeometryData( const std::string& name, const GeometryType& type ) :
     AssetData( name ),
-    m_frame( Core::Transform::Identity() ),
+    m_frame( Core::Math::Transform::Identity() ),
     m_type( type ),
     m_vertex(),
     m_edge(),
@@ -25,4 +26,5 @@ GeometryData::GeometryData( const std::string& name, const GeometryType& type ) 
 GeometryData::~GeometryData() {}
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

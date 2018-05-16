@@ -9,7 +9,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Algorithm {
+namespace Geometry {
 
 // Defining a vector containing true for the indices different than 0
 using BitSet = std::vector<bool>;
@@ -18,7 +18,7 @@ using BitSet = std::vector<bool>;
 using Source = std::vector<uint8_t>;
 
 // Defining the vector containing the value of the sources
-using Delta = Ra::Core::Sparse;
+using Delta = Ra::Core::Math::Sparse;
 
 /*
  * Return the Delta vector.
@@ -81,7 +81,7 @@ void RA_CORE_API delta( const Source& source, const uint size, Delta& u,
  */
 void RA_CORE_API bitset( const Delta& u, BitSet& bit );
 
-} // namespace Algorithm
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

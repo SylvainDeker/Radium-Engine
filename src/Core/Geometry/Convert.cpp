@@ -13,6 +13,8 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
+
 
 Twin::Twin() {
     m_id[0] = uint( -1 );
@@ -38,8 +40,8 @@ void convert( const TriangleMesh& mesh, Dcel& dcel ) {
     // Create vertices
     for ( unsigned int i = 0; i < mesh.m_vertices.size(); ++i )
     {
-        Vector3 p = mesh.m_vertices.at( i );
-        Vector3 n = mesh.m_normals.at( i );
+        Math::Vector3 p = mesh.m_vertices.at( i );
+        Math::Vector3 n = mesh.m_normals.at( i );
         Vertex_ptr v = std::shared_ptr<Vertex>( new Vertex( p, n ) );
         CORE_ASSERT( ( v != nullptr ), "Vertex_ptr == nullptr" );
         v->idx = dcel.m_vertex.insert( v );
@@ -47,7 +49,7 @@ void convert( const TriangleMesh& mesh, Dcel& dcel ) {
         CORE_ASSERT( v->idx.isValid(), "Vertex not inserted" );
     }
     /// TWIN DATA
-    std::map<Twin, Index> he_table;
+    std::map<Twin, Container::Index> he_table;
     // Create faces and halfedges
     for ( const auto& t : mesh.m_triangles )
     {
@@ -59,7 +61,7 @@ void convert( const TriangleMesh& mesh, Dcel& dcel ) {
             CORE_ASSERT( ( he[i] != nullptr ), "HalfEdge_ptr == nullptr" );
         }
         // Create the face
-        Face_ptr f = Ra::Core::make_shared<Face>( he[0] );
+        Face_ptr f = Container::make_shared<Face>( he[0] );
         CORE_ASSERT( ( f != nullptr ), "Face_ptr == nullptr" );
         f->idx = dcel.m_face.insert( f );
         CORE_ASSERT( f->idx.isValid(), "Face not inserted" );
@@ -114,12 +116,12 @@ void convert( const Dcel& dcel, TriangleMesh& mesh ) {
     mesh.m_vertices.resize( v_size );
     mesh.m_normals.resize( v_size );
     mesh.m_triangles.resize( f_size );
-    std::map<Index, uint> v_table;
+    std::map<Container::Index, uint> v_table;
     for ( uint i = 0; i < v_size; ++i )
     {
         const Vertex_ptr& v = dcel.m_vertex.at( i );
-        const Vector3 p = v->P();
-        const Vector3 n = v->N();
+        const Math::Vector3 p = v->P();
+        const Math::Vector3 n = v->N();
         mesh.m_vertices[i] = p;
         mesh.m_normals[i] = n;
         v_table[v->idx] = i;
@@ -135,5 +137,6 @@ void convert( const Dcel& dcel, TriangleMesh& mesh ) {
     }
 }
 
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

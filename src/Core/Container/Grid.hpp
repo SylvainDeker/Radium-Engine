@@ -8,6 +8,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 /// This class stores a D-dimensional grid of elements of arbitrary type.
 /// in a contiguous memory block. Elements are stored in column-major order.
 /// e.g. for a 3x3x3 array the element vector looks like
@@ -233,6 +234,7 @@ class Grid {
     /// Storage for the grid data.
     std::vector<T> m_data;
 };
+} // namespace Container
 } // namespace Core
 } // namespace Ra
 

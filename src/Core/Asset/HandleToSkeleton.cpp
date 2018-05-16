@@ -4,6 +4,7 @@
 #include <Core/Asset/HandleData.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 namespace {
@@ -11,8 +12,8 @@ namespace {
 void addBone(
     const int parent,                                                       // index of parent bone
     const uint dataID,                                                      // index in map
-    const Ra::Core::AlignedStdVector<Ra::Asset::HandleComponentData>& data, // handle bone data
-    const Ra::Core::AlignedStdVector<Ra::Core::Vector2i>& edgeList,         // list of edges
+    const Container::AlignedStdVector<HandleComponentData>& data, // handle bone data
+    const Container::AlignedStdVector<Math::Vector2i>& edgeList,         // list of edges
     std::vector<bool>& processed,       // which ids have been processed
     Core::Animation::Skeleton& skelOut, // skeleton being built
     std::map<uint, uint>& indexTable )  // correspondance between data idx and bone idx
@@ -21,7 +22,7 @@ void addBone(
     {
         processed[dataID] = true;
         uint index = skelOut.addBone( parent, data.at( dataID ).m_frame,
-                                      Ra::Core::Animation::Handle::SpaceType::MODEL,
+                                      Animation::Handle::SpaceType::MODEL,
                                       data.at( dataID ).m_name );
         indexTable[dataID] = index;
         for ( const auto& edge : edgeList )
@@ -35,7 +36,7 @@ void addBone(
 }
 } // namespace
 
-void createSkeleton( const Ra::Asset::HandleData& data, Core::Animation::Skeleton& skelOut,
+void createSkeleton( const HandleData& data, Core::Animation::Skeleton& skelOut,
                      std::map<uint, uint>& indexTableOut ) {
     const uint size = data.getComponentDataSize();
     auto component = data.getComponentData();
@@ -59,4 +60,5 @@ void createSkeleton( const Ra::Asset::HandleData& data, Core::Animation::Skeleto
     }
 }
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

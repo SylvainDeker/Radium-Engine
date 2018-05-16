@@ -8,6 +8,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 /// A very basic structure representing a triangle mesh which stores the bare minimum :
 /// vertices, faces and normals. See MeshUtils for geometric functions operating on a mesh.
 struct TriangleMesh {
@@ -23,13 +24,14 @@ struct TriangleMesh {
     /// Appends another mesh to this one.
     inline void append( const TriangleMesh& other );
 
-    VectorArray<Vector3> m_vertices;
-    VectorArray<Vector3> m_normals;
-    VectorArray<Triangle> m_triangles;
+    Container::VectorArray<Math::Vector3> m_vertices;
+    Container::VectorArray<Math::Vector3> m_normals;
+    Container::VectorArray<Triangle> m_triangles;
 
   public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

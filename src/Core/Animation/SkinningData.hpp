@@ -9,48 +9,48 @@
 
 namespace Ra {
 namespace Core {
-namespace Skinning {
+namespace Animation {
 
 /// Skinning data that gets set at startup including the "reference state"
 struct RefData {
     /// Skeleton
-    Ra::Core::Animation::Skeleton m_skeleton;
+    Skeleton m_skeleton;
 
     /// Mesh in reference position
-    Ra::Core::TriangleMesh m_referenceMesh;
+    Ra::Core::Geometry::TriangleMesh m_referenceMesh;
 
     /// Reference pose
-    Ra::Core::Animation::Pose m_refPose;
+    Pose m_refPose;
 
     /// Skinning weights.
-    Ra::Core::Animation::WeightMatrix m_weights;
+    WeightMatrix m_weights;
 
     /// Optionnal centers of rotations for CoR skinning
-    Ra::Core::Vector3Array m_CoR;
+    Ra::Core::Container::Vector3Array m_CoR;
 };
 
 /// Pose data of one frame. Poses are in model space
 struct FrameData {
     /// Pose of the previous frame.
-    Ra::Core::Animation::Pose m_previousPose;
+    Pose m_previousPose;
 
     /// Pose of the current frame.
-    Ra::Core::Animation::Pose m_currentPose;
+    Pose m_currentPose;
 
     /// Relative pose from previous to current
-    Ra::Core::Animation::Pose m_prevToCurrentRelPose;
+    Pose m_prevToCurrentRelPose;
 
     /// Relative pose from reference pose to current.
-    Ra::Core::Animation::Pose m_refToCurrentRelPose;
+    Pose m_refToCurrentRelPose;
 
     /// Previous position of the vertices
-    Ra::Core::Vector3Array m_previousPos;
+    Ra::Core::Container::Vector3Array m_previousPos;
 
     /// Current position of the vertices
-    Ra::Core::Vector3Array m_currentPos;
+    Ra::Core::Container::Vector3Array m_currentPos;
 
     /// Current vertex normals
-    Ra::Core::Vector3Array m_currentNormal;
+    Ra::Core::Container::Vector3Array m_currentNormal;
 
     /// Number of animation frames
     uint m_frameCounter;
@@ -64,7 +64,7 @@ struct FrameData {
     bool m_doReset;
 };
 
-} // namespace Skinning
+} // namespace Animation
 } // namespace Core
 } // namespace Ra
 

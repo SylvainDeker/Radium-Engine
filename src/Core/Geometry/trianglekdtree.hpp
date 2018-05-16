@@ -21,7 +21,9 @@
 // number of neighbors
 #define KD_TRIANGLES_PER_CELL 64
 
-namespace Super4PCS {
+namespace Ra {
+namespace Core {
+namespace Geometry {
 
 template <typename _Index = int>
 class TriangleKdTree {
@@ -475,7 +477,7 @@ Index TriangleKdTree<Index>::doQueryRestrictedClosestIndexTriangle( const Vector
                 else
                 {
                     new_off = 0;
-                    const VectorType& v = Ra::Core::Geometry::triangleBarycenter( a, b, c );
+                    const VectorType& v = triangleBarycenter( a, b, c );
                     const Scalar d = v[node.dim] - node.splitValue;
                     if ( d < 0. )
                     {
@@ -688,6 +690,8 @@ void TriangleKdTree<Index>::createTree(
     }
 }
 
-} // namespace Super4PCS
+} // namespace Geometry
+} // namespace Core
+} // namespace Ra
 
 #endif // TRIANGLEKDTREE_H

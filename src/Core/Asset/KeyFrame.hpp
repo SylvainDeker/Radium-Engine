@@ -10,6 +10,7 @@
 #include <Core/Asset/AnimationTime.hpp>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 template <class FRAME>
@@ -160,11 +161,12 @@ class KeyFrame {
     /// VARIABLE
     AnimationTime m_time;
     std::map<Time, FRAME, std::less<Time>,
-             Ra::Core::AlignedAllocator<std::pair<const Time, FRAME>, RA_DEFAULT_ALIGN>>
+             Ra::Core::Container::AlignedAllocator<std::pair<const Time, FRAME>, RA_DEFAULT_ALIGN>>
         m_keyframe;
 };
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_KEY_FRAME_HPP

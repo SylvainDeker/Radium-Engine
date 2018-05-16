@@ -24,14 +24,14 @@ class RA_ENGINE_API RenderObjectManager final {
     RenderObjectManager();
     ~RenderObjectManager();
 
-    Core::Index addRenderObject( RenderObject* renderObject );
-    void removeRenderObject( const Core::Index& index );
+    Core::Container::Index addRenderObject( RenderObject* renderObject );
+    void removeRenderObject( const Core::Container::Index& index );
 
     uint getRenderObjectsCount();
 
     /// Returns the render object corresponding to the given index. Will assert
     /// if the index does not match to an existing render object. See exists()
-    std::shared_ptr<RenderObject> getRenderObject( const Core::Index& index );
+    std::shared_ptr<RenderObject> getRenderObject( const Core::Container::Index& index );
 
     /**
      * @brief Get all render objects, the vector is assumed to be empty
@@ -43,9 +43,9 @@ class RA_ENGINE_API RenderObjectManager final {
                                  const RenderObjectType& type ) const;
 
     /// Returns true if the index points to a valid render object.
-    bool exists( const Core::Index& index ) const;
+    bool exists( const Core::Container::Index& index ) const;
 
-    void renderObjectExpired( const Ra::Core::Index& idx );
+    void renderObjectExpired( const Ra::Core::Container::Index& idx );
 
     /// Return the total number of faces drawn
     uint getNumFaces() const;
@@ -54,12 +54,12 @@ class RA_ENGINE_API RenderObjectManager final {
     uint getNumVertices() const;
 
     /// Return the AABB of all visible render objects
-    Core::Aabb getSceneAabb() const;
+    Core::Math::Aabb getSceneAabb() const;
 
   private:
-    Core::IndexMap<std::shared_ptr<RenderObject>> m_renderObjects;
+    Core::Container::IndexMap<std::shared_ptr<RenderObject>> m_renderObjects;
 
-    std::array<std::set<Core::Index>, (int)RenderObjectType::Count> m_renderObjectByType;
+    std::array<std::set<Core::Container::Index>, (int)RenderObjectType::Count> m_renderObjectByType;
 
     mutable std::mutex m_doubleBufferMutex;
 };

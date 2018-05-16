@@ -6,10 +6,10 @@
 #include <Core/Animation/DualQuaternionSkinning.hpp>
 #include <Core/Animation/RotationCenterSkinning.hpp>
 
-using Ra::Core::DualQuaternion;
-using Ra::Core::Quaternion;
+using Ra::Core::Math::DualQuaternion;
+using Ra::Core::Math::Quaternion;
 
-using Ra::Core::TriangleMesh;
+using Ra::Core::Geometry::TriangleMesh;
 using Ra::Core::Animation::Pose;
 using Ra::Core::Animation::RefPose;
 using Ra::Core::Animation::Skeleton;
@@ -17,8 +17,8 @@ using Ra::Core::Animation::WeightMatrix;
 
 using SpaceType = Ra::Core::Animation::Handle::SpaceType;
 
-using Ra::Core::Skinning::FrameData;
-using Ra::Core::Skinning::RefData;
+using Ra::Core::Animation::FrameData;
+using Ra::Core::Animation::RefData;
 
 using Ra::Engine::ComponentMessenger;
 namespace SkinningPlugin {
@@ -35,11 +35,11 @@ void SkinningComponent::setupSkinning() {
     {
         m_skeletonGetter = compMsg->getterCallback<Skeleton>( getEntity(), m_contentsName );
         m_verticesWriter =
-            compMsg->rwCallback<Ra::Core::Vector3Array>( getEntity(), m_contentsName + "v" );
+            compMsg->rwCallback<Ra::Core::Container::Vector3Array>( getEntity(), m_contentsName + "v" );
         m_normalsWriter =
-            compMsg->rwCallback<Ra::Core::Vector3Array>( getEntity(), m_contentsName + "n" );
+            compMsg->rwCallback<Ra::Core::Container::Vector3Array>( getEntity(), m_contentsName + "n" );
         m_duplicateTableGetter =
-            compMsg->getterCallback<std::vector<Ra::Core::Index>>( getEntity(), m_contentsName );
+            compMsg->getterCallback<std::vector<Ra::Core::Container::Index>>( getEntity(), m_contentsName );
 
         m_refData.m_skeleton = compMsg->get<Skeleton>( getEntity(), m_contentsName );
         m_refData.m_referenceMesh = compMsg->get<TriangleMesh>( getEntity(), m_contentsName );
@@ -58,7 +58,7 @@ void SkinningComponent::setupSkinning() {
         // Do some debug checks:  Attempt to write to the mesh and check the weights match skeleton
         // and mesh.
         ON_ASSERT( bool skinnable =
-                       compMsg->canSet<Ra::Core::TriangleMesh>( getEntity(), m_contentsName ) );
+                       compMsg->canSet<TriangleMesh>( getEntity(), m_contentsName ) );
         CORE_ASSERT(
             skinnable,
             "Mesh cannot be skinned. It could be because the mesh is set to nondeformable" );
@@ -108,7 +108,7 @@ void SkinningComponent::skin() {
             }
             case DQS:
             {
-                Ra::Core::AlignedStdVector<DualQuaternion> DQ;
+                Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion> DQ;
                 // computeDQ( m_frameData.m_prevToCurrentRelPose, m_refData.m_weights, DQ );
                 Ra::Core::Animation::computeDQ( m_frameData.m_refToCurrentRelPose,
                                                 m_refData.m_weights, DQ );
@@ -133,8 +133,8 @@ void SkinningComponent::skin() {
 void SkinningComponent::endSkinning() {
     if ( m_frameData.m_doSkinning )
     {
-        Ra::Core::Vector3Array& vertices = *( m_verticesWriter() );
-        Ra::Core::Vector3Array& normals = *( m_normalsWriter() );
+        Ra::Core::Container::Vector3Array& vertices = *( m_verticesWriter() );
+        Ra::Core::Container::Vector3Array& normals = *( m_normalsWriter() );
 
         vertices = m_frameData.m_currentPos;
 
@@ -149,8 +149,8 @@ void SkinningComponent::endSkinning() {
     } else if ( m_frameData.m_doReset )
     {
         // Reset mesh to its initial state.
-        Ra::Core::Vector3Array& vertices = *( m_verticesWriter() );
-        Ra::Core::Vector3Array& normals = *( m_normalsWriter() );
+        Ra::Core::Container::Vector3Array& vertices = *( m_verticesWriter() );
+        Ra::Core::Container::Vector3Array& normals = *( m_normalsWriter() );
 
         vertices = m_refData.m_referenceMesh.m_vertices;
         normals = m_refData.m_referenceMesh.m_normals;
@@ -164,7 +164,7 @@ void SkinningComponent::endSkinning() {
     }
 }
 
-void SkinningComponent::handleWeightsLoading( const Ra::Asset::HandleData* data ) {
+void SkinningComponent::handleWeightsLoading( const Ra::Core::Asset::HandleData* data ) {
     m_contentsName = data->getName();
     setupIO( m_contentsName );
 }
@@ -174,7 +174,7 @@ void SkinningComponent::setContentsName( const std::string name ) {
 }
 
 void SkinningComponent::setupIO( const std::string& id ) {
-    using DualQuatVector = Ra::Core::AlignedStdVector<Ra::Core::DualQuaternion>;
+    using DualQuatVector = Ra::Core::Container::AlignedStdVector<Ra::Core::Math::DualQuaternion>;
 
     ComponentMessenger::CallbackTypes<DualQuatVector>::Getter dqOut =
         std::bind( &SkinningComponent::getDQ, this );
@@ -183,7 +183,7 @@ void SkinningComponent::setupIO( const std::string& id ) {
 
     ComponentMessenger::CallbackTypes<RefData>::Getter refData =
         std::bind( &SkinningComponent::getRefData, this );
-    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Skinning::RefData>(
+    ComponentMessenger::getInstance()->registerOutput<Ra::Core::Animation::RefData>(
         getEntity(), this, id, refData );
 
     ComponentMessenger::CallbackTypes<FrameData>::Getter frameData =
@@ -211,8 +211,8 @@ void SkinningComponent::setupSkinningType( SkinningType type ) {
         if ( m_DQ.empty() )
         {
             m_DQ.resize( m_refData.m_weights.rows(),
-                         DualQuaternion( Quaternion( 0.0, 0.0, 0.0, 0.0 ),
-                                         Quaternion( 0.0, 0.0, 0.0, 0.0 ) ) );
+                         DualQuaternion( Ra::Core::Math::Quaternion( 0.0, 0.0, 0.0, 0.0 ),
+                                         Ra::Core::Math::Quaternion( 0.0, 0.0, 0.0, 0.0 ) ) );
         }
         break;
     }
@@ -224,7 +224,7 @@ void SkinningComponent::setupSkinningType( SkinningType type ) {
             /*
                        for ( const auto& v :m_refData.m_CoR )
                        {
-                           RA_DISPLAY_POINT( v, Ra::Core::Colors::Red(), 0.1f );
+                           RA_DISPLAY_POINT( v, Ra::Core::Math::Colors::Red(), 0.1f );
                        }
             */
         }

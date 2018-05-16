@@ -7,7 +7,7 @@ namespace Ra {
 namespace Core {
 
 /// CONSTRUCTOR
-HalfEdge::HalfEdge( const Index& index ) :
+HalfEdge::HalfEdge( const Container::Index& index ) :
     IndexedObject( index ),
     m_v( nullptr ),
     m_next( nullptr ),
@@ -16,7 +16,7 @@ HalfEdge::HalfEdge( const Index& index ) :
     m_f( nullptr ) {}
 
 HalfEdge::HalfEdge( const Vertex_ptr& v, const HalfEdge_ptr& next, const HalfEdge_ptr& prev,
-                    const HalfEdge_ptr& twin, const Face_ptr& f, const Index& index ) :
+                    const HalfEdge_ptr& twin, const Face_ptr& f, const Container::Index& index ) :
     IndexedObject( index ),
     m_v( v ),
     m_next( next ),

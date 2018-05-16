@@ -9,25 +9,18 @@ namespace Ra {
 namespace Core {
 namespace Animation {
 class Skeleton;
-}
-} // namespace Core
-} // namespace Ra
-namespace Ra {
-namespace Asset {
+} // namespace Animation
 class HandleData;
-}
-} // namespace Ra
-
-namespace Ra {
 namespace Asset {
 
 /// Create a skeleton from a Handle Data extracted from a file
 /// Outputs the skeleton and a map from the component index in the handle data to the bone index.
-void RA_CORE_API createSkeleton( const Ra::Asset::HandleData& data,
+void RA_CORE_API createSkeleton( const HandleData& data,
                                  Core::Animation::Skeleton& skelOut,
                                  std::map<uint, uint>& indexTableOut );
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra
 
 #endif // RADIUMENGINE_HANDLE_TO_SKELETON_HPP_

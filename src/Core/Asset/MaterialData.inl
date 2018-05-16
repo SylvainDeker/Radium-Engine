@@ -6,6 +6,7 @@
 #include <iterator>
 
 namespace Ra {
+namespace Core {
 namespace Asset {
 
 ////////////////
@@ -74,37 +75,38 @@ inline void BlinnPhongMaterialData::displayInfo() const {
 
     if ( hasDiffuse() )
     {
-        Core::StringUtils::stringPrintf( kd, "%.3f %.3f %.3f %.3f", m_diffuse.x(), m_diffuse.y(),
+        Core::Utils::stringPrintf( kd, "%.3f %.3f %.3f %.3f", m_diffuse.x(), m_diffuse.y(),
                                          m_diffuse.z(), m_diffuse.w() );
     }
 
     if ( hasSpecular() )
     {
-        Core::StringUtils::stringPrintf( ks, "%.3f %.3f %.3f %.3f", m_specular.x(),
+        Core::Utils::stringPrintf( ks, "%.3f %.3f %.3f %.3f", m_specular.x(),
                                          m_specular.w() );
     }
 
     if ( hasShininess() )
     {
-        Core::StringUtils::stringPrintf( ns, "%.1f", m_shininess );
+        Core::Utils::stringPrintf( ns, "%.1f", m_shininess );
     }
 
     if ( hasOpacity() )
     {
-        Core::StringUtils::stringPrintf( op, "%.15f", m_opacity );
+        Core::Utils::stringPrintf( op, "%.15f", m_opacity );
     }
 
-    LOG( logINFO ) << "======== MATERIAL INFO ========";
-    LOG( logINFO ) << " Kd             : " << ( hasDiffuse() ? kd : "NO" );
-    LOG( logINFO ) << " Ks             : " << ( hasSpecular() ? ks : "NO" );
-    LOG( logINFO ) << " Ns             : " << ( hasShininess() ? ns : "NO" );
-    LOG( logINFO ) << " Opacity        : " << ( hasOpacity() ? op : "NO" );
-    LOG( logINFO ) << " Kd Texture     : " << ( hasDiffuseTexture() ? m_texDiffuse : "NO" );
-    LOG( logINFO ) << " Ks Texture     : " << ( hasSpecularTexture() ? m_texSpecular : "NO" );
-    LOG( logINFO ) << " Ns Texture     : " << ( hasShininessTexture() ? m_texShininess : "NO" );
-    LOG( logINFO ) << " Normal Texture : " << ( hasNormalTexture() ? m_texNormal : "NO" );
-    LOG( logINFO ) << " Alpha Texture  : " << ( hasOpacityTexture() ? m_texOpacity : "NO" );
+    LOG( Utils::logINFO ) << "======== MATERIAL INFO ========";
+    LOG( Utils::logINFO ) << " Kd             : " << ( hasDiffuse() ? kd : "NO" );
+    LOG( Utils::logINFO ) << " Ks             : " << ( hasSpecular() ? ks : "NO" );
+    LOG( Utils::logINFO ) << " Ns             : " << ( hasShininess() ? ns : "NO" );
+    LOG( Utils::logINFO ) << " Opacity        : " << ( hasOpacity() ? op : "NO" );
+    LOG( Utils::logINFO ) << " Kd Texture     : " << ( hasDiffuseTexture() ? m_texDiffuse : "NO" );
+    LOG( Utils::logINFO ) << " Ks Texture     : " << ( hasSpecularTexture() ? m_texSpecular : "NO" );
+    LOG( Utils::logINFO ) << " Ns Texture     : " << ( hasShininessTexture() ? m_texShininess : "NO" );
+    LOG( Utils::logINFO ) << " Normal Texture : " << ( hasNormalTexture() ? m_texNormal : "NO" );
+    LOG( Utils::logINFO ) << " Alpha Texture  : " << ( hasOpacityTexture() ? m_texOpacity : "NO" );
 }
 
 } // namespace Asset
+} // namespace Core
 } // namespace Ra

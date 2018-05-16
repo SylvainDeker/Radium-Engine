@@ -6,6 +6,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 /*
  * The class FileManager gives the base common interface for handling loading/storing data from/to
@@ -65,6 +66,7 @@ class FileManager {
     std::string m_log;
 };
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra
 

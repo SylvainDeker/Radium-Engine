@@ -7,6 +7,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Utils {
 
 TaskQueue::TaskQueue( uint numThreads ) : m_processingTasks( 0 ), m_shuttingDown( false ) {
     CORE_ASSERT( numThreads > 0, " You need at least one thread" );
@@ -228,10 +229,10 @@ void TaskQueue::runThread( uint id ) {
         // Release mutex.
 
         // Run task
-        m_timerData[task].start = Timer::Clock::now();
+        m_timerData[task].start = Clock::now();
         m_timerData[task].threadId = id;
         m_tasks[task]->process();
-        m_timerData[task].end = Timer::Clock::now();
+        m_timerData[task].end = Clock::now();
 
         // Critical section : mark task as finished and en-queue dependencies.
         uint newTasks = 0;
@@ -315,5 +316,7 @@ void TaskQueue::printTaskGraph( std::ostream& output ) const {
 
     output << "}" << std::endl;
 }
+
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

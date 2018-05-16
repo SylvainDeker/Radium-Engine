@@ -5,8 +5,8 @@
 #include <Tests/CoreTests/Tests.hpp>
 
 namespace RaTests {
-using Ra::Core::Index;
-using Ra::Core::IndexMap;
+using Ra::Core::Container::Index;
+using Ra::Core::Container::IndexMap;
 
 // Just a standard test structure
 struct Foo {

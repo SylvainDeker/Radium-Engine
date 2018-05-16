@@ -36,20 +36,19 @@ Scalar weightSimilarity( const Eigen::SparseVector<Scalar>& v1w,
     return result;
 }
 
-void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
-    LOG( logDEBUG ) << "Precomputing CoRs";
+void computeCoR( RefData& dataInOut, Scalar sigma, Scalar weightEpsilon ) {
+    LOG( Utils::logDEBUG ) << "Precomputing CoRs";
 
     // First step : subdivide the original mesh until weights are sufficiently close enough.
     Scalar maxWeightDistance = 0.f;
-    TriangleMesh subdividedMesh = dataInOut.m_referenceMesh;
+    Geometry::TriangleMesh subdividedMesh = dataInOut.m_referenceMesh;
 
     // Store the weights as row major here because we are going to query the per-vertex weights.
     Eigen::SparseMatrix<Scalar, Eigen::RowMajor> subdividedWeights = dataInOut.m_weights;
 
     // Convert the mesh to DCEL for easy processing.
-    Dcel dcel;
-    convert( subdividedMesh, dcel );
-
+    Core::Dcel dcel;
+    Geometry::convert(subdividedMesh, dcel );
     // The mesh will be subdivided by repeated edge-split, so that adjacent vertices
     // weights are distant of at most `weightEpsilon`.
     // New vertices created by the edge splitting and their new weights are computed
@@ -59,7 +58,7 @@ void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilo
         maxWeightDistance = 0;
 
         // Stores the edges to split
-        std::vector<Index> edgesToSplit;
+        std::vector<Container::Index> edgesToSplit;
 
         // Compute all weights distances for all edges.
         for ( const auto& edge : dcel.m_fulledge )
@@ -77,12 +76,12 @@ void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilo
             }
         }
 
-        LOG( logDEBUG ) << "Max weight distance is " << maxWeightDistance;
+        LOG( Utils::logDEBUG ) << "Max weight distance is " << maxWeightDistance;
 
         // We found some edges over the limit, so we split them.
         if ( !edgesToSplit.empty() )
         {
-            LOG( logDEBUG ) << "Splitting " << edgesToSplit.size() << " edges";
+            LOG( Utils::logDEBUG ) << "Splitting " << edgesToSplit.size() << " edges";
             int startIndex = subdividedWeights.rows();
             int numCols = subdividedWeights.cols();
 
@@ -127,25 +126,25 @@ void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilo
     {
 
         // Check that the first vertices of the subdivided mesh have not changed.
-        ON_ASSERT( const Vector3& p = dataInOut.m_referenceMesh.m_vertices[i] );
+        ON_ASSERT( const Math::Vector3& p = dataInOut.m_referenceMesh.m_vertices[i] );
         CORE_ASSERT( subdividedMesh.m_vertices[i] == p, "Inconsistency in the meshes" );
 
-        Vector3 cor( 0, 0, 0 );
+        Math::Vector3 cor( 0, 0, 0 );
         Scalar sumweight = 0;
         const Eigen::SparseVector<Scalar> Wi = subdividedWeights.row( i );
 
         // Sum the cor and weights over all triangles of the subdivided mesh.
         for ( uint t = 0; t < subdividedMesh.m_triangles.size(); ++t )
         {
-            const Triangle& tri = subdividedMesh.m_triangles[t];
-            std::array<Vector3, 3> triVerts;
-            MeshUtils::getTriangleVertices( subdividedMesh, t, triVerts );
+            const Geometry::Triangle& tri = subdividedMesh.m_triangles[t];
+            std::array<Math::Vector3, 3> triVerts;
+            Geometry::getTriangleVertices( subdividedMesh, t, triVerts );
 
-            const Scalar area = MeshUtils::getTriangleArea( subdividedMesh, t );
+            const Scalar area = Geometry::getTriangleArea( subdividedMesh, t );
             const Eigen::SparseVector<Scalar> triWeight =
                 ( 1 / 3.f ) * ( subdividedWeights.row( tri[0] ) + subdividedWeights.row( tri[1] ) +
                                 subdividedWeights.row( tri[2] ) );
-            const Vector3 centroid = ( triVerts[0] + triVerts[1] + triVerts[2] ) / 3.f;
+            const Math::Vector3 centroid = ( triVerts[0] + triVerts[1] + triVerts[2] ) / 3.f;
 
             const Scalar s = weightSimilarity( Wi, triWeight, sigma );
 
@@ -158,32 +157,32 @@ void computeCoR( Skinning::RefData& dataInOut, Scalar sigma, Scalar weightEpsilo
         {
             dataInOut.m_CoR.push_back( ( 1.f / sumweight ) * cor );
         } else
-        { dataInOut.m_CoR.push_back( Vector3::Zero() ); }
+        { dataInOut.m_CoR.push_back( Math::Vector3::Zero() ); }
 
 #if defined CORE_DEBUG
         if ( i % 100 == 0 )
         {
-            LOG( logDEBUG ) << "CoR:" << i << " / " << nVerts;
+            LOG( Utils::logDEBUG ) << "CoR:" << i << " / " << nVerts;
         }
 #endif // CORE_DEBUG
     }
 }
 
-void corSkinning( const Vector3Array& input, const Animation::Pose& pose,
-                  const Animation::WeightMatrix& weight, const Vector3Array& CoR,
-                  Vector3Array& output ) {
+void corSkinning( const Container::Vector3Array& input, const Pose& pose,
+                  const WeightMatrix& weight, const Container::Vector3Array& CoR,
+                  Container::Vector3Array& output ) {
     const uint size = input.size();
     output.resize( size );
 
     CORE_ASSERT( CoR.size() == size, "Invalid center of rotations" );
 
     // Compute the dual quaternions
-    AlignedStdVector<DualQuaternion> DQ;
-    Animation::computeDQ( pose, weight, DQ );
+    Container::AlignedStdVector<Math::DualQuaternion> DQ;
+    computeDQ( pose, weight, DQ );
 
     // Do LBS on the COR with weights of their associated vertices
-    Vector3Array transformedCoR;
-    Animation::linearBlendSkinning( CoR, pose, weight, transformedCoR );
+    Container::Vector3Array transformedCoR;
+    linearBlendSkinning( CoR, pose, weight, transformedCoR );
 #pragma omp parallel for
     for ( int i = 0; i < int( size ); ++i )
     {

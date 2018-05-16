@@ -2,11 +2,12 @@
 
 namespace Ra {
 namespace Core {
+namespace Asset {
 
 /// ===============================================================================
 /// CONSTRUCTOR
 /// ===============================================================================
-OBJFileManager::OBJFileManager() : FileManager<TriangleMesh>() {}
+OBJFileManager::OBJFileManager() : FileManager<Geometry::TriangleMesh>() {}
 
 /// ===============================================================================
 /// DESTRUCTOR
@@ -20,8 +21,8 @@ std::string OBJFileManager::fileExtension() const {
     return "obj";
 }
 
-bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
-    data = TriangleMesh();
+bool OBJFileManager::importData( std::istream& file, Geometry::TriangleMesh& data ) {
+    data = Geometry::TriangleMesh();
     std::string line;
     while ( std::getline( file, line ) )
     {
@@ -35,13 +36,13 @@ bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
         }
         if ( token == "v" )
         {
-            Vector3 v;
+            Math::Vector3 v;
             iss >> v[0] >> v[1] >> v[2];
             data.m_vertices.push_back( v );
         }
         if ( token == "vn" )
         {
-            Vector3 n;
+            Math::Vector3 n;
             iss >> n[0] >> n[1] >> n[2];
             data.m_normals.push_back( n );
         }
@@ -55,7 +56,7 @@ bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
         }
         if ( token == "f" )
         {
-            Triangle f;
+            Geometry::Triangle f;
             iss >> f[0] >> f[1] >> f[2];
             f[0] -= 1;
             f[1] -= 1;
@@ -71,7 +72,7 @@ bool OBJFileManager::importData( std::istream& file, TriangleMesh& data ) {
     return true;
 }
 
-bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) {
+bool OBJFileManager::exportData( std::ostream& file, const Geometry::TriangleMesh& data ) {
     std::string content = "";
     if ( data.m_vertices.size() == 0 )
     {
@@ -81,21 +82,21 @@ bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) 
     // Vertices
     for ( uint i = 0; i < data.m_vertices.size(); ++i )
     {
-        const Vector3 v = data.m_vertices.at( i );
+        const Math::Vector3 v = data.m_vertices.at( i );
         content += "v " + std::to_string( v[0] ) + " " + std::to_string( v[1] ) + " " +
                    std::to_string( v[2] ) + "\n";
     }
     // Normals
     for ( uint i = 0; i < data.m_normals.size(); ++i )
     {
-        const Vector3 n = data.m_normals.at( i );
+        const Math::Vector3 n = data.m_normals.at( i );
         content += "vn " + std::to_string( n[0] ) + " " + std::to_string( n[1] ) + " " +
                    std::to_string( n[2] ) + "\n";
     }
     // Triangle
     for ( uint i = 0; i < data.m_triangles.size(); ++i )
     {
-        const Triangle f = data.m_triangles.at( i );
+        const Geometry::Triangle f = data.m_triangles.at( i );
         content += "f " + std::to_string( f[0] + 1 ) + " " + std::to_string( f[1] + 1 ) + " " +
                    std::to_string( f[2] + 1 ) + "\n";
     }
@@ -103,5 +104,6 @@ bool OBJFileManager::exportData( std::ostream& file, const TriangleMesh& data ) 
     return true;
 }
 
+} // namespace Asset
 } // namespace Core
 } // namespace Ra

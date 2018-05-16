@@ -12,6 +12,8 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
+
 /// This class stores a 3-dimensional hierarchy of meshes of arbitrary type.
 /// Built on a binary tree
 template <typename T>
@@ -75,6 +77,7 @@ class BVH {
 
     bool m_upToDate;
 };
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

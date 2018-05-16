@@ -14,18 +14,18 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
-void getAutoNormals( TriangleMesh& mesh, VectorArray<Vector3>& normalsOut ) {
+namespace Geometry {
+void getAutoNormals( TriangleMesh& mesh, Container::VectorArray<Math::Vector3>& normalsOut ) {
     const uint numVertices = mesh.m_vertices.size();
     const uint numTriangles = mesh.m_triangles.size();
 
     normalsOut.clear();
-    normalsOut.resize( numVertices, Vector3::Zero() );
+    normalsOut.resize( numVertices, Math::Vector3::Zero() );
 
     for ( uint t = 0; t < numTriangles; t++ )
     {
         const Triangle& tri = mesh.m_triangles[t];
-        Vector3 n = getTriangleNormal( mesh, t );
+        Math::Vector3 n = getTriangleNormal( mesh, t );
 
         for ( uint i = 0; i < 3; ++i )
         {
@@ -42,9 +42,9 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
     const uint numVerts = mesh.m_vertices.size();
     duplicatesMap.resize( numVerts, VertexIdx( -1 ) );
 
-    VectorArray<Vector3>::const_iterator vertPos;
-    VectorArray<Vector3>::const_iterator duplicatePos;
-    std::vector<std::pair<Vector3, VertexIdx>> vertices;
+    Container::VectorArray<Math::Vector3>::const_iterator vertPos;
+    Container::VectorArray<Math::Vector3>::const_iterator duplicatePos;
+    std::vector<std::pair<Math::Vector3, VertexIdx>> vertices;
 
     for ( uint i = 0; i < numVerts; ++i )
     {
@@ -52,7 +52,7 @@ bool findDuplicates( const TriangleMesh& mesh, std::vector<VertexIdx>& duplicate
     }
 
     std::sort( vertices.begin(), vertices.end(),
-               []( std::pair<Vector3, int> a, std::pair<Vector3, int> b ) {
+               []( std::pair<Math::Vector3, int> a, std::pair<Math::Vector3, int> b ) {
                    if ( a.first.x() == b.first.x() )
                    {
                        if ( a.first.y() == b.first.y() )
@@ -88,7 +88,7 @@ void removeDuplicates( TriangleMesh& mesh, std::vector<VertexIdx>& vertexMap ) {
     findDuplicates( mesh, duplicatesMap );
 
     std::vector<VertexIdx> newIndices( mesh.m_vertices.size(), VertexIdx( -1 ) );
-    Vector3Array uniqueVertices;
+    Container::Vector3Array uniqueVertices;
     for ( uint i = 0; i < mesh.m_vertices.size(); i++ )
     {
         if ( duplicatesMap[i] == i )
@@ -115,7 +115,7 @@ void removeDuplicates( TriangleMesh& mesh, std::vector<VertexIdx>& vertexMap ) {
     mesh.m_vertices = uniqueVertices;
 }
 
-RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
+RayCastResult castRay( const TriangleMesh& mesh, const Math::Ray& ray ) {
     RayCastResult result;
 
     // point cloud: get closest point
@@ -141,12 +141,12 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
     {
         Scalar minT = std::numeric_limits<Scalar>::max();
         std::vector<Scalar> tValues;
-        std::array<Vector3, 3> v;
+        std::array<Math::Vector3, 3> v;
         for ( uint i = 0; i < mesh.m_triangles.size(); ++i )
         {
             tValues.clear();
             getTriangleVertices( mesh, i, v );
-            if ( RayCast::vsTriangle( ray, v[0], v[1], v[2], tValues ) && tValues[0] < minT )
+            if ( Math::RayCast::vsTriangle( ray, v[0], v[1], v[2], tValues ) && tValues[0] < minT )
             {
                 minT = tValues[0];
                 result.m_hitTriangle = int( i );
@@ -157,10 +157,10 @@ RayCastResult castRay( const TriangleMesh& mesh, const Ray& ray ) {
         {
             result.m_t = minT;
             Scalar minDist = std::numeric_limits<Scalar>::max();
-            std::array<Vector3, 3> V;
+            std::array<Math::Vector3, 3> V;
             getTriangleVertices( mesh, result.m_hitTriangle, V );
             const Triangle& T = mesh.m_triangles[result.m_hitTriangle];
-            const Vector3 I = ray.pointAt( minT );
+            const Math::Vector3 I = ray.pointAt( minT );
             // find closest vertex
             for ( uint i = 0; i < 3; ++i )
             {
@@ -257,6 +257,6 @@ void checkConsistency( const TriangleMesh& mesh ) {
 #endif
 }
 
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

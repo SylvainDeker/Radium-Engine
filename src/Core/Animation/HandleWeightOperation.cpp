@@ -44,7 +44,7 @@ WeightMatrix partitionOfUnity( Eigen::Ref<const WeightMatrix> weights ) {
 
 uint getMaxWeightIndex( Eigen::Ref<const WeightMatrix> weights, const uint vertexID ) {
     uint maxId = uint( -1 );
-    VectorN row = weights.row( vertexID );
+    Math::VectorN row = weights.row( vertexID );
     row.maxCoeff( &maxId );
     return maxId;
 }
@@ -59,12 +59,12 @@ void getMaxWeightIndex( Eigen::Ref<const WeightMatrix> weights, std::vector<uint
 
 bool checkWeightMatrix( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_ON_ASSERT,
                         const bool MT ) {
-    bool ok = MatrixUtils::checkInvalidNumbers( matrix, FAIL_ON_ASSERT ) &&
+    bool ok = Math::MatrixUtils::checkInvalidNumbers( matrix, FAIL_ON_ASSERT ) &&
               checkNoWeightVertex( matrix, FAIL_ON_ASSERT, MT );
 
     if ( !ok )
     {
-        LOG( logDEBUG ) << "Matrix is not good.";
+        LOG( Utils::logDEBUG ) << "Matrix is not good.";
     }
 
     return ok;
@@ -73,13 +73,13 @@ bool checkWeightMatrix( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_O
 bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL_ON_ASSERT,
                           const bool MT ) {
     int status = 1;
-    LOG( logDEBUG ) << "Searching for empty rows in the matrix...";
+    LOG( Utils::logDEBUG ) << "Searching for empty rows in the matrix...";
     if ( MT )
     {
 #pragma omp parallel for
         for ( int i = 0; i < matrix.rows(); ++i )
         {
-            Sparse row = matrix.row( i );
+            Math::Sparse row = matrix.row( i );
             const int check = ( row.nonZeros() > 0 ) ? 1 : 0;
 #pragma omp atomic
             status &= check;
@@ -90,13 +90,13 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
             {
                 CORE_ASSERT( false, "At least a vertex as no weights" );
             } else
-            { LOG( logDEBUG ) << "At least a vertex as no weights"; }
+            { LOG( Utils::logDEBUG ) << "At least a vertex as no weights"; }
         }
     } else
     {
         for ( int i = 0; i < matrix.rows(); ++i )
         {
-            Sparse row = matrix.row( i );
+            Math::Sparse row = matrix.row( i );
             if ( row.nonZeros() == 0 )
             {
                 status = 0;
@@ -106,7 +106,7 @@ bool checkNoWeightVertex( Eigen::Ref<const WeightMatrix> matrix, const bool FAIL
                 {
                     CORE_ASSERT( false, text.c_str() );
                 } else
-                { LOG( logDEBUG ) << text; }
+                { LOG( Utils::logDEBUG ) << text; }
             }
         }
     }
@@ -122,9 +122,9 @@ bool normalizeWeights( Eigen::Ref<WeightMatrix> matrix, const bool MT ) {
     for ( int k = 0; k < matrix.innerSize(); ++k )
     {
         const Scalar sum = matrix.row( k ).sum();
-        if ( !Ra::Core::Math::areApproxEqual( sum, Scalar( 0 ) ) )
+        if ( !Math::areApproxEqual( sum, Scalar( 0 ) ) )
         {
-            if ( !Ra::Core::Math::areApproxEqual( sum, Scalar( 1 ) ) )
+            if ( !Math::areApproxEqual( sum, Scalar( 1 ) ) )
             {
                 skinningWeightOk = false;
                 matrix.row( k ) /= sum;

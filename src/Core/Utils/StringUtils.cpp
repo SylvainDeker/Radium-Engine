@@ -17,7 +17,7 @@
 
 namespace Ra {
 namespace Core {
-namespace StringUtils {
+namespace Utils {
 std::string getFileExt( const std::string& str ) {
     std::string res;
     ulong pos = str.find_last_of( '.' );
@@ -168,6 +168,6 @@ std::vector<std::string> splitString( const std::string& str, char token ) {
 
     return items;
 }
-} // namespace StringUtils
+} // namespace Utils
 } // namespace Core
 } // namespace Ra

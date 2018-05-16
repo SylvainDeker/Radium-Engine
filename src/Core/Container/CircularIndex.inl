@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 /// DIMENSION
 inline uint CircularIndex::size() const {
@@ -72,5 +73,6 @@ inline bool CircularIndex::operator<( const int i ) const {
     return ( idx < uint( CircularIndex( N, i ) ) );
 }
 
+} // namespace Container
 } // namespace Core
 } // namespace Ra

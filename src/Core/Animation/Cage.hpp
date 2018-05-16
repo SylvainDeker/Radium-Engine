@@ -32,7 +32,7 @@ class RA_CORE_API Cage : public PointCloud {
     virtual void clear() override; // Clear the cage data
 
     /// VARIABLE
-    VectorArray<Ra::Core::Triangle> m_triangle; // The list of triangles in the cage.
+    Container::VectorArray<Geometry::Triangle> m_triangle; // The list of triangles in the cage.
 };
 
 } // namespace Animation

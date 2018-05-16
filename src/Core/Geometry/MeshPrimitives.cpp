@@ -3,38 +3,38 @@
 
 namespace Ra {
 namespace Core {
-namespace MeshUtils {
+namespace Geometry {
 
-TriangleMesh makeXNormalQuad( const Vector2& halfExts ) {
-    Transform T = Transform::Identity();
+TriangleMesh makeXNormalQuad( const Math::Vector2& halfExts ) {
+    Math::Transform T = Math::Transform::Identity();
     T.linear().col( 0 ).swap( T.linear().col( 1 ) );
     T.linear().col( 1 ).swap( T.linear().col( 2 ) );
     return makePlaneGrid( 1, 1, halfExts, T );
 }
 
-TriangleMesh makeYNormalQuad( const Vector2& halfExts ) {
-    Transform T = Transform::Identity();
+TriangleMesh makeYNormalQuad( const Math::Vector2& halfExts ) {
+    Math::Transform T = Math::Transform::Identity();
     T.linear().col( 1 ).swap( T.linear().col( 2 ) );
     T.linear().col( 0 ).swap( T.linear().col( 1 ) );
     return makePlaneGrid( 1, 1, halfExts, T );
 }
 
-TriangleMesh makeZNormalQuad( const Vector2& halfExts ) {
+TriangleMesh makeZNormalQuad( const Math::Vector2& halfExts ) {
     return makePlaneGrid( 1, 1, halfExts );
 }
 
-TriangleMesh makeBox( const Vector3& halfExts ) {
-    Aabb aabb( -halfExts, halfExts );
+TriangleMesh makeBox( const Math::Vector3& halfExts ) {
+    Math::Aabb aabb( -halfExts, halfExts );
     return makeBox( aabb );
 }
 
-TriangleMesh makeBox( const Aabb& aabb ) {
+TriangleMesh makeBox( const Math::Aabb& aabb ) {
     TriangleMesh result;
     result.m_vertices = {
-        aabb.corner( Aabb::BottomLeftFloor ), aabb.corner( Aabb::BottomRightFloor ),
-        aabb.corner( Aabb::TopLeftFloor ),    aabb.corner( Aabb::TopRightFloor ),
-        aabb.corner( Aabb::BottomLeftCeil ),  aabb.corner( Aabb::BottomRightCeil ),
-        aabb.corner( Aabb::TopLeftCeil ),     aabb.corner( Aabb::TopRightCeil )};
+        aabb.corner( Math::Aabb::BottomLeftFloor ), aabb.corner( Math::Aabb::BottomRightFloor ),
+        aabb.corner( Math::Aabb::TopLeftFloor ),    aabb.corner( Math::Aabb::TopRightFloor ),
+        aabb.corner( Math::Aabb::BottomLeftCeil ),  aabb.corner( Math::Aabb::BottomRightCeil ),
+        aabb.corner( Math::Aabb::TopLeftCeil ),     aabb.corner( Math::Aabb::TopRightCeil )};
     result.m_triangles = {
         Triangle( 0, 2, 1 ), Triangle( 1, 2, 3 ), // Floor
         Triangle( 0, 1, 4 ), Triangle( 4, 1, 5 ), // Front
@@ -49,37 +49,37 @@ TriangleMesh makeBox( const Aabb& aabb ) {
     return result;
 }
 
-TriangleMesh makeSharpBox( const Vector3& halfExts ) {
-    Aabb aabb( -halfExts, halfExts );
+TriangleMesh makeSharpBox( const Math::Vector3& halfExts ) {
+    Math::Aabb aabb( -halfExts, halfExts );
     return makeSharpBox( aabb );
 }
 
-TriangleMesh makeSharpBox( const Aabb& aabb ) {
+TriangleMesh makeSharpBox( const Math::Aabb& aabb ) {
     TriangleMesh result;
     result.m_vertices = {// Floor Face
-                         aabb.corner( Aabb::BottomLeftFloor ), aabb.corner( Aabb::TopLeftFloor ),
-                         aabb.corner( Aabb::TopRightFloor ), aabb.corner( Aabb::BottomRightFloor ),
+                         aabb.corner( Math::Aabb::BottomLeftFloor ), aabb.corner( Math::Aabb::TopLeftFloor ),
+                         aabb.corner( Math::Aabb::TopRightFloor ), aabb.corner( Math::Aabb::BottomRightFloor ),
 
                          // Ceil Face
-                         aabb.corner( Aabb::BottomLeftCeil ), aabb.corner( Aabb::BottomRightCeil ),
-                         aabb.corner( Aabb::TopRightCeil ), aabb.corner( Aabb::TopLeftCeil ),
+                         aabb.corner( Math::Aabb::BottomLeftCeil ), aabb.corner( Math::Aabb::BottomRightCeil ),
+                         aabb.corner( Math::Aabb::TopRightCeil ), aabb.corner( Math::Aabb::TopLeftCeil ),
 
                          // Left Face
-                         aabb.corner( Aabb::TopLeftFloor ), aabb.corner( Aabb::BottomLeftFloor ),
-                         aabb.corner( Aabb::BottomLeftCeil ), aabb.corner( Aabb::TopLeftCeil ),
+                         aabb.corner( Math::Aabb::TopLeftFloor ), aabb.corner( Math::Aabb::BottomLeftFloor ),
+                         aabb.corner( Math::Aabb::BottomLeftCeil ), aabb.corner( Math::Aabb::TopLeftCeil ),
 
                          // Right Face
-                         aabb.corner( Aabb::BottomRightFloor ), aabb.corner( Aabb::TopRightFloor ),
-                         aabb.corner( Aabb::TopRightCeil ), aabb.corner( Aabb::BottomRightCeil ),
+                         aabb.corner( Math::Aabb::BottomRightFloor ), aabb.corner( Math::Aabb::TopRightFloor ),
+                         aabb.corner( Math::Aabb::TopRightCeil ), aabb.corner( Math::Aabb::BottomRightCeil ),
 
                          // Bottom Face
-                         aabb.corner( Aabb::BottomLeftFloor ),
-                         aabb.corner( Aabb::BottomRightFloor ),
-                         aabb.corner( Aabb::BottomRightCeil ), aabb.corner( Aabb::BottomLeftCeil ),
+                         aabb.corner( Math::Aabb::BottomLeftFloor ),
+                         aabb.corner( Math::Aabb::BottomRightFloor ),
+                         aabb.corner( Math::Aabb::BottomRightCeil ), aabb.corner( Math::Aabb::BottomLeftCeil ),
 
                          // Top face
-                         aabb.corner( Aabb::TopLeftFloor ), aabb.corner( Aabb::TopLeftCeil ),
-                         aabb.corner( Aabb::TopRightCeil ), aabb.corner( Aabb::TopRightFloor )
+                         aabb.corner( Math::Aabb::TopLeftFloor ), aabb.corner( Math::Aabb::TopLeftCeil ),
+                         aabb.corner( Math::Aabb::TopRightCeil ), aabb.corner( Math::Aabb::TopRightFloor )
 
     };
     result.m_triangles = {
@@ -101,7 +101,7 @@ TriangleMesh makeGeodesicSphere( Scalar radius, uint numSubdiv ) {
     TriangleMesh result;
     // First, make an icosahedron.
     // Top vertex
-    result.m_vertices.push_back( Vector3( 0, 0, radius ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, radius ) );
 
     const Scalar sq5_5 = radius * std::sqrt( 5.f ) / 5.f;
 
@@ -115,12 +115,12 @@ TriangleMesh makeGeodesicSphere( Scalar radius, uint numSubdiv ) {
             const Scalar x = 2.f * sq5_5 * std::cos( theta );
             const Scalar y = 2.f * sq5_5 * std::sin( theta );
             const Scalar z = j == 0 ? sq5_5 : -sq5_5;
-            result.m_vertices.push_back( Vector3( x, y, z ) );
+            result.m_vertices.push_back( Math::Vector3( x, y, z ) );
         }
     }
 
     // Bottom vertex
-    result.m_vertices.push_back( Vector3( 0, 0, -radius ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, -radius ) );
 
     for ( int i = 0; i < 5; ++i )
     {
@@ -142,12 +142,12 @@ TriangleMesh makeGeodesicSphere( Scalar radius, uint numSubdiv ) {
 
     for ( uint n = 0; n < numSubdiv; ++n )
     {
-        VectorArray<Triangle> newTris; //= result.m_triangles;
+        Container::VectorArray<Triangle> newTris; //= result.m_triangles;
         // Now subdivide every face into 4 triangles.
         for ( uint i = 0; i < result.m_triangles.size(); ++i )
         {
             const Triangle& tri = result.m_triangles[i];
-            std::array<Vector3, 3> triVertices;
+            std::array<Math::Vector3, 3> triVertices;
             std::array<uint, 3> middles;
 
             getTriangleVertices( result, i, triVertices );
@@ -177,18 +177,18 @@ TriangleMesh makeGeodesicSphere( Scalar radius, uint numSubdiv ) {
     return result;
 }
 
-TriangleMesh makeCylinder( const Vector3& a, const Vector3& b, Scalar radius, uint nFaces ) {
+TriangleMesh makeCylinder( const Math::Vector3& a, const Math::Vector3& b, Scalar radius, uint nFaces ) {
     TriangleMesh result;
 
-    Core::Vector3 ab = b - a;
+    Core::Math::Vector3 ab = b - a;
 
     //  Create two circles normal centered on A and B and normal to ab;
-    Core::Vector3 xPlane, yPlane;
-    Core::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
+    Core::Math::Vector3 xPlane, yPlane;
+    Core::Math::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
     xPlane.normalize();
     yPlane.normalize();
 
-    Core::Vector3 c = 0.5 * ( a + b );
+    Core::Math::Vector3 c = 0.5 * ( a + b );
 
     result.m_vertices.push_back( a );
     result.m_vertices.push_back( b );
@@ -246,9 +246,9 @@ TriangleMesh makeCapsule( Scalar length, Scalar radius, uint nFaces ) {
         Scalar y = std::sin( theta ) * radius;
 
         // Create 3 circles
-        result.m_vertices.push_back( Vector3( x, y, -l ) );
-        result.m_vertices.push_back( Vector3( x, y, 0.0 ) );
-        result.m_vertices.push_back( Vector3( x, y, l ) );
+        result.m_vertices.push_back( Math::Vector3( x, y, -l ) );
+        result.m_vertices.push_back( Math::Vector3( x, y, 0.0 ) );
+        result.m_vertices.push_back( Math::Vector3( x, y, l ) );
     }
 
     // Cylinder side faces
@@ -285,11 +285,11 @@ TriangleMesh makeCapsule( Scalar length, Scalar radius, uint nFaces ) {
             const Scalar y = radius * std::sin( theta ) * std::sin( phi );
             const Scalar z = radius * std::cos( phi );
 
-            result.m_vertices.push_back( Vector3( x, y, z - l ) );
+            result.m_vertices.push_back( Math::Vector3( x, y, z - l ) );
         }
     }
     // Add bottom point (south pole)
-    result.m_vertices.push_back( Vector3( 0, 0, -( l + radius ) ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, -( l + radius ) ) );
 
     // First ring of sphere triangles (joining with the cylinder)
     for ( uint i = 0; i < nFaces; ++i )
@@ -346,12 +346,12 @@ TriangleMesh makeCapsule( Scalar length, Scalar radius, uint nFaces ) {
             const Scalar y = radius * std::sin( theta ) * std::sin( phi );
             const Scalar z = radius * std::cos( phi );
 
-            result.m_vertices.push_back( Vector3( x, y, z + l ) );
+            result.m_vertices.push_back( Math::Vector3( x, y, z + l ) );
         }
     }
 
     // Add top point (north pole)
-    result.m_vertices.push_back( Vector3( 0, 0, ( l + radius ) ) );
+    result.m_vertices.push_back( Math::Vector3( 0, 0, ( l + radius ) ) );
 
     // First ring of sphere triangles (joining with the cylinder)
     for ( uint i = 0; i < nFaces; ++i )
@@ -398,22 +398,22 @@ TriangleMesh makeCapsule( Scalar length, Scalar radius, uint nFaces ) {
     return result;
 }
 
-TriangleMesh makeTube( const Vector3& a, const Vector3& b, Scalar outerRadius, Scalar innerRadius,
+TriangleMesh makeTube( const Math::Vector3& a, const Math::Vector3& b, Scalar outerRadius, Scalar innerRadius,
                        uint nFaces ) {
 
     CORE_ASSERT( outerRadius > innerRadius, "Outer radius must be bigger than inner." );
 
     TriangleMesh result;
 
-    Core::Vector3 ab = b - a;
+    Core::Math::Vector3 ab = b - a;
 
     //  Create two circles normal centered on A and B and normal to ab;
-    Core::Vector3 xPlane, yPlane;
-    Core::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
+    Core::Math::Vector3 xPlane, yPlane;
+    Core::Math::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
     xPlane.normalize();
     yPlane.normalize();
 
-    Core::Vector3 c = 0.5 * ( a + b );
+    Core::Math::Vector3 c = 0.5 * ( a + b );
 
     const Scalar thetaInc( Core::Math::PiMul2 / Scalar( nFaces ) );
     for ( uint i = 0; i < nFaces; ++i )
@@ -481,14 +481,14 @@ TriangleMesh makeTube( const Vector3& a, const Vector3& b, Scalar outerRadius, S
     return result;
 }
 
-TriangleMesh makeCone( const Vector3& base, const Vector3& tip, Scalar radius, uint nFaces ) {
+TriangleMesh makeCone( const Math::Vector3& base, const Math::Vector3& tip, Scalar radius, uint nFaces ) {
     TriangleMesh result;
 
-    Core::Vector3 ab = tip - base;
+    Core::Math::Vector3 ab = tip - base;
 
     //  Create two circles normal centered on A and B and normal to ab;
-    Core::Vector3 xPlane, yPlane;
-    Core::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
+    Core::Math::Vector3 xPlane, yPlane;
+    Core::Math::Vector::getOrthogonalVectors( ab, xPlane, yPlane );
     xPlane.normalize();
     yPlane.normalize();
 
@@ -516,8 +516,8 @@ TriangleMesh makeCone( const Vector3& base, const Vector3& tip, Scalar radius, u
     return result;
 }
 
-TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Vector2& halfExts,
-                            const Transform& T ) {
+TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Math::Vector2& halfExts,
+                            const Math::Transform& T ) {
     TriangleMesh grid;
     const uint R = ( rows + 1 );
     const uint C = ( cols + 1 );
@@ -528,15 +528,15 @@ TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Vector2& hal
     grid.m_normals.resize( v_size );
     grid.m_triangles.reserve( t_size );
 
-    const Vector3 X = T.linear().col( 0 ).normalized();
-    const Vector3 Y = T.linear().col( 1 ).normalized();
-    const Vector3 Z = T.linear().col( 2 ).normalized();
+    const Math::Vector3 X = T.linear().col( 0 ).normalized();
+    const Math::Vector3 Y = T.linear().col( 1 ).normalized();
+    const Math::Vector3 Z = T.linear().col( 2 ).normalized();
 
-    const Vector3 x = ( 2.0 * halfExts[0] * X ) / ( Scalar )( cols );
-    const Vector3 y = ( 2.0 * halfExts[1] * Y ) / ( Scalar )( rows );
-    const Vector3 o = T.translation() - ( halfExts[0] * X ) - ( halfExts[1] * Y );
+    const Math::Vector3 x = ( 2.0 * halfExts[0] * X ) / ( Scalar )( cols );
+    const Math::Vector3 y = ( 2.0 * halfExts[1] * Y ) / ( Scalar )( rows );
+    const Math::Vector3 o = T.translation() - ( halfExts[0] * X ) - ( halfExts[1] * Y );
 
-    Grid<uint, 2> v( {R, C} );
+    Container::Grid<uint, 2> v( {R, C} );
     for ( uint i = 0; i < R; ++i )
     {
         for ( uint j = 0; j < C; ++j )
@@ -561,6 +561,6 @@ TriangleMesh makePlaneGrid( const uint rows, const uint cols, const Vector2& hal
 
     return grid;
 }
-} // namespace MeshUtils
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra

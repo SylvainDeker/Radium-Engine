@@ -6,10 +6,9 @@
 namespace Ra {
 namespace Core {
 namespace Animation {
-namespace SkeletonUtils {
 /// Returns the start and end point of a bone in model space.
-void getBonePoints( const Skeleton& skeleton, int boneIdx, Ra::Core::Vector3& startOut,
-                    Ra::Core::Vector3& endOut ) {
+void getBonePoints( const Skeleton& skeleton, int boneIdx, Math::Vector3& startOut,
+                    Math::Vector3& endOut ) {
     // Check bone index is valid
     CORE_ASSERT( boneIdx >= 0 && uint( boneIdx ) < skeleton.m_graph.size(), "invalid bone index" );
 
@@ -23,7 +22,7 @@ void getBonePoints( const Skeleton& skeleton, int boneIdx, Ra::Core::Vector3& st
     } else
     {
         // End point is the average of chidren start points.
-        endOut = Vector3::Zero();
+        endOut = Math::Vector3::Zero();
         for ( auto child : children )
         {
             endOut += skeleton.getTransform( child, Handle::SpaceType::MODEL ).translation();
@@ -34,9 +33,9 @@ void getBonePoints( const Skeleton& skeleton, int boneIdx, Ra::Core::Vector3& st
 }
 
 /// Gives out the nearest point on a given bone.
-inline Vector3 projectOnBone( const Skeleton& skeleton, int boneIdx,
-                              const Ra::Core::Vector3& pos ) {
-    Vector3 start, end;
+inline Math::Vector3 projectOnBone( const Skeleton& skeleton, int boneIdx,
+                              const Math::Vector3& pos ) {
+    Math::Vector3 start, end;
     getBonePoints( skeleton, boneIdx, start, end );
 
     auto op = pos - start;
@@ -87,7 +86,6 @@ inline void to_string( const Skeleton& skeleton ) {
     std::cout << "End of Skeleton Hierarchy" << std::endl;
 }
 
-} // namespace SkeletonUtils
 } // namespace Animation
 } // namespace Core
 } // namespace Ra

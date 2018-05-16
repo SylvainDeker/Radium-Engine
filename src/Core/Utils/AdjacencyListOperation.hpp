@@ -8,7 +8,7 @@
 
 namespace Ra {
 namespace Core {
-namespace Graph {
+namespace Utils {
 
 /*
  * Check the integrity of the given AdjacencyList.
@@ -18,7 +18,7 @@ RA_CORE_API void check( const AdjacencyList& adj );
 /*
  * Return the adjacency list built from the given edge list.
  */
-RA_CORE_API AdjacencyList extractAdjacencyList( const VectorArray<Edge>& edgeList );
+RA_CORE_API AdjacencyList extractAdjacencyList( const Container::VectorArray<Geometry::Edge>& edgeList );
 
 /*
  * Return the edge list built from the given adjacency list.
@@ -28,7 +28,7 @@ RA_CORE_API AdjacencyList extractAdjacencyList( const VectorArray<Edge>& edgeLis
  *       ...
  * where i is the index of a leaf node.
  */
-RA_CORE_API VectorArray<Edge> extractEdgeList( const AdjacencyList& adj,
+RA_CORE_API Container::VectorArray<Geometry::Edge> extractEdgeList( const AdjacencyList& adj,
                                                const bool include_leaf = false );
 
 /*
@@ -36,7 +36,7 @@ RA_CORE_API VectorArray<Edge> extractEdgeList( const AdjacencyList& adj,
  */
 RA_CORE_API void storeAdjacencyList( const AdjacencyList& adj, const std::string& name );
 
-} // namespace Graph
+} // namespace Utils
 } // namespace Core
 } // namespace Ra
 

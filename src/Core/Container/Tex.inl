@@ -2,6 +2,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Container {
 
 // Helper functions
 namespace {
@@ -25,7 +26,7 @@ template <>
 struct NLinearInterpolator<2> {
     // bilinear interpolation in a quad cell
     template <typename T>
-    static T interpolate( const Grid<T, 2>& grid, const Vector2& fact, const Vector2ui& size,
+    static T interpolate( const Grid<T, 2>& grid, const Math::Vector2& fact, const Vector2ui& size,
                           const Vector2ui& clamped_nearest ) {
         const uint i0 = clamped_nearest[0];
         const uint j0 = clamped_nearest[1];
@@ -49,7 +50,7 @@ template <>
 struct NLinearInterpolator<3> {
     // tri-linear interpolation in a cubic cell
     template <typename T>
-    static T interpolate( const Grid<T, 3>& grid, const Vector3& fact, const Vector3ui& size,
+    static T interpolate( const Grid<T, 3>& grid, const Math::Vector3& fact, const Vector3ui& size,
                           const Vector3ui& clamped_nearest ) {
         const uint i0 = clamped_nearest[0];
         const uint j0 = clamped_nearest[1];
@@ -106,7 +107,7 @@ inline T Tex<T, N>::fetch( const Vector& v ) const {
     Vector scaled_coords( ( v - m_aabb.min() ).cwiseQuotient( m_cellSize ) );
     // Sometimes due to float imprecision, a value of 0 is passed as -1e7
     // which floors incorrectly rounds down to -1, hence the use of trunc().
-    Vector tmp = Ra::Core::Vector::trunc( scaled_coords );
+    Vector tmp = Ra::Core::Math::Vector::trunc( scaled_coords );
     CORE_ASSERT( !( ( tmp.array() < Vector::Zero().array() ).any() ), "Cannot cast to uint" );
     IdxVector nearest = tmp.template cast<uint>();
     Vector fact = scaled_coords - tmp;
@@ -116,9 +117,10 @@ inline T Tex<T, N>::fetch( const Vector& v ) const {
     IdxVector size =
         this->sizeVector() - IdxVector::Ones(); // TODO check this code on borders of the grid
     IdxVector clamped_nearest =
-        Ra::Core::Vector::clamp<IdxVector>( nearest, IdxVector::Zero(), size );
+        Ra::Core::Math::Vector::clamp<IdxVector>( nearest, IdxVector::Zero(), size );
 
     return NLinearInterpolator<N>::interpolate( *this, fact, size, clamped_nearest );
 }
+} // namespace Container
 } // namespace Core
 } // namespace Ra

@@ -10,6 +10,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 struct TriangleMesh;
 
 /// A structure representing a Half edge (i.e. directed edge) of a mesh.
@@ -64,7 +65,6 @@ class RA_CORE_API HalfEdgeData {
     std::vector<HalfEdgeIdx> m_triangleToHalfEdge;
 };
 
-namespace AdjacencyQueries {
 /// Gets the faces which contain a given vertex.
 RA_CORE_API void getVertexFaces( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                  VertexIdx vertex, std::vector<TriangleIdx>& facesOut );
@@ -90,7 +90,7 @@ RA_CORE_API void getVertexNeighbors( const TriangleMesh& mesh, const HalfEdgeDat
 /// getVertexNeighbors instead.
 RA_CORE_API void getVertexFirstRing( const TriangleMesh& mesh, const HalfEdgeData& heData,
                                      VertexIdx vertex, std::vector<VertexIdx>& ringOut );
-} // namespace AdjacencyQueries
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

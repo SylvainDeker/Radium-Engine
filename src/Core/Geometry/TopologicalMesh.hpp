@@ -10,6 +10,7 @@
 
 namespace Ra {
 namespace Core {
+namespace Geometry {
 
 // Define an OpenMesh TriMesh structure according to
 // http://openmesh.org/Documentation/OpenMesh-2.1-Documentation/mesh_type.html
@@ -25,9 +26,10 @@ struct TopologicalMeshTraits : public OpenMesh::DefaultTraits {
 };
 using TopologicalMesh = OpenMesh::TriMesh_ArrayKernelT<TopologicalMeshTraits> RA_CORE_API;
 
-inline Eigen::Map<const Vector3> convertVec3OpenMeshToEigen( const TopologicalMesh::Point& vec ) {
-    return Eigen::Map<const Vector3>( vec.data() );
+inline Eigen::Map<const Math::Vector3> convertVec3OpenMeshToEigen( const TopologicalMesh::Point& vec ) {
+    return Eigen::Map<const Math::Vector3>( vec.data() );
 }
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
 

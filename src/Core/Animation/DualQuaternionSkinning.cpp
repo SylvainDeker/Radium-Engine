@@ -7,19 +7,19 @@ void computeDQ( const Pose& pose, const WeightMatrix& weight, DQList& DQ ) {
     CORE_ASSERT( ( pose.size() == weight.cols() ), "pose/weight size mismatch." );
     DQ.clear();
     DQ.resize( weight.rows(),
-               DualQuaternion( Quaternion( 0, 0, 0, 0 ), Quaternion( 0, 0, 0, 0 ) ) );
+               Math::DualQuaternion( Math::Quaternion( 0, 0, 0, 0 ), Math::Quaternion( 0, 0, 0, 0 ) ) );
 
     // Stores the first non-zero quaternion for each vertex.
     std::vector<uint> firstNonZero( weight.rows(), std::numeric_limits<uint>::max() );
 
     // Contains the converted dual quaternions from the pose
-    std::vector<DualQuaternion> poseDQ( pose.size() );
+    std::vector<Math::DualQuaternion> poseDQ( pose.size() );
     // poseDQ.reserve( pose.size());
 
     // Loop through all transforms Tj
     for ( int j = 0; j < weight.outerSize(); ++j )
     {
-        poseDQ[j] = DualQuaternion( pose[j] );
+        poseDQ[j] = Math::DualQuaternion( pose[j] );
         // Count how many vertices are influenced by the given transform
         const int nonZero = weight.col( j ).nonZeros();
 
@@ -73,15 +73,15 @@ void computeDQ_naive( const Pose& pose, const WeightMatrix& weight, DQList& DQ )
     CORE_ASSERT( ( pose.size() == weight.cols() ), "pose/weight size mismatch." );
     DQ.clear();
     DQ.resize( weight.rows(),
-               DualQuaternion( Quaternion( 0, 0, 0, 0 ), Quaternion( 0, 0, 0, 0 ) ) );
+               Math::DualQuaternion( Math::Quaternion( 0, 0, 0, 0 ), Math::Quaternion( 0, 0, 0, 0 ) ) );
 
-    std::vector<DualQuaternion> poseDQ;
+    std::vector<Math::DualQuaternion> poseDQ;
     poseDQ.reserve( pose.size() );
 
     // 1. Convert all transforms to DQ
     for ( int j = 0; j < weight.cols(); ++j )
     {
-        poseDQ.push_back( DualQuaternion( pose[j] ) );
+        poseDQ.push_back( Math::DualQuaternion( pose[j] ) );
     }
 
     // 2. for all vertices, blend the dual quats.
@@ -117,8 +117,8 @@ void computeDQ_naive( const Pose& pose, const WeightMatrix& weight, DQList& DQ )
     }
 }
 
-void dualQuaternionSkinning( const Ra::Core::Vector3Array& input, const DQList& DQ,
-                             Ra::Core::Vector3Array& output ) {
+void dualQuaternionSkinning( const Ra::Core::Container::Vector3Array& input, const DQList& DQ,
+                             Ra::Core::Container::Vector3Array& output ) {
     const uint size = input.size();
     CORE_ASSERT( ( size == DQ.size() ), "input/DQ size mismatch." );
     output.resize( size );

@@ -9,7 +9,7 @@
 
 namespace Ra {
 namespace Core {
-
+namespace Geometry {
 template <typename T>
 inline BVH<T>::Node::Node( const std::shared_ptr<T>& t ) : m_aabb( t->getAabb() ), m_data( t ) {}
 
@@ -111,8 +111,8 @@ inline void BVH<T>::buildBottomUpSlow() {
     m_upToDate = true;
 }
 
-// Dummy function to transform Vector3 to Vector4
-inline Vector4 fromV3( Vector3 v, int x ) {
+// Dummy function to transform Math::Vector3 to Vector4
+inline Vector4 fromV3( Math::Vector3 v, int x ) {
     return Vector4( v( 0 ), v( 1 ), v( 2 ), x );
 }
 
@@ -163,5 +163,6 @@ inline void BVH<T>::getInFrustumSlow( std::vector<std::shared_ptr<T>>& objects,
         }
     }
 }
+} // namespace Geometry
 } // namespace Core
 } // namespace Ra
