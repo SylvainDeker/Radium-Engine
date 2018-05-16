@@ -8,6 +8,7 @@
 #include <Engine/Renderer/Light/SpotLight.hpp>
 #include <Engine/Renderer/Light/PointLight.hpp>
 #include <Core/Asset/LightData.hpp>
+#include <GuiBase/Viewer/Viewer.hpp>
 
 
 #include <QPushButton>
@@ -34,7 +35,7 @@
 namespace Ra {
 namespace Gui {
 
-LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
+LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget( nullptr ), m_viewer(viewer)    {
     setupUi( this );
     setWindowTitle("Light Creator");
     setWindowIcon(parent->windowIcon());
@@ -43,7 +44,7 @@ LightCreator::LightCreator( QWidget* parent ) : QWidget( nullptr )    {
     m_intensity_val = new double(100);
     m_inner_angle_val = new double(0);
     m_outer_angle_val = new double(0);
-    m_falloff_val_constant = new double(0);
+    m_falloff_val_constant = new double(1);
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
     m_lightType = new int(0);
@@ -194,6 +195,10 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
 
 
 
+    connect(this,&LightCreator::sig_addLight,m_viewer,&Gui::Viewer::addLight);
+
+
+
 
 
     // Init with Directionnal selected by default
@@ -234,6 +239,9 @@ connect(this,&LightCreator::sig_hide_angle,m_angle_lab,&QLabel::hide);
     m_pos_x_spin->setValue((double) m_position->x());
     m_pos_y_spin->setValue((double) m_position->y());
     m_pos_z_spin->setValue((double) m_position->z());
+
+    m_falloff_spinbox_constant->setValue(1);
+    m_falloff_slider_constant->setValue(1);
 
 
 
@@ -378,7 +386,10 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
   dr/=255;
   dg/=255;
   db/=255;
-  Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
+
+  // printf("===============================%lf;%lf;%lf\n",dr,dg,db );
+
+  Core::Color c = Core::Color( dr, dg, db,/* *m_intensity_val/MAX_INTENSITY */ 1 );
 
 
 
@@ -389,6 +400,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       dir_light->setDirection(*m_direction);
       dir_light->setColor(c);
+      emit sig_addLight(dir_light);
       // End
 
       break;
@@ -398,7 +410,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
       point_light->setPosition(*m_position);
       point_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
-
+      emit sig_addLight(point_light);
         break;
     case 2:
       Ra::Engine::SpotLight * spot_light;
@@ -412,6 +424,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       spot_light->setOuterAngleInDegrees((Scalar) *m_outer_angle_val );
       spot_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
 
+      emit sig_addLight(spot_light);
         break;
 
     default:

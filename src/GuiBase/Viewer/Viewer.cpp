@@ -44,6 +44,7 @@
 
 #include <GuiBase/Viewer/Gizmo/GizmoManager.hpp>
 #include <GuiBase/Viewer/TrackballCamera.hpp>
+#include <GuiBase/Viewer/Viewer.hpp>
 
 namespace Ra {
 Gui::Viewer::Viewer( QScreen* screen ) :
@@ -234,8 +235,16 @@ void Gui::Viewer::intializeRenderer( Engine::Renderer* renderer ) {
     {
         renderer->addLight( m_camera->getLight() );
     }
-  
+
     renderer->lockRendering();
+}
+
+void Gui::Viewer::addLight(Ra::Engine::Light*l){
+  // Gui::Viewer::m_lights.push_back(l);
+  // TODO (Sylvain)
+  LOG( logINFO ) << "Add new light \n";
+  for ( auto& rend : m_renderers )
+    rend->addLight( l );
 }
 
 void Gui::Viewer::resizeGL( int width_, int height_ ) {
