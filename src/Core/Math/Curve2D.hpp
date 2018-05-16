@@ -10,7 +10,6 @@ namespace Ra {
 namespace Core {
 namespace Math {
 
-}
 class Curve2D {
   public:
     enum CurveType { LINE, CUBICBEZIER, SPLINE, SIZE };

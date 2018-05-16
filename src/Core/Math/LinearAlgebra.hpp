@@ -36,7 +36,7 @@ using Vector3 = Eigen::Matrix<Scalar, 3, 1>;
 using Vector3f = Eigen::Vector3f;
 using Vector3d = Eigen::Vector3d;
 #else
-using Math::Vector3 = Eigen::AlignedVector3<Scalar>;
+using Vector3 = Eigen::AlignedVector3<Scalar>;
 using Vector3f = Eigen::AlignedVector3<float>;
 using Vector3d = Eigen::AlignedVector3<double>;
 #endif
@@ -159,8 +159,8 @@ template <typename Vector_>
 inline bool checkInvalidNumbers( Eigen::Ref<const Vector_> v, const bool FAIL_ON_ASSERT = false );
 
 /// Get two vectors orthogonal to a given vector.
-inline void getOrthogonalVectors( const Math::Vector3& fx, Eigen::Ref<Math::Vector3> fy,
-                                  Eigen::Ref<Math::Vector3> fz );
+inline void getOrthogonalVectors( const Vector3& fx, Eigen::Ref<Vector3> fy,
+                                  Eigen::Ref<Vector3> fz );
 
 /// Get the angle between two vectors. Works for types where the cross product is
 /// defined (i.e. 2D and 3D vectors).
@@ -173,8 +173,8 @@ template <typename Vector_>
 inline Vector_ slerp( const Vector_& v1, const Vector_& v2, Scalar t );
 
 /// @return the projection of point on the plane define by plane and planeNormal
-inline Math::Vector3 projectOnPlane( const Math::Vector3& planePos, const Math::Vector3& planeNormal,
-                               const Math::Vector3& point );
+inline Vector3 projectOnPlane( const Vector3& planePos, const Vector3& planeNormal,
+                               const Vector3& point );
 
 /// Get the cotangent of the angle between two vectors. Works for vector types where
 /// dot and cross product is defined (2D or 3D vectors).
@@ -198,7 +198,7 @@ inline Scalar getNormAndNormalizeSafe( Vector_& v );
 } // namespace Vector
 
 namespace MatrixUtils {
-inline Matrix4 lookAt( const Math::Vector3& position, const Math::Vector3& target, const Math::Vector3& up );
+inline Matrix4 lookAt( const Vector3& position, const Vector3& target, const Vector3& up );
 inline Matrix4 perspective( Scalar fovy, Scalar aspect, Scalar near, Scalar zfar );
 inline Matrix4 orthographic( Scalar left, Scalar right, Scalar bottom, Scalar top, Scalar near,
                              Scalar zfar );

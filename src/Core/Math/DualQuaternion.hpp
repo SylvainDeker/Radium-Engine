@@ -31,7 +31,7 @@ class DualQuaternion {
 
     /// Construct a dual-quaternion from a rigid transform
     /// Any non-rigid component (e.g. scale and shear) will be ignored.
-    inline DualQuaternion( const Core::Math::Transform& tr );
+    inline DualQuaternion( const Transform& tr );
 
     /// Default copy constructor and assignment operator.
     DualQuaternion( const DualQuaternion& other ) = default;
@@ -67,13 +67,13 @@ class DualQuaternion {
 
     /// Apply the transform represented by the dual quaternion to given vector.
     /// equivalent to translate( rotate (p)).
-    inline Math::Vector3 transform( const Math::Vector3& p ) const;
+    inline Vector3 transform( const Vector3& p ) const;
 
     /// Apply only the rotational part of the dual quaternion to the given vector.
-    inline Math::Vector3 rotate( const Math::Vector3& p ) const;
+    inline Vector3 rotate( const Vector3& p ) const;
 
     /// Apply only the translational part of the dual quaternion to the given vector.
-    inline Math::Vector3 translate( const Math::Vector3& p ) const;
+    inline Vector3 translate( const Vector3& p ) const;
 
   private:
     /// Non-dual part (representing the rotation)

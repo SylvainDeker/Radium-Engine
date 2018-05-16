@@ -180,6 +180,7 @@ inline std::vector<C> scatter( const uint size, const Scalar gamma ) {
     std::random_shuffle( color.begin(), color.end() );
     return color;
 }
+
 } // namespace Math
 } // namespace Core
 } // namespace Ra

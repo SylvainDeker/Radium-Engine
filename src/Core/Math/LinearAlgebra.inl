@@ -99,7 +99,7 @@ inline Quaternion QuaternionUtils::add( const Quaternion& q1, const Quaternion& 
 }
 
 inline Quaternion QuaternionUtils::addQlerp( const Quaternion& q1, const Quaternion& q2 ) {
-    const Scalar sign = Ra::Core::Math::signNZ( q1.dot( q2 ) );
+    const Scalar sign = signNZ( q1.dot( q2 ) );
     return Quaternion( q1.coeffs() + ( sign * q2.coeffs() ) );
 }
 
@@ -107,26 +107,26 @@ inline Quaternion QuaternionUtils::scale( const Quaternion& q, Scalar k ) {
     return Quaternion( k * q.coeffs() );
 }
 
-inline void Vector::getOrthogonalVectors( const Math::Vector3& fx, Eigen::Ref<Math::Vector3> fy,
-                                          Eigen::Ref<Math::Vector3> fz ) {
+inline void Vector::getOrthogonalVectors( const Vector3& fx, Eigen::Ref<Vector3> fy,
+                                          Eigen::Ref<Vector3> fz ) {
     // for numerical stability, and seen that z will always be present, take the greatest component
     // between x and y.
     if ( std::abs( fx( 0 ) ) > std::abs( fx( 1 ) ) )
     {
         float inv_len = 1.f / sqrtf( fx( 0 ) * fx( 0 ) + fx( 2 ) * fx( 2 ) );
-        Math::Vector3 tmp( -fx( 2 ) * inv_len, 0.f, fx( 0 ) * inv_len );
+        Vector3 tmp( -fx( 2 ) * inv_len, 0.f, fx( 0 ) * inv_len );
         fy = tmp;
     } else
     {
         float inv_len = 1.f / sqrtf( fx( 1 ) * fx( 1 ) + fx( 2 ) * fx( 2 ) );
-        Math::Vector3 tmp( 0.f, fx( 2 ) * inv_len, -fx( 1 ) * inv_len );
+        Vector3 tmp( 0.f, fx( 2 ) * inv_len, -fx( 1 ) * inv_len );
         fy = tmp;
     }
     fz = fx.cross( fy );
 }
 
-inline Math::Vector3 Vector::projectOnPlane( const Math::Vector3& planePos, const Math::Vector3& planeNormal,
-                                       const Math::Vector3& point ) {
+inline Vector3 Vector::projectOnPlane( const Vector3& planePos, const Vector3& planeNormal,
+                                       const Vector3& point ) {
     return point + planeNormal * ( planePos - point ).dot( planeNormal );
 }
 
@@ -165,7 +165,7 @@ inline void QuaternionUtils::getSwingTwist( const Quaternion& in, Quaternion& sw
         AngleAxis twist( 2 * gamma, Vector3::UnitZ() );
         twistOut = twist;
 
-        Math::Vector3 swingAxis( Vector3::Zero() );
+        Vector3 swingAxis( Vector3::Zero() );
         swingAxis.head<2>() = sxy.normalized();
 
         AngleAxis swing( sxy.norm(), swingAxis );
@@ -175,7 +175,7 @@ inline void QuaternionUtils::getSwingTwist( const Quaternion& in, Quaternion& sw
 
 namespace MatrixUtils {
 // http://stackoverflow.com/a/13786235/4717805
-inline Matrix4 lookAt( const Math::Vector3& position, const Math::Vector3& target, const Math::Vector3& up ) {
+inline Matrix4 lookAt( const Vector3& position, const Vector3& target, const Vector3& up ) {
     Matrix3 R;
     R.col( 2 ) = ( position - target ).normalized();
     R.col( 0 ) = up.cross( R.col( 2 ) ).normalized();
