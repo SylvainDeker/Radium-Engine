@@ -150,12 +150,13 @@ namespace Gui{
         updateInfos();
     }
 
-    bool EditionWidget::setTransform(Ra::Core::Transform& tf, bool doUpdateInfos=true)
+    bool EditionWidget::setTransform(const Ra::Core::Transform& tf, bool doUpdateInfos=true)
     {
         Ra::Engine::ItemEntry item = m_selectionManager->currentItem();
 
         if(item.isValid())
         {
+            //Entity
             if (item.isEntityNode())
             {
                 item.m_entity->setTransform(tf);
@@ -168,6 +169,8 @@ namespace Gui{
 
             //no action if the item is only a component
 
+            //Render Object
+            /* desactivated as it may cause problem if a non inversible matrix is passed
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 item.m_component->setTransform(item.m_roIndex, tf);
@@ -176,6 +179,7 @@ namespace Gui{
                 }
                 return true;
             }
+            */
         }
 
         return false;
@@ -201,11 +205,13 @@ namespace Gui{
 
             //no action if the item is only a component
 
+            /* desactivated, see setTransform
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 *tf = item.m_component->getTransform(item.m_roIndex);
                 return true;
             }
+            */
         }
 
         return false;

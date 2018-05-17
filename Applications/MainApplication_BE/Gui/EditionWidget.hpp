@@ -16,7 +16,7 @@ public:
     EditionWidget(QWidget* parent, Ra::GuiBase::SelectionManager* selectionManager);
 
     ///set the transform on the selected object, return false in case of failure
-    bool setTransform(Ra::Core::Transform &tf, bool doUpdateInfos);
+    bool setTransform(const Core::Transform &tf, bool doUpdateInfos);
     bool setMatrix(Ra::Core::Matrix4 &m);
 
     ///get the transform of the selected object, return false in case of failure
@@ -36,7 +36,6 @@ private:
     bool applyDirect();
     bool transformation();
 
-    const float M_DEGREE_TO_RADIAN = M_PI/180;
     Ra::Gui::PickingManager* m_pickingManager;
     Ra::GuiBase::SelectionManager* m_selectionManager;
     QDoubleSpinBox* m_TabButtonDirect[16];
