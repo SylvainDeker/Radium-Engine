@@ -25,9 +25,9 @@ TranslateGizmo::TranslateGizmo( Engine::Component* c, const Core::Math::Transfor
     m_startPoint( Core::Math::Vector3::Zero() ),
     m_initialPix( Core::Math::Vector2::Zero() ),
     m_selectedAxis( -1 ) {
-    constexpr Scalar arrowScale = 0.2f;
+    constexpr Scalar arrowScale = 0.15f;
     constexpr Scalar axisWidth = 0.05f;
-    constexpr Scalar arrowFrac = 0.1f;
+    constexpr Scalar arrowFrac = 0.15f;
 
     // For x,y,z
     for ( uint i = 0; i < 3; ++i )
