@@ -493,8 +493,14 @@ void MainWindow::onItemRemoved( const Engine::ItemEntry& ent ) {
 }
 
 void MainWindow::exportCurrentMesh() {
-    std::string filename;
-    Ra::Core::Utils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
+    //std::string filename;
+    //Ra::Core::Utils::stringPrintf( filename, "radiummesh_%06u", mainApp->getFrameCount() );
+
+
+
+
+
+
     ItemEntry e = m_selectionManager->currentItem();
 
     // For now we only export a mesh if the selected entry is a render object.
@@ -505,6 +511,9 @@ void MainWindow::exportCurrentMesh() {
         auto ro = Engine::RadiumEngine::getInstance()->getRenderObjectManager()->getRenderObject(
             e.m_roIndex );
         Ra::Core::Geometry::TriangleMesh mesh = ro->getMesh()->getGeometry();
+
+        std::string filename = QFileDialog::getSaveFileName(this, "Save mesh", QString::fromStdString(ro->getName()), "Mesh (*.obj)").toStdString();
+
         bool result = obj.save( filename, mesh );
         if ( result )
         {
