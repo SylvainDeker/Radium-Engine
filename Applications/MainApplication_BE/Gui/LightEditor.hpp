@@ -8,6 +8,8 @@
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Core/Container/Index.hpp>
 #include <Engine/Renderer/Light/Light.hpp>
+#include <Engine/Renderer/Light/PointLight.hpp>
+#include <Engine/Renderer/Light/SpotLight.hpp>
 
 #include <ui_LightCreator.h>
 
@@ -67,12 +69,13 @@ class LightEditor : public QWidget, private Ui::LightCreator {
 
     private:
         QColor m_color;
-        double *m_inner_angle_val;
-        double *m_outer_angle_val;
-        double *m_falloff_val_constant;
-        double *m_falloff_val_linear;
-        double *m_falloff_val_quadratic;
-        QString *m_name;
+        QPalette m_pal;
+        double m_inner_angle;
+        double m_outer_angle;
+        Ra::Engine::PointLight::Attenuation m_falloff_p;
+        Ra::Engine::SpotLight::Attenuation m_falloff_s;
+        Core::Vector3 m_direction;
+        Core::Vector3 m_position;
         Ra::Engine::Light *m_light;
         Ra::Engine::Light::LightType m_type;
 };

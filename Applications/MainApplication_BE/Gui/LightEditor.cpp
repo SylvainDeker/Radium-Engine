@@ -2,6 +2,8 @@
 #include <Gui/MainWindow.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Engine/Component/Component.hpp>
+#include <Engine/Renderer/Light/DirLight.hpp>
+#include <Engine/Renderer/Light/SpotLight.hpp>
 
 #include <QPushButton>
 #include <QColorDialog>
@@ -29,13 +31,7 @@ namespace Ra {
 namespace Gui {
 LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     setupUi( this );
-    m_color = QColor(255,255,255);
-    m_inner_angle_val = new double(0);
-    m_outer_angle_val = new double(0);
-    m_falloff_val_constant = new double(0);
-    m_falloff_val_linear = new double(0);
-    m_falloff_val_quadratic = new double(0);
-
+    m_result_color->setAutoFillBackground(true);
 
     m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
@@ -99,10 +95,6 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 
 
     setWindowTitle("Light Editor");
-    QPalette p;
-    p.setColor(QPalette::Background,m_color);
-    m_result_color->setAutoFillBackground(true);
-    m_result_color->setPalette(p);
     connect(m_button_color, &QPushButton::clicked,this,&LightEditor::open_dialogColor);
 
 
@@ -146,45 +138,32 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 }
 
 LightEditor::~LightEditor(){
-  delete m_inner_angle_val;
-  delete m_outer_angle_val;
-  delete m_falloff_val_constant;
-  delete m_falloff_val_linear;
-  delete m_falloff_val_quadratic;
-  delete m_name;
 }
 
 void LightEditor::open_dialogColor(){
   m_color = QColorDialog::getColor ();
-  QPalette p;
-
-  p.setColor(QPalette::Background,m_color);
-  m_result_color->setPalette(p);
-
+  m_pal.setColor(QPalette::Background,m_color);
+  m_result_color->setPalette(m_pal);
 }
 
 /// Angle
 
 void LightEditor::slot_inner_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_inner_angle_val = tmp;
   emit sig_inner_angle_slide_to_spin(tmp);
 }
 
 void LightEditor::slot_inner_angle_spin_to_slide(double val){
-  *m_inner_angle_val = val;
   int tmp = (int) val;
   emit sig_inner_angle_spin_to_slide(tmp);
 }
 
 void LightEditor::slot_outer_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_outer_angle_val = tmp;
   emit sig_outer_angle_slide_to_spin(tmp);
 }
 
 void LightEditor::slot_outer_angle_spin_to_slide(double val){
-  *m_outer_angle_val = val;
   int tmp = (int) val;
   emit sig_outer_angle_spin_to_slide(tmp);
 }
@@ -193,35 +172,29 @@ void LightEditor::slot_outer_angle_spin_to_slide(double val){
 /// Falloff
 void LightEditor::slot_falloff_constant_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_constant = tmp;
-  emit sig_falloff_constant_slide_to_spin(*m_falloff_val_constant);
+  emit sig_falloff_constant_slide_to_spin(tmp);
 }
 
 void LightEditor::slot_falloff_constant_spin_to_slide(double val){
-  *m_falloff_val_constant = val;
   int tmp = (int) val;
   emit sig_falloff_constant_spin_to_slide(tmp);
 }
 
 void LightEditor::slot_falloff_linear_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_linear = tmp;
-  emit sig_falloff_linear_slide_to_spin(*m_falloff_val_linear);
+  emit sig_falloff_linear_slide_to_spin(tmp);
 }
 
 void LightEditor::slot_falloff_linear_spin_to_slide(double val){
-  *m_falloff_val_linear = val;
   int tmp = (int) val;
   emit sig_falloff_linear_spin_to_slide(tmp);
 }
 void LightEditor::slot_falloff_quadratic_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_quadratic = tmp;
-  emit sig_falloff_quadratic_slide_to_spin(*m_falloff_val_quadratic);
+  emit sig_falloff_quadratic_slide_to_spin(tmp);
 }
 
 void LightEditor::slot_falloff_quadratic_spin_to_slide(double val){
-  *m_falloff_val_quadratic = val;
   int tmp = (int) val;
   emit sig_falloff_quadratic_spin_to_slide(tmp);
 }
@@ -251,6 +224,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_pos_z_spin->setVisible(true);
     m_coord_lab->setVisible(true);
 
+    m_falloff_tip->setVisible(true);
     m_falloff_lab->setVisible(true);
     m_falloff_spinbox_linear->setVisible(true);
     m_falloff_spinbox_constant->setVisible(true);
@@ -262,6 +236,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_falloff_lab_constant->setVisible(true);
     m_falloff_lab_quadratic->setVisible(true);
 
+    m_dir_tip->setVisible(true);
     m_dir_x_spin->setVisible(true);
     m_dir_y_spin->setVisible(true);
     m_dir_z_spin->setVisible(true);
@@ -269,19 +244,25 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_dir_y_lab->setVisible(true);
     m_dir_z_lab->setVisible(true);
     m_direction_lab->setVisible(true);
+   
+    // Color 
+    Core::Color col =  m_light->getColor();
+    double dr, dg, db;
+    dr = col.x();
+    dg = col.y();
+    db = col.z();
+    m_color = QColor((int) (dr*255), (int) (dg*255), (int) (db*255));
+    m_pal.setColor(QPalette::Background,m_color);
+    m_result_color->setPalette(m_pal);
     
-    /*m_color = m_light->getColor();
-    QPalette p;
-    p.setColor(QPalette::Background,m_color);
-    m_result_color->setPalette(p);*/
-
-
     switch (m_type) {
         case 0 : // Directional
             m_direction = ((Ra::Engine::DirectionalLight *) m_light)->getDirection();
             m_dir_x_spin->setValue((double) m_direction.x());
             m_dir_y_spin->setValue((double) m_direction.y());
             m_dir_z_spin->setValue((double) m_direction.z());
+            /* m_intensity = m_light->getColor().w();
+            m_intensity_spinbox->setValue(m_intensity);*/
 
             m_pos_x_lab->setVisible(false);
             m_pos_y_lab->setVisible(false);
@@ -290,7 +271,8 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_pos_y_spin->setVisible(false);
             m_pos_z_spin->setVisible(false);
             m_coord_lab->setVisible(false);
-
+            
+            m_falloff_tip->setVisible(false);
             m_falloff_lab->setVisible(false);
             m_falloff_spinbox_linear->setVisible(false);
             m_falloff_spinbox_constant->setVisible(false);
@@ -303,6 +285,17 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_falloff_lab_quadratic->setVisible(false);
             break;
         case 1 : // Point
+            m_falloff_p = ((Ra::Engine::PointLight *) m_light)->getAttenuation();
+            m_falloff_spinbox_linear->setValue((double) m_falloff_p.linear);
+            m_falloff_spinbox_constant->setValue((double) m_falloff_p.constant);
+            m_falloff_spinbox_quadratic->setValue((double) m_falloff_p.quadratic);
+
+            m_position = ((Ra::Engine::PointLight *) m_light)->getPosition();
+            m_pos_x_spin->setValue(m_position.x());
+            m_pos_y_spin->setValue(m_position.y());
+            m_pos_z_spin->setValue(m_position.z());
+
+            m_dir_tip->setVisible(false);
             m_dir_x_spin->setVisible(false);
             m_dir_y_spin->setVisible(false);
             m_dir_z_spin->setVisible(false);
@@ -312,6 +305,26 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_direction_lab->setVisible(false);
             break;
         case 2 : // Spot
+            m_direction = ((Ra::Engine::SpotLight *) m_light)->getDirection();
+            m_dir_x_spin->setValue((double) m_direction.x());
+            m_dir_y_spin->setValue((double) m_direction.y());
+            m_dir_z_spin->setValue((double) m_direction.z());
+            
+            m_position = ((Ra::Engine::SpotLight *) m_light)->getPosition();
+            m_pos_x_spin->setValue(m_position.x());
+            m_pos_y_spin->setValue(m_position.y());
+            m_pos_z_spin->setValue(m_position.z());
+
+            m_falloff_s = ((Ra::Engine::SpotLight *) m_light)->getAttenuation();
+            m_falloff_spinbox_linear->setValue((double) m_falloff_s.linear);
+            m_falloff_spinbox_constant->setValue((double) m_falloff_s.constant);
+            m_falloff_spinbox_quadratic->setValue((double) m_falloff_s.quadratic);
+            
+            m_inner_angle = ((Ra::Engine::SpotLight *) m_light)->getInnerAngle();
+            m_outer_angle = ((Ra::Engine::SpotLight *) m_light)->getOuterAngle();
+            m_inner_angle_spinbox->setValue(Core::Math::toDegrees(m_inner_angle));
+            m_outer_angle_spinbox->setValue(Core::Math::toDegrees(m_outer_angle));
+
             m_angle_lab->setVisible(true);
             m_angle_lab->setVisible(true);
             m_inner_angle_spinbox->setVisible(true);
