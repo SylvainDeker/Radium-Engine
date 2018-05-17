@@ -28,7 +28,6 @@
 
 #include <math.h>
 #define NB_DECIMAL 10
-#define MAX_INTENSITY 100
 #define MAX_ANGLE 360
 #define MIN_CONSTANT -1000
 #define MAX_CONSTANT 1000
@@ -52,7 +51,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     setWindowIcon(parent->windowIcon()); // same icon as the main App
     m_color = new QColor(255,255,255); // Color is white by default
     m_name = new QString("");
-    m_intensity_val = new double(MAX_INTENSITY);
     m_inner_angle_val = new double(0);
     m_outer_angle_val = new double(0);
     m_falloff_val_constant = new double(1); // 1 = value by default
@@ -153,12 +151,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     connect(this,&LightCreator::sig_show_pos,m_coord_lab,&QLabel::show);
 
     // Follow connect() sync the QSlider and the QDoubleSpinBox
-      // Intensity
-      connect(m_intensity_slider, &QSlider::valueChanged, this , &LightCreator::slot_intensity_slide_to_spin );
-      connect(this,&LightCreator::sig_intensity_slide_to_spin,m_intensity_spinbox,&QDoubleSpinBox::setValue);
-
-      connect(m_intensity_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightCreator::slot_intensity_spin_to_slide );
-      connect(this,&LightCreator::sig_intensity_spin_to_slide,m_intensity_slider,&QSlider::setValue);
 
       // Angle
       connect(m_inner_angle_slider, &QSlider::valueChanged, this , &LightCreator::slot_inner_angle_slide_to_spin );
@@ -252,10 +244,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
 
     // Details information
 
-    m_intensity_spinbox-> setDecimals (NB_DECIMAL);
-    m_intensity_spinbox->setMaximum(MAX_INTENSITY);
-    m_intensity_slider->setMaximum(MAX_INTENSITY);
-
     m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
     m_inner_angle_slider->setMaximum(MAX_ANGLE);
@@ -283,8 +271,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     m_falloff_slider_quadratic->setMaximum(MAX_QUADRA);
     m_falloff_slider_quadratic->setMinimum(MIN_QUADRA);
 
-    m_intensity_spinbox->setValue(MAX_INTENSITY);
-    m_intensity_slider->setValue(MAX_INTENSITY);
 
     m_pos_x_spin->setDecimals (NB_DECIMAL);
     m_pos_x_spin->setMaximum(MAX_COORD);
@@ -326,7 +312,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
 */
 LightCreator::~LightCreator(){
   delete m_color;
-  delete m_intensity_val;
   delete m_inner_angle_val;
   delete m_outer_angle_val;
   delete m_falloff_val_constant;
@@ -391,9 +376,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
   db/=255;
 
   // Every kind of Light need Color specification
-  Core::Color c = Core::Color( dr, dg, db, *m_intensity_val/MAX_INTENSITY );
-  // TODO (Sylvain) check m_intensity_val/MAX_INTENSITY
-  // printf("===============================%lf;%lf;%lf;%lf\n",dr,dg,db,c.w() ); // TODO clean
+  Core::Color c = Core::Color( dr, dg, db, 0 );
 
   switch (*m_lightType) {
     /*
@@ -429,8 +412,8 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       spot_light->setDirection(*m_direction);
       spot_light->setColor(c);
-      spot_light->setInnerAngleInDegrees((Scalar) *m_inner_angle_val );
-      spot_light->setOuterAngleInDegrees((Scalar) *m_outer_angle_val );
+      spot_light->setInnerAngleInDegrees( *m_inner_angle_val );
+      spot_light->setOuterAngleInDegrees( *m_outer_angle_val );
       spot_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
 
       emit sig_addLight(spot_light);
@@ -497,24 +480,6 @@ void LightCreator::slot_select_light(int type){
     }
 }
 
-/////////////////////////////////////////   INTENSITY  SLOTS///////////////////
-/*!
-   \brief Slot that sync QDoubleSpinBox from QSlider of Intensity options
-*/
-void LightCreator::slot_intensity_slide_to_spin(int val){
-  double tmp =  (double) val;
-  *m_intensity_val = tmp;
-  emit sig_intensity_slide_to_spin(tmp);
-}
-
-/*!
-   \brief Slot that sync QSlider from QDoubleSpinBox  of Intensity options
-*/
-void LightCreator::slot_intensity_spin_to_slide(double val){
-  *m_intensity_val = val;
-  int tmp = (int) val;
-  emit sig_intensity_spin_to_slide(tmp);
-}
 /////////////////////////////////////////   ANGLES  SLOTS///////////////////
 /*!
    \brief Slot that sync QDoubleSpinBox from QSlider of Inner Angles options

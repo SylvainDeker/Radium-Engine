@@ -71,18 +71,6 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     */
     void slot_select_light(int type);
 
-
-    /////////////////////////////////////////   INTENSITY  SLOTS///////////////////
-    /*!
-       \brief Slot that sync QDoubleSpinBox from QSlider of Intensity options
-    */
-    void slot_intensity_slide_to_spin(int val);
-
-    /*!
-       \brief Slot that sync QSlider from QDoubleSpinBox  of Intensity options
-    */
-    void slot_intensity_spin_to_slide(double val);
-
     /////////////////////////////////////////   ANGLES  SLOTS///////////////////
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of Inner Angles options
@@ -140,8 +128,6 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
 
   signals:
-    void sig_intensity_slide_to_spin(double);
-    void sig_intensity_spin_to_slide(int);
     void sig_inner_angle_slide_to_spin(double);
     void sig_inner_angle_spin_to_slide(int);
     void sig_outer_angle_slide_to_spin(double);
@@ -177,7 +163,6 @@ class LightCreator : public QWidget, private Ui::LightCreator {
 
     int * m_lightType;
     QColor *m_color;
-    double *m_intensity_val;
     double *m_inner_angle_val;
     double *m_outer_angle_val;
     double *m_falloff_val_constant;
