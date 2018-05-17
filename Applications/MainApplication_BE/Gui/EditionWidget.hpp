@@ -32,8 +32,8 @@ public slots:
     void onValueChanged(double);
 
 private:
-    bool applyWolfram();
-    bool applyDirect();
+    bool applyMatrixText();
+    bool applyMatrixBox();
     bool transformation();
 
     Ra::Gui::PickingManager* m_pickingManager;

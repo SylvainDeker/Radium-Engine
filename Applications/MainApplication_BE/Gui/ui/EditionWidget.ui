@@ -113,23 +113,23 @@
        <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="wolfram">
+       <widget class="QWidget" name="matrixText">
         <attribute name="title">
-         <string>Wolfram</string>
+         <string>Text</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_9">
          <item row="0" column="0">
-          <widget class="QTextEdit" name="m_wolframEdit"/>
+          <widget class="QTextEdit" name="m_matrixTextEdit"/>
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="direct">
+       <widget class="QWidget" name="matrixBox">
         <attribute name="title">
-         <string>direct</string>
+         <string>Box</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_8">
          <item row="0" column="0">
-          <layout class="QGridLayout" name="m_directLayout">
+          <layout class="QGridLayout" name="m_matrixBoxLayout">
            <property name="leftMargin">
             <number>0</number>
            </property>

@@ -6,7 +6,6 @@
 #include <locale>
 #include <iostream>
 #include <sstream>
-#include <cmath>
 #include <limits>
 
 #include <QWidget>
@@ -38,11 +37,11 @@ namespace Gui{
     {
         setupUi(this);
         for( int i =0 ; i <16 ;++i){
-            m_TabButtonDirect[i] = new QDoubleSpinBox(direct);
+            m_TabButtonDirect[i] = new QDoubleSpinBox(matrixBox);
             m_TabButtonDirect[i]->setDecimals(5);
             m_TabButtonDirect[i]->setMaximum(std::numeric_limits<float>::max());
             m_TabButtonDirect[i]->setMinimum(-std::numeric_limits<float>::max());
-            m_directLayout->addWidget(m_TabButtonDirect[i],(i/4)+1,(i%4),1,1);
+            m_matrixBoxLayout->addWidget(m_TabButtonDirect[i],(i/4)+1,(i%4),1,1);
         }
         //TODO find limits of radium
         m_rotation_x->setMaximum(std::numeric_limits<float>::max());
@@ -73,10 +72,10 @@ namespace Gui{
         QObject::connect(m_scale_y, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
         QObject::connect(m_scale_z, SIGNAL(valueChanged(double)), this, SLOT(onValueChanged(double)));
 
-        m_matrice3 = new QCheckBox(direct);
+        m_matrice3 = new QCheckBox(matrixBox);
         m_matrice3->setObjectName(QStringLiteral("m_matrice3"));
         m_matrice3->setText(QApplication::translate("EditionWidget", "use matrice 3 * 3", nullptr));
-        m_directLayout->addWidget(m_matrice3,0,0,1,4);
+        m_matrixBoxLayout->addWidget(m_matrice3,0,0,1,4);
         QObject::connect(m_matrice3,SIGNAL(clicked(bool)),this,SLOT(matriceSize3()));
         QObject::connect(m_resetButton, SIGNAL(clicked()), this, SLOT(resetSelectedObject()));
         QObject::connect(m_applyButton, SIGNAL(clicked()), this, SLOT(applyMatrix()));
@@ -118,7 +117,7 @@ namespace Gui{
                        << m(1,0) << "," << m(1,1) << "," << m(1,2) << "," << m(1,3) << "},\n{"
                        << m(2,0) << "," << m(2,1) << "," << m(2,2) << "," << m(2,3) << "},\n{"
                        << m(3,0) << "," << m(3,1) << "," << m(3,2) << "," << m(3,3) << "}\n}";
-            m_wolframEdit->setText(QString::fromStdString(matrixText.str()));
+            m_matrixTextEdit->setText(QString::fromStdString(matrixText.str()));
 
             for(int i = 0; i < 16; ++i)
             {
@@ -136,7 +135,7 @@ namespace Gui{
             SET_VALUE_NO_SIGNALS(m_rotation_x, 0);
             SET_VALUE_NO_SIGNALS(m_rotation_y, 0);
             SET_VALUE_NO_SIGNALS(m_rotation_z, 0);
-            m_wolframEdit->setText("");
+            m_matrixTextEdit->setText("");
             for(int i = 0; i < 16; ++i)
             {
                 m_TabButtonDirect[i]->setValue(0);
@@ -231,21 +230,18 @@ namespace Gui{
             switch(index)
             {
             case 0 :
-                //wolfram
-                if(!applyWolfram()){
+                if(!applyMatrixText()){
                     //TODO more visible error
                     LOG(logINFO) << "Cannot apply matrix : bad format or non-editable object.";
                 }
                 break;
             case 1 :
-                //direct
-                if(!applyDirect()){
+                if(!applyMatrixBox()){
                     //TODO more visible error
                     LOG(logINFO) << "Cannot apply matrix : bad format or non-editable object.";
                 }
                 break;
             default :
-                //TODO ?
                 break;
             }
        } else {
@@ -292,11 +288,11 @@ namespace Gui{
     }
 
     ///parse the text into a Matrix4 (support 3x3 and 4x4) and apply it to the selected object
-    bool EditionWidget::applyWolfram()
+    bool EditionWidget::applyMatrixText()
     {
         struct lconv *locale = localeconv();
         Core::Matrix4 m = Core::Transform::Identity().matrix();
-        std::string input = m_wolframEdit->toPlainText().toStdString();
+        std::string input = m_matrixTextEdit->toPlainText().toStdString();
 
         //remove all spaces
         for(size_t pos = input.find(" "); pos != std::string::npos; pos = input.find(" ")){
@@ -386,7 +382,7 @@ namespace Gui{
         return setMatrix(m);
     }
 
-    bool EditionWidget::applyDirect()
+    bool EditionWidget::applyMatrixBox()
     {
         Core::Matrix4 m = Core::Transform::Identity().matrix();
         for (int i=0 ; i<4 ;i++){
