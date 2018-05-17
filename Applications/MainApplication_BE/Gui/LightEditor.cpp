@@ -29,19 +29,13 @@ namespace Ra {
 namespace Gui {
 LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     setupUi( this );
-    m_color = new QColor(255,255,255);
-    m_name = new QString("");
-    m_intensity_val = new double(0);
+    m_color = QColor(255,255,255);
     m_inner_angle_val = new double(0);
     m_outer_angle_val = new double(0);
     m_falloff_val_constant = new double(0);
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
 
-
-    m_intensity_spinbox-> setDecimals (NB_DECIMAL);
-    m_intensity_spinbox->setMaximum(MAX_INTENSITY);
-    m_intensity_slider->setMaximum(MAX_INTENSITY);
 
     m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
@@ -106,17 +100,11 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 
     setWindowTitle("Light Editor");
     QPalette p;
-    p.setColor(QPalette::Background,*m_color);
+    p.setColor(QPalette::Background,m_color);
     m_result_color->setAutoFillBackground(true);
     m_result_color->setPalette(p);
     connect(m_button_color, &QPushButton::clicked,this,&LightEditor::open_dialogColor);
 
-    // Intensity
-    connect(m_intensity_slider, &QSlider::valueChanged, this , &LightEditor::slot_intensity_slide_to_spin );
-    connect(this,&LightEditor::sig_intensity_slide_to_spin,m_intensity_spinbox,&QDoubleSpinBox::setValue);
-
-    connect(m_intensity_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_intensity_spin_to_slide );
-    connect(this,&LightEditor::sig_intensity_spin_to_slide,m_intensity_slider,&QSlider::setValue);
 
     // Angle
     connect(m_inner_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_inner_angle_slide_to_spin );
@@ -158,8 +146,6 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 }
 
 LightEditor::~LightEditor(){
-  delete m_color;
-  delete m_intensity_val;
   delete m_inner_angle_val;
   delete m_outer_angle_val;
   delete m_falloff_val_constant;
@@ -169,25 +155,12 @@ LightEditor::~LightEditor(){
 }
 
 void LightEditor::open_dialogColor(){
-  *m_color = QColorDialog::getColor ();
+  m_color = QColorDialog::getColor ();
   QPalette p;
 
-  p.setColor(QPalette::Background,*m_color);
+  p.setColor(QPalette::Background,m_color);
   m_result_color->setPalette(p);
 
-}
-
-/// Intensity
-void LightEditor::slot_intensity_slide_to_spin(int val){
-  double tmp =  (double) val;
-  *m_intensity_val = tmp;
-  emit sig_intensity_slide_to_spin(tmp);
-}
-
-void LightEditor::slot_intensity_spin_to_slide(double val){
-  *m_intensity_val = val;
-  int tmp = (int) val;
-  emit sig_intensity_spin_to_slide(tmp);
 }
 
 /// Angle
@@ -289,16 +262,27 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_falloff_lab_constant->setVisible(true);
     m_falloff_lab_quadratic->setVisible(true);
 
-     m_dir_x_spin->setVisible(true);
-     m_dir_y_spin->setVisible(true);
-     m_dir_z_spin->setVisible(true);
-     m_dir_x_lab->setVisible(true);
-     m_dir_y_lab->setVisible(true);
-     m_dir_z_lab->setVisible(true);
-     m_direction_lab->setVisible(true);
+    m_dir_x_spin->setVisible(true);
+    m_dir_y_spin->setVisible(true);
+    m_dir_z_spin->setVisible(true);
+    m_dir_x_lab->setVisible(true);
+    m_dir_y_lab->setVisible(true);
+    m_dir_z_lab->setVisible(true);
+    m_direction_lab->setVisible(true);
+    
+    /*m_color = m_light->getColor();
+    QPalette p;
+    p.setColor(QPalette::Background,m_color);
+    m_result_color->setPalette(p);*/
+
 
     switch (m_type) {
         case 0 : // Directional
+            m_direction = ((Ra::Engine::DirectionalLight *) m_light)->getDirection();
+            m_dir_x_spin->setValue((double) m_direction.x());
+            m_dir_y_spin->setValue((double) m_direction.y());
+            m_dir_z_spin->setValue((double) m_direction.z());
+
             m_pos_x_lab->setVisible(false);
             m_pos_y_lab->setVisible(false);
             m_pos_z_lab->setVisible(false);
