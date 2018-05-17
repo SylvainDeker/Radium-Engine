@@ -342,6 +342,39 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
 }
 
 void LightEditor::edit_light(){
+    int ir, ig, ib;
+    m_color.getRgb(&ir, &ig, &ib);
+    m_light->setColor(Core::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
+
+    switch (m_type){
+        case 0 : // Directional Light
+            m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            ((Ra::Engine::DirectionalLight *) m_light)->setDirection(m_direction);
+
+            break;
+        case 1 : // Point Light
+            ((Ra::Engine::PointLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
+
+            m_position = Core::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            ((Ra::Engine::PointLight *) m_light)->setPosition(m_position);
+
+            break;
+        case 2 : // Spot Light
+            ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
+
+            m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            ((Ra::Engine::SpotLight *) m_light)->setDirection(m_direction);
+
+            m_position = Core::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            ((Ra::Engine::SpotLight *) m_light)->setPosition(m_position);
+
+            ((Ra::Engine::SpotLight *) m_light)->setInnerAngleInDegrees(m_inner_angle_spinbox->value());
+            ((Ra::Engine::SpotLight *) m_light)->setOuterAngleInDegrees(m_outer_angle_spinbox->value());
+
+            break;
+        default :
+            break;
+    }
     emit sig_close_window();
 }
 
