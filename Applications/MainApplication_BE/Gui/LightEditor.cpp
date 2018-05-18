@@ -11,11 +11,9 @@
 #include <QDoubleSpinBox>
 #include <QSlider>
 #include <QMessageBox>
-#include <QCheckBox>
 
 #include <math.h>
 #define NB_DECIMAL 10
-#define MAX_INTENSITY 100
 #define MAX_ANGLE 360
 #define MIN_CONSTANT -1000
 #define MAX_CONSTANT 1000
@@ -47,23 +45,17 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     m_falloff_slider_constant->setMaximum(MAX_CONSTANT);
     m_falloff_slider_constant->setMinimum(MIN_CONSTANT);
 
-
-
     m_falloff_spinbox_linear->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_linear->setMaximum(MAX_LINEAR);
     m_falloff_spinbox_linear->setMinimum(MIN_LINEAR);
     m_falloff_slider_linear->setMaximum(MAX_LINEAR);
     m_falloff_slider_linear->setMinimum(MIN_LINEAR);
 
-
     m_falloff_spinbox_quadratic->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_quadratic->setMaximum(MAX_QUADRA);
     m_falloff_spinbox_quadratic->setMinimum(MIN_QUADRA);
     m_falloff_slider_quadratic->setMaximum(MAX_QUADRA);
     m_falloff_slider_quadratic->setMinimum(MIN_QUADRA);
-
-
-
 
 
     m_pos_x_spin->setDecimals (NB_DECIMAL);
@@ -78,25 +70,22 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     m_pos_z_spin->setMaximum(MAX_COORD);
     m_pos_z_spin->setMinimum(-MAX_COORD);
 
+
     m_dir_x_spin->setDecimals (NB_DECIMAL);
     m_dir_x_spin->setMaximum(MAX_COORD);
     m_dir_x_spin->setMinimum(-MAX_COORD);
 
-
     m_dir_y_spin->setDecimals (NB_DECIMAL);
     m_dir_y_spin->setMaximum(MAX_COORD);
     m_dir_y_spin->setMinimum(-MAX_COORD);
-
 
     m_dir_z_spin->setDecimals (NB_DECIMAL);
     m_dir_z_spin->setMaximum(MAX_COORD);
     m_dir_z_spin->setMinimum(-MAX_COORD);
 
 
-
     setWindowTitle("Light Editor");
     connect(m_button_color, &QPushButton::clicked,this,&LightEditor::open_dialogColor);
-
 
     // Angle
     connect(m_inner_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_inner_angle_slide_to_spin );
@@ -112,7 +101,6 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     connect(this,&LightEditor::sig_outer_angle_spin_to_slide,m_outer_angle_slider,&QSlider::setValue);
 
     // Falloff
-
     connect(m_falloff_slider_constant, &QSlider::valueChanged, this , &LightEditor::slot_falloff_constant_slide_to_spin );
     connect(this,&LightEditor::sig_falloff_constant_slide_to_spin,m_falloff_spinbox_constant,&QDoubleSpinBox::setValue);
 
@@ -134,7 +122,6 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 // OK Button
     connect(m_button_create,&QPushButton::clicked,this,&LightEditor::edit_light);
     connect(this,&LightEditor::sig_close_window,this,&QWidget::close);
-
 }
 
 LightEditor::~LightEditor(){
@@ -147,56 +134,45 @@ void LightEditor::open_dialogColor(){
 }
 
 /// Angle
-
 void LightEditor::slot_inner_angle_slide_to_spin(int val){
-  double tmp =  (double) val;
-  emit sig_inner_angle_slide_to_spin(tmp);
+  emit sig_inner_angle_slide_to_spin((double) val);
 }
 
 void LightEditor::slot_inner_angle_spin_to_slide(double val){
-  int tmp = (int) val;
-  emit sig_inner_angle_spin_to_slide(tmp);
+  emit sig_inner_angle_spin_to_slide((int) val);
 }
 
 void LightEditor::slot_outer_angle_slide_to_spin(int val){
-  double tmp =  (double) val;
-  emit sig_outer_angle_slide_to_spin(tmp);
+  emit sig_outer_angle_slide_to_spin((double) val);
 }
 
 void LightEditor::slot_outer_angle_spin_to_slide(double val){
-  int tmp = (int) val;
-  emit sig_outer_angle_spin_to_slide(tmp);
+  emit sig_outer_angle_spin_to_slide((int) val);
 }
 
 
 /// Falloff
 void LightEditor::slot_falloff_constant_slide_to_spin(int val){
-  double tmp =  (double) val;
-  emit sig_falloff_constant_slide_to_spin(tmp);
+  emit sig_falloff_constant_slide_to_spin((double) val);
 }
 
 void LightEditor::slot_falloff_constant_spin_to_slide(double val){
-  int tmp = (int) val;
-  emit sig_falloff_constant_spin_to_slide(tmp);
+  emit sig_falloff_constant_spin_to_slide((int) val);
 }
 
 void LightEditor::slot_falloff_linear_slide_to_spin(int val){
-  double tmp =  (double) val;
-  emit sig_falloff_linear_slide_to_spin(tmp);
+  emit sig_falloff_linear_slide_to_spin((double) val);
 }
 
 void LightEditor::slot_falloff_linear_spin_to_slide(double val){
-  int tmp = (int) val;
-  emit sig_falloff_linear_spin_to_slide(tmp);
+  emit sig_falloff_linear_spin_to_slide((int) val);
 }
 void LightEditor::slot_falloff_quadratic_slide_to_spin(int val){
-  double tmp =  (double) val;
-  emit sig_falloff_quadratic_slide_to_spin(tmp);
+  emit sig_falloff_quadratic_slide_to_spin((double) val);
 }
 
 void LightEditor::slot_falloff_quadratic_spin_to_slide(double val){
-  int tmp = (int) val;
-  emit sig_falloff_quadratic_spin_to_slide(tmp);
+  emit sig_falloff_quadratic_spin_to_slide((int) val);
 }
 
 void LightEditor::init(Ra::Engine::ItemEntry item){
@@ -342,13 +318,14 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
 }
 
 void LightEditor::edit_light(){
-    int ir, ig, ib;
-    m_color.getRgb(&ir, &ig, &ib);
-    m_light->setColor(Core::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
-
+    
     switch (m_type){
         case 0 : // Directional Light
             m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
+                QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
+                return;
+            }
             ((Ra::Engine::DirectionalLight *) m_light)->setDirection(m_direction);
 
             break;
@@ -360,10 +337,14 @@ void LightEditor::edit_light(){
 
             break;
         case 2 : // Spot Light
-            ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
-
             m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
+                QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
+                return;
+            }
             ((Ra::Engine::SpotLight *) m_light)->setDirection(m_direction);
+
+            ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
 
             m_position = Core::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
             ((Ra::Engine::SpotLight *) m_light)->setPosition(m_position);
@@ -375,6 +356,11 @@ void LightEditor::edit_light(){
         default :
             break;
     }
+    // Color
+    int ir, ig, ib;
+    m_color.getRgb(&ir, &ig, &ib);
+    m_light->setColor(Core::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
+
     emit sig_close_window();
 }
 
