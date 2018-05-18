@@ -30,7 +30,11 @@
 
 namespace Ra{
 namespace Gui{
-
+/**
+     * @brief EditionWidget::EditionWidget : widget providing an user interface for editing selected Entity transform.
+     * @param parent : a parent widget
+     * @param selectionManager : the selection manager of the application
+     */
     EditionWidget::EditionWidget(QWidget *parent, Ra::GuiBase::SelectionManager* selectionManager) :
         QWidget(parent),
         m_selectionManager(selectionManager)
@@ -168,8 +172,8 @@ namespace Gui{
 
             //no action if the item is only a component
 
-            //Render Object
-            /* desactivated as it may cause problem if a non inversible matrix is passed
+            //Render Object desactivated as it may cause problem if a non inversible matrix is passed
+            /*
             if (item.isRoNode() && item.m_component->canEdit(item.m_roIndex))
             {
                 item.m_component->setTransform(item.m_roIndex, tf);
@@ -270,8 +274,6 @@ namespace Gui{
         m_scale_y->setEnabled(visible);
         m_scale_z->setEnabled(visible);
         tabWidget->setEnabled(!visible);
-        //m_applyButton->setEnabled(!visible);
-        //m_undoButton->setEnabled(!visible);
     }
 
     bool EditionWidget::transformation(){
