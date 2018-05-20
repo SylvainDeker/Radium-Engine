@@ -69,6 +69,10 @@ void Entity::swapTransformBuffers() {
     }
 }
 
+EntityManager* Entity::getEntityMgr(){
+    return RadiumEngine::getInstance()->getEntityManager();
+}
+
 void Entity::rayCastQuery( const Core::Math::Ray& r ) const {
     // put ray in local frame.
     Core::Math::Ray transformedRay = Ra::Core::Math::transformRay( r, m_transform.inverse() );

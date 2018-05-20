@@ -60,8 +60,8 @@ class LightEditor : public QWidget, private Ui::LightCreator {
         double m_outer_angle;
         Ra::Engine::PointLight::Attenuation m_falloff_p;
         Ra::Engine::SpotLight::Attenuation m_falloff_s;
-        Core::Vector3 m_direction;
-        Core::Vector3 m_position;
+        Core::Math::Vector3 m_direction;
+        Core::Math::Vector3 m_position;
         Ra::Engine::Light *m_light;
         Ra::Engine::Light::LightType m_type;
 };

@@ -241,7 +241,7 @@ void Gui::Viewer::intializeRenderer( Engine::Renderer* renderer ) {
 
 void Gui::Viewer::addLight(Ra::Engine::Light*l){
   // sldkrcheckpoint
-  LOG( logINFO ) << "Add new light \n";
+  LOG( Core::Utils::logINFO ) << "Add new light \n";
   for ( auto& rend : m_renderers )
     rend->addLight( l );
 }
