@@ -29,6 +29,7 @@ namespace Ra {
 namespace Gui {
 LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     setupUi( this );
+    setFixedSize(size());
     m_result_color->setAutoFillBackground(true);
 
     m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
@@ -119,9 +120,10 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
     connect(m_falloff_spinbox_quadratic, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_falloff_quadratic_spin_to_slide );
     connect(this,&LightEditor::sig_falloff_quadratic_spin_to_slide,m_falloff_slider_quadratic,&QSlider::setValue);
 
-// OK Button
+// OK/Cancel Buttons
     connect(m_button_create,&QPushButton::clicked,this,&LightEditor::edit_light);
     connect(this,&LightEditor::sig_close_window,this,&QWidget::close);
+    connect(m_button_cancel,&QPushButton::clicked,this,&QWidget::close);
 }
 
 LightEditor::~LightEditor(){
@@ -182,7 +184,10 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_type = m_light->getType();
     m_kind_of_light->setDisabled(true);
     m_kind_of_light->setCurrentIndex(m_type);
-    
+
+    m_entity_group_box->setVisible(false);
+    m_entity_lab->setVisible(false);
+
     m_angle_lab->setVisible(false);
     m_angle_lab->setVisible(false);
     m_inner_angle_spinbox->setVisible(false);
@@ -220,9 +225,9 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_dir_y_lab->setVisible(true);
     m_dir_z_lab->setVisible(true);
     m_direction_lab->setVisible(true);
-   
-    // Color 
-    Core::Color col =  m_light->getColor();
+
+    // Color
+    Core::Math::Color col =  m_light->getColor();
     double dr, dg, db;
     dr = col.x();
     dg = col.y();
@@ -230,7 +235,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
     m_color = QColor((int) (dr*255), (int) (dg*255), (int) (db*255));
     m_pal.setColor(QPalette::Background,m_color);
     m_result_color->setPalette(m_pal);
-    
+
     switch (m_type) {
         case 0 : // Directional
             m_direction = ((Ra::Engine::DirectionalLight *) m_light)->getDirection();
@@ -247,7 +252,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_pos_y_spin->setVisible(false);
             m_pos_z_spin->setVisible(false);
             m_coord_lab->setVisible(false);
-            
+
             m_falloff_tip->setVisible(false);
             m_falloff_lab->setVisible(false);
             m_falloff_spinbox_linear->setVisible(false);
@@ -285,7 +290,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_dir_x_spin->setValue((double) m_direction.x());
             m_dir_y_spin->setValue((double) m_direction.y());
             m_dir_z_spin->setValue((double) m_direction.z());
-            
+
             m_position = ((Ra::Engine::SpotLight *) m_light)->getPosition();
             m_pos_x_spin->setValue(m_position.x());
             m_pos_y_spin->setValue(m_position.y());
@@ -295,7 +300,7 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_falloff_spinbox_linear->setValue((double) m_falloff_s.linear);
             m_falloff_spinbox_constant->setValue((double) m_falloff_s.constant);
             m_falloff_spinbox_quadratic->setValue((double) m_falloff_s.quadratic);
-            
+
             m_inner_angle = ((Ra::Engine::SpotLight *) m_light)->getInnerAngle();
             m_outer_angle = ((Ra::Engine::SpotLight *) m_light)->getOuterAngle();
             m_inner_angle_spinbox->setValue(Core::Math::toDegrees(m_inner_angle));
@@ -318,10 +323,10 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
 }
 
 void LightEditor::edit_light(){
-    
+
     switch (m_type){
         case 0 : // Directional Light
-            m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            m_direction = Core::Math::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
             if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
                 QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
                 return;
@@ -332,12 +337,12 @@ void LightEditor::edit_light(){
         case 1 : // Point Light
             ((Ra::Engine::PointLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
 
-            m_position = Core::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            m_position = Core::Math::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
             ((Ra::Engine::PointLight *) m_light)->setPosition(m_position);
 
             break;
         case 2 : // Spot Light
-            m_direction = Core::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
+            m_direction = Core::Math::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
             if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
                 QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
                 return;
@@ -346,7 +351,7 @@ void LightEditor::edit_light(){
 
             ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
 
-            m_position = Core::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            m_position = Core::Math::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
             ((Ra::Engine::SpotLight *) m_light)->setPosition(m_position);
 
             ((Ra::Engine::SpotLight *) m_light)->setInnerAngleInDegrees(m_inner_angle_spinbox->value());
@@ -359,7 +364,7 @@ void LightEditor::edit_light(){
     // Color
     int ir, ig, ib;
     m_color.getRgb(&ir, &ig, &ib);
-    m_light->setColor(Core::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
+    m_light->setColor(Core::Math::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
 
     emit sig_close_window();
 }

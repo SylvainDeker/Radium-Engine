@@ -12,10 +12,13 @@
 #include <Core/Math/LinearAlgebra.hpp>
 #include <Core/Math/Ray.hpp>
 
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
+
 namespace Ra {
 namespace Engine {
 class Component;
 class System;
+class EntityManager;
 } // namespace Engine
 } // namespace Ra
 
@@ -67,6 +70,9 @@ class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
     // Queries
     virtual void rayCastQuery( const Core::Math::Ray& r ) const;
 
+    /// Shortcut to access the entity manager
+    static EntityManager* getEntityMgr();
+
   private:
     Core::Math::Transform m_transform;
     Core::Math::Transform m_doubleBufferedTransform;
@@ -77,6 +83,7 @@ class RA_ENGINE_API Entity : public Core::Container::IndexedObject {
 
     bool m_transformChanged;
     mutable std::mutex m_transformMutex;
+
 };
 
 } // namespace Engine

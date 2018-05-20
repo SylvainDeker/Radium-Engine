@@ -47,7 +47,7 @@ When creating an entity, if you set its transform, *do not forget* to call
 ```
 Ra::Engine::Entity* entity = theEntityManager->getOrCreate( "MyEntity" );
 Ra::Core::Transform transform( Ra::Core::Transform::Identity() );
-transform.translation = Ra::Core::Vector3( 42, 13, 37 );
+transform.translation = Ra::Core::Math::Vector3( 42, 13, 37 );
 entity->setTransform( transform );
 entity->swapTransformBuffers(); 
 ```

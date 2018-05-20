@@ -7,6 +7,7 @@
 
 #include <Gui/LightCreator.hpp>
 #include <Gui/MainWindow.hpp>
+#include <Engine/RadiumEngine.hpp>
 #include <Engine/Renderer/Light/PointLight.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Engine/Entity/Entity.hpp>
@@ -49,6 +50,7 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     setupUi( this );
     setWindowTitle("Light Creator");
     setWindowIcon(parent->windowIcon()); // same icon as the main App
+    setFixedSize(size());
     m_color = new QColor(255,255,255); // Color is white by default
     m_name = new QString("");
     m_inner_angle_val = new double(0);
@@ -57,15 +59,21 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     m_falloff_val_linear = new double(0);
     m_falloff_val_quadratic = new double(0);
     m_lightType = new int(0);
-    m_position = new Core::Vector3(0,0,0);
-    m_direction = new Core::Vector3(0,0,1);
+    m_position = new Core::Math::Vector3(0,0,0);
+    m_direction = new Core::Math::Vector3(0,0,1);
+    m_entity_selected = nullptr;
 
 
+    connect(this, &LightCreator::sig_show,this,&LightCreator::show);
     // Color Selecter
     connect(m_button_color, &QPushButton::clicked,this,&LightCreator::open_dialogColor);
 
     // LightType Selecter (to hide unrelevent options )
     connect(m_kind_of_light,static_cast<void (QComboBox::*) (int)>(&QComboBox::currentIndexChanged),this,&LightCreator::slot_select_light);
+
+    // Entity Selecter
+    connect(m_entity_group_box,static_cast<void (QComboBox::*) (const QString&)>(&QComboBox::activated),this,&LightCreator::slot_selected_entity);
+
     // All connect about hiding Angles options :
     // 7 elements ( 3 QLabel, 2 QDoubleSpinBox and 2 QSlider) with hide and show actions so 14 connect()
     connect(this,&LightCreator::sig_show_angle,m_angle_lab,&QLabel::show);
@@ -189,15 +197,12 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
 
     // OK Button
     connect(m_button_create,&QPushButton::clicked,this,&LightCreator::open_dialogueConfirm);// Confirm and save
-    connect(this,&LightCreator::sig_close_windows,this,&QWidget::close);
-
+    // Cancel Button
+    connect(m_button_cancel,&QPushButton::clicked,this,&LightCreator::close_dialogueConfirm);
+    connect(this,&LightCreator::sig_close_windows,this,&LightCreator::close_dialogueConfirm);
 
 
     connect(this,&LightCreator::sig_addLight,m_viewer,&Gui::Viewer::addLight);
-
-
-
-
 
     // Init with Directionnal selected by default
     m_angle_lab->setVisible(false);
@@ -337,13 +342,14 @@ void LightCreator::open_dialogColor(){
    \brief Slot that check data and save
 */
 void LightCreator::open_dialogueConfirm(){
-  Ra::Engine::EntityManager *em = Ra::Engine::RadiumEngine::getInstance()->getEntityManager();
-  Ra::Engine::Entity *entity = em->entityExists( "Lights" )  ? em->getEntity( "Lights" ) : em->createEntity( "Lights" );
-
   *m_name = m_lineEdit->text();
-  if( m_name->isEmpty())
+  if( m_name->isEmpty()){
     QMessageBox::critical(this, "Watch out !","A new light must have a name !");
-  else if( entity->getComponent( m_name->toStdString()) != nullptr) {
+  }
+  else if (m_entity_selected == nullptr){
+      QMessageBox::critical(this, "Watch out !","A light must be linked to an entity !");
+  }
+  else if( m_entity_selected->getComponent( m_name->toStdString()) != nullptr) {
     QMessageBox::critical(this, "Watch out !","The name is already used !");
   }
   else if ( *m_lightType != _POINT_LIGHT && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
@@ -351,10 +357,38 @@ void LightCreator::open_dialogueConfirm(){
     QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
   }
   else {
-
-    save_light(entity); // private function
+    save_light(); // private function
     emit sig_close_windows() ;
+
+    // Reset data set
+    m_lineEdit->setText(QString::fromStdString(""));
+
+    m_kind_of_light->setCurrentIndex(0);
+
+    m_color->setRgb(255,255,255);
+    QPalette p;
+    p.setColor(QPalette::Background,*m_color);
+    m_result_color->setPalette(p);
+
+    m_dir_x_spin->setValue(0.0);
+    m_dir_y_spin->setValue(0.0);
+    m_dir_z_spin->setValue(1.0);
+
+    m_pos_x_spin->setValue(0.0);
+    m_pos_y_spin->setValue(0.0);
+    m_pos_z_spin->setValue(1.0);
+
+    emit sig_falloff_constant_slide_to_spin(0.0);
+    emit sig_falloff_linear_slide_to_spin(0.0);
+    emit sig_falloff_quadratic_slide_to_spin(0.0);
+    emit sig_inner_angle_slide_to_spin(0.0);
+    emit sig_outer_angle_slide_to_spin(0.0);
+
   }
+}
+
+void LightCreator::close_dialogueConfirm(){
+    QWidget::close();
 }
 
 /*!
@@ -362,9 +396,9 @@ void LightCreator::open_dialogueConfirm(){
    \param Ra::Engine::Entity *entity because Lights are components and need to be attached to an entity
    \return void
 */
-void LightCreator::save_light(Ra::Engine::Entity *entity){
-
-  // The function m_color->getRgb(...) give value in RGB range 0 to 255 (int) and Core::Color() need in range 0.0 to 1.0 (double)
+void LightCreator::save_light(){
+  CORE_ASSERT(m_entity_selected != nullptr, "No entity selected");
+  // The function m_color->getRgb(...) give value in RGB range 0 to 255 (int) and Core::Math::Color() need in range 0.0 to 1.0 (double)
   double dr,dg,db;
   int ir,ig,ib;
   m_color->getRgb(&ir,&ig,&ib);
@@ -376,7 +410,7 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
   db/=255;
 
   // Every kind of Light need Color specification
-  Core::Color c = Core::Color( dr, dg, db, 0 );
+  Core::Math::Color c = Core::Math::Color( dr, dg, db, 0 );
 
   switch (*m_lightType) {
     /*
@@ -387,8 +421,8 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
     */
     case _DIR_LIGHT:
     Ra::Engine::DirectionalLight * dir_light;
-      dir_light = new Ra::Engine::DirectionalLight( entity,m_name->toStdString() );
-      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      dir_light = new Ra::Engine::DirectionalLight( m_entity_selected,m_name->toStdString() );
+      m_direction = new Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       dir_light->setDirection(*m_direction);
       dir_light->setColor(c);
       emit sig_addLight(dir_light);
@@ -396,8 +430,8 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
       break;
     case _POINT_LIGHT:
       Ra::Engine::PointLight * point_light;
-      point_light = new Ra::Engine::PointLight( entity, m_name->toStdString() );
-      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      point_light = new Ra::Engine::PointLight( m_entity_selected, m_name->toStdString() );
+      m_position = new Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
       point_light->setPosition(*m_position);
       point_light->setColor(c);
       point_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
@@ -406,10 +440,10 @@ void LightCreator::save_light(Ra::Engine::Entity *entity){
     case _SPOT_LIGHT:
 
       Ra::Engine::SpotLight * spot_light;
-      spot_light = new Ra::Engine::SpotLight( entity, m_name->toStdString() );
-      m_position = new Core::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      spot_light = new Ra::Engine::SpotLight( m_entity_selected, m_name->toStdString() );
+      m_position = new Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
       spot_light->setPosition(*m_position);
-      m_direction = new Core::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      m_direction = new Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
       spot_light->setDirection(*m_direction);
       spot_light->setColor(c);
       spot_light->setInnerAngleInDegrees( *m_inner_angle_val );
@@ -569,8 +603,20 @@ void LightCreator::slot_falloff_quadratic_spin_to_slide(double val){
   emit sig_falloff_quadratic_spin_to_slide(tmp);
 }
 
+void LightCreator::slot_start(){
+    // Reset and init the combobox used for entities
+    m_entity_group_box->clear();
+    m_entity_group_box->addItem("");
+    m_entities_vector = Ra::Engine::Entity::getEntityMgr()->getEntities();
+    for (int i = 0; i < m_entities_vector.size(); i++){
+        m_entity_group_box->addItem(QString::fromStdString(m_entities_vector[i]->getName()));
+    }
+    emit sig_show();
+}
 
-
+void LightCreator::slot_selected_entity(const QString &m_name_entity){
+    m_entity_selected = Ra::Engine::Entity::getEntityMgr()->getEntity(m_name_entity.toStdString());
+}
 
 } // namespace Gui
 } // namespace Ra

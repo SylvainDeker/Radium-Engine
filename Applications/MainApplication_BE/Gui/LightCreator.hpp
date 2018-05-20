@@ -10,12 +10,20 @@
 #include <QWidget>
 #include <QColor>
 #include <memory>
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
 
 #include <Core/Container/Index.hpp>
 #include <Engine/ItemModel/ItemEntry.hpp>
 #include <Core/Math/Math.hpp>
 #include <Engine/Renderer/Light/Light.hpp>
 #include <GuiBase/Viewer/Viewer.hpp>
+#include <Engine/Managers/EntityManager/EntityManager.hpp>
+#include <Engine/Entity/Entity.hpp>
+#include <Core/Container/IndexMap.hpp>
+#include <Engine/Managers/SystemDisplay/SystemDisplay.hpp>
 
 #include <ui_LightCreator.h>
 #define _DIR_LIGHT 0
@@ -32,6 +40,7 @@ class RenderObjectManager;
 class RenderObject;
 class Material;
 class BlinnPhongMaterial;
+class Entity;
 } // namespace Engine
 } // namespace Ra
 
@@ -63,6 +72,11 @@ class LightCreator : public QWidget, private Ui::LightCreator {
        \brief Slot that check data and save
     */
     void open_dialogueConfirm();
+
+    /*!
+      \brief Cancel the dialog and reset data
+    */
+    void close_dialogueConfirm();
 
     /*!
        \brief Slot that hides elements that are not required
@@ -123,7 +137,17 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     */
     void slot_falloff_quadratic_spin_to_slide(double val);
 
+    /*!
+      \biref Slot to get selected entity
+    */
+    void slot_selected_entity(const QString &m_name_entity);
 
+public slots:
+
+    /*!
+      \biref Slot that update entities when Entity's Combobox is clicked
+    */
+    void slot_start();
 
 
 
@@ -150,10 +174,9 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     void sig_show_pos();
     void sig_show_falloff();
 
-
     void sig_addLight( Ra::Engine::Light * light );
 
-
+    void sig_show();
     void sig_close_windows();
 
 
@@ -169,16 +192,20 @@ class LightCreator : public QWidget, private Ui::LightCreator {
     double *m_falloff_val_linear;
     double *m_falloff_val_quadratic;
     QString *m_name;
-    Core::Vector3 *m_position;
-    Core::Vector3 *m_direction;
+    Core::Math::Vector3 *m_position;
+    Core::Math::Vector3 *m_direction;
     Gui::Viewer * m_viewer;
+    Ra::Engine::Entity *m_entity_selected;
+    Core::Container::IndexMap<std::unique_ptr<Ra::Engine::Entity>> m_entities;
+    std::map<std::string, Core::Container::Index> m_entitiesName;
+    std::vector<Ra::Engine::Entity *> m_entities_vector;
 
     /*!
        \brief Private function that save config light parameters
        \param Ra::Engine::Entity *entity because Lights are components and need to be attached to an entity
        \return void
     */
-    void save_light(Ra::Engine::Entity *entity);
+    void save_light();
 };
 } // namespace Gui
 } // namespace Ra

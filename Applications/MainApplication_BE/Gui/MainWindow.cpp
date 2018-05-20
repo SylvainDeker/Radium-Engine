@@ -85,7 +85,7 @@ void MainWindow::createConnections() {
     connect( actionReload_Shaders, &QAction::triggered, m_viewer, &Viewer::reloadShaders );
     connect( actionOpen_Material_Editor, &QAction::triggered, this,
              &MainWindow::openMaterialEditor );
-    connect( actionLightCreator, &QAction::triggered,m_lightCreator,&QWidget::show);
+    connect( actionLightCreator, &QAction::triggered,m_lightCreator,&LightCreator::slot_start);
     // Toolbox setup
     connect( actionToggle_Local_Global, &QAction::toggled, m_viewer->getGizmoManager(),
              &GizmoManager::setLocal );
@@ -562,7 +562,7 @@ void MainWindow::deleteCurrentItem() {
         e.m_component->removeRenderObject( e.m_roIndex );
     } else if ( e.isComponentNode() )
     {
-        e.m_entity->removeComponent( e.m_component->getName() );
+        e.m_entity->removeComponent( e.m_entity->getName() );
     } else if ( e.isEntityNode() )
     { Engine::RadiumEngine::getInstance()->getEntityManager()->removeEntity( e.m_entity->idx ); }
 }
