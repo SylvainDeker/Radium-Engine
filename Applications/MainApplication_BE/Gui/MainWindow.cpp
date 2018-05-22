@@ -56,6 +56,8 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
 
+    dockWidget_2->setHidden(true);
+
     createConnections();
 
     mainApp->framesCountForStatsChanged( (uint)m_avgFramesCount->value() );
@@ -153,6 +155,11 @@ void MainWindow::createConnections() {
              &Ra::GuiBase::BaseApplication::setRecordGraph );
     connect( m_printTimings, &QCheckBox::stateChanged, mainApp,
              &Ra::GuiBase::BaseApplication::setRecordTimings );
+
+    // Log display
+    connect(m_backUpDisplayCombo,
+            static_cast<void ( QComboBox::* )( const QString& )>( &QComboBox::currentIndexChanged ),
+            this, &MainWindow::logComboChanged);
 
     // Connect engine signals to the appropriate callbacks
     std::function<void( const Engine::ItemEntry& )> add =
@@ -558,6 +565,14 @@ void MainWindow::onGLInitialized() {
     // set default renderer once OpenGL is configured
     std::shared_ptr<Engine::Renderer> e( new Engine::ForwardRenderer() );
     addRenderer( "Forward Renderer", e );
+}
+
+void MainWindow::logComboChanged() {
+    switch (m_backUpDisplayCombo->currentIndex()) {
+    case 0 : dockWidget_2->setVisible(false);break;
+    case 1 : dockWidget_2->setVisible(true);break;
+    default : break;
+    }
 }
 
 } // namespace Gui

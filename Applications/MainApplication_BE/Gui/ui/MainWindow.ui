@@ -573,15 +573,10 @@
                  </spacer>
                 </item>
                 <item row="6" column="1">
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="m_backUpDisplayCombo">
                   <item>
                    <property name="text">
                     <string>None</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Pop-up</string>
                    </property>
                   </item>
                   <item>
@@ -623,6 +618,25 @@
    <addaction name="separator"/>
    <addaction name="actionRecord_Frames"/>
    <addaction name="separator"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPlainTextEdit" name="plainTextEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionOpenMesh">
    <property name="text">

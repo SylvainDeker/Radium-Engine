@@ -119,6 +119,9 @@ class MainWindow : public Ra::GuiBase::MainWindowInterface, private Ui::MainWind
     void updateDisplayedTexture();
 
   private slots:
+    /// Slot for the back up display combobox
+    void logComboChanged();
+
     /// Slot for the "load file" menu.
     void loadFile();
 
