@@ -330,9 +330,14 @@ LightCreator::~LightCreator(){
    \brief Select a color
 */
 void LightCreator::open_dialogColor(){
-  *m_color = QColorDialog::getColor ();
   QPalette p;
-
+  QColor tmp_color = QColorDialog::getColor();
+  if(tmp_color == QColor(0,0,0)){
+      QMessageBox::warning(this,"Watch out !","Selected color: invalid\nNo effect on renderer.");
+  }
+  if(tmp_color.isValid()){
+      *m_color = tmp_color;
+  }
   p.setColor(QPalette::Background,*m_color);
   m_result_color->setPalette(p);
 
@@ -369,6 +374,8 @@ void LightCreator::open_dialogueConfirm(){
     QPalette p;
     p.setColor(QPalette::Background,*m_color);
     m_result_color->setPalette(p);
+
+    m_entity_selected = nullptr;
 
     m_dir_x_spin->setValue(0.0);
     m_dir_y_spin->setValue(0.0);
