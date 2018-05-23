@@ -184,16 +184,16 @@ public slots:
 
   private:
 
-    int * m_lightType;
-    QColor *m_color;
-    double *m_inner_angle_val;
-    double *m_outer_angle_val;
-    double *m_falloff_val_constant;
-    double *m_falloff_val_linear;
-    double *m_falloff_val_quadratic;
-    QString *m_name;
-    Core::Math::Vector3 *m_position;
-    Core::Math::Vector3 *m_direction;
+    int m_lightType;
+    QColor m_color;
+    double m_inner_angle_val;
+    double m_outer_angle_val;
+    double m_falloff_val_constant;
+    double m_falloff_val_linear;
+    double m_falloff_val_quadratic;
+    QString m_name;
+    Core::Math::Vector3 m_position;
+    Core::Math::Vector3 m_direction;
     Gui::Viewer * m_viewer;
     Ra::Engine::Entity *m_entity_selected;
     Core::Container::IndexMap<std::unique_ptr<Ra::Engine::Entity>> m_entities;

@@ -51,16 +51,16 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     setWindowTitle("Light Creator");
     setWindowIcon(parent->windowIcon()); // same icon as the main App
     setFixedSize(size());
-    m_color = new QColor(255,255,255); // Color is white by default
-    m_name = new QString("");
-    m_inner_angle_val = new double(0);
-    m_outer_angle_val = new double(0);
-    m_falloff_val_constant = new double(1); // 1 = value by default
-    m_falloff_val_linear = new double(0);
-    m_falloff_val_quadratic = new double(0);
-    m_lightType = new int(0);
-    m_position = new Core::Math::Vector3(0,0,0);
-    m_direction = new Core::Math::Vector3(0,0,1);
+    m_color = QColor(255,255,255); // Color is white by default
+    m_name = QString("");
+    m_inner_angle_val = 0;
+    m_outer_angle_val = 0;
+    m_falloff_val_constant = 1; // 1 = value by default
+    m_falloff_val_linear = 0;
+    m_falloff_val_quadratic = 0;
+    m_lightType = 0;
+    m_position = Core::Math::Vector3(0,0,0);
+    m_direction = Core::Math::Vector3(0,0,1);
     m_entity_selected = nullptr;
 
 
@@ -234,15 +234,15 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     m_falloff_lab_quadratic->setVisible(false);
     m_falloff_tip->setVisible(false);
 
-    m_lineEdit->setPlaceholderText(*m_name);
+    m_lineEdit->setPlaceholderText(m_name);
 
-    m_dir_x_spin->setValue((double) m_direction->x());
-    m_dir_y_spin->setValue((double) m_direction->y());
-    m_dir_z_spin->setValue((double) m_direction->z());
+    m_dir_x_spin->setValue((double) m_direction.x());
+    m_dir_y_spin->setValue((double) m_direction.y());
+    m_dir_z_spin->setValue((double) m_direction.z());
 
-    m_pos_x_spin->setValue((double) m_position->x());
-    m_pos_y_spin->setValue((double) m_position->y());
-    m_pos_z_spin->setValue((double) m_position->z());
+    m_pos_x_spin->setValue((double) m_position.x());
+    m_pos_y_spin->setValue((double) m_position.y());
+    m_pos_z_spin->setValue((double) m_position.z());
 
     m_falloff_spinbox_constant->setValue(1);
     m_falloff_slider_constant->setValue(1);
@@ -306,7 +306,7 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
     // Qwidget that show the selected color
     // QColor is manipulate with QPalette
     QPalette p;
-    p.setColor(QPalette::Background,*m_color);
+    p.setColor(QPalette::Background,m_color);
     m_result_color->setAutoFillBackground(true);
     m_result_color->setPalette(p);
 }
@@ -316,14 +316,6 @@ LightCreator::LightCreator( QWidget* parent, Ra::Gui::Viewer *viewer ) : QWidget
    \brief Destructor
 */
 LightCreator::~LightCreator(){
-  delete m_color;
-  delete m_inner_angle_val;
-  delete m_outer_angle_val;
-  delete m_falloff_val_constant;
-  delete m_falloff_val_linear;
-  delete m_falloff_val_quadratic;
-  delete m_name;
-  delete m_lightType;
 }
 
 /*!
@@ -336,9 +328,9 @@ void LightCreator::open_dialogColor(){
       QMessageBox::warning(this,"Watch out !","Selected color: invalid\nNo effect on renderer.");
   }
   if(tmp_color.isValid()){
-      *m_color = tmp_color;
+      m_color = tmp_color;
   }
-  p.setColor(QPalette::Background,*m_color);
+  p.setColor(QPalette::Background,m_color);
   m_result_color->setPalette(p);
 
 }
@@ -347,17 +339,17 @@ void LightCreator::open_dialogColor(){
    \brief Slot that check data and save
 */
 void LightCreator::open_dialogueConfirm(){
-  *m_name = m_lineEdit->text();
-  if( m_name->isEmpty()){
+  m_name = m_lineEdit->text();
+  if( m_name.isEmpty()){
     QMessageBox::critical(this, "Watch out !","A new light must have a name !");
   }
   else if (m_entity_selected == nullptr){
       QMessageBox::critical(this, "Watch out !","A light must be linked to an entity !");
   }
-  else if( m_entity_selected->getComponent( m_name->toStdString()) != nullptr) {
+  else if( m_entity_selected->getComponent( m_name.toStdString()) != nullptr) {
     QMessageBox::critical(this, "Watch out !","The name is already used !");
   }
-  else if ( *m_lightType != _POINT_LIGHT && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
+  else if ( m_lightType != _POINT_LIGHT && m_dir_x_spin->value()== 0 && m_dir_y_spin->value()==0 && m_dir_z_spin->value() == 0 ){
     // Only _DIR_LIGHT and _SPOT_LIGHT required sush check
     QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
   }
@@ -370,9 +362,9 @@ void LightCreator::open_dialogueConfirm(){
 
     m_kind_of_light->setCurrentIndex(0);
 
-    m_color->setRgb(255,255,255);
+    m_color.setRgb(255,255,255);
     QPalette p;
-    p.setColor(QPalette::Background,*m_color);
+    p.setColor(QPalette::Background,m_color);
     m_result_color->setPalette(p);
 
     m_entity_selected = nullptr;
@@ -405,10 +397,10 @@ void LightCreator::close_dialogueConfirm(){
 */
 void LightCreator::save_light(){
   CORE_ASSERT(m_entity_selected != nullptr, "No entity selected");
-  // The function m_color->getRgb(...) give value in RGB range 0 to 255 (int) and Core::Math::Color() need in range 0.0 to 1.0 (double)
+  // The function m_color.getRgb(...) give value in RGB range 0 to 255 (int) and Core::Math::Color() need in range 0.0 to 1.0 (double)
   double dr,dg,db;
   int ir,ig,ib;
-  m_color->getRgb(&ir,&ig,&ib);
+  m_color.getRgb(&ir,&ig,&ib);
   dr=(double)ir;
   dg=(double)ig;
   db=(double)ib;
@@ -419,7 +411,7 @@ void LightCreator::save_light(){
   // Every kind of Light need Color specification
   Core::Math::Color c = Core::Math::Color( dr, dg, db, 0 );
 
-  switch (*m_lightType) {
+  switch (m_lightType) {
     /*
     in the file ./LightCreator.hpp :
     - #define _DIR_LIGHT 0
@@ -428,34 +420,34 @@ void LightCreator::save_light(){
     */
     case _DIR_LIGHT:
     Ra::Engine::DirectionalLight * dir_light;
-      dir_light = new Ra::Engine::DirectionalLight( m_entity_selected,m_name->toStdString() );
-      m_direction = new Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
-      dir_light->setDirection(*m_direction);
+      dir_light = new Ra::Engine::DirectionalLight( m_entity_selected,m_name.toStdString() );
+      m_direction = Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      dir_light->setDirection(m_direction);
       dir_light->setColor(c);
       emit sig_addLight(dir_light);
 
       break;
     case _POINT_LIGHT:
       Ra::Engine::PointLight * point_light;
-      point_light = new Ra::Engine::PointLight( m_entity_selected, m_name->toStdString() );
-      m_position = new Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
-      point_light->setPosition(*m_position);
+      point_light = new Ra::Engine::PointLight( m_entity_selected, m_name.toStdString() );
+      m_position = Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      point_light->setPosition(m_position);
       point_light->setColor(c);
-      point_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
+      point_light->setAttenuation((Scalar)m_falloff_val_constant,(Scalar)m_falloff_val_linear,(Scalar)m_falloff_val_quadratic);
       emit sig_addLight(point_light);
         break;
     case _SPOT_LIGHT:
 
       Ra::Engine::SpotLight * spot_light;
-      spot_light = new Ra::Engine::SpotLight( m_entity_selected, m_name->toStdString() );
-      m_position = new Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
-      spot_light->setPosition(*m_position);
-      m_direction = new Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
-      spot_light->setDirection(*m_direction);
+      spot_light = new Ra::Engine::SpotLight( m_entity_selected, m_name.toStdString() );
+      m_position = Core::Math::Vector3(m_pos_x_spin->value(),m_pos_y_spin->value(),m_pos_z_spin->value());
+      spot_light->setPosition(m_position);
+      m_direction = Core::Math::Vector3(m_dir_x_spin->value(),m_dir_y_spin->value(),m_dir_z_spin->value());
+      spot_light->setDirection(m_direction);
       spot_light->setColor(c);
-      spot_light->setInnerAngleInDegrees( *m_inner_angle_val );
-      spot_light->setOuterAngleInDegrees( *m_outer_angle_val );
-      spot_light->setAttenuation((Scalar)*m_falloff_val_constant,(Scalar)*m_falloff_val_linear,(Scalar)*m_falloff_val_quadratic);
+      spot_light->setInnerAngleInDegrees( m_inner_angle_val );
+      spot_light->setOuterAngleInDegrees( m_outer_angle_val );
+      spot_light->setAttenuation((Scalar)m_falloff_val_constant,(Scalar)m_falloff_val_linear,(Scalar)m_falloff_val_quadratic);
 
       emit sig_addLight(spot_light);
         break;
@@ -474,7 +466,7 @@ void LightCreator::save_light(){
    \return void
 */
 void LightCreator::slot_select_light(int type){
-    *m_lightType = type;
+    m_lightType = type;
     /*
     usable in the switch  :
 
@@ -527,14 +519,14 @@ void LightCreator::slot_select_light(int type){
 */
 void LightCreator::slot_inner_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_inner_angle_val = tmp;
+  m_inner_angle_val = tmp;
   emit sig_inner_angle_slide_to_spin(tmp);
 }
 /*!
    \brief Slot that sync QSlider from QDoubleSpinBox of Inner Angles options
 */
 void LightCreator::slot_inner_angle_spin_to_slide(double val){
-  *m_inner_angle_val = val;
+  m_inner_angle_val = val;
   int tmp = (int) val;
   emit sig_inner_angle_spin_to_slide(tmp);
 }
@@ -543,14 +535,14 @@ void LightCreator::slot_inner_angle_spin_to_slide(double val){
 */
 void LightCreator::slot_outer_angle_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_outer_angle_val = tmp;
+  m_outer_angle_val = tmp;
   emit sig_outer_angle_slide_to_spin(tmp);
 }
 /*!
    \brief Slot that sync QSlider from QDoubleSpinBox of Outer Angles options
 */
 void LightCreator::slot_outer_angle_spin_to_slide(double val){
-  *m_outer_angle_val = val;
+  m_outer_angle_val = val;
   int tmp = (int) val;
   emit sig_outer_angle_spin_to_slide(tmp);
 }
@@ -561,15 +553,15 @@ void LightCreator::slot_outer_angle_spin_to_slide(double val){
 */
 void LightCreator::slot_falloff_constant_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_constant = tmp;
-  emit sig_falloff_constant_slide_to_spin(*m_falloff_val_constant);
+  m_falloff_val_constant = tmp;
+  emit sig_falloff_constant_slide_to_spin(m_falloff_val_constant);
 }
 
 /*!
    \brief Slot that sync QSlider from QDoubleSpinBox  of falloff options
 */
 void LightCreator::slot_falloff_constant_spin_to_slide(double val){
-  *m_falloff_val_constant = val;
+  m_falloff_val_constant = val;
   int tmp = (int) val;
   emit sig_falloff_constant_spin_to_slide(tmp);
 }
@@ -579,15 +571,15 @@ void LightCreator::slot_falloff_constant_spin_to_slide(double val){
 */
 void LightCreator::slot_falloff_linear_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_linear = tmp;
-  emit sig_falloff_linear_slide_to_spin(*m_falloff_val_linear);
+  m_falloff_val_linear = tmp;
+  emit sig_falloff_linear_slide_to_spin(m_falloff_val_linear);
 }
 
 /*!
    \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
 */
 void LightCreator::slot_falloff_linear_spin_to_slide(double val){
-  *m_falloff_val_linear = val;
+  m_falloff_val_linear = val;
   int tmp = (int) val;
   emit sig_falloff_linear_spin_to_slide(tmp);
 }
@@ -597,15 +589,15 @@ void LightCreator::slot_falloff_linear_spin_to_slide(double val){
 */
 void LightCreator::slot_falloff_quadratic_slide_to_spin(int val){
   double tmp =  (double) val;
-  *m_falloff_val_quadratic = tmp;
-  emit sig_falloff_quadratic_slide_to_spin(*m_falloff_val_quadratic);
+  m_falloff_val_quadratic = tmp;
+  emit sig_falloff_quadratic_slide_to_spin(m_falloff_val_quadratic);
 }
 
 /*!
    \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
 */
 void LightCreator::slot_falloff_quadratic_spin_to_slide(double val){
-  *m_falloff_val_quadratic = val;
+  m_falloff_val_quadratic = val;
   int tmp = (int) val;
   emit sig_falloff_quadratic_spin_to_slide(tmp);
 }
