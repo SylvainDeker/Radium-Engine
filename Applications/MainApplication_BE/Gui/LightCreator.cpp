@@ -614,6 +614,7 @@ void LightCreator::slot_start(){
 }
 
 void LightCreator::slot_selected_entity(const QString &m_name_entity){
+    if(m_name_entity != QString(""))
     m_entity_selected = Ra::Engine::Entity::getEntityMgr()->getEntity(m_name_entity.toStdString());
 }
 
