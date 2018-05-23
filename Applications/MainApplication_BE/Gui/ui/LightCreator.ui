@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1056</width>
+    <width>1084</width>
     <height>634</height>
    </rect>
   </property>
@@ -33,7 +33,7 @@
        <rect>
         <x>0</x>
         <y>30</y>
-        <width>1041</width>
+        <width>1053</width>
         <height>521</height>
        </rect>
       </property>
@@ -86,61 +86,65 @@
          </item>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="m_color_lab">
          <property name="text">
           <string>Color : </string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QGroupBox" name="m_color_layout">
-         <property name="minimumSize">
-          <size>
-           <width>911</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>69</height>
-          </size>
-         </property>
-         <layout class="QHBoxLayout" name="m_layout_color">
-          <item>
-           <widget class="QPushButton" name="m_button_color">
-            <property name="text">
-             <string>Choose</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="m_result_color">
-            <property name="minimumSize">
-             <size>
-              <width>40</width>
-              <height>0</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="m_layout_color">
+         <item>
+          <widget class="QPushButton" name="m_button_color">
+           <property name="maximumSize">
+            <size>
+             <width>300</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Choose</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="m_result_color">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>35</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="m_angle_lab">
          <property name="text">
           <string>Angle : </string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <layout class="QVBoxLayout" name="verticalLayout">
+       <item row="4" column="1">
+        <layout class="QVBoxLayout" name="m_layout_angle">
          <item>
           <layout class="QHBoxLayout" name="m_layout_inner_angle">
            <item>
             <widget class="QLabel" name="m_inner_angle_lab">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Inner</string>
              </property>
@@ -162,6 +166,12 @@
           <layout class="QHBoxLayout" name="m_layout_outer_angle">
            <item>
             <widget class="QLabel" name="m_outer_angle_lab">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Outter</string>
              </property>
@@ -181,19 +191,25 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="m_falloff_lab">
          <property name="text">
           <string>Falloff :</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="6" column="1">
         <layout class="QVBoxLayout" name="m_falloff_layout_main">
          <item>
           <layout class="QHBoxLayout" name="m_falloff_layout_constant">
            <item>
             <widget class="QLabel" name="m_falloff_lab_constant">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Constant</string>
              </property>
@@ -215,6 +231,12 @@
           <layout class="QHBoxLayout" name="m_falloff_layout_linear">
            <item>
             <widget class="QLabel" name="m_falloff_lab_linear">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Linear</string>
              </property>
@@ -236,6 +258,12 @@
           <layout class="QHBoxLayout" name="m_falloff_layout_quadratic">
            <item>
             <widget class="QLabel" name="m_falloff_lab_quadratic">
+             <property name="minimumSize">
+              <size>
+               <width>70</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="text">
               <string>Quadratic</string>
              </property>
@@ -262,14 +290,14 @@
          </item>
         </layout>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="m_coord_lab">
          <property name="text">
           <string>Position : </string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <layout class="QHBoxLayout" name="m_pos_layout">
          <item>
           <widget class="QLabel" name="m_pos_x_lab">
@@ -303,14 +331,14 @@
          </item>
         </layout>
        </item>
-       <item row="9" column="0">
+       <item row="10" column="0">
         <widget class="QLabel" name="m_direction_lab">
          <property name="text">
           <string>Direction : </string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="10" column="1">
         <layout class="QHBoxLayout" name="m_dir_layout">
          <item>
           <widget class="QLabel" name="m_dir_x_lab">
@@ -351,18 +379,22 @@
          </item>
         </layout>
        </item>
-       <item row="11" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_2"/>
-       </item>
-       <item row="10" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="m_entity_lab">
          <property name="text">
           <string>Entity : </string>
          </property>
         </widget>
        </item>
-       <item row="10" column="1">
-        <widget class="QComboBox" name="m_entity_group_box"/>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="m_entity_group_box">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
