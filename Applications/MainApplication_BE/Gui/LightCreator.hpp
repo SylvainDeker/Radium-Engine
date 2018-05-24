@@ -209,7 +209,9 @@ public slots:
      */
     void save_light();
 
-
+    /*!
+       \brief init function only called once in the Constructor
+    */
     void init();
 };
 } // namespace Gui

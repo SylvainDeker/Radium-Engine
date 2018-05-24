@@ -25,18 +25,20 @@
 #include <QDoubleSpinBox>
 #include <QSlider>
 #include <QMessageBox>
-#include <QCheckBox>
+
 
 #include <math.h>
-#define NB_DECIMAL 10
-#define MAX_ANGLE 360
-#define MIN_CONSTANT -1000
-#define MAX_CONSTANT 1000
-#define MIN_LINEAR -100
+#define NB_DECIMAL 3
+#define MAX_ANGLE 180
+#define MIN_CONSTANT 0
+#define MAX_CONSTANT 100
+#define MIN_LINEAR 0
 #define MAX_LINEAR 100
-#define MIN_QUADRA -100
+#define MIN_QUADRA 0
 #define MAX_QUADRA 100
 #define MAX_COORD 10000000
+#define STEP_SLIDER 10
+
 
 
 namespace Ra {
@@ -351,36 +353,36 @@ void LightCreator::init(){
   m_pos_z_spin->setValue((double) m_position.z());
 
   m_falloff_spinbox_constant->setValue(1);
-  m_falloff_slider_constant->setValue(1);
+  m_falloff_slider_constant->setValue(1*STEP_SLIDER);
 
   // Details information
 
   m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
   m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
-  m_inner_angle_slider->setMaximum(MAX_ANGLE);
+  m_inner_angle_slider->setMaximum(MAX_ANGLE*STEP_SLIDER);
 
   m_outer_angle_spinbox-> setDecimals (NB_DECIMAL);
   m_outer_angle_spinbox->setMaximum(MAX_ANGLE);
-  m_outer_angle_slider->setMaximum(MAX_ANGLE);
+  m_outer_angle_slider->setMaximum(MAX_ANGLE*STEP_SLIDER);
 
   m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
   m_falloff_spinbox_constant->setMinimum(MIN_CONSTANT);
-  m_falloff_slider_constant->setMaximum(MAX_CONSTANT);
-  m_falloff_slider_constant->setMinimum(MIN_CONSTANT);
+  m_falloff_slider_constant->setMaximum(MAX_CONSTANT*STEP_SLIDER);
+  m_falloff_slider_constant->setMinimum(MIN_CONSTANT*STEP_SLIDER);
 
   m_falloff_spinbox_linear->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_linear->setMaximum(MAX_LINEAR);
   m_falloff_spinbox_linear->setMinimum(MIN_LINEAR);
-  m_falloff_slider_linear->setMaximum(MAX_LINEAR);
-  m_falloff_slider_linear->setMinimum(MIN_LINEAR);
+  m_falloff_slider_linear->setMaximum(MAX_LINEAR*STEP_SLIDER);
+  m_falloff_slider_linear->setMinimum(MIN_LINEAR*STEP_SLIDER);
 
 
   m_falloff_spinbox_quadratic->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_quadratic->setMaximum(MAX_QUADRA);
   m_falloff_spinbox_quadratic->setMinimum(MIN_QUADRA);
-  m_falloff_slider_quadratic->setMaximum(MAX_QUADRA);
-  m_falloff_slider_quadratic->setMinimum(MIN_QUADRA);
+  m_falloff_slider_quadratic->setMaximum(MAX_QUADRA*STEP_SLIDER);
+  m_falloff_slider_quadratic->setMinimum(MIN_QUADRA*STEP_SLIDER);
 
 
   m_pos_x_spin->setDecimals (NB_DECIMAL);
@@ -639,32 +641,32 @@ void LightCreator::slot_select_light(const int type){
      \brief Slot that sync QDoubleSpinBox from QSlider of Inner Angles options
 */
 void LightCreator::slot_inner_angle_slide_to_spin(const int val){
-    double tmp =    (double) val;
-    m_inner_angle_val = tmp;
-    emit sig_inner_angle_slide_to_spin(tmp);
+    double tmp =    ((double) val ) ;
+    m_inner_angle_val = tmp/STEP_SLIDER;
+    emit sig_inner_angle_slide_to_spin(m_inner_angle_val);
 }
 /*!
      \brief Slot that sync QSlider from QDoubleSpinBox of Inner Angles options
 */
 void LightCreator::slot_inner_angle_spin_to_slide(const double val){
     m_inner_angle_val = val;
-    int tmp = (int) val;
+    int tmp = (int) (val*STEP_SLIDER);
     emit sig_inner_angle_spin_to_slide(tmp);
 }
 /*!
      \brief Slot that sync QDoubleSpinBox from QSlider of Outer Angles options
 */
 void LightCreator::slot_outer_angle_slide_to_spin(const int val){
-    double tmp =    (double) val;
-    m_outer_angle_val = tmp;
-    emit sig_outer_angle_slide_to_spin(tmp);
+    double tmp =    ((double) val );
+    m_outer_angle_val = tmp/STEP_SLIDER;
+    emit sig_outer_angle_slide_to_spin(m_outer_angle_val);
 }
 /*!
      \brief Slot that sync QSlider from QDoubleSpinBox of Outer Angles options
 */
 void LightCreator::slot_outer_angle_spin_to_slide(const double val){
     m_outer_angle_val = val;
-    int tmp = (int) val;
+    int tmp = (int) (val*STEP_SLIDER);
     emit sig_outer_angle_spin_to_slide(tmp);
 }
 
@@ -674,7 +676,7 @@ void LightCreator::slot_outer_angle_spin_to_slide(const double val){
 */
 void LightCreator::slot_falloff_constant_slide_to_spin(const int val){
     double tmp =    (double) val;
-    m_falloff_val_constant = tmp;
+    m_falloff_val_constant = tmp/STEP_SLIDER;
     emit sig_falloff_constant_slide_to_spin(m_falloff_val_constant);
 }
 
@@ -683,7 +685,7 @@ void LightCreator::slot_falloff_constant_slide_to_spin(const int val){
 */
 void LightCreator::slot_falloff_constant_spin_to_slide(const double val){
     m_falloff_val_constant = val;
-    int tmp = (int) val;
+    int tmp = (int)(val * STEP_SLIDER);
     emit sig_falloff_constant_spin_to_slide(tmp);
 }
 
@@ -692,7 +694,7 @@ void LightCreator::slot_falloff_constant_spin_to_slide(const double val){
 */
 void LightCreator::slot_falloff_linear_slide_to_spin(const int val){
     double tmp =    (double) val;
-    m_falloff_val_linear = tmp;
+    m_falloff_val_linear = tmp/STEP_SLIDER;
     emit sig_falloff_linear_slide_to_spin(m_falloff_val_linear);
 }
 
@@ -701,7 +703,7 @@ void LightCreator::slot_falloff_linear_slide_to_spin(const int val){
 */
 void LightCreator::slot_falloff_linear_spin_to_slide(const double val){
     m_falloff_val_linear = val;
-    int tmp = (int) val;
+    int tmp = (int)(val * STEP_SLIDER);
     emit sig_falloff_linear_spin_to_slide(tmp);
 }
 
@@ -709,8 +711,8 @@ void LightCreator::slot_falloff_linear_spin_to_slide(const double val){
      \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
 */
 void LightCreator::slot_falloff_quadratic_slide_to_spin(const int val){
-    double tmp =    (double) val;
-    m_falloff_val_quadratic = tmp;
+    double tmp = (double) val;
+    m_falloff_val_quadratic = tmp/STEP_SLIDER;
     emit sig_falloff_quadratic_slide_to_spin(m_falloff_val_quadratic);
 }
 
@@ -719,7 +721,7 @@ void LightCreator::slot_falloff_quadratic_slide_to_spin(const int val){
 */
 void LightCreator::slot_falloff_quadratic_spin_to_slide(const double val){
     m_falloff_val_quadratic = val;
-    int tmp = (int) val;
+    int tmp = (int) (val*STEP_SLIDER);
     emit sig_falloff_quadratic_spin_to_slide(tmp);
 }
 
