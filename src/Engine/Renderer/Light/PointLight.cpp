@@ -25,5 +25,14 @@ std::string PointLight::getShaderInclude() const {
     return "Point";
 }
 
+void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){
+    (void) roIdx;
+}
+
+Core::Math::Transform PointLight::getTransform( Core::Container::Index roIdx ) {
+    (void) roIdx;
+    return Core::Math::Transform::Identity();
+};
+
 } // namespace Engine
 } // namespace Ra
