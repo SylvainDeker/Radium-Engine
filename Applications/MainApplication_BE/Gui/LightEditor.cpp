@@ -13,50 +13,42 @@
 #include <QMessageBox>
 
 #include <math.h>
-#define NB_DECIMAL 10
+#define NB_DECIMAL 3
 #define MAX_ANGLE 360
-#define MIN_CONSTANT -1000
-#define MAX_CONSTANT 1000
-#define MIN_LINEAR -100
+#define MAX_CONSTANT 100
 #define MAX_LINEAR 100
-#define MIN_QUADRA -100
 #define MAX_QUADRA 100
 #define MAX_COORD 10000000
-
+#define STEP_SLIDER 100
+#define INV_STEP 0.01
 
 
 namespace Ra {
 namespace Gui {
-LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
+LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr ) {
     setupUi( this );
     setFixedSize(size());
     m_result_color->setAutoFillBackground(true);
 
     m_inner_angle_spinbox-> setDecimals (NB_DECIMAL);
     m_inner_angle_spinbox->setMaximum(MAX_ANGLE);
-    m_inner_angle_slider->setMaximum(MAX_ANGLE);
+    m_inner_angle_slider->setMaximum(MAX_ANGLE*STEP_SLIDER);
 
     m_outer_angle_spinbox-> setDecimals (NB_DECIMAL);
     m_outer_angle_spinbox->setMaximum(MAX_ANGLE);
-    m_outer_angle_slider->setMaximum(MAX_ANGLE);
+    m_outer_angle_slider->setMaximum(MAX_ANGLE*STEP_SLIDER);
 
     m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
-    m_falloff_spinbox_constant->setMinimum(MIN_CONSTANT);
-    m_falloff_slider_constant->setMaximum(MAX_CONSTANT);
-    m_falloff_slider_constant->setMinimum(MIN_CONSTANT);
+    m_falloff_slider_constant->setMaximum(MAX_CONSTANT*STEP_SLIDER);
 
     m_falloff_spinbox_linear->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_linear->setMaximum(MAX_LINEAR);
-    m_falloff_spinbox_linear->setMinimum(MIN_LINEAR);
-    m_falloff_slider_linear->setMaximum(MAX_LINEAR);
-    m_falloff_slider_linear->setMinimum(MIN_LINEAR);
+    m_falloff_slider_linear->setMaximum(MAX_LINEAR*STEP_SLIDER);
 
     m_falloff_spinbox_quadratic->setDecimals (NB_DECIMAL);
     m_falloff_spinbox_quadratic->setMaximum(MAX_QUADRA);
-    m_falloff_spinbox_quadratic->setMinimum(MIN_QUADRA);
-    m_falloff_slider_quadratic->setMaximum(MAX_QUADRA);
-    m_falloff_slider_quadratic->setMinimum(MIN_QUADRA);
+    m_falloff_slider_quadratic->setMaximum(MAX_QUADRA*STEP_SLIDER);
 
 
     m_pos_x_spin->setDecimals (NB_DECIMAL);
@@ -86,98 +78,130 @@ LightEditor::LightEditor( QWidget* parent ) : QWidget( nullptr )    {
 
 
     setWindowTitle("Light Editor");
-    connect(m_button_color, &QPushButton::clicked,this,&LightEditor::open_dialogColor);
+    connect(m_button_color, &QPushButton::clicked,
+            this, &LightEditor::open_dialogColor);
 
     // Angle
-    connect(m_inner_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_inner_angle_slide_to_spin );
-    connect(this,&LightEditor::sig_inner_angle_slide_to_spin,m_inner_angle_spinbox,&QDoubleSpinBox::setValue);
+    connect(m_inner_angle_slider, &QSlider::valueChanged,
+            this, &LightEditor::slot_inner_angle_slide_to_spin);
+    connect(this, &LightEditor::sig_inner_angle_slide_to_spin,
+            m_inner_angle_spinbox, &QDoubleSpinBox::setValue);
 
-    connect(m_inner_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_inner_angle_spin_to_slide );
-    connect(this,&LightEditor::sig_inner_angle_spin_to_slide,m_inner_angle_slider,&QSlider::setValue);
+    connect(m_inner_angle_spinbox,
+            static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged),
+            this , &LightEditor::slot_inner_angle_spin_to_slide);
+    connect(this, &LightEditor::sig_inner_angle_spin_to_slide,
+            m_inner_angle_slider, &QSlider::setValue);
 
-    connect(m_outer_angle_slider, &QSlider::valueChanged, this , &LightEditor::slot_outer_angle_slide_to_spin );
-    connect(this,&LightEditor::sig_outer_angle_slide_to_spin,m_outer_angle_spinbox,&QDoubleSpinBox::setValue);
+    connect(m_outer_angle_slider, &QSlider::valueChanged,
+            this, &LightEditor::slot_outer_angle_slide_to_spin);
+    connect(this, &LightEditor::sig_outer_angle_slide_to_spin,
+            m_outer_angle_spinbox, &QDoubleSpinBox::setValue);
 
-    connect(m_outer_angle_spinbox, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_outer_angle_spin_to_slide );
-    connect(this,&LightEditor::sig_outer_angle_spin_to_slide,m_outer_angle_slider,&QSlider::setValue);
+    connect(m_outer_angle_spinbox,
+        static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged),
+        this, &LightEditor::slot_outer_angle_spin_to_slide);
+    connect(this, &LightEditor::sig_outer_angle_spin_to_slide,
+        m_outer_angle_slider, &QSlider::setValue);
 
     // Falloff
-    connect(m_falloff_slider_constant, &QSlider::valueChanged, this , &LightEditor::slot_falloff_constant_slide_to_spin );
-    connect(this,&LightEditor::sig_falloff_constant_slide_to_spin,m_falloff_spinbox_constant,&QDoubleSpinBox::setValue);
+    connect(m_falloff_slider_constant, &QSlider::valueChanged,
+            this, &LightEditor::slot_falloff_constant_slide_to_spin);
+    connect(this, &LightEditor::sig_falloff_constant_slide_to_spin,
+            m_falloff_spinbox_constant, &QDoubleSpinBox::setValue);
 
-    connect(m_falloff_spinbox_constant, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_falloff_constant_spin_to_slide );
-    connect(this,&LightEditor::sig_falloff_constant_spin_to_slide,m_falloff_slider_constant,&QSlider::setValue);
+    connect(m_falloff_spinbox_constant,
+            static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged),
+            this, &LightEditor::slot_falloff_constant_spin_to_slide);
+    connect(this, &LightEditor::sig_falloff_constant_spin_to_slide,
+            m_falloff_slider_constant, &QSlider::setValue);
 
-    connect(m_falloff_slider_linear, &QSlider::valueChanged, this , &LightEditor::slot_falloff_linear_slide_to_spin );
-    connect(this,&LightEditor::sig_falloff_linear_slide_to_spin,m_falloff_spinbox_linear,&QDoubleSpinBox::setValue);
+    connect(m_falloff_slider_linear, &QSlider::valueChanged,
+            this, &LightEditor::slot_falloff_linear_slide_to_spin);
+    connect(this, &LightEditor::sig_falloff_linear_slide_to_spin,
+            m_falloff_spinbox_linear, &QDoubleSpinBox::setValue);
 
-    connect(m_falloff_spinbox_linear, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_falloff_linear_spin_to_slide );
-    connect(this,&LightEditor::sig_falloff_linear_spin_to_slide,m_falloff_slider_linear,&QSlider::setValue);
+    connect(m_falloff_spinbox_linear,
+            static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged),
+            this, &LightEditor::slot_falloff_linear_spin_to_slide);
+    connect(this, &LightEditor::sig_falloff_linear_spin_to_slide,
+            m_falloff_slider_linear, &QSlider::setValue);
 
-    connect(m_falloff_slider_quadratic, &QSlider::valueChanged, this , &LightEditor::slot_falloff_quadratic_slide_to_spin );
-    connect(this,&LightEditor::sig_falloff_quadratic_slide_to_spin,m_falloff_spinbox_quadratic,&QDoubleSpinBox::setValue);
+    connect(m_falloff_slider_quadratic, &QSlider::valueChanged,
+            this, &LightEditor::slot_falloff_quadratic_slide_to_spin);
+    connect(this, &LightEditor::sig_falloff_quadratic_slide_to_spin,
+            m_falloff_spinbox_quadratic, &QDoubleSpinBox::setValue);
 
-    connect(m_falloff_spinbox_quadratic, static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged), this , &LightEditor::slot_falloff_quadratic_spin_to_slide );
-    connect(this,&LightEditor::sig_falloff_quadratic_spin_to_slide,m_falloff_slider_quadratic,&QSlider::setValue);
+    connect(m_falloff_spinbox_quadratic,
+            static_cast<void (QDoubleSpinBox::*) (double)>(&QDoubleSpinBox::valueChanged),
+            this, &LightEditor::slot_falloff_quadratic_spin_to_slide);
+    connect(this, &LightEditor::sig_falloff_quadratic_spin_to_slide,
+            m_falloff_slider_quadratic, &QSlider::setValue);
 
 // OK/Cancel Buttons
-    connect(m_button_create,&QPushButton::clicked,this,&LightEditor::edit_light);
-    connect(this,&LightEditor::sig_close_window,this,&QWidget::close);
-    connect(m_button_cancel,&QPushButton::clicked,this,&QWidget::close);
+    connect(m_button_create, &QPushButton::clicked,
+            this, &LightEditor::edit_light);
+    connect(this, &LightEditor::sig_close_window, this, &QWidget::close);
+    connect(m_button_cancel, &QPushButton::clicked, this, &QWidget::close);
 }
 
-LightEditor::~LightEditor(){
+LightEditor::~LightEditor() {
 }
 
-void LightEditor::open_dialogColor(){
-  m_color = QColorDialog::getColor ();
-  m_pal.setColor(QPalette::Background,m_color);
-  m_result_color->setPalette(m_pal);
+void LightEditor::open_dialogColor() {
+    QColor tmp_col;
+    tmp_col = QColorDialog::getColor ();
+    if (tmp_col == QColor(0,0,0))
+        QMessageBox::warning(this,"Watch out !",
+            "Selected color : No effect on renderer.");
+    if (tmp_col.isValid())
+        m_color = tmp_col;
+    m_pal.setColor(QPalette::Background, m_color);
+    m_result_color->setPalette(m_pal);
 }
 
 /// Angle
-void LightEditor::slot_inner_angle_slide_to_spin(int val){
-  emit sig_inner_angle_slide_to_spin((double) val);
+void LightEditor::slot_inner_angle_slide_to_spin(int val) {
+    emit sig_inner_angle_slide_to_spin(((double) val)*INV_STEP);
 }
 
-void LightEditor::slot_inner_angle_spin_to_slide(double val){
-  emit sig_inner_angle_spin_to_slide((int) val);
+void LightEditor::slot_inner_angle_spin_to_slide(double val) {
+    emit sig_inner_angle_spin_to_slide((int) (val*STEP_SLIDER));
 }
 
-void LightEditor::slot_outer_angle_slide_to_spin(int val){
-  emit sig_outer_angle_slide_to_spin((double) val);
+void LightEditor::slot_outer_angle_slide_to_spin(int val) {
+    emit sig_outer_angle_slide_to_spin(((double) val)*INV_STEP);
 }
 
-void LightEditor::slot_outer_angle_spin_to_slide(double val){
-  emit sig_outer_angle_spin_to_slide((int) val);
+void LightEditor::slot_outer_angle_spin_to_slide(double val) {
+    emit sig_outer_angle_spin_to_slide((int) (val*STEP_SLIDER));
 }
-
 
 /// Falloff
-void LightEditor::slot_falloff_constant_slide_to_spin(int val){
-  emit sig_falloff_constant_slide_to_spin((double) val);
+void LightEditor::slot_falloff_constant_slide_to_spin(int val) {
+    emit sig_falloff_constant_slide_to_spin(((double) val)*INV_STEP);
 }
 
-void LightEditor::slot_falloff_constant_spin_to_slide(double val){
-  emit sig_falloff_constant_spin_to_slide((int) val);
+void LightEditor::slot_falloff_constant_spin_to_slide(double val) {
+    emit sig_falloff_constant_spin_to_slide((int) (val*STEP_SLIDER));
 }
 
-void LightEditor::slot_falloff_linear_slide_to_spin(int val){
-  emit sig_falloff_linear_slide_to_spin((double) val);
+void LightEditor::slot_falloff_linear_slide_to_spin(int val) {
+    emit sig_falloff_linear_slide_to_spin(((double) val)*INV_STEP);
 }
 
-void LightEditor::slot_falloff_linear_spin_to_slide(double val){
-  emit sig_falloff_linear_spin_to_slide((int) val);
+void LightEditor::slot_falloff_linear_spin_to_slide(double val) {
+    emit sig_falloff_linear_spin_to_slide((int) (val*STEP_SLIDER));
 }
-void LightEditor::slot_falloff_quadratic_slide_to_spin(int val){
-  emit sig_falloff_quadratic_slide_to_spin((double) val);
-}
-
-void LightEditor::slot_falloff_quadratic_spin_to_slide(double val){
-  emit sig_falloff_quadratic_spin_to_slide((int) val);
+void LightEditor::slot_falloff_quadratic_slide_to_spin(int val) {
+    emit sig_falloff_quadratic_slide_to_spin(((double) val)*INV_STEP);
 }
 
-void LightEditor::init(Ra::Engine::ItemEntry item){
+void LightEditor::slot_falloff_quadratic_spin_to_slide(double val) {
+    emit sig_falloff_quadratic_spin_to_slide((int) (val*STEP_SLIDER));
+}
+
+void LightEditor::init(Ra::Engine::ItemEntry item) {
     m_light = (Ra::Engine::Light *) item.m_component;
     m_lineEdit->setText(QString::fromStdString(m_light->getName()));
     m_lineEdit->setDisabled(true);
@@ -242,8 +266,6 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
             m_dir_x_spin->setValue((double) m_direction.x());
             m_dir_y_spin->setValue((double) m_direction.y());
             m_dir_z_spin->setValue((double) m_direction.z());
-            /* m_intensity = m_light->getColor().w();
-            m_intensity_spinbox->setValue(m_intensity);*/
 
             m_pos_x_lab->setVisible(false);
             m_pos_y_lab->setVisible(false);
@@ -318,40 +340,59 @@ void LightEditor::init(Ra::Engine::ItemEntry item){
         default :
             return;
     }
-
     show();
 }
 
-void LightEditor::edit_light(){
+void LightEditor::edit_light() {
 
-    switch (m_type){
+    switch (m_type) {
         case 0 : // Directional Light
-            m_direction = Core::Math::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
-            if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
-                QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
+            m_direction = Core::Math::Vector3(m_dir_x_spin->value(),
+                                              m_dir_y_spin->value(),
+                                              m_dir_z_spin->value());
+            if ((m_direction.x() == 0) &&
+                (m_direction.y() == 0) &&
+                (m_direction.z() == 0)) {
+                
+                QMessageBox::critical(this, "Watch out !",
+                    "Direction Vector cannot be null on each conponent (x,y,z) ! ");
                 return;
             }
             ((Ra::Engine::DirectionalLight *) m_light)->setDirection(m_direction);
 
             break;
         case 1 : // Point Light
-            ((Ra::Engine::PointLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
+            ((Ra::Engine::PointLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(),
+                                                                 m_falloff_spinbox_linear->value(),
+                                                                 m_falloff_spinbox_quadratic->value());
 
-            m_position = Core::Math::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            m_position = Core::Math::Vector3(m_pos_x_spin->value(),
+                                             m_pos_y_spin->value(),
+                                             m_pos_z_spin->value());
             ((Ra::Engine::PointLight *) m_light)->setPosition(m_position);
 
             break;
         case 2 : // Spot Light
-            m_direction = Core::Math::Vector3(m_dir_x_spin->value(), m_dir_y_spin->value(), m_dir_z_spin->value());
-            if ((m_direction.x() == 0) && (m_direction.y() == 0) && (m_direction.z() == 0)){
-                QMessageBox::critical(this, "Watch out !","Direction Vector cannot be null on each conponent (x,y,z) ! ");
+            m_direction = Core::Math::Vector3(m_dir_x_spin->value(),
+                                              m_dir_y_spin->value(),
+                                              m_dir_z_spin->value());
+            if ((m_direction.x() == 0) &&
+                (m_direction.y() == 0) &&
+                (m_direction.z() == 0)) {
+
+                QMessageBox::critical(this, "Watch out !",
+                    "Direction Vector cannot be null on each conponent (x,y,z) ! ");
                 return;
             }
             ((Ra::Engine::SpotLight *) m_light)->setDirection(m_direction);
 
-            ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(), m_falloff_spinbox_linear->value(), m_falloff_spinbox_quadratic->value());
+            ((Ra::Engine::SpotLight *) m_light)->setAttenuation(m_falloff_spinbox_constant->value(),
+                                                                m_falloff_spinbox_linear->value(),
+                                                                m_falloff_spinbox_quadratic->value());
 
-            m_position = Core::Math::Vector3(m_pos_x_spin->value(), m_pos_y_spin->value(), m_pos_z_spin->value());
+            m_position = Core::Math::Vector3(m_pos_x_spin->value(),
+                                             m_pos_y_spin->value(),
+                                             m_pos_z_spin->value());
             ((Ra::Engine::SpotLight *) m_light)->setPosition(m_position);
 
             ((Ra::Engine::SpotLight *) m_light)->setInnerAngleInDegrees(m_inner_angle_spinbox->value());
@@ -364,7 +405,9 @@ void LightEditor::edit_light(){
     // Color
     int ir, ig, ib;
     m_color.getRgb(&ir, &ig, &ib);
-    m_light->setColor(Core::Math::Color(((double) ir)/255, ((double) ig)/255, ((double) ib)/255, 0));
+    m_light->setColor(Core::Math::Color(((double) ir)/255,
+                                        ((double) ig)/255,
+                                        ((double) ib)/255,0));
 
     emit sig_close_window();
 }

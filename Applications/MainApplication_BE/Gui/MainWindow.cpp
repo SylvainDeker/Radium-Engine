@@ -64,7 +64,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_edition = new EditionWidget(nullptr, m_selectionManager);
     this->layoutForEdition->addWidget(m_edition);
     m_lightCreator = new Gui::LightCreator(this,m_viewer);
-    m_lightEditor = new Gui::LightEditor();
+    m_lightEditor = new Gui::LightEditor(this);
 
     createConnections();
 
