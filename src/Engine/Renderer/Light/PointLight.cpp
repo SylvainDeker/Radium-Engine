@@ -27,6 +27,7 @@ std::string PointLight::getShaderInclude() const {
 
 void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){
     (void) roIdx;
+    m_position += 0.5 * Core::Math::Vector3(transform(0,3),transform(1,3),transform(2,3));
 }
 
 Core::Math::Transform PointLight::getTransform( Core::Container::Index roIdx ) {

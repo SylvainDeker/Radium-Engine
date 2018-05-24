@@ -46,6 +46,8 @@ class RA_ENGINE_API SpotLight final : public Light {
     inline const Attenuation& getAttenuation() const;
 
     std::string getShaderInclude() const;
+    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform );
+    Ra::Core::Math::Transform getTransform( Core::Container::Index roIdx );
 
   private:
     Core::Math::Vector3 m_position;
