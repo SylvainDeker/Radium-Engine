@@ -1,7 +1,7 @@
 #include <Engine/Renderer/Light/PointLight.hpp>
 
 #include <Engine/Renderer/RenderTechnique/RenderParameters.hpp>
-
+#include <QMessageBox>
 namespace Ra {
 namespace Engine {
 
@@ -27,6 +27,14 @@ std::string PointLight::getShaderInclude() const {
 
 void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){
     (void) roIdx;
+    if(transform(0,0)!=1 || transform(0,1)!=0 || transform(0,2)!=0 ||
+        transform(1,0)!=0 || transform(1,1)!=1 || transform(1,2)!=0 ||
+        transform(2,0)!=0 || transform(2,1)!=0 || transform(2,2)!=1)
+    {
+      QMessageBox::warning(nullptr,"Warning",
+        "Rotation does not affect a Point Light !");
+    }
+
     m_position += 0.5 * Core::Math::Vector3(transform(0,3),transform(1,3),transform(2,3));
 }
 
