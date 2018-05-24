@@ -1,7 +1,7 @@
 #include <Engine/Renderer/Light/DirLight.hpp>
 
 #include <Engine/Renderer/RenderTechnique/RenderParameters.hpp>
-
+#include <QMessageBox>
 namespace Ra {
 namespace Engine {
 DirectionalLight::DirectionalLight( Entity* entity, const std::string& name ) :
@@ -41,6 +41,12 @@ void DirectionalLight::setTransform( Core::Container::Index roIdx, const Core::M
 
       );
     }
+
+    if(transform(0,3)!=0 || transform(1,3)!= 0 || transform(2,3)!= 0){
+      QMessageBox::warning(nullptr,"Warning",
+        "Translation does not affect a Directional Light !");
+    }
+
 }
 
 Ra::Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) {
