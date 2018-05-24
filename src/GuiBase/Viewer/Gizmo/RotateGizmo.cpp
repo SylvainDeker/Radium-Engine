@@ -25,7 +25,7 @@ RotateGizmo::RotateGizmo( Engine::Component* c, const Core::Math::Transform& wor
     m_initialPix( Core::Math::Vector2::Zero() ),
     m_selectedAxis( -1 ) {
     constexpr Scalar torusOutRadius = 0.15f;
-    constexpr Scalar torusAspectRatio = 0.04f;
+    constexpr Scalar torusAspectRatio = 0.06f;
     // For x,y,z
     for ( uint i = 0; i < 3; ++i )
     {
