@@ -135,6 +135,10 @@ inline void Output2FILE::Output( const std::string& msg ) {
     fflush( pStream );
 }
 
+class Output2WIDGET{
+
+};
+
 class FILELog : public Log<Output2FILE> {};
 // using FILELog = Log<Output2FILE>;
 
@@ -155,7 +159,7 @@ class FILELog : public Log<Output2FILE> {};
     else                                                                    \
         Ra::Core::Utils::FILELog().Get( level )
 
-#define LOG( level ) FILE_LOG( level )
+#define LOG( level )  FILE_LOG( level )
 
 #include <ctime>
 
