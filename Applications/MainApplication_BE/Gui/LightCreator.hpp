@@ -4,8 +4,8 @@
    \author Sylvain
    \date 16/05/2018
 */
-#ifndef RADIUMENGINE_LIGHTCREATOR_HPP
-#define RADIUMENGINE_LIGHTCREATOR_HPP
+#ifndef RADIUMENGINE_LIGHTCREATOR_HPP_
+#define RADIUMENGINE_LIGHTCREATOR_HPP_
 
 #include <QWidget>
 #include <QColor>
@@ -51,12 +51,14 @@ class LightCreator : public QWidget, private Ui::LightCreator {
   Q_OBJECT
 
   public:
+    RA_CORE_ALIGNED_NEW
+
     /*!
        \brief Constructor (call only once)
        \param QWidget* parent only used for the icon
        \param Ra::Gui::Viewer *viewer to add new Lights to the Viewer
     */
-    LightCreator( QWidget* parent ,Ra::Gui::Viewer *viewer );
+    LightCreator( QWidget* parent ,const Ra::Gui::Viewer *viewer );
     /*!
        \brief Destructor
     */
@@ -83,59 +85,59 @@ class LightCreator : public QWidget, private Ui::LightCreator {
        \param _DIR_LIGHT or _POINT_LIGHT or _SPOT_LIGHT define in LightCreator.hpp
        \return void
     */
-    void slot_select_light(int type);
+    void slot_select_light(const int type);
 
-    /////////////////////////////////////////   ANGLES  SLOTS///////////////////
+    /////////////////////////////////////////   ANGLES  SLOTS//////////////////
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of Inner Angles options
     */
-    void slot_inner_angle_slide_to_spin(int val);
+    void slot_inner_angle_slide_to_spin(const int val);
 
     /*!
        \brief Slot that sync QSlider from QDoubleSpinBox of Inner Angles options
     */
-    void slot_inner_angle_spin_to_slide(double val);
+    void slot_inner_angle_spin_to_slide(const double val);
 
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of Outer Angles options
     */
-    void slot_outer_angle_slide_to_spin(int val);
+    void slot_outer_angle_slide_to_spin(const int val);
 
     /*!
        \brief Slot that sync QSlider from QDoubleSpinBox of Outer Angles options
     */
-    void slot_outer_angle_spin_to_slide(double val);
+    void slot_outer_angle_spin_to_slide(const double val);
 
-    /////////////////////////////////////////   FALLOFF  SLOTS///////////////////
+    /////////////////////////////////////////   FALLOFF  SLOTS/////////////////
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
     */
-    void slot_falloff_constant_slide_to_spin(int val);
+    void slot_falloff_constant_slide_to_spin(const int val);
 
     /*!
        \brief Slot that sync QSlider from QDoubleSpinBox  of falloff options
     */
-    void slot_falloff_constant_spin_to_slide(double val);
+    void slot_falloff_constant_spin_to_slide(const double val);
 
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
     */
-    void slot_falloff_linear_slide_to_spin(int val);
+    void slot_falloff_linear_slide_to_spin(const int val);
 
     /*!
        \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
     */
-    void slot_falloff_linear_spin_to_slide(double val);
+    void slot_falloff_linear_spin_to_slide(const double val);
 
     /*!
        \brief Slot that sync QDoubleSpinBox from QSlider of falloff options
     */
-    void slot_falloff_quadratic_slide_to_spin(int val);
+    void slot_falloff_quadratic_slide_to_spin(const int val);
 
     /*!
        \brief Slot that sync QSlider from QDoubleSpinBox of falloff options
     */
-    void slot_falloff_quadratic_spin_to_slide(double val);
+    void slot_falloff_quadratic_spin_to_slide(const double val);
 
     /*!
       \biref Slot to get selected entity
@@ -184,28 +186,31 @@ public slots:
 
   private:
 
-    int m_lightType;
+    Core::Math::Vector3 m_position;
+    Core::Math::Vector3 m_direction;
     QColor m_color;
-    double m_inner_angle_val;
+    QString m_name;
     double m_outer_angle_val;
     double m_falloff_val_constant;
     double m_falloff_val_linear;
     double m_falloff_val_quadratic;
-    QString m_name;
-    Core::Math::Vector3 m_position;
-    Core::Math::Vector3 m_direction;
-    Gui::Viewer * m_viewer;
-    Ra::Engine::Entity *m_entity_selected;
+    double m_inner_angle_val;
+    const Gui::Viewer * m_viewer;
     Core::Container::IndexMap<std::unique_ptr<Ra::Engine::Entity>> m_entities;
-    std::map<std::string, Core::Container::Index> m_entitiesName;
     std::vector<Ra::Engine::Entity *> m_entities_vector;
+    std::map<std::string, Core::Container::Index> m_entitiesName;
+    Ra::Engine::Entity *m_entity_selected;
+    int m_lightType;
 
     /*!
-       \brief Private function that save config light parameters
-       \param Ra::Engine::Entity *entity because Lights are components and need to be attached to an entity
-       \return void
-    */
+     \brief Private function that save config light parameters
+     \param Ra::Engine::Entity *entity because Lights are components and need to be attached to an entity
+     \return void
+     */
     void save_light();
+
+
+    void init();
 };
 } // namespace Gui
 } // namespace Ra
