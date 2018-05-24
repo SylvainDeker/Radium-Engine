@@ -62,7 +62,7 @@ MainWindow::MainWindow( QWidget* parent ) : MainWindowInterface( parent ) {
     m_selectionManager = new GuiBase::SelectionManager( m_itemModel, this );
     m_entitiesTreeView->setSelectionModel( m_selectionManager );
     m_lightCreator = new Gui::LightCreator(this,m_viewer);
-    m_lightEditor = new Gui::LightEditor();
+    m_lightEditor = new Gui::LightEditor(this);
 
     createConnections();
 
