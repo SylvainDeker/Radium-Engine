@@ -30,11 +30,8 @@
 #include <math.h>
 #define NB_DECIMAL 3
 #define MAX_ANGLE 180
-#define MIN_CONSTANT 0
 #define MAX_CONSTANT 100
-#define MIN_LINEAR 0
 #define MAX_LINEAR 100
-#define MIN_QUADRA 0
 #define MAX_QUADRA 100
 #define MAX_COORD 10000000
 #define STEP_SLIDER 10
@@ -367,22 +364,16 @@ void LightCreator::init(){
 
   m_falloff_spinbox_constant->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_constant->setMaximum(MAX_CONSTANT);
-  m_falloff_spinbox_constant->setMinimum(MIN_CONSTANT);
   m_falloff_slider_constant->setMaximum(MAX_CONSTANT*STEP_SLIDER);
-  m_falloff_slider_constant->setMinimum(MIN_CONSTANT*STEP_SLIDER);
 
   m_falloff_spinbox_linear->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_linear->setMaximum(MAX_LINEAR);
-  m_falloff_spinbox_linear->setMinimum(MIN_LINEAR);
   m_falloff_slider_linear->setMaximum(MAX_LINEAR*STEP_SLIDER);
-  m_falloff_slider_linear->setMinimum(MIN_LINEAR*STEP_SLIDER);
 
 
   m_falloff_spinbox_quadratic->setDecimals (NB_DECIMAL);
   m_falloff_spinbox_quadratic->setMaximum(MAX_QUADRA);
-  m_falloff_spinbox_quadratic->setMinimum(MIN_QUADRA);
   m_falloff_slider_quadratic->setMaximum(MAX_QUADRA*STEP_SLIDER);
-  m_falloff_slider_quadratic->setMinimum(MIN_QUADRA*STEP_SLIDER);
 
 
   m_pos_x_spin->setDecimals (NB_DECIMAL);
