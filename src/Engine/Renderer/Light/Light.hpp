@@ -39,7 +39,7 @@ class RA_ENGINE_API Light : public Component {
     virtual void getRenderParameters( RenderParameters& params ) const;
 
     virtual std::string getShaderInclude() const;
-
+    bool canEdit( Core::Container::Index roIdx ) const { return true; }
     void initialize() override;
 
   private:
