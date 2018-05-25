@@ -1,4 +1,4 @@
-#include <Core/Asset/OBJFileManager.hpp>
+#include <Core/Asset/deprecated/OBJFileManager.hpp>
 #include <Core/Geometry/MeshPrimitives.hpp>
 #include <Core/Geometry/TopologicalMeshConvert.hpp>
 #include <OpenMesh/Tools/Subdivider/Uniform/CatmullClarkT.hh>

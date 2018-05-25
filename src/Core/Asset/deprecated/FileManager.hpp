@@ -70,6 +70,6 @@ class FileManager {
 } // namespace Core
 } // namespace Ra
 
-#include <Core/Asset/FileManager.inl>
+#include <Core/Asset/deprecated/FileManager.inl>
 
 #endif // RADIUMENGINE_FILE_MANAGER_HPP

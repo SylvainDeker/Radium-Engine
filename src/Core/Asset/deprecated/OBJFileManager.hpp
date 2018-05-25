@@ -1,6 +1,6 @@
 #ifndef RADIUMENGINE_OBJ_FILE_MANAGER_HPP
 #define RADIUMENGINE_OBJ_FILE_MANAGER_HPP
-#include <Core/Asset/FileManager.hpp>
+#include <Core/Asset/deprecated/FileManager.hpp>
 #include <Core/Geometry/TriangleMesh.hpp>
 #include <Core/RaCore.hpp>
 

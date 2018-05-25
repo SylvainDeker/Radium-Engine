@@ -1,4 +1,4 @@
-#include <Core/Asset/OFFFileManager.hpp>
+#include <Core/Asset/deprecated/OFFFileManager.hpp>
 
 namespace Ra {
 namespace Core {

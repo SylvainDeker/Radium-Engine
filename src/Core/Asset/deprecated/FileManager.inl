@@ -1,4 +1,4 @@
-#include <Core/Asset/FileManager.hpp>
+#include <Core/Asset/deprecated/FileManager.hpp>
 
 namespace Ra {
 namespace Core {
