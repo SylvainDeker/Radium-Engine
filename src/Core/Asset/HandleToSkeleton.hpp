@@ -10,8 +10,9 @@ namespace Core {
 namespace Animation {
 class Skeleton;
 } // namespace Animation
-class HandleData;
+
 namespace Asset {
+class HandleData;
 
 /// Create a skeleton from a Handle Data extracted from a file
 /// Outputs the skeleton and a map from the component index in the handle data to the bone index.
