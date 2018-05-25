@@ -73,15 +73,27 @@
           <property name="text">
            <string>Directional</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../../../Assets/Images/icon_Dir_Light.png</normaloff>../../../Assets/Images/icon_Dir_Light.png</iconset>
+          </property>
          </item>
          <item>
           <property name="text">
            <string>Point</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../../../Assets/Images/icon_Point_Light.png</normaloff>../../../Assets/Images/icon_Point_Light.png</iconset>
+          </property>
          </item>
          <item>
           <property name="text">
            <string>Spot</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../../../Assets/Images/icon_Spot_Light.png</normaloff>../../../Assets/Images/icon_Spot_Light.png</iconset>
           </property>
          </item>
         </widget>
