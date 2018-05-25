@@ -3,6 +3,7 @@
 namespace Ra {
 namespace Core {
 namespace Asset {
+namespace deprecated {
 
 //////////////////////////////////////////////////////////////////////////////
 // CONSTRUCTOR
@@ -156,6 +157,7 @@ inline void FileManager<DATA, Binary>::saveLog( const std::string& filename ) {
     file.close();
 }
 
+} // namespace deprecated
 } // namespace Asset
 } // namespace Core
 } // namespace Ra

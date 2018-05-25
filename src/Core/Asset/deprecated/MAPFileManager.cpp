@@ -3,6 +3,7 @@
 namespace Ra {
 namespace Core {
 namespace Asset {
+namespace deprecated {
 
 using namespace Geometry;
 
@@ -81,6 +82,7 @@ bool MAPFileManager::exportData( std::ostream& file, const Parametrization& data
     return true;
 }
 
+} // namespace deprecated
 } // namespace Asset
 } // namespace Core
 } // namespace Ra

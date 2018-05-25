@@ -7,6 +7,8 @@
 namespace Ra {
 namespace Core {
 namespace Asset {
+namespace deprecated {
+
 
 class RA_CORE_API OBJFileManager : public FileManager<Geometry::TriangleMesh> {
   public:
@@ -22,6 +24,7 @@ class RA_CORE_API OBJFileManager : public FileManager<Geometry::TriangleMesh> {
     virtual bool exportData( std::ostream& file, const Geometry::TriangleMesh& data ) override;
 };
 
+} // namespace deprecated
 } // namespace Asset
 } // namespace Core
 } // namespace Ra

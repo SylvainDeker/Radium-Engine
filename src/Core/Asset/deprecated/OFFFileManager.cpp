@@ -3,6 +3,7 @@
 namespace Ra {
 namespace Core {
 namespace Asset {
+namespace deprecated {
 
 /// ===============================================================================
 /// CONSTRUCTOR
@@ -111,6 +112,7 @@ bool OFFFileManager::exportData( std::ostream& file, const Geometry::TriangleMes
     return true;
 }
 
+} // namespace deprecated
 } // namespace Asset
 } // namespace Core
 } // namespace Ra
