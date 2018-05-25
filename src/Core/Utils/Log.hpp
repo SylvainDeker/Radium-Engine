@@ -8,8 +8,6 @@
 
 #include <Core/Utils/StringUtils.hpp>
 
-//#define LOG( level ) std::cout 
-
 namespace Ra { 
 namespace Core {
 namespace Utils {
