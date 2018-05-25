@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>1350</width>
-     <height>22</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFILE">
@@ -57,7 +57,6 @@
     <property name="title">
      <string>&amp;Objects</string>
     </property>
-    <addaction name="actionNew_one_2"/>
     <addaction name="separator"/>
     <addaction name="actionLightCreator"/>
    </widget>
@@ -742,12 +741,12 @@
   </action>
   <action name="actionLightCreator">
    <property name="text">
-    <string>New light</string>
+    <string>New &amp;light</string>
    </property>
   </action>
   <action name="actionNew_one_2">
    <property name="text">
-    <string>New entity</string>
+    <string>&amp;New entity</string>
    </property>
   </action>
  </widget>
