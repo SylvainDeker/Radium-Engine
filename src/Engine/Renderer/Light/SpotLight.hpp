@@ -53,13 +53,13 @@ class RA_ENGINE_API SpotLight final : public Light {
        \param const Core::Math::Transform& transform the transformation
        \return void
     */
-    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform );
+    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ) override;
 
     /*!
        \brief Redefinition from Component to update Gizmos position when you use them on light
        \return void
     */
-    Ra::Core::Math::Transform getTransform( Core::Container::Index roIdx ) const ;
+    Ra::Core::Math::Transform getTransform( Core::Container::Index roIdx ) const override ;
 
   private:
 

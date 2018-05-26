@@ -60,7 +60,7 @@ void DirectionalLight::setTransform( Core::Container::Index roIdx, const Core::M
    \brief Redefinition from Component to update Gizmos position when you use them on light
    \return void
 */
-Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) const {
+Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) const{
     (void) roIdx;
     return Core::Math::Transform::Identity();
 };

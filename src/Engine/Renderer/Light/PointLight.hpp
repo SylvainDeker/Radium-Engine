@@ -38,13 +38,13 @@ class RA_ENGINE_API PointLight final : public Light {
        \param const Core::Math::Transform& transform the transformation
        \return void
     */
-    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform );
+    void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ) override;
 
     /*!
        \brief Redefinition from Component to update Gizmos position when you use them on light
        \return void
     */
-    Core::Math::Transform getTransform( Core::Container::Index roIdx ) const ;
+    Core::Math::Transform getTransform( Core::Container::Index roIdx ) const override ;
 
     std::string getShaderInclude() const;
 
