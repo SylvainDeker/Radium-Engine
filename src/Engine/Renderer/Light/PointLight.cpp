@@ -35,12 +35,15 @@ void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::T
         "Rotation does not affect a Point Light !");
     }
 
-    m_position += 0.5 * Core::Math::Vector3(transform(0,3),transform(1,3),transform(2,3));
+    Core::Math::Vector4 tmp = transform * Core::Math::Vector4(m_position.x(),m_position.y(),m_position.z(),1);
+    m_position = 0.5 * Core::Math::Vector3(tmp.x(),tmp.y(),tmp.z());
+
 }
 
-Core::Math::Transform PointLight::getTransform( Core::Container::Index roIdx ) {
+Core::Math::Transform PointLight::getTransform( Core::Container::Index roIdx ) const {
     (void) roIdx;
-    return Core::Math::Transform::Identity();
+    auto m =Core::Math::Transform::Identity();
+    return m.translate(m_position);
 };
 
 } // namespace Engine
