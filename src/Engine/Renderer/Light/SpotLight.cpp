@@ -54,12 +54,17 @@ void SpotLight::setTransform( Core::Container::Index roIdx, const Core::Math::Tr
       );
     }
 
-    m_position += 0.5 * Core::Math::Vector3(transform(0,3),transform(1,3),transform(2,3));
+    m_position = 0.5 * Core::Math::Vector3(m_position.x()+transform(0,3)
+                                          ,m_position.y()+transform(1,3)
+                                          ,m_position.z()+transform(2,3)
+                                          );
 }
 
-Ra::Core::Math::Transform SpotLight::getTransform( Core::Container::Index roIdx ) {
+Core::Math::Transform SpotLight::getTransform( Core::Container::Index roIdx ) const {
     (void) roIdx;
-    return Core::Math::Transform::Identity();
+    Core::Math::Transform m =Core::Math::Transform::Identity();
+     m = m.translate(m_position);
+    return m;
 };
 
 } // namespace Engine

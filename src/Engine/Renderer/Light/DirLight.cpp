@@ -49,7 +49,7 @@ void DirectionalLight::setTransform( Core::Container::Index roIdx, const Core::M
 
 }
 
-Ra::Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) {
+Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) const {
     (void) roIdx;
     return Core::Math::Transform::Identity();
 };

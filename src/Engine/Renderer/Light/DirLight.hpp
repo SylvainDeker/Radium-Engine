@@ -22,7 +22,7 @@ class RA_ENGINE_API DirectionalLight final : public Light {
     std::string getShaderInclude() const;
     void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform );
 
-    Ra::Core::Math::Transform getTransform( Core::Container::Index roIdx );
+    Ra::Core::Math::Transform getTransform( Core::Container::Index roIdx ) const ;
 
   private:
     Core::Math::Vector3 m_direction;
