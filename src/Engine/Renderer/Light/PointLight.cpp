@@ -25,6 +25,12 @@ std::string PointLight::getShaderInclude() const {
     return "Point";
 }
 
+/*!
+   \brief Redefinition from Component to manipulate lights with Gizmos
+   \param Core::Container::Index roIdx Useless here
+   \param const Core::Math::Transform& transform the transformation
+   \return void
+*/
 void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){
     (void) roIdx;
     if(transform(0,0)!=1 || transform(0,1)!=0 || transform(0,2)!=0 ||
@@ -41,6 +47,10 @@ void PointLight::setTransform( Core::Container::Index roIdx, const Core::Math::T
                                           );
 }
 
+/*!
+   \brief Redefinition from Component to update Gizmos position when you use them on light
+   \return void
+*/
 Core::Math::Transform PointLight::getTransform( Core::Container::Index roIdx ) const {
     (void) roIdx;
     auto m =Core::Math::Transform::Identity();
