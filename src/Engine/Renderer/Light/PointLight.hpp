@@ -32,7 +32,7 @@ class RA_ENGINE_API PointLight final : public Light {
     inline void setAttenuation( Scalar constant, Scalar linear, Scalar quadratic );
     inline const Attenuation& getAttenuation() const;
     void setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform );
-    Core::Math::Transform getTransform( Core::Container::Index roIdx );
+    Core::Math::Transform getTransform( Core::Container::Index roIdx ) const ;
 
     std::string getShaderInclude() const;
 
