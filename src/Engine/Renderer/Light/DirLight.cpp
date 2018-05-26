@@ -15,6 +15,13 @@ void DirectionalLight::getRenderParameters( RenderParameters& params ) const {
 
     params.addParameter( "light.directional.direction", m_direction );
 }
+
+/*!
+   \brief Redefinition from Component to manipulate lights with Gizmos
+   \param Core::Container::Index roIdx Useless here
+   \param const Core::Math::Transform& transform the transformation
+   \return void
+*/
 void DirectionalLight::setTransform( Core::Container::Index roIdx, const Core::Math::Transform& transform ){
     (void) roIdx;
 
@@ -49,6 +56,10 @@ void DirectionalLight::setTransform( Core::Container::Index roIdx, const Core::M
 
 }
 
+/*!
+   \brief Redefinition from Component to update Gizmos position when you use them on light
+   \return void
+*/
 Core::Math::Transform DirectionalLight::getTransform( Core::Container::Index roIdx ) const {
     (void) roIdx;
     return Core::Math::Transform::Identity();
