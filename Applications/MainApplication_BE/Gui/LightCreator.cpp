@@ -29,7 +29,7 @@
 
 #include <math.h>
 #define NB_DECIMAL 3
-#define MAX_ANGLE 180
+#define MAX_ANGLE 360
 #define MAX_CONSTANT 100
 #define MAX_LINEAR 100
 #define MAX_QUADRA 100
@@ -474,13 +474,15 @@ void LightCreator::open_dialogueConfirm(){
 
         m_pos_x_spin->setValue(0.0);
         m_pos_y_spin->setValue(0.0);
-        m_pos_z_spin->setValue(1.0);
+        m_pos_z_spin->setValue(0.0);
 
-        emit sig_falloff_constant_slide_to_spin(0.0);
+        emit sig_falloff_constant_slide_to_spin(1.0);
         emit sig_falloff_linear_slide_to_spin(0.0);
         emit sig_falloff_quadratic_slide_to_spin(0.0);
         emit sig_inner_angle_slide_to_spin(0.0);
         emit sig_outer_angle_slide_to_spin(0.0);
+        m_inner_angle_val = 0;
+        m_outer_angle_val = 0;
 
     }
 }

@@ -190,10 +190,10 @@ public slots:
     Core::Math::Vector3 m_direction;
     QColor m_color;
     QString m_name;
-    double m_outer_angle_val;
     double m_falloff_val_constant;
     double m_falloff_val_linear;
     double m_falloff_val_quadratic;
+    double m_outer_angle_val;
     double m_inner_angle_val;
     const Gui::Viewer * m_viewer;
     Core::Container::IndexMap<std::unique_ptr<Ra::Engine::Entity>> m_entities;
